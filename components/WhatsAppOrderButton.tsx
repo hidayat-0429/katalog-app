@@ -16,7 +16,7 @@ export default function WhatsAppOrderButton({
   totalPrice,
   customerName,
   items,
-  adminPhone = '628113503650', // Hotline resmi PT Eka Timur Raya
+  adminPhone = '6285816172367', // Nomor WA testing (ganti ke 628113503650 untuk produksi)
 }: WhatsAppOrderButtonProps) {
   const handleOpenWhatsApp = () => {
     const itemList = items

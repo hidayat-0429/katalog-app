@@ -1,103 +1,64 @@
-# Katalog Pemesanan Produk
+# Sistem Katalog & Pemesanan B2B
+**Studi Kasus PKN:** PT Eka Timur Raya (Etira Mushrooms)
 
-Starter project untuk tugas magang: sistem katalog produk & pemesanan berbasis web.
+Sistem Informasi Manajemen Katalog dan Pemesanan Grosir (Business-to-Business) berbasis web. Sistem ini dirancang untuk memfasilitasi klien B2B (hotel, restoran, katering, dan industri) dalam memesan pasokan jamur segar dan olahan langsung dari pabrik.
 
-**Stack:** Next.js 14 (App Router) + TypeScript + Tailwind CSS + Prisma + PostgreSQL + NextAuth
+## 🚀 Teknologi yang Digunakan (Tech Stack)
+- **Framework:** Next.js 14 (App Router)
+- **Bahasa:** TypeScript
+- **Styling:** Tailwind CSS
+- **Database ORM:** Prisma
+- **Database:** PostgreSQL (Supabase)
+- **Autentikasi:** NextAuth.js v4
 
-## Fitur yang sudah jalan
+## ✨ Fitur Unggulan
+- **Role-Based Access Control (RBAC):** Pemisahan hak akses dan dasbor khusus untuk Admin (pengelola) dan Buyer (klien).
+- **Kalkulator Konversi Grosir:** Penghitungan otomatis dari satuan ecer (kaleng/pouch/pack) ke satuan grosir (Karton/Dus) secara *real-time* saat *checkout*.
+- **Opsi Armada Logistik:** Pilihan metode pengiriman spesifik komoditas (Armada Berpendingin Cold Chain, Kargo Kering, atau Ambil di Pabrik).
+- **Manajemen Pesanan Atomik:** Sistem checkout terintegrasi yang mencegah *race-condition* pada stok barang (*overselling*).
+- **Faktur Siap Cetak (Printable Invoice):** Laman khusus pesanan yang terformat rapi untuk dicetak sebagai dokumen pengiriman.
+- **Ekspor Laporan (CSV):** Admin dapat mengunduh rekapan data pesanan ke dalam format `.csv` dengan *encoding* BOM UTF-8 yang sepenuhnya kompatibel dengan Microsoft Excel.
+- **Integrasi WhatsApp:** *Auto-generate* pesan rincian belanja klien yang dikirim langsung ke *hotline* WhatsApp perusahaan.
 
-- Register & login (role `ADMIN` dan `BUYER`)
-- Katalog produk dengan filter kategori & search
-- Detail produk + tambah ke keranjang
-- Keranjang (ubah qty, hapus item) + checkout jadi pesanan
-- Riwayat & detail pesanan buyer, termasuk batalkan pesanan (status `PENDING`)
-- Dashboard admin (statistik ringkas, produk terlaris, pesanan terbaru)
-- CRUD produk & kategori (admin)
-- Kelola pesanan & ubah status (admin)
-- Proteksi halaman sesuai role (middleware)
+## 🛠️ Cara Menjalankan di Lingkungan Lokal (Development)
 
-## Cara Menjalankan
-
-### 1. Install dependencies
-
+**1. Install dependensi**
 ```bash
 npm install
 ```
 
-### 2. Siapkan database PostgreSQL
-
-Paling gampang pakai database gratis dari [Neon](https://neon.tech) atau [Supabase](https://supabase.com) — tinggal daftar, buat project, copy connection string-nya.
-
-Kalau mau lokal, install PostgreSQL lalu buat database baru:
-
-```sql
-CREATE DATABASE katalog_db;
+**2. Setup Environment Variables**
+Salin `env.example` menjadi `.env`, lalu konfigurasikan:
+```env
+DATABASE_URL="postgresql://user:password@host:5432/database"
+NEXTAUTH_SECRET="secret-key-acak-minimal-32-karakter"
+NEXTAUTH_URL="http://localhost:3000"
 ```
 
-### 3. Setup environment variables
-
-Copy `.env.example` jadi `.env`, lalu isi:
-
+**3. Pengisian Data Awal (Seeding)**
+Jalankan perintah berikut untuk mengisi database dengan 5 Kategori Resmi dan 12 Produk Etira:
 ```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-- `DATABASE_URL` — connection string database kamu
-- `NEXTAUTH_SECRET` — isi string acak (bisa generate dengan `openssl rand -base64 32`)
-- `NEXTAUTH_URL` — biarkan `http://localhost:3000` untuk development
-
-### 4. Migrasi database & isi data awal
-
-```bash
-npx prisma migrate dev --name init
 npm run seed
 ```
 
-Setelah seed berhasil, ada 2 akun contoh:
-- **Admin:** admin@katalog.test / admin123
-- **Buyer:** buyer@katalog.test / buyer123
+**4. Akun Demo untuk Uji Coba**
+Setelah proses *seed* selesai, Anda dapat masuk menggunakan akun berikut:
+- **Admin:** `admin@etiramushrooms.com` / Password: `admin123`
+- **Buyer (Klien):** `buyer@katalog.test` / Password: `buyer123`
 
-Plus 3 kategori & 6 produk contoh (jamur kaleng, pouch, frozen — bisa diganti sesuai perusahaan magang kamu).
-
-### 5. Jalankan aplikasi
-
+**5. Jalankan Server Development**
 ```bash
 npm run dev
 ```
+Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-Buka [http://localhost:3000](http://localhost:3000)
+## 📁 Struktur Direktori Utama
+- `app/` → Konfigurasi App Router Next.js (halaman publik & privat)
+- `app/admin/` → Dasbor dan manajemen khusus Admin (produk, kategori, pesanan, ekspor)
+- `app/keranjang/` → Modul pemesanan dan formulir *checkout*
+- `components/` → Komponen antarmuka yang dapat digunakan kembali (*reusable UI*)
+- `lib/actions/` → Server Actions untuk logika mutasi data (Create/Update/Delete)
+- `prisma/` → Skema basis data dan skrip pengisian data (*seeder*)
 
-## Struktur Folder Penting
-
-```
-app/                  → halaman (App Router)
-  admin/              → halaman khusus admin (dashboard, produk, kategori, pesanan)
-  produk/[id]/        → detail produk
-  keranjang/          → halaman keranjang & checkout
-  pesanan/            → riwayat pesanan buyer
-  login, register/    → autentikasi
-lib/
-  actions/            → server actions (logika create/update/delete)
-  prisma.ts           → koneksi database
-  auth.ts             → konfigurasi NextAuth
-  session.ts          → helper cek user login & role
-prisma/
-  schema.prisma       → skema database
-  seed.ts             → data awal
-```
-
-## Ide Pengembangan Lanjutan (buat laporan magang)
-
-- Export laporan pesanan ke Excel/PDF
-- Notifikasi email saat status pesanan berubah
-- Upload gambar produk langsung (saat ini masih pakai URL gambar)
-- Halaman kelola user (admin bisa lihat semua buyer)
-- Grafik penjualan pakai chart library (mis. Recharts)
-- Multi-harga per klien (kontrak khusus B2B)
-
-## Catatan
-
-- Harga disimpan sebagai bilangan bulat (Rupiah, tanpa desimal) untuk menyederhanakan perhitungan.
-- Stok otomatis berkurang saat checkout dan dicek ulang saat checkout untuk mencegah overselling.
-- Middleware melindungi halaman `/keranjang`, `/pesanan`, dan `/admin` — otomatis redirect ke halaman login kalau belum masuk.
+---
+*Proyek ini dikembangkan sebagai pemenuhan tugas Praktik Kerja Nyata (PKN) Program Studi Teknik Informatika.*
