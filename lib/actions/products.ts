@@ -87,12 +87,17 @@ export async function deleteProduct(id: string) {
   await requireAdmin();
   try {
     await prisma.product.delete({ where: { id } });
-  } catch {
-    // Jika produk sudah pernah dipesan, nonaktifkan agar integritas riwayat pesanan tetap terjaga
-    await prisma.product.update({
-      where: { id },
-      data: { isActive: false, stock: 0 },
-    });
+  } catch (err: any) {
+    // Jika produk sudah memiliki riwayat relasi (mis. pernah dipesan dalam orderItems),
+    // nonaktifkan produk agar integritas riwayat pesanan pelanggan tetap terjaga
+    if (err?.code === "P2003" || err?.code === "P2014") {
+      await prisma.product.update({
+        where: { id },
+        data: { isActive: false, stock: 0 },
+      });
+    } else {
+      throw err;
+    }
   }
   revalidatePath("/admin/produk");
   revalidatePath("/");

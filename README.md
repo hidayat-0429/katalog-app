@@ -43,7 +43,7 @@ npm run seed
 
 **4. Akun Demo untuk Uji Coba**
 Setelah proses *seed* selesai, Anda dapat masuk menggunakan akun berikut:
-- **Admin:** `admin@etiramushrooms.com` / Password: `admin123`
+- **Admin:** `admin@katalog.test` / Password: `admin123`
 - **Buyer (Klien):** `buyer@katalog.test` / Password: `buyer123`
 
 **5. Jalankan Server Development**

@@ -4,13 +4,14 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminPassword = await bcrypt.hash("admin123", 10);
+  const adminRawPassword = process.env.ADMIN_SEED_PASSWORD || "admin123";
+  const adminPassword = await bcrypt.hash(adminRawPassword, 10);
   const admin = await prisma.user.upsert({
-    where: { email: "admin@etiramushrooms.com" },
+    where: { email: "admin@katalog.test" },
     update: {},
     create: {
-      name: "Admin Operasional PT Eka Timur Raya",
-      email: "admin@etiramushrooms.com",
+      name: "Admin Operasional",
+      email: "admin@katalog.test",
       password: adminPassword,
       role: "ADMIN",
     },
@@ -28,7 +29,8 @@ async function main() {
     },
   });
 
-  const buyerPassword = await bcrypt.hash("buyer123", 10);
+  const buyerRawPassword = process.env.BUYER_SEED_PASSWORD || "buyer123";
+  const buyerPassword = await bcrypt.hash(buyerRawPassword, 10);
   await prisma.user.upsert({
     where: { email: "buyer@katalog.test" },
     update: {},
@@ -215,8 +217,8 @@ async function main() {
     }
   }
 
-  console.log("Seed selesai. Data PT Eka Timur Raya (Etira Mushrooms) berhasil disinkronkan.");
-  console.log("Admin: admin@etiramushrooms.com / admin123 (atau admin@katalog.test)");
+  console.log("Seed selesai. Data dummy berhasil disinkronkan.");
+  console.log("Admin: admin@katalog.test / admin123");
   console.log("Buyer: buyer@katalog.test / buyer123");
 }
 

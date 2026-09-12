@@ -48,24 +48,38 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
 
 export async function cancelOrder(orderId: string) {
   const user = await requireUser();
-  const order = await prisma.order.findUnique({
-    where: { id: orderId },
-    include: { items: true },
-  });
-  if (!order || order.userId !== user.id) return { error: "Pesanan tidak ditemukan" };
-  if (order.status !== "PENDING") return { error: "Pesanan sudah diproses, tidak bisa dibatalkan" };
 
-  await prisma.$transaction(async (tx) => {
-    await tx.order.update({ where: { id: orderId }, data: { status: "DIBATALKAN" } });
-    for (const item of order.items) {
-      await tx.product.update({
-        where: { id: item.productId },
-        data: { stock: { increment: item.quantity } },
+  try {
+    await prisma.$transaction(async (tx) => {
+      const order = await tx.order.findUnique({
+        where: { id: orderId },
+        include: { items: true },
       });
-    }
-  });
 
-  revalidatePath("/pesanan");
-  revalidatePath(`/pesanan/${orderId}`);
-  return { success: true };
+      if (!order || order.userId !== user.id) {
+        throw new Error("Pesanan tidak ditemukan");
+      }
+      if (order.status !== "PENDING") {
+        throw new Error("Pesanan sudah diproses, tidak bisa dibatalkan");
+      }
+
+      await tx.order.update({
+        where: { id: orderId },
+        data: { status: "DIBATALKAN" },
+      });
+
+      for (const item of order.items) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: { stock: { increment: item.quantity } },
+        });
+      }
+    });
+
+    revalidatePath("/pesanan");
+    revalidatePath(`/pesanan/${orderId}`);
+    return { success: true };
+  } catch (err: any) {
+    return { error: err?.message || "Gagal membatalkan pesanan" };
+  }
 }

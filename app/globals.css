@@ -147,11 +147,15 @@ body {
   }
 
   /* Nav Links */
-  .nav-link {
-    @apply text-sm font-medium text-charcoal-muted dark:text-dark-muted
-           hover:text-charcoal dark:hover:text-dark-text transition-colors duration-150
-           px-2.5 py-1.5 rounded;
-  }
+  .focus-visible {
+  outline: 2px solid #5B7C5E;
+  outline-offset: 2px;
+}
+
+
+.nav-link {
+    @apply text-sm font-medium text-charcoal-muted dark:text-dark-muted hover:text-charcoal dark:hover:text-dark-text transition-colors duration-150 px-2.5 py-1.5 rounded;
+}
 
   .nav-link-active {
     @apply nav-link text-charcoal dark:text-dark-text font-semibold;
@@ -167,8 +171,9 @@ body {
   .sidebar-link-active {
     @apply sidebar-link text-charcoal dark:text-dark-text bg-bg-subtle dark:bg-dark-surface font-semibold;
   }
-}
 
+
+}
 /* ─── Print Styles ─────────────────────────────────────── */
 @media print {
   body {

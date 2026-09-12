@@ -71,13 +71,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       Jl. Raya Nongkojajar KM 1.4 Purwodadi, Pasuruan 67163, Jawa Timur, Indonesia
                     </p>
                     <p className="pt-1">
-                      <span className="font-medium text-charcoal dark:text-dark-text">Telp:</span> +62 343 613650
+                      <span className="font-medium text-charcoal dark:text-dark-text">Telp:</span> {process.env.NEXT_PUBLIC_COMPANY_PHONE || "085816172367"}
                     </p>
                     <p>
-                      <span className="font-medium text-charcoal dark:text-dark-text">WhatsApp:</span> +62 811-3503-650
+                      <span className="font-medium text-charcoal dark:text-dark-text">WhatsApp:</span> +{process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367"}
                     </p>
                     <p>
-                      <span className="font-medium text-charcoal dark:text-dark-text">Email:</span> marketing@etiramushrooms.com
+                      <span className="font-medium text-charcoal dark:text-dark-text">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "nurhidayat2329@gmail.com"}
                     </p>
                   </div>
                 </div>

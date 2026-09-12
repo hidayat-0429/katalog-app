@@ -9,7 +9,12 @@ const registerSchema = z.object({
   email: z.string().email("Email tidak valid"),
   password: z.string().min(6, "Password minimal 6 karakter"),
   companyName: z.string().optional(),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")), {
+      message: "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)",
+    }),
   address: z.string().optional(),
 });
 

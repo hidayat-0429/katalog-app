@@ -29,6 +29,7 @@ export default function ProductCard({
   return (
     <Link
       href={`/produk/${id}`}
+      aria-label={`Detail produk ${name}`}
       className="group flex flex-col bg-white dark:bg-dark-surface border border-border dark:border-dark-border rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 hover:border-sage dark:hover:border-dark-sage"
     >
       {/* Product Image */}

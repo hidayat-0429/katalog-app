@@ -144,3 +144,16 @@ export async function checkout(formData: FormData) {
   redirect(`/pesanan/${orderId}`);
 }
 
+export async function undoAddToCart(productId: string) {
+  const user = await requireUser();
+  // Find cart item for this user and product
+  const existingItem = await prisma.cart.findUnique({
+    where: { userId_productId: { userId: user.id, productId } },
+  });
+  if (existingItem) {
+    await prisma.cart.delete({ where: { id: existingItem.id } });
+    revalidatePath("/keranjang");
+    return { success: true };
+  }
+  return { error: "Item not found in cart" };
+}

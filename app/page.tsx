@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import ProductCard from "@/components/ProductCard";
 import EmptyState from "@/components/EmptyState";
 import Link from "next/link";
+import PaginationControls from "@/components/PaginationControls";
 import Image from "next/image";
 import { formatRupiah } from "@/lib/format";
 import { getProductPlaceholderImage, getMinOrderText } from "@/lib/productImage";
@@ -10,7 +11,7 @@ import { getProductPlaceholderImage, getMinOrderText } from "@/lib/productImage"
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: { kategori?: string; q?: string; sort?: string };
+  searchParams: { kategori?: string; q?: string; sort?: string; page?: string };
 }) {
   const q = searchParams.q || "";
   const categoryId = searchParams.kategori || "";
@@ -35,12 +36,21 @@ export default async function HomePage({
     orderByClause = { name: "asc" };
   }
 
+  const page = Number(searchParams.page) || 1;
+  const limit = 12;
+  const skip = (page - 1) * limit;
+
+  const totalCount = await prisma.product.count({ where: whereClause });
+  const totalPages = Math.ceil(totalCount / limit);
+
   const [categories, products, featuredProducts] = await Promise.all([
     prisma.category.findMany({ orderBy: { name: "asc" } }),
     prisma.product.findMany({
       where: whereClause,
       include: { category: true },
       orderBy: orderByClause,
+      skip,
+      take: limit,
     }),
     !isFiltering
       ? prisma.product.findMany({
@@ -187,8 +197,8 @@ export default async function HomePage({
               </div>
             </section>
           )}
-        </>
-      )}
+        
+      </>) }
 
       {/* Main Catalog Section */}
       <section id="katalog" className="scroll-mt-20">
@@ -277,10 +287,13 @@ export default async function HomePage({
                 </a>
               );
             })}
-          </div>
         </div>
+        <PaginationControls currentPage={page} totalPages={totalPages} />
+</div>
+      
 
-        {/* Product Grid */}
+
+{/* Product Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (

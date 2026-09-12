@@ -3,7 +3,8 @@
 import { useState, useTransition } from 'react';
 import { Minus, Plus, ShoppingCart, CheckCircle, AlertCircle, Loader2, PackageCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { addToCart } from '@/lib/actions/cart';
+import { addToCart, undoAddToCart } from '@/lib/actions/cart';
+import { useToast } from '@/components/Providers';
 import { getCartonConversion } from '@/lib/productImage';
 
 interface AddToCartFormProps {
@@ -14,30 +15,26 @@ interface AddToCartFormProps {
 
 export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: AddToCartFormProps) {
   const router = useRouter();
+  const toast = useToast();
   const [isPending, startTransition] = useTransition();
   const [quantity, setQuantity] = useState(1);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const conversion = getCartonConversion(unit, quantity);
 
   const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      setStatus('idle');
     }
   };
 
   const handleAddCarton = () => {
     const nextQty = Math.min(maxStock, quantity + conversion.perCarton);
     setQuantity(nextQty);
-    setStatus('idle');
   };
 
   const handleIncrease = () => {
     if (quantity < maxStock) {
       setQuantity(quantity + 1);
-      setStatus('idle');
     }
   };
 
@@ -45,50 +42,33 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
     e.preventDefault();
     if (quantity < 1 || quantity > maxStock) return;
 
-    setStatus('idle');
-    setErrorMessage('');
-
     startTransition(async () => {
       try {
         const res = await addToCart(productId, quantity);
         
         if (res?.error) {
-          setStatus('error');
-          setErrorMessage(res.error);
+          toast(res.error, { type: 'error' });
         } else {
-          setStatus('success');
+          toast('Berhasil ditambahkan ke keranjang', {
+            type: 'success',
+            onUndo: async () => {
+              await undoAddToCart(productId);
+            },
+          });
           setQuantity(1); // Reset form
           router.refresh();
         }
       } catch (err) {
-        setStatus('error');
-        setErrorMessage('Terjadi kesalahan yang tidak terduga');
+        toast('Terjadi kesalahan yang tidak terduga', { type: 'error' });
       }
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {status === 'success' && (
-        <div className="flex items-center gap-2 text-sm bg-emerald-50 text-emerald-700 px-4 py-3 rounded-lg border border-emerald-100 animate-scale-in">
-          <CheckCircle className="w-5 h-5 shrink-0" />
-          <div className="flex-1">Berhasil ditambahkan ke keranjang</div>
-          <button 
-            type="button" 
-            onClick={() => router.push('/keranjang')}
-            className="text-emerald-800 font-medium hover:underline whitespace-nowrap"
-          >
-            Lihat Keranjang
-          </button>
-        </div>
-      )}
 
-      {status === 'error' && (
-        <div className="flex items-center gap-2 text-sm bg-terracotta/10 text-terracotta px-4 py-3 rounded-lg border border-terracotta/20 animate-scale-in">
-          <AlertCircle className="w-5 h-5 shrink-0" />
-          <span>{errorMessage}</span>
-        </div>
-      )}
+
+
 
       <div className="flex items-center gap-4">
         <div className="flex-1">
