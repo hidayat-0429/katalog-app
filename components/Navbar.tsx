@@ -10,15 +10,15 @@ export default async function Navbar() {
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-dark-bg/95 backdrop-blur-sm border-b border-border dark:border-dark-border transition-colors duration-150">
+    <header className="sticky top-0 z-50 bg-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm border-b border-border dark:border-dark-border transition-colors duration-150">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
+        <div className="flex items-center justify-between h-16">
           {/* Simple, Confident Brand Logo */}
           <Link href="/" className="flex flex-col">
-            <span className="font-extrabold text-base sm:text-lg tracking-tight text-charcoal dark:text-dark-text leading-none">
+            <span className="font-heading font-extrabold text-base sm:text-lg tracking-tight text-charcoal dark:text-dark-text leading-none">
               Etira Mushrooms
             </span>
-            <span className="text-[10px] tracking-wider uppercase font-semibold text-sage dark:text-dark-sage mt-0.5">
+            <span className="font-sans text-[10px] tracking-wider uppercase font-semibold text-primary dark:text-dark-primary mt-0.5">
               PT Eka Timur Raya
             </span>
           </Link>

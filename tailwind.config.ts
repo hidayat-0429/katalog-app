@@ -10,89 +10,62 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#FFFFFF",
-          subtle: "#F6F5F3",
+          DEFAULT: "#FAFAF7", // off-white
+          subtle: "#F5F4F0",
         },
         surface: "#FFFFFF",
-        charcoal: {
-          DEFAULT: "#1A1A1A",
-          muted: "#70706B",
+        primary: {
+          DEFAULT: "#4A5D3A", // olive green
+          hover: "#3D4E30",
+          light: "#E8EFE3",
         },
-        sage: {
-          DEFAULT: "#5B7C5E",
-          hover: "#4A684D",
-          dark: "#3D5740",
-          light: "#EBF2EC",
+        cta: {
+          DEFAULT: "#E8A33D", // amber
+          hover: "#D4922F",
+        },
+        charcoal: {
+          DEFAULT: "#1F2419",
+          muted: "#6B7263",
         },
         border: {
-          DEFAULT: "#E5E4E0",
-          subtle: "#EEEEEC",
+          DEFAULT: "#E5E3DC",
+          subtle: "#E5E3DC",
         },
-        clay: {
+        danger: {
           DEFAULT: "#B94A48",
-          muted: "#9B3C3A",
-        },
-        terracotta: {
-          DEFAULT: "#C05621",
-          hover: "#A84718",
-        },
-        forest: {
-          DEFAULT: "#2D5A27",
-          hover: "#23471E",
+          bg: "#FDF0EF",
         },
         // Dark theme specific mapping
         dark: {
-          bg: "#141414",
-          "bg-subtle": "#1C1C1C",
-          surface: "#202020",
-          text: "#E5E5E3",
-          muted: "#9C9C97",
-          border: "#2C2C2C",
-          sage: "#7FA882",
-          "sage-hover": "#95BC98",
-          cta: "#E5E5E3",
-          "cta-text": "#141414",
+          bg: "#141410",
+          "bg-subtle": "#1C1C18",
+          surface: "#222220",
+          primary: "#7FA882",
+          "primary-hover": "#95BC98",
+          text: "#E5E5E0",
+          muted: "#9C9C90",
+          border: "#2C2C28",
+          cta: "#E8A33D",
+          "cta-text": "#141410",
         },
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["var(--font-figtree)", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["var(--font-bricolage)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       borderRadius: {
         sm: "4px",
-        DEFAULT: "6px",
+        DEFAULT: "8px", // Default 8px
         md: "8px",
-        lg: "12px",
-        xl: "16px",
+        lg: "10px", // Max 10px
+        xl: "10px",
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0, 0, 0, 0.03)",
         sm: "0 1px 3px 0 rgba(0, 0, 0, 0.05)",
         DEFAULT: "0 2px 6px -1px rgba(0, 0, 0, 0.06)",
         md: "0 4px 12px -2px rgba(0, 0, 0, 0.08)",
-      },
-      keyframes: {
-        "fade-in": {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "slide-in-right": {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(0)" },
-        },
-        "scale-in": {
-          "0%": { opacity: "0", transform: "scale(0.96)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
-        },
-      },
-      animation: {
-        "fade-in": "fade-in 0.25s ease-out",
-        "fade-in-up": "fade-in-up 0.25s ease-out",
-        "slide-in-right": "slide-in-right 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-        "scale-in": "scale-in 0.2s ease-out",
       },
     },
   },

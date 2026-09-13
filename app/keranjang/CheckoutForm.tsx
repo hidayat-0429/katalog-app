@@ -33,41 +33,41 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 pt-3 text-xs">
+    <form onSubmit={handleSubmit} className="space-y-4 pt-3 text-sm font-sans">
       {error && (
-        <div className="text-xs text-[#B91C1C] dark:text-[#F87171] bg-red-50 dark:bg-red-950/20 p-2.5 rounded border border-red-200 dark:border-red-900/30 flex items-start gap-2">
+        <div className="text-sm text-danger bg-danger-bg p-3 rounded-md border border-danger flex items-start gap-2">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
       )}
 
       <div>
-        <label className="font-medium text-charcoal dark:text-dark-text mb-1 flex items-center gap-1" htmlFor="shippingMethod">
-          <Truck className="w-3.5 h-3.5 text-charcoal-muted dark:text-dark-muted" />
+        <label className="font-semibold text-charcoal mb-1.5 flex items-center gap-1.5 text-xs uppercase tracking-wider" htmlFor="shippingMethod">
+          <Truck className="w-4 h-4 text-charcoal-muted" />
           <span>Metode Armada Pengiriman</span>
         </label>
         <select
           id="shippingMethod"
           name="shippingMethod"
           disabled={isPending}
-          className="input w-full text-xs disabled:opacity-50 cursor-pointer"
+          className="input w-full text-sm disabled:opacity-50 cursor-pointer"
           defaultValue="Armada Truk Berpendingin (Cold Chain)"
         >
           <option value="Armada Truk Berpendingin (Cold Chain)">
-            ❄️ Armada Truk Berpendingin (Cold Chain - Rekomendasi Jamur Segar &amp; Beku)
+            Armada Truk Berpendingin (Cold Chain - Rekomendasi Jamur Segar &amp; Beku)
           </option>
           <option value="Kargo Logistik Kering (Kaleng &amp; Pouch)">
-            📦 Kargo Logistik Kering (Khusus Kaleng &amp; Pouch Steril)
+            Kargo Logistik Kering (Khusus Kaleng &amp; Pouch Steril)
           </option>
           <option value="Ambil Mandiri di Pabrik (Purwodadi, Pasuruan)">
-            🏭 Ambil Mandiri di Gudang Pabrik (Purwodadi, Pasuruan)
+            Ambil Mandiri di Gudang Pabrik (Purwodadi, Pasuruan)
           </option>
         </select>
       </div>
 
       <div>
-        <label className="font-medium text-charcoal dark:text-dark-text mb-1 flex items-center gap-1" htmlFor="shippingAddress">
-          <MapPin className="w-3.5 h-3.5 text-charcoal-muted dark:text-dark-muted" />
+        <label className="font-semibold text-charcoal mb-1.5 flex items-center gap-1.5 text-xs uppercase tracking-wider" htmlFor="shippingAddress">
+          <MapPin className="w-4 h-4 text-charcoal-muted" />
           <span>Alamat Pengiriman Tujuan</span>
         </label>
         <textarea
@@ -77,14 +77,14 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
           defaultValue={defaultAddress}
           rows={3}
           disabled={isPending}
-          className="input w-full resize-none text-xs disabled:opacity-50"
+          className="input w-full resize-none text-sm disabled:opacity-50"
           placeholder="Alamat lengkap tujuan kirim..."
         />
       </div>
 
       <div>
-        <label className="font-medium text-charcoal dark:text-dark-text mb-1 flex items-center gap-1" htmlFor="notes">
-          <MessageSquare className="w-3.5 h-3.5 text-charcoal-muted dark:text-dark-muted" />
+        <label className="font-semibold text-charcoal mb-1.5 flex items-center gap-1.5 text-xs uppercase tracking-wider" htmlFor="notes">
+          <MessageSquare className="w-4 h-4 text-charcoal-muted" />
           <span>Catatan Khusus (Opsional)</span>
         </label>
         <textarea
@@ -92,12 +92,12 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
           name="notes"
           rows={2}
           disabled={isPending}
-          className="input w-full resize-none text-xs disabled:opacity-50"
+          className="input w-full resize-none text-sm disabled:opacity-50"
           placeholder="Contoh: Titip di pos satpam / hubungi penerima..."
         />
       </div>
       
-      <button type="submit" disabled={isPending} className="btn-primary w-full py-2.5 mt-2">
+      <button type="submit" disabled={isPending} className="btn-primary w-full py-3 mt-4">
         {isPending ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
