@@ -68,120 +68,72 @@ export default async function HomePage({
   const spotlightMinOrder = spotlightProduct ? getMinOrderText(spotlightProduct.unit) : "";
 
   return (
-    <div className="flex flex-col gap-14 sm:gap-20 pb-20">
+    <div className="flex flex-col gap-20 pb-24">
       {!isFiltering && (
         <>
           {/* Hero Section */}
-          <section className="pt-2 sm:pt-4">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <section className="pt-8 sm:pt-12">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Left */}
-              <div className="lg:col-span-7 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-light text-primary text-xs font-sans font-medium tracking-wide w-fit mb-5">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span>PT Eka Timur Raya • Produsen Jamur Terintegrasi Pasuruan</span>
-                </div>
-
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-charcoal leading-[1.1] mb-5">
-                  Pasokan Jamur Segar &amp; Olahan Steril Langsung dari Pabrik.
+              <div className="flex flex-col justify-center">
+                <span className="font-sans font-medium text-primary mb-4 block">PT Eka Timur Raya</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-charcoal leading-[1.1] mb-6">
+                  Pasokan Jamur Olahan Langsung dari Pabrik.
                 </h1>
 
-                <p className="text-base sm:text-lg font-sans text-charcoal-muted leading-relaxed mb-8 max-w-xl">
-                  Etira Mushrooms menyediakan pasokan terpercaya jamur kancing segar, olahan kaleng steril, pouch retort, dan jamur beku untuk industri kuliner, restoran waralaba, dan katering nasional.
+                <p className="text-lg font-sans text-charcoal-muted leading-relaxed mb-8 max-w-lg">
+                  Kebutuhan jamur kancing segar, kaleng steril, dan pouch untuk industri kuliner nasional, restoran waralaba, serta katering.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-3">
-                  <a href="#katalog" className="btn-primary py-3 px-6 text-sm">
-                    Jelajahi Katalog Komoditas
+                <div className="flex items-center gap-4">
+                  <a href="#katalog" className="btn-primary py-3.5 px-8 text-base">
+                    Lihat Katalog
                   </a>
-                  <Link href="/register" className="btn-secondary py-3 px-6 text-sm">
-                    Registrasi Klien B2B
-                  </Link>
-                </div>
-
-                {/* Reassurance line */}
-                <div className="mt-8 pt-6 border-t border-border flex flex-wrap items-center gap-4 text-xs font-sans font-medium text-charcoal-muted">
-                  <span className="flex items-center gap-1.5 text-charcoal font-semibold">
-                    ✓ Panen Hari yang Sama
-                  </span>
-                  <span>•</span>
-                  <span>Standar Pengolahan Steril</span>
-                  <span>•</span>
-                  <span>Faktur Resmi Siap Cetak</span>
-                  <span>•</span>
-                  <span>Armada Berpendingin</span>
                 </div>
               </div>
 
-              {/* Right */}
+              {/* Right: Spotlight Product (Clean, no boxy card) */}
               {spotlightProduct && spotlightImage && (
-                <div className="lg:col-span-5">
-                  <Link
-                    href={`/produk/${spotlightProduct.id}`}
-                    className="group block bg-surface border border-border rounded-lg overflow-hidden hover:border-charcoal transition-colors duration-150"
-                  >
-                    <div className="relative aspect-[4/3] w-full bg-bg-subtle overflow-hidden border-b border-border">
-                      <Image
-                        src={spotlightImage}
-                        alt={spotlightProduct.name}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                        priority
-                      />
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-bg-subtle group">
+                  <Image
+                    src={spotlightImage}
+                    alt={spotlightProduct.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 text-white">
+                    <p className="font-sans text-sm font-medium text-white/80 mb-1">{spotlightProduct.category?.name}</p>
+                    <h3 className="font-heading text-2xl font-bold mb-2">
+                      {spotlightProduct.name}
+                    </h3>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono text-xl font-bold">
+                        {formatRupiah(spotlightProduct.price)}
+                      </span>
+                      <span className="font-sans text-sm text-white/80">
+                        /{spotlightProduct.unit}
+                      </span>
                     </div>
-
-                    <div className="p-5">
-                      <div className="flex items-center justify-between text-xs font-sans text-charcoal-muted mb-2">
-                        <span>Pilihan Utama Pekan Ini</span>
-                        <span className="uppercase tracking-wider font-semibold">{spotlightProduct.category?.name}</span>
-                      </div>
-
-                      <h3 className="font-heading text-lg sm:text-xl font-bold text-charcoal leading-snug group-hover:text-primary transition-colors">
-                        {spotlightProduct.name}
-                      </h3>
-
-                      <div className="mt-4 pt-4 border-t border-border flex items-baseline justify-between">
-                        <div>
-                          <div className="flex items-baseline gap-1">
-                            <span className="font-mono text-xl sm:text-2xl font-bold text-charcoal">
-                              {formatRupiah(spotlightProduct.price)}
-                            </span>
-                            <span className="font-sans text-sm text-charcoal-muted">
-                              /{spotlightProduct.unit}
-                            </span>
-                          </div>
-                          <span className="font-sans text-xs text-charcoal-muted">
-                            {spotlightMinOrder}
-                          </span>
-                        </div>
-
-                        <span className="font-sans text-xs font-semibold text-charcoal flex items-center gap-1">
-                          Rincian &rarr;
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
+                  </div>
+                  <Link href={`/produk/${spotlightProduct.id}`} className="absolute inset-0 z-10" aria-label={`Lihat ${spotlightProduct.name}`} />
                 </div>
               )}
             </div>
           </section>
 
-          {/* Featured Section: Calm & Direct */}
+          {/* Featured Section */}
           {featuredProducts.length > 0 && (
-            <section>
-              <div className="flex items-baseline justify-between mb-6 pb-2 border-b border-border">
-                <h2 className="font-heading text-xl font-bold text-charcoal">
+            <section className="pt-8">
+              <div className="flex items-baseline justify-between mb-8">
+                <h2 className="font-heading text-2xl font-bold text-charcoal">
                   Produk Pilihan
                 </h2>
-                <a
-                  href="#katalog"
-                  className="font-sans text-xs font-medium text-charcoal-muted hover:text-charcoal transition-colors"
-                >
-                  Lihat semua ({products.length})
-                </a>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
                 {featuredProducts.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -197,104 +149,99 @@ export default async function HomePage({
               </div>
             </section>
           )}
-        
-      </>) }
+        </>
+      )}
 
       {/* Main Catalog Section */}
-      <section id="katalog" className="scroll-mt-20">
-        <div className="border-b border-border pb-5 mb-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-            <div>
-              <h2 className="font-heading text-xl sm:text-2xl font-bold text-charcoal">
-                Daftar Produk
-              </h2>
-              <p className="font-sans text-sm text-charcoal-muted mt-1">
-                Tersedia {products.length} komoditas dan kemasan olahan.
-              </p>
-            </div>
-
-            {/* Search and Sort Form */}
-            <form action="/" method="GET" className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-              {categoryId && <input type="hidden" name="kategori" value={categoryId} />}
-
-              <div className="relative">
-                <Search className="w-4 h-4 text-charcoal-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  name="q"
-                  defaultValue={q}
-                  placeholder="Cari produk..."
-                  className="input pl-9 pr-3 py-1.5 text-xs sm:text-sm w-full sm:w-56"
-                />
-              </div>
-
-              <div className="relative">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-charcoal-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <select
-                  name="sort"
-                  defaultValue={sort}
-                  className="input pl-8 pr-6 py-1.5 text-xs sm:text-sm appearance-none cursor-pointer w-full sm:w-44"
-                >
-                  <option value="terbaru">Terbaru</option>
-                  <option value="harga-asc">Harga: Rendah ke Tinggi</option>
-                  <option value="harga-desc">Harga: Tinggi ke Rendah</option>
-                  <option value="nama-asc">Nama: A – Z</option>
-                </select>
-              </div>
-
-              <button type="submit" className="btn-secondary py-1.5 px-4 text-sm">
-                Filter
-              </button>
-            </form>
+      <section id="katalog" className="scroll-mt-24 pt-8 border-t border-border">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-charcoal">
+              Katalog Lengkap
+            </h2>
           </div>
 
-          {/* Clean Category Links */}
-          <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-1 font-sans text-sm">
-            <a
-              href={
-                q || sort !== "terbaru"
-                  ? `/?${q ? `q=${encodeURIComponent(q)}&` : ""}${sort !== "terbaru" ? `sort=${sort}` : ""}#katalog`
-                  : "/#katalog"
-              }
-              className={`px-4 py-2 rounded-md transition-colors whitespace-nowrap text-sm font-medium border ${
-                !categoryId
-                  ? "bg-charcoal text-white border-charcoal"
-                  : "bg-transparent text-charcoal-muted border-transparent hover:text-charcoal hover:bg-bg-subtle"
-              }`}
-            >
-              Semua Kategori
-            </a>
+          {/* Search and Sort Form */}
+          <form action="/" method="GET" className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            {categoryId && <input type="hidden" name="kategori" value={categoryId} />}
 
-            {categories.map((cat) => {
-              const params = new URLSearchParams();
-              params.set("kategori", cat.id);
-              if (q) params.set("q", q);
-              if (sort && sort !== "terbaru") params.set("sort", sort);
+            <div className="relative">
+              <Search className="w-4 h-4 text-charcoal-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                name="q"
+                defaultValue={q}
+                placeholder="Cari produk..."
+                className="input pl-9 pr-4 py-2 text-sm w-full sm:w-64 bg-surface"
+              />
+            </div>
 
-              const isActive = categoryId === cat.id;
+            <div className="relative">
+              <select
+                name="sort"
+                defaultValue={sort}
+                className="input pl-4 pr-10 py-2 text-sm appearance-none cursor-pointer w-full sm:w-48 bg-surface"
+              >
+                <option value="terbaru">Terbaru</option>
+                <option value="harga-asc">Harga Terendah</option>
+                <option value="harga-desc">Harga Tertinggi</option>
+                <option value="nama-asc">A – Z</option>
+              </select>
+              <SlidersHorizontal className="w-3.5 h-3.5 text-charcoal-muted absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            </div>
 
-              return (
-                <a
-                  key={cat.id}
-                  href={`/?${params.toString()}#katalog`}
-                  className={`px-4 py-2 rounded-md transition-colors whitespace-nowrap text-sm font-medium border ${
-                    isActive
-                      ? "bg-charcoal text-white border-charcoal"
-                      : "bg-transparent text-charcoal-muted border-transparent hover:text-charcoal hover:bg-bg-subtle"
-                  }`}
-                >
-                  {cat.name}
-                </a>
-              );
-            })}
+            <button type="submit" className="btn-secondary py-2 px-6 text-sm">
+              Cari
+            </button>
+          </form>
         </div>
-        <PaginationControls currentPage={page} totalPages={totalPages} />
-</div>
-      
 
-{/* Product Grid */}
+        {/* Clean Category Links */}
+        <div className="flex flex-wrap gap-2 mb-10 font-sans text-base">
+          <a
+            href={
+              q || sort !== "terbaru"
+                ? `/?${q ? `q=${encodeURIComponent(q)}&` : ""}${sort !== "terbaru" ? `sort=${sort}` : ""}#katalog`
+                : "/#katalog"
+            }
+            className={`px-5 py-2 rounded-full transition-colors ${
+              !categoryId
+                ? "bg-charcoal text-white font-medium"
+                : "bg-surface text-charcoal-muted hover:bg-border hover:text-charcoal"
+            }`}
+          >
+            Semua
+          </a>
+
+          {categories.map((cat) => {
+            const params = new URLSearchParams();
+            params.set("kategori", cat.id);
+            if (q) params.set("q", q);
+            if (sort && sort !== "terbaru") params.set("sort", sort);
+
+            const isActive = categoryId === cat.id;
+
+            return (
+              <a
+                key={cat.id}
+                href={`/?${params.toString()}#katalog`}
+                className={`px-5 py-2 rounded-full transition-colors ${
+                  isActive
+                    ? "bg-charcoal text-white font-medium"
+                    : "bg-surface text-charcoal-muted hover:bg-border hover:text-charcoal"
+                }`}
+              >
+                {cat.name}
+              </a>
+            );
+          })}
+        </div>
+        
+        <PaginationControls currentPage={page} totalPages={totalPages} />
+
+        {/* Product Grid */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 mt-10">
             {products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -312,7 +259,7 @@ export default async function HomePage({
           <EmptyState
             title="Produk tidak ditemukan"
             description="Tidak ada produk yang sesuai dengan pencarian atau filter yang dipilih."
-            action={{ label: "Lihat Semua Produk", href: "/#katalog" }}
+            action={{ label: "Kembali ke Katalog", href: "/#katalog" }}
           />
         )}
       </section>
