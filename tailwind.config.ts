@@ -10,43 +10,30 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#FAFAF7", // off-white
-          subtle: "#F5F4F0",
+          DEFAULT: "rgb(var(--bg) / <alpha-value>)",
+          subtle: "rgb(var(--bg-subtle) / <alpha-value>)",
         },
-        surface: "#FFFFFF",
+        surface: "rgb(var(--surface) / <alpha-value>)",
         primary: {
-          DEFAULT: "#4A5D3A", // olive green
-          hover: "#3D4E30",
-          light: "#E8EFE3",
+          DEFAULT: "rgb(var(--primary) / <alpha-value>)",
+          hover: "rgb(var(--primary-hover) / <alpha-value>)",
+          light: "rgb(var(--primary-light) / <alpha-value>)",
         },
         cta: {
-          DEFAULT: "#E8A33D", // amber
-          hover: "#D4922F",
+          DEFAULT: "rgb(var(--cta) / <alpha-value>)",
+          hover: "rgb(var(--cta-hover) / <alpha-value>)",
         },
         charcoal: {
-          DEFAULT: "#1F2419",
-          muted: "#6B7263",
+          DEFAULT: "rgb(var(--charcoal) / <alpha-value>)",
+          muted: "rgb(var(--charcoal-muted) / <alpha-value>)",
         },
         border: {
-          DEFAULT: "#E5E3DC",
-          subtle: "#E5E3DC",
+          DEFAULT: "rgb(var(--border) / <alpha-value>)",
+          subtle: "rgb(var(--border-subtle) / <alpha-value>)",
         },
         danger: {
-          DEFAULT: "#B94A48",
-          bg: "#FDF0EF",
-        },
-        // Dark theme specific mapping
-        dark: {
-          bg: "#141410",
-          "bg-subtle": "#1C1C18",
-          surface: "#222220",
-          primary: "#7FA882",
-          "primary-hover": "#95BC98",
-          text: "#E5E5E0",
-          muted: "#9C9C90",
-          border: "#2C2C28",
-          cta: "#E8A33D",
-          "cta-text": "#141410",
+          DEFAULT: "rgb(var(--danger) / <alpha-value>)",
+          bg: "rgb(var(--danger-bg) / <alpha-value>)",
         },
       },
       fontFamily: {
