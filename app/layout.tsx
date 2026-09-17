@@ -24,8 +24,33 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com"),
   title: "Etira Mushrooms | Pasokan Jamur B2B PT Eka Timur Raya",
   description: "Sistem pemesanan pasokan jamur olahan kaleng & pouch steril, jamur segar panen harian, dan produk pangan beku langsung dari pabrik PT Eka Timur Raya, Pasuruan.",
+  keywords: [
+    "jamur kancing", "supplier jamur", "jamur kaleng", "jamur pouch steril", 
+    "etira mushrooms", "eka timur raya", "pabrik jamur pasuruan", "B2B jamur"
+  ],
+  openGraph: {
+    title: "Etira Mushrooms | Pasokan Jamur B2B",
+    description: "Pemesanan pasokan jamur olahan kaleng & pouch steril, langsung dari pabrik PT Eka Timur Raya.",
+    type: "website",
+    locale: "id_ID",
+    siteName: "Etira Mushrooms",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Etira Mushrooms - Pasokan Jamur B2B",
+      },
+    ],
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,70 +59,70 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
         <Providers>
           <Navbar />
-          <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+          <main className="flex-1 w-full">
             {children}
           </main>
 
-          {/* Clean, Honest Footer */}
-          <footer className="border-t border-border dark:border-dark-border bg-bg-subtle dark:bg-dark-bg-subtle mt-auto transition-colors duration-200">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Corporate Minimalist Footer */}
+          <footer className="border-t border-stone-200 dark:border-stone-800 bg-[#faf9f6] dark:bg-[#141715] text-stone-600 dark:text-stone-400 mt-auto transition-colors duration-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                 {/* Brand Info */}
-                <div>
-                  <Link href="/" className="inline-block text-lg font-bold tracking-tight text-charcoal dark:text-dark-text">
-                    Etira Mushrooms
+                <div className="md:col-span-2">
+                  <Link href="/" className="inline-block text-lg font-bold tracking-tight text-[#1f2421] dark:text-stone-100 hover:text-[#1b382b] transition-colors">
+                    ETIRA MUSHROOMS
                   </Link>
-                  <p className="text-xs font-semibold text-sage dark:text-dark-sage mt-0.5">
-                    PT Eka Timur Raya — Pasuruan, Jawa Timur
+                  <p className="text-xs font-semibold text-[#1b382b] dark:text-emerald-400 mt-0.5 tracking-wider uppercase">
+                    PT Eka Timur Raya &bull; Pasuruan, Jawa Timur
                   </p>
-                  <p className="text-xs text-charcoal-muted dark:text-dark-muted mt-2.5 leading-relaxed max-w-sm">
-                    Produsen dan pemasok terpercaya jamur kancing segar, olahan kaleng, pouch retort steril, dan produk beku untuk industri kuliner, katering, dan Horeka.
+                  <p className="text-xs text-stone-500 dark:text-stone-400 mt-3.5 leading-relaxed max-w-md">
+                    Produsen dan pemasok terpercaya jamur kancing segar panen harian, olahan kaleng steril, pouch retort, dan produk beku untuk industri kuliner, restoran, katering, dan Horeka di seluruh Indonesia.
                   </p>
                 </div>
 
                 {/* Navigasi */}
                 <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-charcoal-muted dark:text-dark-muted mb-3">
-                    Navigasi Katalog
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1f2421] dark:text-stone-200 mb-4">
+                    Navigasi
                   </h4>
-                  <div className="flex flex-col gap-2 text-sm">
-                    <Link href="/#katalog" className="text-charcoal dark:text-dark-text hover:text-sage dark:hover:text-dark-sage transition-colors">
-                      Daftar Komoditas &amp; Kemasan
+                  <div className="flex flex-col gap-2.5 text-xs sm:text-sm">
+                    <Link href="/?katalog=semua" className="text-stone-600 dark:text-stone-400 hover:text-[#1b382b] dark:hover:text-white transition-colors">
+                      Katalog Produk
                     </Link>
-                    <Link href="/login" className="text-charcoal dark:text-dark-text hover:text-sage dark:hover:text-dark-sage transition-colors">
-                      Masuk ke Portal Pemesan
+                    <Link href="/tentang" className="text-stone-600 dark:text-stone-400 hover:text-[#1b382b] dark:hover:text-white transition-colors">
+                      Tentang Perusahaan
                     </Link>
-                    <Link href="/register" className="text-charcoal dark:text-dark-text hover:text-sage dark:hover:text-dark-sage transition-colors">
-                      Pendaftaran Mitra Bisnis
+                    <Link href="/kontak" className="text-stone-600 dark:text-stone-400 hover:text-[#1b382b] dark:hover:text-white transition-colors">
+                      Kontak &amp; Pemesanan
+                    </Link>
+                    <Link href="/login" className="text-stone-600 dark:text-stone-400 hover:text-[#1b382b] dark:hover:text-white transition-colors">
+                      Portal Masuk Mitra
                     </Link>
                   </div>
                 </div>
 
-                {/* Layanan & Hubungi Kami */}
+                {/* Layanan & Kontak */}
                 <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-charcoal-muted dark:text-dark-muted mb-3">
-                    Kantor &amp; Pabrik Pengolahan
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1f2421] dark:text-stone-200 mb-4">
+                    Kantor &amp; Fasilitas
                   </h4>
-                  <div className="space-y-1.5 text-xs text-charcoal-muted dark:text-dark-muted">
+                  <div className="space-y-2 text-xs text-stone-600 dark:text-stone-400">
                     <p className="leading-relaxed">
-                      Jl. Raya Nongkojajar KM 1.4 Purwodadi, Pasuruan 67163, Jawa Timur, Indonesia
+                      Jl. Raya Nongkojajar KM 1.4 Purwodadi, Pasuruan 67163, Jawa Timur
                     </p>
                     <p className="pt-1">
-                      <span className="font-medium text-charcoal dark:text-dark-text">Telp:</span> {process.env.NEXT_PUBLIC_COMPANY_PHONE || "085816172367"}
+                      <span className="font-semibold text-stone-800 dark:text-stone-200">WhatsApp:</span> +{process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367"}
                     </p>
                     <p>
-                      <span className="font-medium text-charcoal dark:text-dark-text">WhatsApp:</span> +{process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367"}
-                    </p>
-                    <p>
-                      <span className="font-medium text-charcoal dark:text-dark-text">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "nurhidayat2329@gmail.com"}
+                      <span className="font-semibold text-stone-800 dark:text-stone-200">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "nurhidayat2329@gmail.com"}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 pt-6 border-t border-border dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-charcoal-muted dark:text-dark-muted">
+              <div className="mt-12 pt-8 border-t border-stone-200 dark:border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
                 <p>&copy; {new Date().getFullYear()} PT Eka Timur Raya (Etira Mushrooms). Seluruh hak cipta dilindungi.</p>
-                <p>Pasokan langsung pabrik &amp; perkebunan jamur</p>
+                <p className="text-stone-600 dark:text-stone-400 font-medium">Pasokan Langsung Pabrik &amp; Perkebunan Jamur</p>
               </div>
             </div>
           </footer>

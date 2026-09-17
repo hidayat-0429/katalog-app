@@ -6,6 +6,7 @@ import CartItemRow from './CartItemRow';
 import CheckoutForm from './CheckoutForm';
 import { formatRupiah } from '@/lib/format';
 import EmptyState from '@/components/EmptyState';
+import { Card } from '@/components/ui';
 
 export default async function CartPage() {
   const user = await requireUser();
@@ -60,7 +61,7 @@ export default async function CartPage() {
           </div>
 
           <div className="lg:col-span-5 lg:sticky lg:top-20">
-            <div className="card p-5">
+            <Card className="p-5">
               <div className="flex items-center gap-2 font-sans font-bold text-sm text-charcoal pb-3 border-b border-border">
                 <Receipt className="w-4 h-4 text-charcoal-muted" />
                 <span>Ringkasan Pemesanan</span>
@@ -78,7 +79,7 @@ export default async function CartPage() {
               </div>
 
               <CheckoutForm defaultAddress={dbUser?.address || ''} />
-            </div>
+            </Card>
           </div>
         </div>
       )}

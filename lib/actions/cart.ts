@@ -62,7 +62,10 @@ export async function removeCartItem(cartId: string) {
 }
 
 export async function checkout(formData: FormData) {
-  const user = await requireUser();
+  const sessionUser = await requireUser();
+  
+  const user = await prisma.user.findUnique({ where: { id: sessionUser.id } });
+  if (!user) return { error: "User tidak ditemukan" };
 
   const shippingAddress = String(formData.get("shippingAddress") || "").trim();
   const shippingMethod = String(formData.get("shippingMethod") || "Armada Truk Berpendingin (Cold Chain)").trim();
@@ -107,6 +110,10 @@ export async function checkout(formData: FormData) {
         data: {
           orderNumber,
           userId: user.id,
+          buyerName: user.name,
+          buyerEmail: user.email,
+          buyerPhone: user.phone || null,
+          companyName: user.companyName || null,
           totalPrice,
           shippingAddress,
           notes: notes || null,

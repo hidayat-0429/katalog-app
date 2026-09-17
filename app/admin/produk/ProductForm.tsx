@@ -4,10 +4,23 @@ import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { Save, Tag, Upload, Link as LinkIcon, X, Loader2, Image as ImageIcon, AlertCircle } from 'lucide-react'
 
+interface ProductData {
+  id?: string;
+  name: string;
+  categoryId: string;
+  description?: string | null;
+  price: number;
+  unit: string;
+  stock: number;
+  imageUrl?: string | null;
+  isActive: boolean;
+  isFeatured: boolean;
+}
+
 type ProductFormProps = {
   categories: { id: string, name: string }[]
-  product?: any
-  action: (formData: FormData) => Promise<any>
+  product?: ProductData | null
+  action: (formData: FormData) => Promise<{ error?: string } | void>
 }
 
 export default function ProductForm({ categories, product, action }: ProductFormProps) {

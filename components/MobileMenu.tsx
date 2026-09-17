@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
-import { Menu, X, Store, ShoppingCart, ClipboardList, LayoutDashboard, LogIn, UserPlus, LogOut } from 'lucide-react';
+import { Menu, X, Store, ShoppingCart, ClipboardList, LayoutDashboard, LogIn, UserPlus, LogOut, Info, Phone } from 'lucide-react';
 
 type User = {
   id: string;
@@ -66,15 +66,38 @@ export default function MobileMenu({ user }: { user?: User }) {
                 >
                   <Store className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Katalog Produk
                 </Link>
+                <Link 
+                  href="/tentang" 
+                  onClick={closeMenu} 
+                  className="flex items-center gap-2.5 px-3 py-2 rounded hover:bg-bg-subtle dark:hover:bg-dark-surface font-medium transition-colors"
+                >
+                  <Info className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Tentang Perusahaan
+                </Link>
+                <Link 
+                  href="/kontak" 
+                  onClick={closeMenu} 
+                  className="flex items-center gap-2.5 px-3 py-2 rounded hover:bg-bg-subtle dark:hover:bg-dark-surface font-medium transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Hubungi Kami
+                </Link>
 
                 {user?.role === 'BUYER' && (
                   <>
                     <Link 
-                      href="/keranjang" 
+                      href="/profil" 
                       onClick={closeMenu} 
                       className="flex items-center gap-2.5 px-3 py-2 rounded hover:bg-bg-subtle dark:hover:bg-dark-surface font-medium transition-colors"
                     >
-                      <ShoppingCart className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Keranjang
+                      <UserPlus className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Profil & Alamat
+                    </Link>
+                    <Link 
+                      href="/keranjang" 
+                      onClick={closeMenu} 
+                      className="flex items-center justify-between px-3 py-2 rounded hover:bg-bg-subtle dark:hover:bg-dark-surface font-medium transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <ShoppingCart className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" /> Keranjang
+                      </div>
                     </Link>
                     <Link 
                       href="/pesanan" 

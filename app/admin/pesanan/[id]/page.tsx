@@ -7,9 +7,10 @@ import PrintInvoiceButton from '@/components/PrintInvoiceButton'
 import { formatRupiah } from '@/lib/format'
 import { User, MapPin, Package } from 'lucide-react'
 
-export default async function AdminOrderDetailPage({ params }: { params: { id: string } }) {
+export default async function AdminOrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const order = await prisma.order.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       user: true,
       items: {
@@ -43,10 +44,10 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             <User className="w-4 h-4" /> Informasi Pelanggan
           </h2>
           <div className="space-y-1.5 text-xs">
-            <p><span className="text-charcoal-muted dark:text-dark-muted">Nama:</span> <strong className="font-medium text-charcoal dark:text-dark-text ml-1">{order.user.name}</strong></p>
-            <p><span className="text-charcoal-muted dark:text-dark-muted">Email:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.user.email}</span></p>
-            {order.user.companyName && <p><span className="text-charcoal-muted dark:text-dark-muted">Perusahaan:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.user.companyName}</span></p>}
-            {order.user.phone && <p><span className="text-charcoal-muted dark:text-dark-muted">Telepon:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.user.phone}</span></p>}
+            <p><span className="text-charcoal-muted dark:text-dark-muted">Nama:</span> <strong className="font-medium text-charcoal dark:text-dark-text ml-1">{order.buyerName || order.user.name}</strong></p>
+            <p><span className="text-charcoal-muted dark:text-dark-muted">Email:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.buyerEmail || order.user.email}</span></p>
+            {(order.companyName || order.user.companyName) && <p><span className="text-charcoal-muted dark:text-dark-muted">Perusahaan:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.companyName || order.user.companyName}</span></p>}
+            {(order.buyerPhone || order.user.phone) && <p><span className="text-charcoal-muted dark:text-dark-muted">Telepon:</span> <span className="text-charcoal dark:text-dark-text ml-1">{order.buyerPhone || order.user.phone}</span></p>}
           </div>
         </div>
 

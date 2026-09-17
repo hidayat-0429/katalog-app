@@ -10,9 +10,9 @@ import WhatsAppOrderButton from "@/components/WhatsAppOrderButton";
 import PaymentInfoCard from "@/components/PaymentInfoCard";
 import { ChevronRight, MapPin, MessageSquare, Calendar, Package, AlertCircle, Building2 } from "lucide-react";
 
-export default async function OrderDetailPage({ params }: { params: { id: string } }) {
+export default async function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requireUser();
-  const { id } = params;
+  const { id } = await params;
 
   const order = await prisma.order.findUnique({
     where: { id },
@@ -55,7 +55,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
       <div className="hidden print:flex items-center justify-between border-b border-stone-300 pb-4 mb-6 font-sans">
         <div>
           <h1 className="font-heading text-xl font-bold text-stone-900">FAKTUR PEMESANAN PASOKAN RESMI</h1>
-          <p className="text-xs text-stone-600 mt-0.5">PT EKA TIMUR RAYA (ETIRA MUSHROOMS) — PURWODADI, PASURUAN</p>
+          <p className="text-xs text-stone-600 mt-0.5">PT EKA TIMUR RAYA (ETIRA MUSHROOMS) PURWODADI, PASURUAN</p>
         </div>
         <div className="text-right text-xs">
           <p className="font-mono font-bold text-stone-900">{order.orderNumber}</p>
@@ -144,10 +144,10 @@ export default async function OrderDetailPage({ params }: { params: { id: string
           <div className="text-xs space-y-0.5">
             <span className="text-charcoal-muted block">Pemesan</span>
             <span className="font-semibold text-charcoal block">
-              {order.user.name}
+              {order.buyerName || order.user.name}
             </span>
-            {order.user.companyName && (
-              <span className="text-charcoal-muted block">{order.user.companyName}</span>
+            {(order.companyName || order.user.companyName) && (
+              <span className="text-charcoal-muted block">{order.companyName || order.user.companyName}</span>
             )}
           </div>
 
@@ -228,7 +228,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
           <WhatsAppOrderButton
             orderNumber={order.orderNumber}
             totalPrice={order.totalPrice}
-            customerName={order.user.name}
+            customerName={order.buyerName || order.user.name}
             items={order.items.map((i) => ({
               productName: i.productName || i.product?.name || "Produk",
               quantity: i.quantity,

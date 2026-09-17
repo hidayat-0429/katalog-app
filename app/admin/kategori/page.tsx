@@ -3,6 +3,7 @@ import { createCategory } from '@/lib/actions/categories'
 import { Plus, Tag } from 'lucide-react'
 import DeleteCategoryButton from './DeleteCategoryButton'
 import EditCategoryButton from './EditCategoryButton'
+import { Button, Input } from '@/components/ui'
 
 export default async function AdminCategoriesPage() {
   const categories = await prisma.category.findMany({
@@ -38,16 +39,16 @@ export default async function AdminCategoriesPage() {
           <form action={handleCreate} className="space-y-3 text-xs">
             <div className="space-y-1">
               <label htmlFor="name" className="font-medium text-charcoal dark:text-dark-text">Nama Kategori</label>
-              <input type="text" id="name" name="name" required className="input w-full text-xs" placeholder="Contoh: Jamur Segar / Pouch" />
+              <Input type="text" id="name" name="name" required className="w-full text-xs" placeholder="Contoh: Jamur Segar / Pouch" />
             </div>
             <div className="space-y-1">
               <label htmlFor="description" className="font-medium text-charcoal dark:text-dark-text">Keterangan (Opsional)</label>
               <textarea id="description" name="description" className="input w-full min-h-[70px] text-xs" placeholder="Deskripsi singkat jenis produk..." />
             </div>
-            <button type="submit" className="btn-primary w-full inline-flex items-center justify-center gap-1.5 py-2">
+            <Button type="submit" variant="primary" className="w-full inline-flex items-center justify-center gap-1.5 py-2">
               <Plus className="w-3.5 h-3.5" />
               <span>Simpan Kategori</span>
-            </button>
+            </Button>
           </form>
         </div>
 
@@ -64,7 +65,7 @@ export default async function AdminCategoriesPage() {
                   <div className="text-xs text-charcoal-muted dark:text-dark-muted">
                     {category._count.products} produk terdaftar
                     {category.description && (
-                      <span className="ml-2 italic">— {category.description}</span>
+                      <span className="ml-2 italic"> {category.description}</span>
                     )}
                   </div>
                 </div>

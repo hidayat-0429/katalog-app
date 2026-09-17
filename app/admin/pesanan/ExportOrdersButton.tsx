@@ -16,6 +16,10 @@ interface OrderData {
   totalPrice: number;
   shippingAddress: string;
   notes?: string | null;
+  buyerName?: string | null;
+  buyerEmail?: string | null;
+  buyerPhone?: string | null;
+  companyName?: string | null;
   user: {
     name: string;
     email: string;
@@ -69,12 +73,12 @@ export default function ExportOrdersButton({ orders }: ExportOrdersButtonProps) 
       return [
         escapeCsv(o.orderNumber),
         escapeCsv(formattedDate),
-        escapeCsv(o.user.name),
-        escapeCsv(o.user.companyName || '-'),
-        escapeCsv(o.user.phone || '-'),
-        escapeCsv(o.user.email),
+        escapeCsv(o.buyerName || o.user.name),
+        escapeCsv(o.companyName || o.user.companyName || '-'),
+        escapeCsv(o.buyerPhone || o.user.phone || '-'),
+        escapeCsv(o.buyerEmail || o.user.email),
         escapeCsv(o.shippingAddress),
-        escapeCsv(o.totalPrice),
+        escapeCsv(new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(o.totalPrice)),
         escapeCsv(o.status),
         escapeCsv(o.notes || '-'),
         escapeCsv(itemsDetail || '-'),

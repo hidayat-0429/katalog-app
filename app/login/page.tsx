@@ -5,6 +5,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { Input, Button } from '@/components/ui';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -64,12 +65,11 @@ export default function LoginPage() {
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
-              <input
+              <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-with-icon w-full pl-9"
                 placeholder="nama@perusahaan.com"
                 required
                 disabled={loading}
@@ -83,22 +83,23 @@ export default function LoginPage() {
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
-              <input
+              <Input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-with-icon w-full pl-9"
                 placeholder="••••••••"
                 required
                 disabled={loading}
+                className="input-with-icon w-full pl-9"
               />
             </div>
           </div>
 
-          <button type="submit" className="btn-primary w-full mt-2" disabled={loading}>
-            {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Masuk'}
-          </button>
+                      <Button type="submit" variant="primary" className="w-full mt-2" disabled={loading}>
+              {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Masuk'}
+            </Button>
+            
         </form>
 
         <div className="mt-5 pt-4 border-t border-border dark:border-dark-border text-center text-xs text-charcoal-muted dark:text-dark-muted">

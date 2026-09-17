@@ -7,6 +7,7 @@ import { updateCartItem, removeCartItem } from '@/lib/actions/cart';
 import { useRouter } from 'next/navigation';
 
 import { getCartonConversion } from '@/lib/productImage';
+import { Card } from '@/components/ui';
 
 interface CartItemRowProps {
   cartId: string;
@@ -40,7 +41,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
   };
 
   return (
-    <div className={`card p-4 flex items-center justify-between gap-4 ${isPending ? 'opacity-50 pointer-events-none' : ''} transition-opacity`}>
+    <Card className={`p-4 flex items-center justify-between gap-4 ${isPending ? 'opacity-50 pointer-events-none' : ''} transition-opacity`}>
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-10 h-10 bg-bg-subtle rounded flex items-center justify-center shrink-0 border border-border text-charcoal-muted">
           <Package className="w-5 h-5" />
@@ -92,6 +93,6 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
           <Trash2 className="w-4 h-4" />
         </button>
       </div>
-    </div>
+    </Card>
   );
 }

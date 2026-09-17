@@ -3,6 +3,7 @@ import { formatRupiah } from '@/lib/format'
 import StatusBadge from '@/components/StatusBadge'
 import Link from 'next/link'
 import { Package, ClipboardList, Users, Clock, TrendingUp, Trophy } from 'lucide-react'
+import { Card } from '@/components/ui'
 
 export default async function AdminDashboardPage() {
   const [totalProduk, totalPesanan, totalUser, pesananPending, totalRevenueResult, produkTerlaris, pesananTerbaru] = await Promise.all([
@@ -47,41 +48,41 @@ export default async function AdminDashboardPage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="card p-4">
+        <Card className="p-4">
           <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
             <Package className="w-4 h-4" />
           </div>
           <div className="font-sans text-xs text-charcoal-muted">Total Produk</div>
           <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalProduk}</div>
-        </div>
+        </Card>
         
-        <div className="card p-4">
+        <Card className="p-4">
           <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
             <ClipboardList className="w-4 h-4" />
           </div>
           <div className="font-sans text-xs text-charcoal-muted">Total Pesanan</div>
           <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalPesanan}</div>
-        </div>
+        </Card>
         
-        <div className="card p-4">
+        <Card className="p-4">
           <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
             <Users className="w-4 h-4" />
           </div>
           <div className="font-sans text-xs text-charcoal-muted">Total Pengguna</div>
           <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalUser}</div>
-        </div>
+        </Card>
         
-        <div className="card p-4">
+        <Card className="p-4">
           <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-primary mb-3 border border-border">
             <Clock className="w-4 h-4" />
           </div>
           <div className="font-sans text-xs text-charcoal-muted">Perlu Diproses</div>
           <div className="font-mono text-xl sm:text-2xl font-bold text-primary mt-0.5">{pesananPending}</div>
-        </div>
+        </Card>
       </div>
 
       {/* Revenue Card */}
-      <div className="card p-5">
+      <Card className="p-5">
         <div className="flex items-center gap-2 mb-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-charcoal-muted">
           <TrendingUp className="w-4 h-4 text-primary" />
           <span>Total Nilai Pesanan Aktif</span>
@@ -92,12 +93,12 @@ export default async function AdminDashboardPage() {
         <p className="font-sans text-xs text-charcoal-muted mt-1">
           Akumulasi dari seluruh pesanan yang tidak dibatalkan
         </p>
-      </div>
+      </Card>
 
       {/* Grid 2-col */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Produk Terlaris */}
-        <div className="card p-5">
+        <Card className="p-5">
           <h2 className="flex items-center gap-2 font-heading font-bold text-sm text-charcoal mb-4 border-b border-border pb-3">
             <Trophy className="w-4 h-4 text-primary" />
             Produk Paling Sering Dipesan
@@ -120,10 +121,10 @@ export default async function AdminDashboardPage() {
               <div className="font-sans text-charcoal-muted text-xs italic">Belum ada data penjualan</div>
             )}
           </div>
-        </div>
+        </Card>
 
         {/* Pesanan Terbaru */}
-        <div className="card p-5">
+        <Card className="p-5">
           <h2 className="flex items-center gap-2 font-heading font-bold text-sm text-charcoal mb-4 border-b border-border pb-3">
             <Clock className="w-4 h-4 text-charcoal-muted" />
             Pesanan Masuk Terbaru
@@ -149,7 +150,7 @@ export default async function AdminDashboardPage() {
               <div className="font-sans text-charcoal-muted text-xs italic">Belum ada pesanan masuk</div>
             )}
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   )

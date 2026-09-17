@@ -60,6 +60,8 @@ export async function createProduct(formData: FormData) {
   redirect("/admin/produk");
 }
 
+import { deleteImageFromSupabase } from "@/lib/supabase";
+
 export async function updateProduct(id: string, formData: FormData) {
   await requireAdmin();
   const rawData = parseProductForm(formData);
@@ -76,7 +78,18 @@ export async function updateProduct(id: string, formData: FormData) {
     return { error: "Kategori yang dipilih tidak ditemukan" };
   }
 
+  // Cari produk lama untuk komparasi gambar
+  const oldProduct = await prisma.product.findUnique({ where: { id } });
+  if (!oldProduct) return { error: "Produk tidak ditemukan" };
+
   await prisma.product.update({ where: { id }, data: parsed.data });
+
+  // SAFE GC: Jika update database sukses dan admin mengganti gambar (URL beda),
+  // barulah kita hapus gambar yang lama secara asinkron (tidak memblokir flow).
+  if (oldProduct.imageUrl && parsed.data.imageUrl !== oldProduct.imageUrl) {
+    await deleteImageFromSupabase(oldProduct.imageUrl).catch(() => {});
+  }
+
   revalidatePath("/admin/produk");
   revalidatePath(`/admin/produk/${id}`);
   revalidatePath("/");
@@ -86,10 +99,18 @@ export async function updateProduct(id: string, formData: FormData) {
 export async function deleteProduct(id: string) {
   await requireAdmin();
   try {
+    const product = await prisma.product.findUnique({ where: { id } });
+    
     await prisma.product.delete({ where: { id } });
+    
+    // SAFE GC: Hanya hapus gambar jika HAPUS KERAS (hard delete) di DB sukses.
+    if (product && product.imageUrl) {
+      await deleteImageFromSupabase(product.imageUrl).catch(() => {});
+    }
   } catch (err: any) {
-    // Jika produk sudah memiliki riwayat relasi (mis. pernah dipesan dalam orderItems),
-    // nonaktifkan produk agar integritas riwayat pesanan pelanggan tetap terjaga
+    // Jika gagal karena Foreign Key constraint (P2003 / P2014) artinya produk pernah dipesan.
+    // Lakukan SOFT DELETE (Hanya mematikan isActive) dan JANGAN hapus gambarnya 
+    // agar riwayat pesanan (invoice B2B) lama tetap bisa me-render foto aslinya.
     if (err?.code === "P2003" || err?.code === "P2014") {
       await prisma.product.update({
         where: { id },

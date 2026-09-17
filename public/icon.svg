@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background circle -->
+  <rect width="32" height="32" rx="8" fill="#4A5D3A"/>
+  <!-- Mushroom cap (button mushroom) -->
+  <ellipse cx="16" cy="14" rx="10" ry="7" fill="#F5F4F0"/>
+  <!-- Mushroom stem -->
+  <rect x="13" y="19" width="6" height="6" rx="2" fill="#F5F4F0"/>
+  <!-- Mushroom cap detail / shadow -->
+  <ellipse cx="16" cy="14" rx="10" ry="7" fill="url(#cap-gradient)" opacity="0.3"/>
+  <defs>
+    <radialGradient id="cap-gradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4A5D3A"/>
+      <stop offset="100%" stop-color="#4A5D3A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

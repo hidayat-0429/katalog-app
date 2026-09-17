@@ -1,4 +1,4 @@
-# Design System — PT Eka Timur Raya (B2B Jamur)
+# Design System PT Eka Timur Raya (B2B Jamur)
 
 ## Warna
 
@@ -40,8 +40,8 @@
 
 ## Tipografi
 
-- **Heading** (h1–h3): `Bricolage Grotesque` — bold, tracking tight
-- **Body / paragraf**: `Figtree` — regular/medium
+- **Heading** (h1–h3): `Bricolage Grotesque`  bold, tracking tight
+- **Body / paragraf**: `Figtree`  regular/medium
 - **Angka, harga, kode pesanan**: `font-mono` (JetBrains Mono atau Inter monospace fallback)
 - **Format harga**: `Rp 150.000` (tanpa desimal, titik sebagai pemisah ribuan)
 - **Satuan**: ditulis jelas setelah harga → `/kg`, `/karton`, `/pak`, `/kaleng`, `/pouch`
@@ -60,7 +60,7 @@
 - ❌ Warna purple / ungu (kecuali status pill "Dikirim")
 - ❌ Glassmorphism / blur / backdrop-filter
 - ❌ Box-shadow besar (shadow hanya boleh untuk dropdown & modal, dan harus tipis: `shadow-sm` maks)
-- ❌ Emoji sebagai ikon (🏭❄️📦 dsb) — ganti dengan ikon Lucide yang sesuai
+- ❌ Emoji sebagai ikon (🏭❄️📦 dsb)  ganti dengan ikon Lucide yang sesuai
 - ❌ Animasi berlebihan — hanya transisi halus (`transition-colors`, `transition-opacity`)
 
 ## Komponen Referensi

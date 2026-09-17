@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { User, Building2, Phone, MapPin, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { registerUser } from '@/lib/actions/auth';
+import { Input, Button } from '@/components/ui';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -86,17 +87,17 @@ export default function RegisterPage() {
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
-                className="input input-with-icon w-full pl-9"
-                placeholder="Nama penanggung jawab"
-                required
-                disabled={loading}
-              />
+                              <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Nama penanggung jawab"
+                  required
+                  disabled={loading}
+                  className="input-with-icon w-full pl-9"
+                />
             </div>
           </div>
 
@@ -106,15 +107,15 @@ export default function RegisterPage() {
             </label>
             <div className="relative">
               <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
-              <input
+              <Input
                 id="company"
                 name="companyName"
                 type="text"
                 value={formData.companyName}
                 onChange={handleChange}
-                className="input input-with-icon w-full pl-9"
-                placeholder="Contoh: CV Rasa Utama / Restoran Selera"
+                placeholder="Contoh: CV Rasa Utama / Restoran Selasa"
                 disabled={loading}
+                className="input-with-icon w-full pl-9"
               />
             </div>
           </div>

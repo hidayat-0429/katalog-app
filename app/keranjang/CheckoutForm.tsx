@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { ShoppingBag, MapPin, MessageSquare, AlertCircle, Loader2, Truck } from 'lucide-react';
 import { checkout } from '@/lib/actions/cart';
+import { Button } from '@/components/ui';
 
 interface CheckoutFormProps {
   defaultAddress?: string;
@@ -97,7 +98,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
         />
       </div>
       
-      <button type="submit" disabled={isPending} className="btn-primary w-full py-3 mt-4">
+      <Button type="submit" variant="primary" disabled={isPending} className="w-full py-3 mt-4">
         {isPending ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -109,7 +110,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
             <span>Proses Pemesanan</span>
           </>
         )}
-      </button>
+      </Button>
     </form>
   );
 }

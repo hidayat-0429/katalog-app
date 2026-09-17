@@ -1,5 +1,6 @@
 import { Clock, Loader, Truck, CheckCircle, XCircle } from "lucide-react";
-import { statusLabel, statusColor } from "@/lib/format";
+import { statusLabel } from "@/lib/format";
+import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 
 interface StatusBadgeProps {
   status: string;
@@ -23,12 +24,21 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
     }
   };
 
-  const className = `badge flex items-center gap-1.5 ${statusColor(status)}`;
+  const getVariant = (): BadgeVariant => {
+    switch (status.toUpperCase()) {
+      case "PENDING": return "warning";
+      case "DIPROSES": return "info";
+      case "DIKIRIM": return "purple";
+      case "SELESAI": return "success";
+      case "DIBATALKAN": return "danger";
+      default: return "default";
+    }
+  };
 
   return (
-    <span className={className}>
+    <Badge variant={getVariant()}>
       {getIcon()}
-      {statusLabel(status)}
-    </span>
+      <span>{statusLabel(status)}</span>
+    </Badge>
   );
 }

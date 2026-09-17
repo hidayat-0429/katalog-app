@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { supabaseAdmin, STORAGE_BUCKET } from "@/lib/supabase";
 
 const MIME_TO_EXT: Record<string, string> = {
   "image/jpeg": ".jpg",
@@ -13,7 +12,7 @@ const MIME_TO_EXT: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
-    // Only authenticated admin can upload product images
+    // Hanya admin yang bisa upload gambar produk
     const session = await getServerSession(authOptions);
     if (!session || session.user?.role !== "ADMIN") {
       return NextResponse.json(
@@ -29,7 +28,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "File tidak ditemukan" }, { status: 400 });
     }
 
-    // Validate mime type strictly (SVG excluded to prevent Stored XSS)
+    // Validasi MIME type (SVG dikecualikan untuk mencegah Stored XSS)
     const ext = MIME_TO_EXT[file.type];
     if (!ext) {
       return NextResponse.json(
@@ -38,7 +37,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate size (max 5MB)
+    // Validasi ukuran (max 5MB)
     const maxSizeBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
       return NextResponse.json(
@@ -50,23 +49,45 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique, safe filename using validated extension from MIME
+    // Buat filename yang unik dan aman
     const randomSuffix = Math.random().toString(36).substring(2, 8);
-    const cleanName = path
-      .basename(file.name, path.extname(file.name))
+    const cleanName = file.name
+      .replace(/\.[^.]+$/, "")
       .toLowerCase()
       .replace(/[^a-z0-9]/g, "-")
       .slice(0, 30) || "product";
-    const fileName = `${Date.now()}-${cleanName}-${randomSuffix}${ext}`;
+    const fileName = `products/${Date.now()}-${cleanName}-${randomSuffix}${ext}`;
 
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
+    // Cek apakah env Supabase Storage sudah dikonfigurasi
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json(
+        { error: "Konfigurasi Supabase Storage belum diatur. Tambahkan NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY di file .env" },
+        { status: 500 }
+      );
+    }
 
-    const filePath = path.join(uploadDir, fileName);
-    await writeFile(filePath, buffer);
+    // Upload ke Supabase Storage
+    const { data, error } = await supabaseAdmin.storage
+      .from(STORAGE_BUCKET)
+      .upload(fileName, buffer, {
+        contentType: file.type,
+        upsert: false,
+      });
 
-    const publicUrl = `/uploads/${fileName}`;
-    return NextResponse.json({ success: true, url: publicUrl });
+    if (error) {
+      console.error("Supabase upload error:", error);
+      return NextResponse.json(
+        { error: `Gagal mengunggah ke storage: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    // Dapatkan URL publik gambar
+    const { data: publicUrlData } = supabaseAdmin.storage
+      .from(STORAGE_BUCKET)
+      .getPublicUrl(data.path);
+
+    return NextResponse.json({ success: true, url: publicUrlData.publicUrl });
   } catch (error: any) {
     console.error("Upload error:", error);
     return NextResponse.json(
@@ -75,4 +96,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

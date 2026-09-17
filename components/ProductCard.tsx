@@ -30,65 +30,59 @@ export default function ProductCard({
     <Link
       href={`/produk/${id}`}
       aria-label={`Detail produk ${name}`}
-      className="group flex flex-col bg-surface border border-border rounded-lg overflow-hidden transition-colors hover:border-primary"
+      className="group flex flex-col bg-white dark:bg-[#141715] border border-stone-200 dark:border-stone-800/90 rounded-lg overflow-hidden transition-all duration-200 hover:border-stone-400 dark:hover:border-stone-500 hover:shadow-xs"
     >
-      {/* Product Image */}
-      <div className="relative aspect-[4/3] w-full bg-bg-subtle overflow-hidden border-b border-border">
+      {/* Product Image Container */}
+      <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
         <Image
           src={displayImage}
           alt={name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
         />
 
-        {/* Category Pill Tag on Top-Left */}
-        <div className="absolute top-2.5 left-2.5">
-          <span className="font-sans text-[10px] font-semibold tracking-wide uppercase px-2 py-1 bg-charcoal/80 text-white rounded-md shadow-xs">
-            {categoryName}
-          </span>
-        </div>
-
-        {isOutOfStock ? (
-          <div className="absolute inset-0 bg-white/60 dark:bg-black/60 flex items-center justify-center backdrop-blur-xs">
-            <span className="font-sans text-xs font-bold uppercase tracking-wider text-danger px-3 py-1 bg-danger-bg rounded-md border border-danger shadow-xs">
+        {/* Stock Notice if out of stock */}
+        {isOutOfStock && (
+          <div className="absolute inset-0 bg-stone-900/60 backdrop-blur-[2px] flex items-center justify-center">
+            <span className="px-3 py-1 rounded-sm bg-stone-900/90 text-white text-xs font-medium">
               Stok Habis
-            </span>
-          </div>
-        ) : (
-          <div className="absolute bottom-2.5 right-2.5">
-            <span className="font-sans text-[10px] font-medium px-2 py-1 bg-surface text-charcoal rounded-md border border-border shadow-xs">
-              Stok: <span className="font-mono">{stock}</span> {unit}
             </span>
           </div>
         )}
       </div>
 
       {/* Product Info */}
-      <div className="p-4 flex flex-col flex-1 justify-between gap-3">
+      <div className="p-5 flex flex-col flex-1 justify-between gap-4">
         <div>
-          <h3 className="font-sans font-semibold text-sm sm:text-base text-charcoal leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-stone-500 dark:text-stone-400 dark:text-stone-500 block mb-1">
+            {categoryName}
+          </span>
+          <h3 className="font-sans font-semibold text-base text-[#1f2421] dark:text-stone-100 leading-snug line-clamp-2 group-hover:text-[#1b382b] dark:text-emerald-400 transition-colors">
             {name}
           </h3>
+          <p className="font-sans text-xs text-stone-500 dark:text-stone-400 dark:text-stone-500 mt-1">
+            {minOrder}
+          </p>
         </div>
 
-        <div className="pt-3 border-t border-border flex items-end justify-between gap-2">
+        <div className="pt-3.5 border-t border-stone-100 dark:border-stone-800/60 flex items-end justify-between gap-2">
           <div>
-            <div className="flex items-baseline gap-1">
-              <span className="font-mono text-base sm:text-lg font-bold text-charcoal">
+            <span className="text-[10px] text-stone-400 dark:text-stone-500 uppercase tracking-wider block font-medium">
+              Harga pasokan
+            </span>
+            <div className="flex items-baseline gap-1 mt-0.5">
+              <span className="font-sans text-base sm:text-lg font-bold text-[#1f2421] dark:text-stone-100 tracking-tight">
                 {formatRupiah(price)}
               </span>
-              <span className="font-sans text-xs text-charcoal-muted">
+              <span className="font-sans text-xs text-stone-500 dark:text-stone-400 dark:text-stone-500">
                 /{unit}
               </span>
             </div>
-            <p className="font-sans text-[11px] text-charcoal-muted mt-0.5">
-              {minOrder}
-            </p>
           </div>
 
-          <span className="btn-primary text-xs py-1.5 px-3 rounded-md">
-            Pesan
+          <span className="text-xs font-semibold text-[#1b382b] dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5 pb-0.5 shrink-0 whitespace-nowrap">
+            Lihat Detail &rarr;
           </span>
         </div>
       </div>
