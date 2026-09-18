@@ -10,6 +10,7 @@ import WhatsAppOrderButton from "@/components/WhatsAppOrderButton";
 import PaymentInfoCard from "@/components/PaymentInfoCard";
 import { ChevronRight, MapPin, MessageSquare, Calendar, Package, AlertCircle, Building2 } from "lucide-react";
 
+
 export default async function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requireUser();
   const { id } = await params;
@@ -35,7 +36,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
   const isCanceled = order.status === "DIBATALKAN";
 
   return (
-    <div className="max-w-4xl mx-auto py-4">
+    <div className="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       {/* Top Breadcrumb & Action bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 print:hidden">
         <nav className="flex items-center gap-1.5 font-sans text-xs text-charcoal-muted">

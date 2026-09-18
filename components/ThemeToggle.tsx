@@ -1,38 +1,35 @@
 "use client";
-
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggle() {
-  const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  // Initialize based on localStorage or system preference
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("theme");
+      if (stored) return stored === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="w-8 h-8 rounded border border-border dark:border-dark-border bg-white dark:bg-dark-surface" />
-    );
-  }
-
-  const isDark = resolvedTheme === "dark";
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
   return (
     <button
-      type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="w-8 h-8 rounded border border-border dark:border-dark-border bg-white dark:bg-dark-surface text-charcoal dark:text-dark-text hover:bg-bg-subtle dark:hover:bg-dark-surface/80 flex items-center justify-center transition-colors duration-150"
-      title={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
-      aria-label="Toggle theme"
+      onClick={() => setIsDark(!isDark)}
+      className="p-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-colors"
+      aria-label="Toggle dark mode"
     >
-      {isDark ? (
-        <Sun className="w-4 h-4 text-amber-300" />
-      ) : (
-        <Moon className="w-4 h-4 text-charcoal" />
-      )}
+      {isDark ? "☀️" : "🌙"}
     </button>
   );
 }

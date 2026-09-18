@@ -1,4 +1,4 @@
-import { Search, SlidersHorizontal, ArrowRight } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import ProductCard from "@/components/ProductCard";
 import EmptyState from "@/components/EmptyState";
@@ -11,52 +11,55 @@ import { Prisma } from "@prisma/client";
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ kategori?: string; q?: string; sort?: string; page?: string; katalog?: string }>;
+  searchParams: Promise<{
+    kategori?: string;
+    q?: string;
+    sort?: string;
+    page?: string;
+    katalog?: string;
+  }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  
+
   // Sanitasi & Normalisasi Input
   const rawQ = resolvedSearchParams.q || "";
   const q = rawQ.trim().slice(0, 100);
-  
+
   const categoryId = resolvedSearchParams.kategori || "";
   const sort = resolvedSearchParams.sort || "terbaru";
 
-  const isFiltering = q.length > 0 || categoryId.length > 0 || (sort && sort !== "terbaru");
-  const isCatalogMode = isFiltering || resolvedSearchParams.katalog === "semua" || Boolean(resolvedSearchParams.page);
+  const isFiltering =
+    q.length > 0 || categoryId.length > 0 || (sort && sort !== "terbaru");
+  const isCatalogMode =
+    isFiltering ||
+    resolvedSearchParams.katalog === "semua" ||
+    Boolean(resolvedSearchParams.page);
 
-  // Type-Safety: Prisma.ProductWhereInput
+  // Prisma WHERE clause
   const whereClause: Prisma.ProductWhereInput = { isActive: true };
-  if (categoryId) {
-    whereClause.categoryId = categoryId;
-  }
-  if (q) {
-    whereClause.name = { contains: q, mode: "insensitive" };
-  }
+  if (categoryId) whereClause.categoryId = categoryId;
+  if (q) whereClause.name = { contains: q, mode: "insensitive" };
 
-  // Type-Safety: Prisma.ProductOrderByWithRelationInput
-  let orderByClause: Prisma.ProductOrderByWithRelationInput = { createdAt: "desc" };
-  
-  if (sort === "harga-asc") {
-    orderByClause = { price: "asc" };
-  } else if (sort === "harga-desc") {
-    orderByClause = { price: "desc" };
-  } else if (sort === "nama-asc") {
-    orderByClause = { name: "asc" };
-  }
+  // Prisma ORDER BY clause
+  let orderByClause: Prisma.ProductOrderByWithRelationInput = {
+    createdAt: "desc",
+  };
+  if (sort === "harga-asc") orderByClause = { price: "asc" };
+  else if (sort === "harga-desc") orderByClause = { price: "desc" };
+  else if (sort === "nama-asc") orderByClause = { name: "asc" };
 
   const limit = 12;
   const totalCount = await prisma.product.count({ where: whereClause });
   const totalPages = Math.max(Math.ceil(totalCount / limit), 1);
 
-  // Sanitasi Pagination
+  // Pagination
   const rawPage = Number(resolvedSearchParams.page);
-  const requestedPage = Number.isInteger(rawPage) && rawPage > 0 ? rawPage : 1;
+  const requestedPage =
+    Number.isInteger(rawPage) && rawPage > 0 ? rawPage : 1;
   const safePage = Math.min(requestedPage, totalPages);
-  
   const skip = (safePage - 1) * limit;
 
-  // Optimasi Parallel Query
+  // Parallel queries
   const [categories, products, featuredProducts] = await Promise.all([
     prisma.category.findMany({ orderBy: { name: "asc" } }),
     prisma.product.findMany({
@@ -75,13 +78,14 @@ export default async function HomePage({
       : Promise.resolve([]),
   ]);
 
-  // Jika produk featured kosong di database, gunakan 4 produk teratas yang aktif
-  const curatedProducts = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 4);
+  // Fallback bila tidak ada featured
+  const curatedProducts =
+    featuredProducts.length > 0 ? featuredProducts : products.slice(0, 4);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#faf9f6] dark:bg-[#0f1110] text-[#1f2421] dark:text-stone-100">
       {/* ─────────────────────────────────────────────────────────────
-          MODE 1: KATALOG PRODUK EFISIEN (Saat mencari / filter / buka katalog)
+          MODE 1: KATALOG PRODUK EFISIEN
           ───────────────────────────────────────────────────────────── */}
       {isCatalogMode ? (
         <section className="py-10 sm:py-14">
@@ -90,30 +94,35 @@ export default async function HomePage({
             <div className="border-b border-stone-200 dark:border-stone-800 pb-8 mb-8">
               <Link
                 href="/"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 dark:text-stone-400 dark:text-stone-500 hover:text-[#1b382b] dark:text-emerald-400 transition-colors mb-4"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 dark:text-stone-400 hover:text-[#1b382b] dark:text-emerald-400 transition-colors mb-4"
               >
                 &larr; Kembali ke Beranda
               </Link>
-              
+
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                   <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-[#1f2421] dark:text-stone-100">
                     Katalog Produk &amp; Pasokan
                   </h1>
-                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 mt-2 max-w-2xl leading-relaxed">
-                    Daftar komoditas jamur segar panen harian, kaleng steril, pouch retort, dan olahan beku PT Eka Timur Raya untuk mitra bisnis Horeka dan industri kuliner.
+                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 mt-2 max-w-2xl leading-relaxed">
+                    Daftar komoditas jamur segar panen harian, kaleng steril,
+                    pouch retort, dan olahan beku PT Eka Timur Raya untuk mitra
+                    bisnis Horeka dan industri kuliner.
                   </p>
                 </div>
 
-                <div className="text-xs text-stone-500 dark:text-stone-400 dark:text-stone-500 font-medium">
+                <div className="text-xs text-stone-500 dark:text-stone-400 font-medium">
                   Menampilkan {products.length} dari {totalCount} komoditas
                 </div>
               </div>
 
-              {/* Toolbar Pencarian & Filter */}
+              {/* Toolbar pencarian & filter */}
               <div className="mt-8 pt-6 border-t border-stone-200 dark:border-stone-800/80 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-                {/* Search & Sort Form */}
-                <form action="/" method="GET" className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <form
+                  action="/"
+                  method="GET"
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+                >
                   <input type="hidden" name="katalog" value="semua" />
                   {categoryId && <input type="hidden" name="kategori" value={categoryId} />}
 
@@ -155,13 +164,15 @@ export default async function HomePage({
                   <a
                     href={
                       q || sort !== "terbaru"
-                        ? `/?katalog=semua&${q ? `q=${encodeURIComponent(q)}&` : ""}${sort !== "terbaru" ? `sort=${sort}` : ""}`
+                        ? `/?katalog=semua&${q ? `q=${encodeURIComponent(q)}&` : ""}${
+                            sort !== "terbaru" ? `sort=${sort}` : ""
+                          }`
                         : "/?katalog=semua"
                     }
                     className={`px-3.5 py-2 rounded-md transition-colors whitespace-nowrap font-medium border ${
                       !categoryId
                         ? "bg-[#1b382b] dark:bg-[#204232] text-white border-[#1b382b]"
-                        : "bg-white dark:bg-[#141715] text-stone-600 dark:text-stone-400 dark:text-stone-500 border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
+                        : "bg-white dark:bg-[#141715] text-stone-600 dark:text-stone-400 border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
                     }`}
                   >
                     Semua Kategori
@@ -173,9 +184,7 @@ export default async function HomePage({
                     params.set("kategori", cat.id);
                     if (q) params.set("q", q);
                     if (sort && sort !== "terbaru") params.set("sort", sort);
-
                     const isActive = categoryId === cat.id;
-
                     return (
                       <a
                         key={cat.id}
@@ -183,7 +192,7 @@ export default async function HomePage({
                         className={`px-3.5 py-2 rounded-md transition-colors whitespace-nowrap font-medium border ${
                           isActive
                             ? "bg-[#1b382b] dark:bg-[#204232] text-white border-[#1b382b]"
-                            : "bg-white dark:bg-[#141715] text-stone-600 dark:text-stone-400 dark:text-stone-500 border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
+                            : "bg-white dark:bg-[#141715] text-stone-600 dark:text-stone-400 border-stone-300 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
                         }`}
                       >
                         {cat.name}
@@ -229,7 +238,7 @@ export default async function HomePage({
            MODE 2: BERANDA RESMI ETIRA MUSHROOMS (Editorial Corporate)
            ───────────────────────────────────────────────────────────── */
         <>
-          {/* 1. HERO SECTION (Asymmetric 2-Column) */}
+          {/* 1. HERO SECTION (Asymmetric 2‑Column) */}
           <section className="pt-12 sm:pt-16 pb-14 sm:pb-20">
             <Container>
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -237,7 +246,7 @@ export default async function HomePage({
                 <div className="lg:col-span-7 flex flex-col order-1">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 rounded-full bg-[#1b382b] dark:bg-[#204232]" />
-                    <span className="font-sans text-xs font-semibold uppercase tracking-widest text-stone-500 dark:text-stone-400 dark:text-stone-500">
+                    <span className="font-sans text-xs font-semibold uppercase tracking-widest text-stone-500 dark:text-stone-400">
                       Pemasok Jamur Industri &bull; Berdiri 1999
                     </span>
                   </div>
@@ -246,7 +255,7 @@ export default async function HomePage({
                     Pasokan jamur untuk kebutuhan bisnis.
                   </h1>
 
-                  {/* Foto khusus layar mobile (tampil di antara headline dan subheadline) */}
+                  {/* Mobile hero image */}
                   <div className="block lg:hidden my-6">
                     <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden border border-stone-200 dark:border-stone-800/90 shadow-xs">
                       <Image
@@ -260,8 +269,10 @@ export default async function HomePage({
                     </div>
                   </div>
 
-                  <p className="font-sans text-base sm:text-lg text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed max-w-xl mt-2 lg:mt-6">
-                    Produk segar dan olahan dengan pasokan yang konsisten untuk restoran, hotel, katering, dan mitra industri pangan langsung dari fasilitas kami di Nongkojajar, Pasuruan.
+                  <p className="font-sans text-base sm:text-lg text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mt-2 lg:mt-6">
+                    Produk segar dan olahan dengan pasokan yang konsisten untuk restoran,
+                    hotel, katering, dan mitra industri pangan langsung dari fasilitas
+                    kami di Nongkojajar, Pasuruan.
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mt-8 sm:mt-10">
@@ -319,7 +330,7 @@ export default async function HomePage({
                   <h2 className="font-sans text-2xl sm:text-3xl font-bold text-[#1f2421] dark:text-stone-100 tracking-tight">
                     Produk Kami
                   </h2>
-                  <p className="font-sans text-sm text-stone-500 dark:text-stone-400 dark:text-stone-500 mt-1">
+                  <p className="font-sans text-sm text-stone-500 dark:text-stone-400 mt-1">
                     Pilihan komoditas jamur segar dan olahan siap pasok untuk operasional bisnis Anda.
                   </p>
                 </div>
@@ -348,7 +359,7 @@ export default async function HomePage({
             </Container>
           </section>
 
-          {/* 4. KEUNGGULAN ETIRA (Numbered Editorial 01–04, No Large Cards) */}
+          {/* 4. KEUNGGULAN ETIRA (Numbered Editorial 01–04) */}
           <section className="py-16 sm:py-24 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-[#141715]">
             <Container>
               <div className="max-w-2xl mb-14">
@@ -358,8 +369,9 @@ export default async function HomePage({
                 <h2 className="font-sans text-2xl sm:text-3xl font-bold text-[#1f2421] dark:text-stone-100 tracking-tight mt-2">
                   Komitmen pasokan pangan terpercaya
                 </h2>
-                <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 mt-2 leading-relaxed">
-                  Dedikasi fasilitas perkebunan dataran tinggi dan pengolahan terpadu PT Eka Timur Raya di Pasuruan, Jawa Timur.
+                <p className="font-sans text-sm text-stone-600 dark:text-stone-400 mt-2 leading-relaxed">
+                  Dedikasi fasilitas perkebunan dataran tinggi dan pengolahan terpadu PT
+                  Eka Timur Raya di Pasuruan, Jawa Timur.
                 </p>
               </div>
 
@@ -372,8 +384,10 @@ export default async function HomePage({
                   <h3 className="font-sans font-bold text-lg text-[#1f2421] dark:text-stone-100 mb-2">
                     Budidaya Dataran Tinggi
                   </h3>
-                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed">
-                    Fasilitas kebun berlokasi di kawasan sejuk Nongkojajar pada ketinggian 1.850 mdpl dengan iklim alami yang stabil untuk pertumbuhan jamur kancing prima.
+                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                    Fasilitas kebun berlokasi di kawasan sejuk Nongkojajar pada ketinggian
+                    1.850 mdpl dengan iklim alami yang stabil untuk pertumbuhan jamur
+                    kancing prima.
                   </p>
                 </div>
 
@@ -385,8 +399,10 @@ export default async function HomePage({
                   <h3 className="font-sans font-bold text-lg text-[#1f2421] dark:text-stone-100 mb-2">
                     Panen &amp; Seleksi Harian
                   </h3>
-                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed">
-                    Jamur dipanen setiap pagi dan disortir secara bertahap berdasarkan ukuran serta keutuhan fisik untuk memenuhi standar spesifikasi dapur komersial.
+                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                    Jamur dipanen setiap pagi dan disortir secara bertahap berdasarkan
+                    ukuran serta keutuhan fisik untuk memenuhi standar spesifikasi
+                    dapur komersial.
                   </p>
                 </div>
 
@@ -398,8 +414,10 @@ export default async function HomePage({
                   <h3 className="font-sans font-bold text-lg text-[#1f2421] dark:text-stone-100 mb-2">
                     Pengolahan Langsung Pabrik
                   </h3>
-                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed">
-                    Fasilitas pengolahan jamur kaleng dan pouch retort steril langsung di Purwodadi Pasuruan memastikan kesegaran terkunci tanpa penurunan kualitas mutu.
+                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                    Fasilitas pengolahan jamur kaleng dan pouch retort steril langsung di
+                    Purwodadi Pasuruan memastikan kesegaran terkunci tanpa penurunan
+                    kualitas mutu.
                   </p>
                 </div>
 
@@ -411,8 +429,10 @@ export default async function HomePage({
                   <h3 className="font-sans font-bold text-lg text-[#1f2421] dark:text-stone-100 mb-2">
                     Pasokan Rutin Horeka &amp; Industri
                   </h3>
-                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed">
-                    Melayani kebutuhan volume pasokan berkelanjutan untuk mitra restoran, hotel, katering, pabrik olahan makanan, dan distributor di berbagai kota.
+                  <p className="font-sans text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                    Melayani kebutuhan volume pasokan berkelanjutan untuk mitra
+                    restoran, hotel, katering, pabrik olahan makanan, dan distributor di
+                    berbagai kota.
                   </p>
                 </div>
               </div>
@@ -444,24 +464,26 @@ export default async function HomePage({
                   <h2 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1f2421] dark:text-stone-100 tracking-tight mb-4">
                     PT Eka Timur Raya
                   </h2>
-                  <p className="font-sans text-sm font-semibold text-stone-500 dark:text-stone-400 dark:text-stone-500 italic mb-4">
-                    &quot;To Be One Stop Point for All Mushrooms Needs of The Customers.&quot;
+                  <p className="font-sans text-sm font-semibold text-stone-500 dark:text-stone-400 italic mb-4">
+                    “To Be One Stop Point for All Mushrooms Needs of The Customers.”
                   </p>
-                  <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed mb-4">
-                    Didirikan pada tahun 1999 di Purwodadi, Pasuruan, Jawa Timur, PT Eka Timur Raya bergerak dalam budidaya dan pengolahan jamur kancing berkualitas tinggi.
+                  <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
+                    Didirikan pada tahun 1999 di Purwodadi, Pasuruan, Jawa Timur,
+                    PT Eka Timur Raya bergerak dalam budidaya dan pengolahan jamur
+                    kancing berkualitas tinggi.
                   </p>
-                  <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed mb-8">
-                    Dengan fasilitas terintegrasi dari perkebunan dataran tinggi Nongkojajar hingga lini pengolahan kaleng dan pouch steril, kami siap menjadi mitra penyedia pasokan jamur terpercaya untuk kebutuhan operasional bisnis Anda.
+                  <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed mb-8">
+                    Dengan fasilitas terintegrasi dari perkebunan dataran tinggi
+                    Nongkojajar hingga lini pengolahan kaleng dan pouch steril, kami
+                    siap menjadi mitra penyedia pasokan jamur terpercaya untuk kebutuhan
+                    operasional bisnis Anda.
                   </p>
-
-                  <div>
-                    <Link
-                      href="/tentang"
-                      className="font-sans text-sm font-semibold text-[#1b382b] dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
-                    >
-                      Selengkapnya tentang perusahaan &rarr;
-                    </Link>
-                  </div>
+                  <Link
+                    href="/tentang"
+                    className="font-sans text-sm font-semibold text-[#1b382b] dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
+                  >
+                    Selengkapnya tentang perusahaan &rarr;
+                  </Link>
                 </div>
               </div>
             </Container>
@@ -474,8 +496,9 @@ export default async function HomePage({
                 <h2 className="font-sans text-2xl sm:text-3xl font-bold text-[#1f2421] dark:text-stone-100 tracking-tight mb-3">
                   Butuh pasokan jamur untuk bisnis Anda?
                 </h2>
-                <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 dark:text-stone-500 leading-relaxed mb-8 max-w-lg">
-                  Diskusikan spesifikasi jamur, volume pengiriman rutin, dan penawaran harga pasokan bersama perwakilan kami.
+                <p className="font-sans text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed mb-8 max-w-lg">
+                  Diskusikan spesifikasi jamur, volume pengiriman rutin, dan penawaran
+                  harga pasokan bersama perwakilan kami.
                 </p>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto mt-2">
                   <Link
