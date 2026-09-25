@@ -15,8 +15,10 @@ export default function LanguageSwitcher() {
   const handleLanguageChange = (newLocale: 'id' | 'en') => {
     if (locale === newLocale) return;
     
+    console.log('[LanguageSwitcher] Changing locale from', locale, 'to', newLocale);
     localStorage.setItem('locale', newLocale);
     window.dispatchEvent(new CustomEvent('localeChange', { detail: { locale: newLocale } }));
+    console.log('[LanguageSwitcher] Event dispatched');
   };
 
   if (!mounted) return null;

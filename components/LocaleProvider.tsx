@@ -29,9 +29,11 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     const handleLocaleChange = (e: Event) => {
       const customEvent = e as CustomEvent<{ locale: Locale }>;
       const newLocale = customEvent.detail.locale;
+      console.log('[LocaleProvider] Locale change event received:', newLocale);
       setLocaleState(newLocale);
       document.documentElement.lang = newLocale;
       localStorage.setItem('locale', newLocale);
+      console.log('[LocaleProvider] Locale updated to:', newLocale);
     };
 
     window.addEventListener('localeChange', handleLocaleChange);
