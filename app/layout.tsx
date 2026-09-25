@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/logos/etira-company-logo.png",
+    shortcut: "/logos/etira-company-logo.png",
+    apple: "/logos/etira-company-logo.png",
   },
 };
 
