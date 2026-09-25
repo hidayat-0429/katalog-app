@@ -1,11 +1,11 @@
-import createMiddleware from 'next-intl/middleware';
-import { locales } from './i18n/request';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export default createMiddleware({
-  locales,
-  defaultLocale: 'id',
-  localePrefix: 'always'
-});
+export function middleware(request: NextRequest) {
+  // Simple middleware - just pass through
+  // Locale handling is done client-side via localStorage
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']

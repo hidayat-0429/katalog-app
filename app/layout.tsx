@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Figtree, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -53,21 +51,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ 
+export default function RootLayout({ 
   children
 }: { 
   children: React.ReactNode;
 }) {
-  const messages = await getMessages();
-  
   return (
     <html lang="id" className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            {children}
-          </Providers>
-        </NextIntlClientProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
