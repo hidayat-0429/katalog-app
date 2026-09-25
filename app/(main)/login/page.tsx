@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Lock, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { Input, Button } from '@/components/ui';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function LoginPage() {
+  const t = useTranslations();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -27,7 +29,7 @@ export default function LoginPage() {
       });
 
       if (res?.error) {
-        setError('Email atau password tidak sesuai');
+        setError(t.login.error);
         setLoading(false);
       } else {
         const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
@@ -40,7 +42,7 @@ export default function LoginPage() {
         router.refresh();
       }
     } catch (err) {
-      setError('Terjadi kesalahan, silakan coba beberapa saat lagi');
+      setError(t.login.errorGeneral);
       setLoading(false);
     }
   };
@@ -52,12 +54,12 @@ export default function LoginPage() {
         className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Kembali ke Beranda
+        {t.login.backToHome}
       </Link>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Masuk ke Akun</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.login.title}</h1>
         <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-          Akses katalog pemesanan dan riwayat transaksi
+          {t.login.subtitle}
         </p>
       </div>
 
@@ -72,7 +74,7 @@ export default function LoginPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="email">
-              Email
+              {t.login.email}
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -91,7 +93,7 @@ export default function LoginPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="password">
-              Kata Sandi
+              {t.login.password}
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -109,15 +111,15 @@ export default function LoginPage() {
           </div>
 
                       <Button type="submit" variant="primary" className="w-full mt-2" disabled={loading}>
-              {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Masuk'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : t.login.submit}
             </Button>
             
         </form>
 
         <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
-          Belum punya akun?{' '}
+          {t.login.noAccount}{' '}
           <Link href="/register" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
-            Daftar di sini
+            {t.login.register}
           </Link>
         </div>
       </div>
@@ -125,7 +127,7 @@ export default function LoginPage() {
       {/* Demo Credentials Box (Hanya tampil di lingkungan pengembangan) */}
       {process.env.NODE_ENV !== 'production' && (
         <div className="mt-6 bg-neutral-50 dark:bg-neutral-800/50 rounded p-4 border border-neutral-200 dark:border-neutral-700 text-xs">
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Akun Uji Coba (Demo)</p>
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">{t.login.demoCredentials}</p>
           <div className="space-y-1.5">
             <button
               type="button"
@@ -135,8 +137,8 @@ export default function LoginPage() {
               }}
               className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
-              <span>Admin: admin@katalog.test</span>
-              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">admin123</span>
+              <span>{t.login.adminEmail}</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.login.adminPassword}</span>
             </button>
 
             <button
@@ -147,8 +149,8 @@ export default function LoginPage() {
               }}
               className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
-              <span>Pembeli: buyer@katalog.test</span>
-              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">buyer123</span>
+              <span>{t.login.buyerEmail}</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.login.buyerPassword}</span>
             </button>
           </div>
         </div>

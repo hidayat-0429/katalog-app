@@ -7,8 +7,10 @@ import Link from 'next/link';
 import { User, Building2, Phone, MapPin, Mail, Lock, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { registerUser } from '@/lib/actions/auth';
 import { Input, Button } from '@/components/ui';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function RegisterPage() {
+  const t = useTranslations();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -58,7 +60,7 @@ export default function RegisterPage() {
         }
       }
     } catch (err) {
-      setError('Terjadi kesalahan yang tidak terduga');
+      setError(t.register.error || 'Terjadi kesalahan yang tidak terduga');
       setLoading(false);
     }
   };
@@ -70,12 +72,12 @@ export default function RegisterPage() {
         className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Kembali ke Beranda
+        {t.register.backToHome}
       </Link>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Pendaftaran Akun</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.register.title}</h1>
         <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-          Daftarkan bisnis Anda untuk mulai melakukan pemesanan rutin
+          {t.register.subtitle}
         </p>
       </div>
 
@@ -90,7 +92,7 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="name">
-              Nama Lengkap
+              {t.register.fullName}
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -100,7 +102,7 @@ export default function RegisterPage() {
                   type="text"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Nama penanggung jawab"
+                  placeholder={t.register.fullNamePlaceholder}
                   required
                   disabled={loading}
                   className="input-with-icon w-full pl-9"
@@ -110,7 +112,7 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="company">
-              Nama Usaha / Perusahaan <span className="text-neutral-500 dark:text-neutral-400 font-normal">(opsional)</span>
+              {t.register.companyName} <span className="text-neutral-500 dark:text-neutral-400 font-normal">{t.register.companyNameOptional}</span>
             </label>
             <div className="relative">
               <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -120,7 +122,7 @@ export default function RegisterPage() {
                 type="text"
                 value={formData.companyName}
                 onChange={handleChange}
-                placeholder="Contoh: CV Rasa Utama / Restoran Selasa"
+                placeholder={t.register.companyNamePlaceholder}
                 disabled={loading}
                 className="input-with-icon w-full pl-9"
               />
@@ -129,7 +131,7 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="phone">
-              Nomor Telepon / WhatsApp
+              {t.register.phone}
             </label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -148,7 +150,7 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="address">
-              Alamat Pengiriman
+              {t.register.address}
             </label>
             <div className="relative">
               <MapPin className="absolute left-3 top-3 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -158,7 +160,7 @@ export default function RegisterPage() {
                 value={formData.address}
                 onChange={handleChange}
                 className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9 min-h-[70px]"
-                placeholder="Alamat lengkap tujuan pengiriman..."
+                placeholder={t.register.addressPlaceholder}
                 disabled={loading}
               />
             </div>
@@ -166,7 +168,7 @@ export default function RegisterPage() {
 
           <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="email">
-              Email
+              {t.register.email}
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -177,7 +179,7 @@ export default function RegisterPage() {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9"
-                placeholder="email@perusahaan.com"
+                placeholder={t.register.emailPlaceholder}
                 required
                 disabled={loading}
               />
@@ -186,7 +188,7 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="password">
-              Kata Sandi
+              {t.register.password}
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
@@ -197,7 +199,7 @@ export default function RegisterPage() {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9"
-                placeholder="Minimal 6 karakter"
+                placeholder={t.register.passwordPlaceholder}
                 required
                 minLength={6}
                 disabled={loading}
@@ -206,14 +208,14 @@ export default function RegisterPage() {
           </div>
 
           <button type="submit" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-forest-600 hover:bg-brand-forest-700 text-white text-sm font-semibold transition-colors duration-150 w-full mt-3 justify-center" disabled={loading}>
-            {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Daftar Sekarang'}
+            {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : t.register.submit}
           </button>
         </form>
 
         <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
-          Sudah memiliki akun?{' '}
+          {t.register.haveAccount}{' '}
           <Link href="/login" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
-            Masuk di sini
+            {t.register.login}
           </Link>
         </div>
       </div>

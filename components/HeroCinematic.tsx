@@ -59,7 +59,21 @@ function AnimatedCounter({
   );
 }
 
-export default function HeroCinematic() {
+interface HeroCinematicProps {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  cta1Text?: string;
+  cta2Text?: string;
+}
+
+export default function HeroCinematic({
+  title = "Jamur Premium",
+  subtitle = "untuk Dapur Profesional",
+  description = "Partner terpercaya 500+ restoran premium di Indonesia. Dari jamur segar grade A hingga olahan siap pakai dipanen pagi, tiba same-day dengan cold chain berstandar internasional.",
+  cta1Text = "Lihat Katalog Produk",
+  cta2Text = "Hubungi Kami"
+}: HeroCinematicProps = {}) {
   const heroRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -174,10 +188,10 @@ export default function HeroCinematic() {
             style={{ transitionDelay: "160ms" }}
           >
             <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-white">
-              Jamur Premium
+              {title}
             </span>
             <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-brand-fresh-300">
-              untuk Dapur Profesional
+              {subtitle}
             </span>
           </h1>
 
@@ -186,7 +200,7 @@ export default function HeroCinematic() {
             className={`text-sm sm:text-base text-white/65 leading-relaxed max-w-lg mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "260ms" }}
           >
-            Partner terpercaya 500+ restoran premium di Indonesia. Dari jamur segar grade A hingga olahan siap pakai dipanen pagi, tiba same-day dengan cold chain berstandar internasional.
+            {description}
           </p>
 
           {/* CTA */}
@@ -198,14 +212,14 @@ export default function HeroCinematic() {
               href="/?katalog=semua"
               className="group inline-flex items-center gap-2 bg-brand-forest-600 hover:bg-brand-forest-500 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-forest-900/40"
             >
-              Lihat Katalog Produk
+              {cta1Text}
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/kontak"
               className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/14 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
             >
-              Hubungi Kami
+              {cta2Text}
             </Link>
           </div>
 
