@@ -24,14 +24,19 @@
     "search": "Search products...",
     "apply": "Apply",
     "reset": "Reset",
-    "allProducts": "All products"
+    "allProducts": "All products",
+    "backToHome": "Back to Home",
+    "noProducts": "Products not found",
+    "category": "Category"
   },
   "product": {
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now",
     "stock": "Stock",
     "price": "Price",
-    "unit": "Unit"
+    "unit": "Unit",
+    "rp": "Rp",
+    "perUnit": "per"
   },
   "contact": {
     "title": "Contact Us",
@@ -61,5 +66,21 @@
     "contact": "Contact",
     "faq": "FAQ",
     "allRightsReserved": "All rights reserved"
+  },
+  "common": {
+    "menu": "MENU",
+    "access": "ACCESS",
+    "orders": "ORDERS",
+    "displayMode": "Display Mode",
+    "language": "Language",
+    "activeAccount": "Active Account",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
+

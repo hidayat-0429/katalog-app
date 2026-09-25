@@ -24,14 +24,19 @@
     "search": "Cari produk...",
     "apply": "Terapkan",
     "reset": "Reset",
-    "allProducts": "Semua produk"
+    "allProducts": "Semua produk",
+    "backToHome": "Kembali ke Beranda",
+    "noProducts": "Produk tidak ditemukan",
+    "category": "Kategori"
   },
   "product": {
     "addToCart": "Tambah ke Keranjang",
     "buyNow": "Beli Sekarang",
     "stock": "Stok",
     "price": "Harga",
-    "unit": "Satuan"
+    "unit": "Satuan",
+    "rp": "Rp",
+    "perUnit": "per"
   },
   "contact": {
     "title": "Hubungi Kami",
@@ -61,5 +66,21 @@
     "contact": "Kontak",
     "faq": "FAQ",
     "allRightsReserved": "Semua hak dilindungi"
+  },
+  "common": {
+    "menu": "MENU",
+    "access": "AKSES",
+    "orders": "PESANAN",
+    "displayMode": "Mode Tampilan",
+    "language": "Bahasa",
+    "activeAccount": "Akun Aktif",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "success": "Berhasil",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "save": "Simpan",
+    "cancel": "Batal"
   }
 }
+

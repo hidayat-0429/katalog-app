@@ -19,12 +19,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     // Get locale from localStorage on mount
     const saved = (localStorage.getItem('locale') as Locale) || 'id';
     setLocaleState(saved);
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = saved;
+    
     setMounted(true);
 
     // Listen for locale changes from LanguageSwitcher
     const handleLocaleChange = (e: Event) => {
       const customEvent = e as CustomEvent<{ locale: Locale }>;
-      setLocaleState(customEvent.detail.locale);
+      const newLocale = customEvent.detail.locale;
+      setLocaleState(newLocale);
+      document.documentElement.lang = newLocale;
+      localStorage.setItem('locale', newLocale);
     };
 
     window.addEventListener('localeChange', handleLocaleChange);
@@ -34,6 +41,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     localStorage.setItem('locale', newLocale);
+    document.documentElement.lang = newLocale;
   };
 
   if (!mounted) {
