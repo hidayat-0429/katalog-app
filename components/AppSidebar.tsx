@@ -30,7 +30,7 @@ export default async function AppSidebar() {
             ETIRA
           </p>
           <p className="text-[10px] text-neutral-500 dark:text-neutral-500 leading-none mt-0.5">
-            Pemesanan B2B
+            Eka Timur Raya
           </p>
         </div>
       </Link>

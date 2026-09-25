@@ -61,7 +61,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
                 ETIRA
               </p>
               <p className="text-[9px] text-neutral-500 dark:text-neutral-400 leading-none mt-0.5">
-                Pemesanan B2B
+                Eka Timur Raya
               </p>
             </div>
           </Link>
