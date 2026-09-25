@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { supabaseAdmin, STORAGE_BUCKET } from "@/lib/supabase";
+import { getAdmin, STORAGE_BUCKET } from "@/lib/supabase";
 
 const MIME_TO_EXT: Record<string, string> = {
   "image/jpeg": ".jpg",
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Upload ke Supabase Storage
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await getAdmin().storage
       .from(STORAGE_BUCKET)
       .upload(fileName, buffer, {
         contentType: file.type,
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Dapatkan URL publik gambar
-    const { data: publicUrlData } = supabaseAdmin.storage
+    const { data: publicUrlData } = getAdmin().storage
       .from(STORAGE_BUCKET)
       .getPublicUrl(data.path);
 

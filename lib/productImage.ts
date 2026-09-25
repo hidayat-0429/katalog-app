@@ -5,28 +5,8 @@
 export function getProductPlaceholderImage(name: string, categoryName?: string | null): string {
   const query = `${name || ''} ${categoryName || ''}`.toLowerCase();
 
-  // Kaleng / Canned button mushrooms
-  if (query.includes('kaleng') || query.includes('can') || query.includes('2.8kg')) {
-    return 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80';
-  }
-
-  // Pouch / sliced mushrooms
-  if (query.includes('pouch') || query.includes('slice') || query.includes('iris')) {
-    return 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80';
-  }
-
-  // Nugget or processed items
-  if (query.includes('nugget') || query.includes('camilan') || query.includes('goreng')) {
-    return 'https://images.unsplash.com/photo-1562967914-608f82629710?w=800&auto=format&fit=crop&q=80';
-  }
-
-  // Frozen / fresh / raw mushrooms
-  if (query.includes('beku') || query.includes('frozen')) {
-    return 'https://images.unsplash.com/photo-1588165171080-c89acfa5ee83?w=800&auto=format&fit=crop&q=80';
-  }
-
-  // Whole button / fresh mushroom default
-  return 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&auto=format&fit=crop&q=80';
+  // All products use local image
+  return '/hero-branding.jpg';
 }
 
 /**

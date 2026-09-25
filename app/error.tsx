@@ -22,11 +22,11 @@ export default function GlobalError({
         <AlertTriangle className="w-8 h-8" />
       </div>
       
-      <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-charcoal mb-3">
+      <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-charcoal mb-4">
         Terjadi Kesalahan Sistem
       </h1>
       
-      <p className="font-sans text-sm text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
+      <p className="font-sans text-sm sm:text-base text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
         Maaf, kami mengalami gangguan teknis saat memproses permintaan Anda. Hal ini bisa disebabkan oleh koneksi yang tidak stabil atau pembaruan sistem yang sedang berlangsung.
       </p>
       

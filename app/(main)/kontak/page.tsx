@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, MessageSquare, Clock } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata = {
   title: "Hubungi Kami | Etira Mushrooms",
@@ -6,100 +7,134 @@ export const metadata = {
 };
 
 export default function KontakPage() {
-  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
+  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
   const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "info@ekatimurraya.com";
   const waLink = `https://wa.me/${adminWa}`;
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="py-8 px-4 sm:px-6">
       {/* Header */}
-      <div className="text-center mb-10">
-        <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-charcoal mb-4">
+      <div className="mb-8">
+        <h1 className="font-heading text-3xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
           Hubungi Kami
         </h1>
-        <p className="font-sans text-sm sm:text-base text-charcoal-muted max-w-xl mx-auto leading-relaxed">
-          Punya pertanyaan terkait kuota pasokan, metode pengiriman, atau harga spesifik komoditas? Tim layanan B2B kami siap membantu Anda.
+        <p className="font-sans text-base text-neutral-500 dark:text-neutral-400 max-w-2xl">
+          Kontak layanan pelanggan, konsultasi harga pasokan, dan pemesanan resmi PT Eka Timur Raya. Silakan isi form di bawah atau hubungi langsung melalui kontak yang tersedia.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 font-sans">
-        
-        {/* Kolom Info Kontak */}
+      {/* Grid Layout */}
+      <div className="grid lg:grid-cols-3 gap-8 items-start">
+        {/* Left Column - Contact Info (spans 1 column) */}
         <div className="space-y-6">
-          <div className="card p-5 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <MapPin className="w-5 h-5 text-primary" />
+          {/* WhatsApp CTA */}
+          <div className="bg-brand-forest-600 dark:bg-brand-forest-700 rounded-xl p-6 text-white border border-brand-forest-700 dark:border-brand-forest-600">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h2 className="font-heading font-bold text-lg text-white mb-1">
+                  Hubungi via WhatsApp
+                </h2>
+                <p className="text-xs sm:text-sm text-white/80">
+                  Respons cepat untuk konsultasi pesanan & spesifikasi.
+                </p>
+              </div>
+              <MessageSquare className="w-5 h-5 text-white flex-shrink-0" />
             </div>
-            <div>
-              <h3 className="font-bold text-charcoal mb-1">Alamat Pabrik & Kantor</h3>
-              <p className="text-sm text-charcoal-muted leading-relaxed">
-                PT Eka Timur Raya<br />
-                Jl. Raya Purwodadi,<br />
-                Kec. Purwodadi, Pasuruan,<br />
-                Jawa Timur, Indonesia.
-              </p>
-            </div>
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors duration-150"
+            >
+              <Phone className="w-4 h-4 fill-white" />
+              Chat Sekarang
+            </a>
           </div>
 
-          <div className="card p-5 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <MessageSquare className="w-5 h-5 text-primary" />
+          {/* Address */}
+          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center shrink-0 text-brand-forest-600 dark:text-brand-forest-400">
+                <MapPin className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                  Alamat Pabrik
+                </h3>
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Sentra Pengolahan</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-charcoal mb-1">WhatsApp & Telepon</h3>
-              <p className="text-sm text-charcoal-muted mb-3">Layanan konsultasi pemesanan.</p>
-              <a 
-                href={waLink}
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-xs"
-              >
-                <Phone className="w-4 h-4 fill-white" />
-                <span>Chat Admin Sales</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="card p-5 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-              <Mail className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-bold text-charcoal mb-1">Surat Elektronik (Email)</h3>
-              <p className="text-sm text-charcoal-muted mb-2">Untuk keperluan legalitas dan penawaran tender.</p>
-              <a href={`mailto:${companyEmail}`} className="text-sm font-semibold text-primary hover:underline">
-                {companyEmail}
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Kolom Maps / Jam Operasional */}
-        <div className="space-y-6">
-          <div className="card p-6 bg-charcoal text-white border-none">
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-sage" /> Jam Operasional Pabrik
-            </h3>
-            <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex justify-between border-b border-white/10 pb-2">
-                <span>Senin - Jumat</span>
-                <span className="font-medium text-white">08:00 - 16:00 WIB</span>
-              </li>
-              <li className="flex justify-between border-b border-white/10 pb-2">
-                <span>Sabtu</span>
-                <span className="font-medium text-white">08:00 - 13:00 WIB</span>
-              </li>
-              <li className="flex justify-between pb-1 text-danger-text/90 font-medium">
-                <span>Minggu & Tanggal Merah</span>
-                <span>Tutup / Libur</span>
-              </li>
-            </ul>
-            <p className="text-xs text-white/60 mt-4 leading-relaxed">
-              *Pesanan online yang masuk di luar jam operasional akan diproses pada hari kerja berikutnya sesuai urutan masuk (First In, First Out).
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              PT Eka Timur Raya<br />
+              Jl. Raya Purwodadi, Kec. Purwodadi,<br />
+              Kabupaten Pasuruan, Jawa Timur 67163.
             </p>
           </div>
+
+          {/* Email */}
+          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center shrink-0 text-brand-forest-600 dark:text-brand-forest-400">
+                <Mail className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                  Email Resmi
+                </h3>
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Tender & Kerja Sama</p>
+              </div>
+            </div>
+            <a
+              href={`mailto:${companyEmail}`}
+              className="text-xs font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline break-all"
+            >
+              {companyEmail}
+            </a>
+          </div>
+
+          {/* Operational Hours */}
+          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-neutral-100 dark:border-neutral-700">
+              <div className="w-7 h-7 rounded-md bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
+                <Clock className="w-4 h-4" />
+              </div>
+              <h2 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                Jam Operasional
+              </h2>
+            </div>
+            <ul className="space-y-2 text-xs">
+              {[
+                { hari: "Senin – Jumat", jam: "08:00 – 16:00 WIB" },
+                { hari: "Sabtu", jam: "08:00 – 13:00 WIB" },
+              ].map((item) => (
+                <li key={item.hari} className="flex justify-between items-center border-b border-neutral-100 dark:border-neutral-700 pb-2">
+                  <span className="text-neutral-600 dark:text-neutral-400">{item.hari}</span>
+                  <span className="font-mono font-medium text-neutral-900 dark:text-neutral-100">{item.jam}</span>
+                </li>
+              ))}
+              <li className="flex justify-between items-center pt-1">
+                <span className="text-neutral-600 dark:text-neutral-400">Minggu & Libur</span>
+                <span className="font-medium text-neutral-500 dark:text-neutral-500">Tutup</span>
+              </li>
+            </ul>
+            <div className="mt-4 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              Pesanan di luar jam kerja akan dikonfirmasi esok hari.
+            </div>
+          </div>
         </div>
 
+        {/* Right Column - Contact Form (spans 2 columns) */}
+        <div className="lg:col-span-2 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-8">
+          <div className="mb-6">
+            <h2 className="font-heading text-xl md:text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+              Kirim Pesan
+            </h2>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              Form berikut untuk pertanyaan, pesanan grosir, atau konsultasi kerjasama. Tim kami akan merespons dalam 24 jam kerja.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
       </div>
     </div>
   );

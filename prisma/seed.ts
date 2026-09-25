@@ -6,23 +6,11 @@ const prisma = new PrismaClient();
 async function main() {
   const adminRawPassword = process.env.ADMIN_SEED_PASSWORD || "admin123";
   const adminPassword = await bcrypt.hash(adminRawPassword, 10);
-  const admin = await prisma.user.upsert({
-    where: { email: "admin@katalog.test" },
-    update: {},
-    create: {
-      name: "Admin Operasional",
-      email: "admin@katalog.test",
-      password: adminPassword,
-      role: "ADMIN",
-    },
-  });
-
-  // Alias akun test untuk kemudahan login saat evaluasi PKN
   await prisma.user.upsert({
     where: { email: "admin@katalog.test" },
     update: {},
     create: {
-      name: "Admin Etira (Demo)",
+      name: "Admin Operasional",
       email: "admin@katalog.test",
       password: adminPassword,
       role: "ADMIN",
@@ -35,13 +23,13 @@ async function main() {
     where: { email: "buyer@katalog.test" },
     update: {},
     create: {
-      name: "Budi Santoso (Purchasing Manager)",
+      name: "Purchasing Manager",
       email: "buyer@katalog.test",
       password: buyerPassword,
       role: "BUYER",
-      companyName: "CV Selera Kuliner Nusantara",
+      companyName: "Restaurant & Catering Network",
       phone: "081234567890",
-      address: "Jl. Basuki Rahmat No. 45, Surabaya",
+      address: "Jl. Kota Industri No. 45",
     },
   });
 
@@ -86,7 +74,7 @@ async function main() {
       unit: "pack",
       stock: 350,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur kancing segar utuh dipetik langsung dari kebun budidaya di Purwodadi di hari yang sama. Tekstur renyah dan aroma segar alami.",
     },
     {
@@ -96,7 +84,7 @@ async function main() {
       unit: "pack",
       stock: 150,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1588165171080-c89acfa5ee83?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur portabella segar kualitas premium dengan tekstur padat menyerupai daging (meaty). Sangat ideal untuk steak, burger, dan panggangan hotel/restoran.",
     },
     {
@@ -106,7 +94,7 @@ async function main() {
       unit: "karton",
       stock: 60,
       isFeatured: false,
-      imageUrl: "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Kemasan karton berventilasi khusus untuk pasokan dapur hotel bintang lima, katering, dan supermarket grosir.",
     },
     // Canned
@@ -117,7 +105,7 @@ async function main() {
       unit: "kaleng",
       stock: 500,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur kancing utuh pilihan dalam kaleng steril kedap udara. Bebas pengawet sintetis dengan daya simpan panjang untuk efisiensi stok dapur.",
     },
     {
@@ -127,7 +115,7 @@ async function main() {
       unit: "kaleng",
       stock: 450,
       isFeatured: false,
-      imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur kancing iris siap saji dan siap masak. Sangat cocok sebagai bahan topping pizza, isian sup, tumisan, dan saus jamur steak.",
     },
     {
@@ -137,7 +125,7 @@ async function main() {
       unit: "kaleng",
       stock: 200,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Kemasan kaleng metal ukuran industri (A10) 3.000 gram. Sangat ekonomis untuk industri katering besar, pabrik saus, dan restoran waralaba.",
     },
     // Pouched
@@ -148,7 +136,7 @@ async function main() {
       unit: "pouch",
       stock: 800,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur iris dalam larutan garam steril kemasan retort pouch fleksibel. Mudah disobek, higienis, dan hemat tempat penyimpanan gudang.",
     },
     {
@@ -158,7 +146,7 @@ async function main() {
       unit: "pouch",
       stock: 350,
       isFeatured: false,
-      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur kancing utuh dalam kemasan kantong pouch tebal 900 gram. Pilihan ideal untuk kebutuhan operasional dapur kafe & resto.",
     },
     {
@@ -168,7 +156,7 @@ async function main() {
       unit: "pouch",
       stock: 280,
       isFeatured: false,
-      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Kemasan retort pouch 2 kg untuk suplai dapur pusat (central kitchen) dan katering industri.",
     },
     // Frozen
@@ -179,7 +167,7 @@ async function main() {
       unit: "pack",
       stock: 400,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1588165171080-c89acfa5ee83?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Jamur kancing segar yang dibekukan secara kilat (Individually Quick Frozen) di hari panen yang sama untuk mempertahankan nutrisi dan kesegaran rasa.",
     },
     // Value Added
@@ -190,7 +178,7 @@ async function main() {
       unit: "pack",
       stock: 300,
       isFeatured: true,
-      imageUrl: "https://images.unsplash.com/photo-1562967914-608f82629710?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Camilan sehat nugget berbahan dasar jamur kancing segar, dibalut tepung roti renyah. Sumber serat dan protein vegetarian.",
     },
     {
@@ -200,7 +188,7 @@ async function main() {
       unit: "pack",
       stock: 250,
       isFeatured: false,
-      imageUrl: "https://images.unsplash.com/photo-1562967914-608f82629710?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "/hero-branding.jpg",
       description: "Bakso lezat kenyal alami berbahan dasar jamur kancing pilihan, siap rebus untuk aneka sup, bakso kuah, atau olahan mie.",
     },
   ];

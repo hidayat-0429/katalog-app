@@ -26,9 +26,9 @@ export default function PaymentInfoCard() {
   }
 
   return (
-    <div className="card p-5 border border-border dark:border-dark-border">
-      <div className="flex items-center gap-2 font-bold text-sm text-charcoal dark:text-dark-text border-b border-border dark:border-dark-border pb-3">
-        <Landmark className="w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+    <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-5">
+      <div className="flex items-center gap-2 font-bold text-sm text-neutral-900 dark:text-neutral-100 border-b border-neutral-200 dark:border-neutral-700 pb-3">
+        <Landmark className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
         <span>Instruksi Pembayaran Transfer Bank</span>
       </div>
 
@@ -36,27 +36,27 @@ export default function PaymentInfoCard() {
         {bankAccounts.map((acc, idx) => (
           <div
             key={acc.bank}
-            className="p-3 bg-bg-subtle dark:bg-dark-surface rounded border border-border dark:border-dark-border flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+            className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded border border-neutral-200 dark:border-neutral-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
           >
             <div>
-              <p className="text-xs font-semibold text-charcoal-muted dark:text-dark-muted">
+              <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
                 {acc.bank}
               </p>
-              <p className="text-base font-bold text-charcoal dark:text-dark-text mt-0.5 tracking-wide">
+              <p className="text-base font-bold text-neutral-900 dark:text-neutral-100 mt-0.5 tracking-wide">
                 {acc.accNumber}
               </p>
-              <p className="text-xs text-charcoal-muted dark:text-dark-muted">a.n. {acc.holder}</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">a.n. {acc.holder}</p>
             </div>
 
             <button
               type="button"
               onClick={() => handleCopy(acc.accNumber, idx)}
-              className="btn-secondary text-xs py-1 px-2.5 self-start sm:self-center print:hidden"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors duration-150 ease-out self-start sm:self-center print:hidden"
             >
               {copiedIndex === idx ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-sage" />
-                  <span className="text-sage font-semibold">Tersalin</span>
+                  <Check className="w-3.5 h-3.5 text-brand-forest-600 dark:text-brand-forest-400" />
+                  <span className="text-brand-forest-600 dark:text-brand-forest-400 font-semibold">Tersalin</span>
                 </>
               ) : (
                 <>
@@ -69,8 +69,8 @@ export default function PaymentInfoCard() {
         ))}
       </div>
 
-      <div className="mt-3 flex items-start gap-2 text-xs text-charcoal-muted dark:text-dark-muted pt-2 border-t border-border dark:border-dark-border">
-        <ShieldCheck className="w-4 h-4 text-sage shrink-0 mt-0.5" />
+      <div className="mt-3 flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400 pt-2 border-t border-neutral-200 dark:border-neutral-700">
+        <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400 shrink-0 mt-0.5" />
         <p>
           Setelah melakukan transfer, mohon kirimkan konfirmasi melalui tombol WhatsApp di bawah ini agar pesanan Anda dapat langsung dipersiapkan oleh tim operasional.
         </p>

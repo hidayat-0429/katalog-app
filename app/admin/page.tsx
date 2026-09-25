@@ -2,8 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { formatRupiah } from '@/lib/format'
 import StatusBadge from '@/components/StatusBadge'
 import Link from 'next/link'
-import { Package, ClipboardList, Users, Clock, TrendingUp, Trophy } from 'lucide-react'
-import { Card } from '@/components/ui'
+import { Package, ClipboardList, Users, Clock, TrendingUp, Trophy, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 export default async function AdminDashboardPage() {
   const [totalProduk, totalPesanan, totalUser, pesananPending, totalRevenueResult, produkTerlaris, pesananTerbaru] = await Promise.all([
@@ -15,18 +14,37 @@ export default async function AdminDashboardPage() {
       where: { status: { not: 'DIBATALKAN' } },
       _sum: { totalPrice: true }
     }),
-    prisma.orderItem.groupBy({
-      by: ['productId'],
-      _sum: { quantity: true },
-      orderBy: { _sum: { quantity: 'desc' } },
-      take: 5
-    }).then(async items => {
-      const productIds = items.map(item => item.productId)
-      const products = await prisma.product.findMany({ where: { id: { in: productIds } } })
-      return items.map(item => ({
-        ...item,
-        product: products.find(p => p.id === item.productId)
-      }))
+    prisma.orderItem.findMany({
+      where: {
+        order: {
+          status: { not: 'DIBATALKAN' }
+        }
+      },
+      select: {
+        productId: true,
+        quantity: true,
+        product: {
+          select: { id: true, name: true }
+        }
+      }
+    }).then(items => {
+      const map = new Map<string, { product: { id: string; name: string } | null; quantity: number }>();
+      for (const item of items) {
+        const existing = map.get(item.productId);
+        if (existing) {
+          existing.quantity += item.quantity;
+        } else {
+          map.set(item.productId, { product: item.product, quantity: item.quantity });
+        }
+      }
+      return Array.from(map.entries())
+        .sort((a, b) => b[1].quantity - a[1].quantity)
+        .slice(0, 5)
+        .map(([productId, val]) => ({
+          productId,
+          _sum: { quantity: val.quantity },
+          product: val.product,
+        }));
     }),
     prisma.order.findMany({
       take: 5,
@@ -37,120 +55,197 @@ export default async function AdminDashboardPage() {
 
   const totalRevenue = totalRevenueResult._sum.totalPrice || 0
 
+  const stats = [
+    {
+      icon: TrendingUp,
+      label: 'Total Nilai Pesanan',
+      value: formatRupiah(totalRevenue),
+      sub: 'Tidak termasuk yang dibatalkan',
+      accent: true,
+      href: '/admin/pesanan',
+    },
+    {
+      icon: Clock,
+      label: 'Perlu Diproses',
+      value: String(pesananPending),
+      sub: 'Pesanan menunggu konfirmasi',
+      urgent: pesananPending > 0,
+      href: '/admin/pesanan?status=PENDING',
+    },
+    {
+      icon: ClipboardList,
+      label: 'Total Pesanan',
+      value: String(totalPesanan),
+      sub: 'Semua waktu',
+      href: '/admin/pesanan',
+    },
+    {
+      icon: Package,
+      label: 'Total Produk',
+      value: String(totalProduk),
+      sub: 'Aktif & nonaktif',
+      href: '/admin/produk',
+    },
+    {
+      icon: Users,
+      label: 'Total Pengguna',
+      value: String(totalUser),
+      sub: 'Admin & buyer terdaftar',
+      href: null,
+    },
+  ]
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Header */}
       <div>
-        <h1 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-charcoal">Ringkasan Operasional</h1>
-        <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
-          Pantau volume pesanan, pendapatan, dan aktivitas produk
+        <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          Ringkasan Operasional
+        </h1>
+        <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+          Pantau volume pesanan, pendapatan, dan aktivitas produk secara real-time.
         </p>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stat utama revenue full width */}
+      <div className="bg-brand-forest-600 dark:bg-brand-forest-700 rounded-lg p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-brand-forest-700 dark:border-brand-forest-600">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-white/70 mb-2">Total Nilai Pesanan Aktif</p>
+          <p className="font-mono text-4xl font-bold text-white tabular-nums mb-1">{formatRupiah(totalRevenue)}</p>
+          <p className="text-xs text-white/60">Akumulasi semua pesanan yang tidak dibatalkan</p>
+        </div>
+        <Link
+          href="/admin/pesanan"
+          className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors duration-150 ease-out shrink-0"
+        >
+          Lihat Pesanan <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+
+      {/* Stat grid 2x2 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-4">
-          <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
-            <Package className="w-4 h-4" />
-          </div>
-          <div className="font-sans text-xs text-charcoal-muted">Total Produk</div>
-          <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalProduk}</div>
-        </Card>
-        
-        <Card className="p-4">
-          <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
-            <ClipboardList className="w-4 h-4" />
-          </div>
-          <div className="font-sans text-xs text-charcoal-muted">Total Pesanan</div>
-          <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalPesanan}</div>
-        </Card>
-        
-        <Card className="p-4">
-          <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-charcoal mb-3 border border-border">
-            <Users className="w-4 h-4" />
-          </div>
-          <div className="font-sans text-xs text-charcoal-muted">Total Pengguna</div>
-          <div className="font-mono text-xl sm:text-2xl font-bold text-charcoal mt-0.5">{totalUser}</div>
-        </Card>
-        
-        <Card className="p-4">
-          <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center text-primary mb-3 border border-border">
+        {/* Perlu diproses */}
+        <div className={`rounded-lg border p-6 bg-white dark:bg-neutral-800 transition-colors duration-200 ease-out ${pesananPending > 0 ? 'border-semantic-warning-DEFAULT/40 bg-semantic-warning-light/30 dark:bg-semantic-warning-darkBg/20' : 'border-neutral-200 dark:border-neutral-700'}`}>
+          <div className={`w-9 h-9 rounded-lg flex items-center justify-center mb-4 ${pesananPending > 0 ? 'bg-semantic-warning-DEFAULT/15 text-semantic-warning-DEFAULT' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-400'}`}>
             <Clock className="w-4 h-4" />
           </div>
-          <div className="font-sans text-xs text-charcoal-muted">Perlu Diproses</div>
-          <div className="font-mono text-xl sm:text-2xl font-bold text-primary mt-0.5">{pesananPending}</div>
-        </Card>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">Perlu Diproses</p>
+            <p className="font-mono text-4xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums mb-1">{pesananPending}</p>
+            {pesananPending > 0 && (
+              <p className="text-xs text-semantic-warning-dark dark:text-semantic-warning-DEFAULT">Membutuhkan perhatian</p>
+            )}
+          </div>
+          <Link href="/admin/pesanan?status=PENDING" className="text-xs font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline flex items-center gap-1 mt-4">
+            Lihat <ArrowUpRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* Total pesanan */}
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+          <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
+            <ClipboardList className="w-4 h-4" />
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">Total Pesanan</p>
+            <p className="font-mono text-4xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums">{totalPesanan}</p>
+          </div>
+          <Link href="/admin/pesanan" className="text-xs font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline flex items-center gap-1 mt-4">
+            Kelola <ArrowUpRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* Total produk */}
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+          <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
+            <Package className="w-4 h-4" />
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">Total Produk</p>
+            <p className="font-mono text-4xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums">{totalProduk}</p>
+          </div>
+          <Link href="/admin/produk" className="text-xs font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline flex items-center gap-1 mt-4">
+            Kelola <ArrowUpRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* Total user */}
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+          <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
+            <Users className="w-4 h-4" />
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">Total Pengguna</p>
+            <p className="font-mono text-4xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums">{totalUser}</p>
+          </div>
+          <span className="text-xs text-neutral-500 dark:text-neutral-400 mt-4 block">Admin &amp; Buyer</span>
+        </div>
       </div>
 
-      {/* Revenue Card */}
-      <Card className="p-5">
-        <div className="flex items-center gap-2 mb-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-charcoal-muted">
-          <TrendingUp className="w-4 h-4 text-primary" />
-          <span>Total Nilai Pesanan Aktif</span>
-        </div>
-        <div className="font-mono text-2xl sm:text-3xl font-bold text-charcoal">
-          {formatRupiah(totalRevenue)}
-        </div>
-        <p className="font-sans text-xs text-charcoal-muted mt-1">
-          Akumulasi dari seluruh pesanan yang tidak dibatalkan
-        </p>
-      </Card>
-
-      {/* Grid 2-col */}
+      {/* Bottom grid */}
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Produk Terlaris */}
-        <Card className="p-5">
-          <h2 className="flex items-center gap-2 font-heading font-bold text-sm text-charcoal mb-4 border-b border-border pb-3">
-            <Trophy className="w-4 h-4 text-primary" />
-            Produk Paling Sering Dipesan
-          </h2>
-          <div className="space-y-3">
-            {produkTerlaris.map((item, index) => (
-              <div key={item.productId} className="flex items-center justify-between font-sans text-xs sm:text-sm">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-5 h-5 rounded-md bg-bg-subtle border border-border flex items-center justify-center text-[11px] font-semibold text-charcoal-muted">
-                    {index + 1}
-                  </span>
-                  <span className="font-medium text-charcoal">{item.product?.name || 'Produk'}</span>
-                </div>
-                <span className="text-xs text-charcoal-muted">
-                  {item._sum.quantity} terjual
-                </span>
-              </div>
-            ))}
-            {produkTerlaris.length === 0 && (
-              <div className="font-sans text-charcoal-muted text-xs italic">Belum ada data penjualan</div>
-            )}
+        {/* Produk terlaris */}
+        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
+          <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-semantic-warning-DEFAULT" />
+              <h2 className="font-display font-bold text-sm text-neutral-900 dark:text-neutral-100">Produk Paling Dipesan</h2>
+            </div>
+            <Link href="/admin/produk" className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+              Lihat semua →
+            </Link>
           </div>
-        </Card>
-
-        {/* Pesanan Terbaru */}
-        <Card className="p-5">
-          <h2 className="flex items-center gap-2 font-heading font-bold text-sm text-charcoal mb-4 border-b border-border pb-3">
-            <Clock className="w-4 h-4 text-charcoal-muted" />
-            Pesanan Masuk Terbaru
-          </h2>
-          <div className="space-y-2.5">
-            {pesananTerbaru.map((order) => (
-              <Link key={order.id} href={`/admin/pesanan/${order.id}`} className="block group">
-                <div className="flex flex-col gap-1 p-2.5 rounded-md border border-border hover:border-charcoal transition-colors font-sans">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-mono font-semibold text-charcoal group-hover:underline">
-                      {order.orderNumber}
+          <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            {produkTerlaris.length === 0 ? (
+              <p className="px-6 py-8 text-xs text-neutral-500 dark:text-neutral-400 italic text-center">Belum ada data penjualan</p>
+            ) : (
+              produkTerlaris.map((item, index) => (
+                <div key={item.productId} className="px-6 py-3 flex items-center justify-between gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors duration-150 ease-out">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 flex items-center justify-center text-[11px] font-bold text-neutral-600 dark:text-neutral-400 shrink-0">
+                      {index + 1}
                     </span>
-                    <StatusBadge status={order.status} />
+                    <span className="font-sans text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">{item.product?.name || 'Produk'}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs text-charcoal-muted">
-                    <span>{order.user.name}</span>
-                    <span className="font-mono font-semibold text-charcoal">{formatRupiah(order.totalPrice)}</span>
-                  </div>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[11px] font-semibold bg-semantic-success-light dark:bg-semantic-success-darkBg text-semantic-success-dark dark:text-green-200 border border-semantic-success-DEFAULT">
+                    {item._sum.quantity} terjual
+                  </span>
                 </div>
-              </Link>
-            ))}
-            {pesananTerbaru.length === 0 && (
-              <div className="font-sans text-charcoal-muted text-xs italic">Belum ada pesanan masuk</div>
+              ))
             )}
           </div>
-        </Card>
+        </div>
+
+        {/* Pesanan terbaru */}
+        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
+          <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h2 className="font-display font-bold text-sm text-neutral-900 dark:text-neutral-100">Pesanan Terbaru</h2>
+            </div>
+            <Link href="/admin/pesanan" className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+              Lihat semua →
+            </Link>
+          </div>
+          <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            {pesananTerbaru.length === 0 ? (
+              <p className="px-6 py-8 text-xs text-neutral-500 dark:text-neutral-400 italic text-center">Belum ada pesanan masuk</p>
+            ) : (
+              pesananTerbaru.map((order) => (
+                <Link key={order.id} href={`/admin/pesanan/${order.id}`} className="px-6 py-3 flex items-center justify-between gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors duration-150 ease-out group">
+                  <div className="min-w-0">
+                    <p className="font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-brand-forest-600 dark:group-hover:text-brand-forest-400 transition-colors">{order.orderNumber}</p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 truncate">{order.user.name}</p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <StatusBadge status={order.status} />
+                    <span className="font-mono text-xs font-semibold text-neutral-900 dark:text-neutral-100 tabular-nums">{formatRupiah(order.totalPrice)}</span>
+                  </div>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

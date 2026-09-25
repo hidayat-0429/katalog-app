@@ -42,7 +42,7 @@ function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={t.id}
             className={`flex items-center gap-2 px-4 py-2 rounded shadow-md text-sm pointer-events-auto ${
-              t.type === "success" ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"
+              t.type === "success" ? "bg-semantic-success-light text-semantic-success-dark" : "bg-semantic-danger-light text-semantic-danger-dark"
             }`}
           >
             <span className="flex-1">{t.message}</span>

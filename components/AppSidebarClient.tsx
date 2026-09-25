@@ -1,10 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function AppSidebarClient({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Auto-close saat navigasi
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   // Tutup drawer jika resize ke desktop
   useEffect(() => {
@@ -27,46 +36,67 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
 
   return (
     <>
-      {/* Hamburger button — mobile only */}
-      <button
-        onClick={() => setIsOpen(true)}
-        aria-label="Buka menu"
-        className="lg:hidden fixed top-4 left-4 z-40 w-9 h-9 flex items-center justify-center rounded-md bg-bg border border-border shadow-sm text-charcoal dark:text-stone-100 hover:bg-bg-subtle transition-colors"
-      >
-        <Menu className="w-5 h-5" />
-      </button>
+      {/* Mobile Top App Bar */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-[#141715]/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-4 flex items-center justify-between shadow-xs">
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => setIsOpen(true)}
+            aria-label="Buka menu navigasi"
+            className="w-9 h-9 -ml-1 flex items-center justify-center rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
+              <Image 
+                src="/logos/etira-company-logo.png" 
+                alt="Etira Logo" 
+                width={28}
+                height={28}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <p className="font-heading font-bold text-xs text-neutral-900 dark:text-neutral-100 leading-none">
+                ETIRA
+              </p>
+              <p className="text-[9px] text-neutral-500 dark:text-neutral-400 leading-none mt-0.5">
+                Pemesanan B2B
+              </p>
+            </div>
+          </Link>
+        </div>
+      </header>
 
-      {/* Overlay — mobile */}
+      {/* Backdrop Overlay */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-xs"
+          className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Sidebar wrapper */}
+      {/* Sidebar Drawer */}
       <aside
         className={`
-          fixed top-0 left-0 h-full z-50 w-[260px]
+          fixed top-0 left-0 h-screen z-50 w-64
           bg-[#faf9f6] dark:bg-[#141715]
-          border-r border-stone-200 dark:border-stone-800
-          flex flex-col
+          border-r border-neutral-200 dark:border-neutral-800
+          flex flex-col shadow-xl lg:shadow-none
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:z-40
         `}
       >
-        {/* Close button — mobile */}
         <button
           onClick={() => setIsOpen(false)}
-          aria-label="Tutup menu"
-          className="lg:hidden absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-md text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle transition-colors"
+          aria-label="Tutup menu navigasi"
+          className="lg:hidden absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
         >
           <X className="w-4 h-4" />
         </button>
 
-        {/* Sidebar content */}
-        <div className="flex flex-col h-full overflow-y-auto">
+        <div className="flex flex-col h-full overflow-y-auto no-scrollbar">
           {children}
         </div>
       </aside>

@@ -4,6 +4,19 @@ import type { NextRequest } from "next/server";
 
 // Simple in-memory rate limiter untuk login endpoint
 // Menyimpan: { ip -> { count, resetAt } }
+//
+// ⚠️  PERINGATAN PRODUCTION:
+// Rate limiter ini berbasis memori proses (in-memory Map). Di lingkungan
+// serverless (Vercel, AWS Lambda, dsb.), setiap request bisa ditangani oleh
+// instance yang berbeda sehingga Map ini TIDAK dishare antar instance.
+// Artinya rate limiting ini TIDAK EFEKTIF di production serverless deployment.
+//
+// Untuk production yang serius, ganti dengan solusi berbasis Redis/Upstash:
+// - @upstash/ratelimit (https://github.com/upstash/ratelimit)
+// - ioredis + sliding window counter
+//
+// Rate limiter ini tetap bermanfaat untuk single-instance deployment
+// (VPS/dedicated server) atau sebagai lapisan pertama sebelum WAF.
 const loginAttempts = new Map<string, { count: number; resetAt: number }>();
 
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 menit
@@ -66,6 +79,7 @@ export const config = {
   matcher: [
     "/keranjang/:path*",
     "/pesanan/:path*",
+    "/profil/:path*",
     "/admin/:path*",
     "/api/auth/callback/credentials",
   ],

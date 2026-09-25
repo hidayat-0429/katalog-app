@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { User, Building2, Phone, MapPin, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { User, Building2, Phone, MapPin, Mail, Lock, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { registerUser } from '@/lib/actions/auth';
 import { Input, Button } from '@/components/ui';
 
@@ -65,28 +65,35 @@ export default function RegisterPage() {
 
   return (
     <div className="max-w-md mx-auto py-10 px-4">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        Kembali ke Beranda
+      </Link>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-charcoal dark:text-dark-text">Pendaftaran Akun</h1>
-        <p className="text-sm text-charcoal-muted dark:text-dark-muted mt-1">
+        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Pendaftaran Akun</h1>
+        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
           Daftarkan bisnis Anda untuk mulai melakukan pemesanan rutin
         </p>
       </div>
 
-      <div className="card p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="text-xs text-[#B91C1C] dark:text-[#F87171] flex items-center gap-2 bg-red-50 dark:bg-red-950/20 p-3 rounded border border-red-200 dark:border-red-900/30">
+            <div className="text-xs text-semantic-danger-DEFAULT dark:text-semantic-danger-DEFAULT flex items-center gap-2 bg-semantic-danger-light dark:bg-semantic-danger-darkBg p-3 rounded border border-semantic-danger-DEFAULT dark:border-semantic-danger-dark">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="name">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="name">
               Nama Lengkap
             </label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
                               <Input
                   id="name"
                   name="name"
@@ -102,11 +109,11 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="company">
-              Nama Usaha / Perusahaan <span className="text-charcoal-muted dark:text-dark-muted font-normal">(opsional)</span>
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="company">
+              Nama Usaha / Perusahaan <span className="text-neutral-500 dark:text-neutral-400 font-normal">(opsional)</span>
             </label>
             <div className="relative">
-              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <Input
                 id="company"
                 name="companyName"
@@ -121,18 +128,18 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="phone">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="phone">
               Nomor Telepon / WhatsApp
             </label>
             <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <input
                 id="phone"
                 name="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
-                className="input input-with-icon w-full pl-9"
+                className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9"
                 placeholder="081234567890"
                 disabled={loading}
               />
@@ -140,36 +147,36 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="address">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="address">
               Alamat Pengiriman
             </label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <MapPin className="absolute left-3 top-3 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <textarea
                 id="address"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="input input-with-icon w-full pl-9 min-h-[70px]"
+                className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9 min-h-[70px]"
                 placeholder="Alamat lengkap tujuan pengiriman..."
                 disabled={loading}
               />
             </div>
           </div>
 
-          <div className="pt-2 border-t border-border dark:border-dark-border">
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="email">
+          <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="email">
               Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <input
                 id="email"
                 name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="input input-with-icon w-full pl-9"
+                className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9"
                 placeholder="email@perusahaan.com"
                 required
                 disabled={loading}
@@ -178,18 +185,18 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="password">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="password">
               Kata Sandi
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <input
                 id="password"
                 name="password"
                 type="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="input input-with-icon w-full pl-9"
+                className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-transparent transition-colors duration-150 input-with-icon w-full pl-9"
                 placeholder="Minimal 6 karakter"
                 required
                 minLength={6}
@@ -198,14 +205,14 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <button type="submit" className="btn-primary w-full mt-3" disabled={loading}>
+          <button type="submit" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-forest-600 hover:bg-brand-forest-700 text-white text-sm font-semibold transition-colors duration-150 w-full mt-3 justify-center" disabled={loading}>
             {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Daftar Sekarang'}
           </button>
         </form>
 
-        <div className="mt-5 pt-4 border-t border-border dark:border-dark-border text-center text-xs text-charcoal-muted dark:text-dark-muted">
+        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
           Sudah memiliki akun?{' '}
-          <Link href="/login" className="font-medium text-charcoal dark:text-dark-text underline underline-offset-2 hover:text-sage">
+          <Link href="/login" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
             Masuk di sini
           </Link>
         </div>

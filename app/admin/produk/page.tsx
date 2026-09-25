@@ -6,7 +6,6 @@ import DeleteProductButton from "./DeleteProductButton";
 import Image from "next/image";
 import {
   Button,
-  Card,
   Badge,
   Table,
   TableHeader,
@@ -52,10 +51,10 @@ export default async function AdminProductsPage({
     <div className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-charcoal">
+          <h1 className="font-display text-xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             Kelola Produk
           </h1>
-          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
             {totalCount} produk terdaftar
           </p>
         </div>
@@ -77,6 +76,7 @@ export default async function AdminProductsPage({
           name="q"
           defaultValue={search}
           placeholder="Cari nama produk atau kategori..."
+          aria-label="Cari nama produk atau kategori"
           className="input flex-1 text-sm py-1.5"
         />
         <Button type="submit" variant="secondary" className="py-1.5 px-4 text-sm">
@@ -91,7 +91,7 @@ export default async function AdminProductsPage({
         )}
       </form>
 
-      <Card className="p-0 overflow-hidden font-sans">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-white dark:bg-neutral-800">
         {products.length > 0 ? (
           <div className="overflow-x-auto">
             <Table>
@@ -112,7 +112,7 @@ export default async function AdminProductsPage({
                   <TableRow key={product.id}>
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-bg-subtle border border-border rounded-md flex items-center justify-center shrink-0 overflow-hidden relative text-charcoal-muted">
+                        <div className="w-10 h-10 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md flex items-center justify-center shrink-0 overflow-hidden relative text-neutral-400 dark:text-neutral-500">
                           {product.imageUrl ? (
                             <Image
                               src={product.imageUrl}
@@ -126,27 +126,27 @@ export default async function AdminProductsPage({
                           )}
                         </div>
                         <div>
-                          <div className="font-semibold text-charcoal">
+                          <div className="font-semibold text-neutral-900 dark:text-neutral-100">
                             {product.name}
                           </div>
                           {product.isFeatured && (
-                            <span className="text-[10px] font-medium text-primary">
+                            <span className="text-[10px] font-medium text-brand-forest-600 dark:text-brand-forest-400">
                               ★ Produk Pilihan
                             </span>
                           )}
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-charcoal-muted">
+                    <TableCell className="text-neutral-600 dark:text-neutral-400">
                       {product.category?.name || "-"}
                     </TableCell>
-                    <TableCell className="font-mono font-medium text-charcoal">
+                    <TableCell numeric>
                       {formatRupiah(product.price)}
-                      <span className="font-sans text-charcoal-muted font-normal text-xs ml-1">
+                      <span className="font-sans text-neutral-500 dark:text-neutral-400 font-normal text-xs ml-1">
                         /{product.unit}
                       </span>
                     </TableCell>
-                    <TableCell className="font-mono text-charcoal-muted">
+                    <TableCell numeric>
                       {product.stock}
                     </TableCell>
                     <TableCell>
@@ -174,18 +174,18 @@ export default async function AdminProductsPage({
             </Table>
           </div>
         ) : (
-          <div className="p-8 text-center text-charcoal-muted text-xs">
+          <div className="p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs">
             {search
               ? `Tidak ada produk yang cocok dengan pencarian "${search}".`
               : "Belum ada produk terdaftar. Klik tombol Tambah Produk untuk membuat."}
           </div>
         )}
-      </Card>
+      </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between font-sans text-sm">
-          <span className="text-xs text-charcoal-muted">
+          <span className="text-xs text-neutral-600 dark:text-neutral-400">
             Halaman {currentPage} dari {totalPages} ({totalCount} produk)
           </span>
           <div className="flex gap-2">
@@ -197,7 +197,7 @@ export default async function AdminProductsPage({
                 }).toString()}`}
               >
                 <Button variant="secondary" className="py-1.5 px-3 text-xs">
-                  ← Sebelumnya
+                   Sebelumnya
                 </Button>
               </Link>
             )}

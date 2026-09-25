@@ -61,7 +61,7 @@
 - ❌ Glassmorphism / blur / backdrop-filter
 - ❌ Box-shadow besar (shadow hanya boleh untuk dropdown & modal, dan harus tipis: `shadow-sm` maks)
 - ❌ Emoji sebagai ikon (🏭❄️📦 dsb)  ganti dengan ikon Lucide yang sesuai
-- ❌ Animasi berlebihan — hanya transisi halus (`transition-colors`, `transition-opacity`)
+- ❌ Animasi berlebihan hanya transisi halus (`transition-colors`, `transition-opacity`)
 
 ## Komponen Referensi
 
@@ -115,7 +115,7 @@
 - Ikon menu: Lucide, ukuran `18px`, warna white/muted
 
 ## Catatan untuk AI / Developer
-- Jangan mengubah logika apapun: `use server`, `useTransition`, `startTransition`, server actions, Prisma calls, routing — JANGAN DISENTUH
+- Jangan mengubah logika apapun: `use server`, `useTransition`, `startTransition`, server actions, Prisma calls, routing JANGAN DISENTUH
 - Hanya ubah: class Tailwind CSS, struktur HTML/JSX, dan impor font/ikon
 - Pastikan semua perubahan tetap responsif (mobile-first) dan mendukung dark mode
-- Gunakan custom color dari `tailwind.config.ts` — jangan pakai warna Tailwind default (blue-500 dsb) kecuali memang sesuai palet di atas
+- Gunakan custom color dari `tailwind.config.ts` jangan pakai warna Tailwind default (blue-500 dsb) kecuali memang sesuai palet di atas

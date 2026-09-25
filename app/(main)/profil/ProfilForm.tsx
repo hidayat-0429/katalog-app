@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { User, Building2, Phone, MapPin, Mail, AlertCircle, Save, Loader2, CheckCircle2 } from "lucide-react";
 import { updateProfile } from "@/lib/actions/users";
-import { Input, Button, Card } from "@/components/ui";
+import { Input, Button } from "@/components/ui";
 
 interface ProfileData {
   id: string;
@@ -42,132 +42,142 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 mt-6 font-sans">
+    <form onSubmit={handleSubmit} className="space-y-6 mt-6">
       {error && (
-        <div className="text-xs text-[#B91C1C] dark:text-[#F87171] flex items-center gap-2 bg-red-50 dark:bg-red-950/20 p-3 rounded border border-red-200 dark:border-red-900/30">
+        <div className="text-sm text-semantic-danger-dark flex items-center gap-2 bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
       
       {success && (
-        <div className="text-xs text-primary flex items-center gap-2 bg-primary/10 p-3 rounded border border-primary/30">
+        <div className="text-sm text-brand-forest-700 flex items-center gap-2 bg-brand-forest-100 p-3 rounded-md border border-brand-forest-300 dark:bg-brand-forest-900/30 dark:text-brand-forest-300 dark:border-brand-forest-700">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>Data profil berhasil diperbarui!</span>
         </div>
       )}
 
-      <div className="grid md:grid-cols-2 gap-5">
-        <div className="space-y-4">
-          <h3 className="font-semibold text-sm text-charcoal border-b border-border pb-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+          <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
             Data Penanggung Jawab
           </h3>
           
-          <div>
-            <label className="block text-xs font-medium text-charcoal mb-1" htmlFor="name">
-              Nama Lengkap
-            </label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                defaultValue={user.name}
-                required
-                disabled={loading}
-                className="input-with-icon w-full pl-9"
-              />
+          <div className="space-y-6">
+            <div>
+              <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2" htmlFor="name">
+                Nama Lengkap
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  defaultValue={user.name}
+                  required
+                  disabled={loading}
+                  className="pl-10"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-medium text-charcoal mb-1" htmlFor="company">
-              Nama Usaha / Perusahaan <span className="text-charcoal-muted font-normal">(opsional)</span>
-            </label>
-            <div className="relative">
-              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
-              <Input
-                id="company"
-                name="companyName"
-                type="text"
-                defaultValue={user.companyName || ""}
-                disabled={loading}
-                className="input-with-icon w-full pl-9"
-              />
+            <div>
+              <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2" htmlFor="company">
+                Nama Usaha / Perusahaan <span className="text-neutral-500 dark:text-neutral-400 font-normal normal-case">(opsional)</span>
+              </label>
+              <div className="relative">
+                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Input
+                  id="company"
+                  name="companyName"
+                  type="text"
+                  defaultValue={user.companyName || ""}
+                  disabled={loading}
+                  className="pl-10"
+                />
+              </div>
             </div>
-          </div>
-          
-          <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">
-              Alamat Email Akun
-            </label>
-            <div className="relative opacity-60">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
-              <Input
-                type="email"
-                value={user.email}
-                disabled
-                readOnly
-                className="input-with-icon w-full pl-9 bg-bg-subtle"
-              />
+            
+            <div>
+              <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                Alamat Email Akun
+              </label>
+              <div className="relative opacity-60">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Input
+                  type="email"
+                  value={user.email}
+                  disabled
+                  readOnly
+                  className="pl-10 bg-neutral-50 dark:bg-neutral-900"
+                />
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">Email digunakan untuk login dan tidak dapat diubah.</p>
             </div>
-            <p className="text-[10px] text-charcoal-muted mt-1">Email digunakan untuk login dan tidak dapat diubah.</p>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <h3 className="font-semibold text-sm text-charcoal border-b border-border pb-2">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+          <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
             Kontak & Pengiriman
           </h3>
 
-          <div>
-            <label className="block text-xs font-medium text-charcoal mb-1" htmlFor="phone">
-              Nomor Telepon / WhatsApp
-            </label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                defaultValue={user.phone || ""}
-                required
-                disabled={loading}
-                className="input input-with-icon w-full pl-9"
-              />
+          <div className="space-y-6">
+            <div>
+              <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2" htmlFor="phone">
+                Nomor Telepon / WhatsApp
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  defaultValue={user.phone || ""}
+                  required
+                  disabled={loading}
+                  className="w-full pl-10 px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 disabled:bg-neutral-50 disabled:text-neutral-500 disabled:cursor-not-allowed dark:disabled:bg-neutral-900"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-medium text-charcoal mb-1" htmlFor="address">
-              Alamat Pengiriman Utama
-            </label>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-3 w-4 h-4 text-charcoal-muted" />
-              <textarea
-                id="address"
-                name="address"
-                defaultValue={user.address || ""}
-                required
-                disabled={loading}
-                className="input input-with-icon w-full pl-9 min-h-[95px]"
-                placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kodepos..."
-              />
+            <div>
+              <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2" htmlFor="address">
+                Alamat Pengiriman Utama
+              </label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-3 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <textarea
+                  id="address"
+                  name="address"
+                  defaultValue={user.address || ""}
+                  required
+                  disabled={loading}
+                  rows={4}
+                  className="w-full pl-10 px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none disabled:bg-neutral-50 disabled:text-neutral-500 disabled:cursor-not-allowed dark:disabled:bg-neutral-900"
+                  placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kodepos..."
+                />
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">Ini akan otomatis digunakan saat pemesanan baru (Checkout).</p>
             </div>
-            <p className="text-[10px] text-charcoal-muted mt-1">Ini akan otomatis digunakan saat pemesanan baru (Checkout).</p>
           </div>
         </div>
       </div>
 
-      <div className="pt-4 border-t border-border flex justify-end">
-        <Button type="submit" variant="primary" disabled={loading} className="gap-2 px-6">
+      <div className="flex justify-end pt-6 border-t border-neutral-200 dark:border-neutral-700">
+        <Button type="submit" variant="primary" disabled={loading}>
           {loading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span>Menyimpan...</span>
+            </>
           ) : (
-            <Save className="w-4 h-4" />
+            <>
+              <Save className="w-4 h-4" />
+              <span>Simpan Perubahan</span>
+            </>
           )}
-          <span>Simpan Perubahan</span>
         </Button>
       </div>
     </form>

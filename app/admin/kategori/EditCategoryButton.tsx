@@ -41,7 +41,7 @@ export default function EditCategoryButton({ id, currentName, currentDescription
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="btn-icon text-charcoal-muted dark:text-dark-muted hover:text-charcoal dark:hover:text-dark-text"
+        className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 w-9 h-9 rounded-md flex items-center justify-center transition-colors duration-150 ease-out"
         title="Edit Kategori"
       >
         <Pencil className="w-4 h-4" />
@@ -51,13 +51,13 @@ export default function EditCategoryButton({ id, currentName, currentDescription
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Overlay */}
           <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50"
             onClick={() => !isPending && setIsOpen(false)}
           />
           {/* Modal */}
-          <div className="relative w-full max-w-md bg-white dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border dark:border-dark-border">
-              <h2 className="font-bold text-sm text-charcoal dark:text-dark-text">Edit Kategori</h2>
+          <div className="relative w-full max-w-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-neutral-200 dark:border-neutral-700">
+              <h2 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">Edit Kategori</h2>
               <button
                 onClick={() => !isPending && setIsOpen(false)}
                 className="btn-icon"
@@ -68,7 +68,7 @@ export default function EditCategoryButton({ id, currentName, currentDescription
             </div>
 
             {error && (
-              <div className="text-xs text-[#B91C1C] dark:text-[#F87171] bg-red-50 dark:bg-red-950/20 p-2.5 rounded border border-red-200 dark:border-red-900/30 flex items-center gap-2 mb-3">
+              <div className="text-xs text-semantic-danger-DEFAULT dark:text-semantic-danger-DEFAULT bg-semantic-danger-light dark:bg-semantic-danger-darkBg p-2.5 rounded border border-semantic-danger-DEFAULT dark:border-semantic-danger-dark flex items-center gap-2 mb-3">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -76,7 +76,7 @@ export default function EditCategoryButton({ id, currentName, currentDescription
 
             <form onSubmit={handleSubmit} className="space-y-3 text-xs">
               <div className="space-y-1">
-                <label htmlFor="edit-name" className="font-medium text-charcoal dark:text-dark-text">
+                <label htmlFor="edit-name" className="font-medium text-neutral-900 dark:text-neutral-100">
                   Nama Kategori
                 </label>
                 <input
@@ -92,7 +92,7 @@ export default function EditCategoryButton({ id, currentName, currentDescription
                 />
               </div>
               <div className="space-y-1">
-                <label htmlFor="edit-description" className="font-medium text-charcoal dark:text-dark-text">
+                <label htmlFor="edit-description" className="font-medium text-neutral-900 dark:text-neutral-100">
                   Keterangan (Opsional)
                 </label>
                 <textarea

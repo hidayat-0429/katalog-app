@@ -73,6 +73,7 @@ export async function checkout(formData: FormData) {
   const notes = `[Armada: ${shippingMethod}]${rawNotes ? ` - Catatan: ${rawNotes}` : ""}`;
 
   if (!shippingAddress) return { error: "Alamat pengiriman wajib diisi" };
+  if (shippingAddress.length < 10) return { error: "Alamat pengiriman terlalu singkat, harap isi dengan alamat lengkap (minimal 10 karakter)" };
 
   const cartItems = await prisma.cart.findMany({
     where: { userId: user.id },
@@ -92,7 +93,8 @@ export async function checkout(formData: FormData) {
     0
   );
 
-  const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  // Gunakan crypto.randomUUID() untuk suffix yang lebih unik dan aman dari collision
+  const randomSuffix = crypto.randomUUID().replace(/-/g, "").substring(0, 8).toUpperCase();
   const orderNumber = `ORD-${Date.now()}-${randomSuffix}`;
 
   let orderId: string;
@@ -151,14 +153,24 @@ export async function checkout(formData: FormData) {
   redirect(`/pesanan/${orderId}`);
 }
 
-export async function undoAddToCart(productId: string) {
+export async function undoAddToCart(productId: string, quantityToRemove: number = 1) {
   const user = await requireUser();
   // Find cart item for this user and product
   const existingItem = await prisma.cart.findUnique({
     where: { userId_productId: { userId: user.id, productId } },
   });
   if (existingItem) {
-    await prisma.cart.delete({ where: { id: existingItem.id } });
+    const newQuantity = existingItem.quantity - quantityToRemove;
+    if (newQuantity <= 0) {
+      // Hapus seluruh entri jika quantity habis
+      await prisma.cart.delete({ where: { id: existingItem.id } });
+    } else {
+      // Decrement sejumlah yang baru ditambahkan
+      await prisma.cart.update({
+        where: { id: existingItem.id },
+        data: { quantity: newQuantity },
+      });
+    }
     revalidatePath("/keranjang");
     return { success: true };
   }

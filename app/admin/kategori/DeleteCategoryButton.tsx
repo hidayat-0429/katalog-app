@@ -14,10 +14,15 @@ export default function DeleteCategoryButton({ id, disabled }: { id: string, dis
     if (confirm('Apakah Anda yakin ingin menghapus kategori ini?')) {
       setIsPending(true)
       try {
-        await deleteCategory(id)
-        router.refresh()
-      } catch (error) {
+        const res = await deleteCategory(id)
+        if (res?.error) {
+          alert(res.error)
+        } else {
+          router.refresh()
+        }
+      } catch (error: any) {
         console.error(error)
+        alert(error?.message || 'Gagal menghapus kategori. Silakan coba lagi.')
       } finally {
         setIsPending(false)
       }
@@ -28,7 +33,7 @@ export default function DeleteCategoryButton({ id, disabled }: { id: string, dis
     <button 
       onClick={handleDelete} 
       disabled={isPending || disabled}
-      className={`btn-icon ${disabled ? 'text-stone-300 cursor-not-allowed' : 'text-stone-400 hover:text-clay hover:bg-clay/10'}`}
+      className={`btn-icon ${disabled ? 'text-neutral-300 cursor-not-allowed' : 'text-neutral-400 hover:text-clay hover:bg-clay/10'}`}
       title={disabled ? 'Tidak dapat menghapus kategori yang memiliki produk' : 'Hapus Kategori'}
     >
       {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}

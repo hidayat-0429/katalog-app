@@ -8,13 +8,13 @@ export default function NotFound() {
       <div className="w-20 h-20 bg-bg-subtle border border-border rounded-full flex items-center justify-center text-charcoal-muted mb-6">
         <SearchX className="w-10 h-10" />
       </div>
-      <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-charcoal mb-3">
+      <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal mb-4">
         404
       </h1>
-      <h2 className="font-sans text-lg sm:text-xl font-semibold text-charcoal mb-2">
+      <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-semibold text-charcoal mb-4">
         Halaman Tidak Ditemukan
       </h2>
-      <p className="font-sans text-sm text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
+      <p className="font-sans text-sm sm:text-base text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
         Maaf, halaman atau produk yang Anda cari mungkin telah dihapus, dipindahkan, atau tautannya tidak valid.
       </p>
       
@@ -22,7 +22,7 @@ export default function NotFound() {
         <Link href="/">
           <Button variant="primary">Kembali ke Beranda</Button>
         </Link>
-        <Link href="/#katalog">
+        <Link href="/?katalog=semua">
           <Button variant="secondary">Lihat Katalog</Button>
         </Link>
       </div>

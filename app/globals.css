@@ -5,51 +5,67 @@
 /* ─── Base ─────────────────────────────────────────────── */
 @layer base {
   :root {
-    --bg: 250 249 246;
-    --bg-subtle: 245 244 240;
-    --surface: 255 255 255;
-    --primary: 27 56 43;
-    --primary-hover: 20 44 33;
-    --primary-light: 232 239 233;
-    --cta: 27 56 43;
-    --cta-hover: 20 44 33;
-    --charcoal: 31 36 33;
-    --charcoal-muted: 100 107 102;
-    --border: 231 229 224;
-    --border-subtle: 238 236 232;
-    --danger: 185 74 72;
-    --danger-bg: 253 240 239;
-    /* New design-system colors */
-    --info: 0 120 212; /* example blue */
-    --info-bg: 229 241 255;
-    --success: 34 139 34; /* green */
-    --success-bg: 235 252 235;
-    --warning: 255 165 0; /* orange */
-    --warning-bg: 255 250 235;
+    /* Sweetgreen-Inspired Premium Palette */
+    --bg: 250 249 246;              /* Cream base - warmer than stark white */
+    --bg-subtle: 240 235 224;       /* Light beige - earth.100 */
+    --surface: 255 255 255;         /* Pure white for cards */
+    --primary: 45 90 39;            /* Deep forest green - forest.500 */
+    --primary-hover: 30 74 26;      /* Forest hover - forest.600 */  
+    --primary-light: 240 247 240;   /* Light sage background - forest.50 */
+    --cta: 217 119 6;               /* Premium amber - amber.500 */
+    --cta-hover: 184 98 10;         /* Amber hover - amber.600 */
+    --charcoal: 31 36 33;           /* Slightly warmer charcoal */
+    --charcoal-muted: 100 107 102;  /* Muted text with slight warmth */
+    --border: 225 215 199;          /* Warm earth border - earth.200 */
+    --border-subtle: 240 235 224;   /* Subtle earth border - earth.100 */
+    --danger: 185 74 72;            /* Keep existing danger */
+    --danger-bg: 253 240 239;       /* Keep existing danger bg */
+    
+    /* Fresh/Success indicators for food freshness */
+    --fresh: 22 163 74;             /* Fresh green - fresh.500 */
+    --fresh-bg: 220 252 231;        /* Fresh background - fresh.100 */
+    --fresh-light: 187 247 208;     /* Fresh badge - fresh.200 */
+    
+    /* Secondary earth tones */
+    --earth: 139 115 85;            /* Rich earth brown - earth.500 */
+    --earth-light: 240 235 224;     /* Light earth - earth.100 */
+    --earth-muted: 207 192 168;     /* Muted earth - earth.300 */
+    
+    /* Legacy compatibility */
+    --info: 59 130 246;
+    --info-bg: 219 234 254;
+    --success: var(--fresh);
+    --success-bg: var(--fresh-bg);
+    --warning: var(--cta);
+    --warning-bg: 253 244 225;
   }
 
   .dark {
-    --bg: 20 20 16;
-    --bg-subtle: 28 28 24;
-    --surface: 34 34 32;
-    --primary: 127 168 130;
-    --primary-hover: 149 188 152;
-    --primary-light: 44 62 33;
-    --cta: 232 163 61;
-    --cta-hover: 242 193 125;
-    --charcoal: 229 229 224;
-    --charcoal-muted: 156 156 144;
-    --border: 44 44 40;
-    --border-subtle: 44 44 40;
-    --danger: 224 108 106;
-    --danger-bg: 62 30 30;
-    /* New design-system dark colors */
-    --info: 0 100 180; /* dark blue */
-    --info-bg: 15 30 45;
-    --success: 20 80 20; /* dark green */
-    --success-bg: 10 30 10;
-    --warning: 180 120 0; /* dark orange */
-    --warning-bg: 40 30 5;
+    /* Dark mode with warmer, more premium feeling */
+    --bg: 15 20 13;                 /* Deep forest background */
+    --bg-subtle: 24 32 21;          /* Subtle forest */
+    --surface: 31 41 28;            /* Forest surface */
+    --primary: 144 184 138;         /* Lighter forest for dark mode */
+    --primary-hover: 164 204 158;   /* Forest hover in dark */
+    --primary-light: 22 42 19;      /* Dark forest accent */
+    --cta: 217 119 6;               /* Keep vibrant amber in dark */
+    --cta-hover: 242 159 63;        /* Lighter amber hover */
+    --charcoal: 245 245 240;        /* Warm white for dark mode text */
+    --charcoal-muted: 180 180 170;  /* Muted warm text */
+    --border: 44 54 41;             /* Dark forest border */
+    --border-subtle: 36 46 33;      /* Subtle dark border */
+    --danger: 224 108 106;          /* Keep existing */
+    --danger-bg: 62 30 30;          /* Keep existing */
+    
+    /* Dark mode fresh indicators */
+    --fresh: 34 197 94;             /* Brighter fresh for dark */
+    --fresh-bg: 20 83 45;           /* Dark fresh bg */
+    --fresh-light: 22 101 52;       /* Dark fresh accent */
+    
+    /* Dark earth tones */
+    --earth: 139 115 85;            /* Keep earth brown */
+    --earth-light: 36 46 33;        /* Dark earth background */
+    --earth-muted: 68 58 45;        /* Muted dark earth */
   }
 }
 
@@ -169,10 +185,8 @@ body {
     @apply badge border border-border text-charcoal;
   }
 
-  /* Glass / Header */
-  .glass {
-    @apply bg-bg/90 backdrop-blur-sm border-b border-border;
-  }
+  /* Glass / Header CATATAN: backdrop-filter tidak digunakan sesuai design system */
+  /* .glass dihapus karena melanggar aturan design system (no glassmorphism/blur) */
 
   /* Headings */
   .section-title {
@@ -221,6 +235,312 @@ body {
   .sidebar-link-active {
     @apply sidebar-link text-white bg-primary-hover font-semibold border-l-4 border-cta rounded-l-none;
   }
+
+  /* ─── Page Header ─────────────────────────────────────── */
+  .page-header {
+    @apply mb-8 pb-6 border-b border-border;
+  }
+
+  .page-title {
+    @apply font-heading text-2xl sm:text-3xl font-bold tracking-tight text-charcoal;
+  }
+
+  .page-subtitle {
+    @apply font-sans text-sm text-charcoal-muted mt-1 leading-relaxed;
+  }
+
+  /* ─── Section Label ────────────────────────────────────── */
+  .section-label {
+    @apply font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-charcoal-muted;
+  }
+
+  /* ─── Stat Card ────────────────────────────────────────── */
+  .stat-card {
+    @apply bg-surface border border-border rounded-lg p-5 flex flex-col gap-3;
+  }
+
+  .stat-value {
+    @apply font-mono text-2xl sm:text-3xl font-bold text-charcoal tracking-tight;
+  }
+
+  .stat-label {
+    @apply font-sans text-xs text-charcoal-muted font-medium;
+  }
+
+  /* ─── Empty / Placeholder ─────────────────────────────── */
+  .empty-icon-wrap {
+    @apply w-14 h-14 rounded-full bg-bg-subtle border border-border flex items-center justify-center text-charcoal-muted mx-auto;
+  }
+
+  /* ─── Divider ─────────────────────────────────────────── */
+  .divider {
+    @apply border-t border-border my-6;
+  }
+
+  /* ─── Inline badge pill ───────────────────────────────── */
+  .pill {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold;
+  }
+
+  .pill-green {
+    @apply pill bg-semantic-success-light text-semantic-success-dark border border-semantic-success-DEFAULT;
+  }
+
+  .pill-amber {
+    @apply pill bg-semantic-warning-light text-semantic-warning-dark border border-semantic-warning-DEFAULT;
+  }
+
+  .pill-red {
+    @apply pill bg-semantic-danger-light text-semantic-danger-dark border border-semantic-danger-DEFAULT;
+  }
+
+  .pill-forest {
+    @apply pill bg-brand-forest-100 text-brand-forest-700 border border-brand-forest-200;
+  }
+
+  .pill-fresh {
+    @apply pill bg-brand-fresh-100 text-brand-fresh-700 border border-brand-fresh-200;
+  }
+
+  .pill-earth {
+    @apply pill bg-brand-earth-100 text-brand-earth-700 border border-brand-earth-200;
+  }
+}
+
+/* ─── Button & Micro-Interaction Animations ──────────── */
+@keyframes buttonPress {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 50;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Enhanced Button States */
+button, [role="button"], .btn-primary, .btn-secondary {
+  @apply active:scale-95 transition-transform duration-100 ease-out;
+}
+
+button:not(:disabled):active {
+  animation: buttonPress 150ms ease-out;
+}
+
+/* Loading State Animation */
+@keyframes loading-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-loading {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  background-size: 1000px 100%;
+  animation: loading-shimmer 2s infinite;
+}
+
+/* Success Toast Animation */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) translateY(-20px);
+  }
+}
+
+.toast-enter {
+  animation: toastSlideIn 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-exit {
+  animation: toastSlideOut 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Cinematic Animations ─────────────────────────────── */
+
+/* Scroll Reveal: fade up */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hidden-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hidden-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0) !important;
+}
+
+/* Hero entrance stagger */
+.hero-stagger {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-stagger-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Film grain texture */
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Shimmer accent line */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(74, 93, 58, 0.4) 25%,
+    rgba(74, 93, 58, 0.8) 50%,
+    rgba(74, 93, 58, 0.4) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.dark .shimmer-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(127, 168, 130, 0.3) 25%,
+    rgba(127, 168, 130, 0.6) 50%,
+    rgba(127, 168, 130, 0.3) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Section wave divider */
+.section-divider-wave {
+  position: relative;
+}
+
+.section-divider-wave::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48h1440V24c-240-32-480-16-720 0S240 56 0 24z' fill='%23faf9f6'/%3E%3C/svg%3E")
+    no-repeat bottom center;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.dark .section-divider-wave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48h1440V24c-240-32-480-16-720 0S240 56 0 24z' fill='%230f1110'/%3E%3C/svg%3E");
+}
+
+/* Feature card large number background */
+.feature-card-num {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card-num::after {
+  content: attr(data-num);
+  position: absolute;
+  top: -12px;
+  right: -4px;
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.04;
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  pointer-events: none;
+  color: currentColor;
 }
 
 /* ─── Print Styles ─────────────────────────────────────── */
@@ -244,4 +564,318 @@ body {
     padding: 0 !important;
     margin: 0 !important;
   }
+}
+
+/* ─── Reduced Motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Sweetgreen-Style Premium Components ──────────────── */
+
+/* Fresh/Quality Badges */
+.badge-fresh {
+  @apply inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full
+         bg-brand-fresh-100 text-brand-fresh-700 border border-brand-fresh-200;
+}
+
+.badge-premium {
+  @apply inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full
+         bg-brand-amber-50 text-brand-amber-700 border border-brand-amber-200;
+}
+
+.badge-chef-choice {
+  @apply inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full
+         bg-gradient-to-r from-brand-forest-600 to-brand-amber-600 text-white;
+}
+
+/* Sweetgreen-Style Buttons */
+.btn-forest {
+  @apply inline-flex items-center justify-center gap-2
+         bg-brand-forest-600 hover:bg-brand-forest-700 text-white
+         font-sans font-semibold text-sm px-6 py-3 rounded-xl
+         motion-safe:transition-colors motion-safe:duration-200;
+}
+
+.btn-amber {
+  @apply inline-flex items-center justify-center gap-2
+         bg-brand-amber-500 hover:bg-brand-amber-600 text-white
+         font-sans font-semibold text-sm px-6 py-3 rounded-xl
+         motion-safe:transition-colors motion-safe:duration-200;
+}
+
+.btn-earth {
+  @apply inline-flex items-center gap-2
+         bg-brand-earth-100 hover:bg-brand-earth-200 text-brand-earth-700
+         border border-brand-earth-300 hover:border-brand-earth-400
+         font-sans font-medium text-sm px-6 py-3 rounded-xl
+         motion-safe:transition-all motion-safe:duration-200;
+}
+
+.btn-fresh {
+  @apply inline-flex items-center justify-center gap-2
+         bg-brand-fresh-600 hover:bg-brand-fresh-700 text-white
+         font-sans font-semibold text-sm px-6 py-3 rounded-xl
+         motion-safe:transition-colors motion-safe:duration-200;
+}
+
+/* ─── Final Polish: Advanced Animations & Optimizations ── */
+
+/* Enhanced micro-interactions */
+.hover-lift {
+  @apply motion-safe:transition-all motion-safe:duration-300 motion-safe:ease-out;
+}
+
+.hover-lift:hover {
+  @apply motion-safe:-translate-y-1 shadow-xl;
+}
+
+/* Staggered grid animations */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerIn 0.6s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+.stagger-item:nth-child(6) { animation-delay: 0.6s; }
+.stagger-item:nth-child(7) { animation-delay: 0.7s; }
+.stagger-item:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes staggerIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-brand-forest-600 via-brand-fresh-600 to-brand-forest-700 dark:from-brand-forest-400 dark:via-brand-fresh-400 dark:to-brand-forest-500 bg-clip-text text-transparent;
+}
+
+/* Gentle floating animation */
+.float-gentle {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Breathing animation for live indicators */
+.pulse-gentle {
+  animation: pulseGentle 2s ease-in-out infinite;
+}
+
+@keyframes pulseGentle {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 dark:from-neutral-700 dark:via-neutral-600 dark:to-neutral-700 bg-[length:200%_100%];
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Enhanced focus states */
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-900;
+}
+
+/* Button enhancement animations */
+.btn-enhanced {
+  @apply relative overflow-hidden;
+  @apply before:absolute before:inset-0 before:bg-white before:opacity-0 before:transition-opacity before:duration-300;
+}
+
+.btn-enhanced:hover:before {
+  @apply opacity-10;
+}
+
+/* Enhanced card effects */
+.card-premium {
+  @apply motion-safe:transition-all motion-safe:duration-300;
+  @apply hover:shadow-2xl hover:shadow-emerald-500/10;
+}
+
+.card-premium:hover {
+  @apply motion-safe:scale-[1.02] motion-safe:-translate-y-1;
+}
+
+/* Badge glow effect */
+.badge-glow {
+  animation: badgeGlow 2s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(45, 90, 39, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(45, 90, 39, 0.5), 0 0 30px rgba(45, 90, 39, 0.3); }
+}
+
+/* Progress animations */
+.progress-bar {
+  @apply relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 rounded-full;
+}
+
+.progress-fill {
+  @apply h-full bg-gradient-to-r from-brand-forest-500 to-brand-fresh-500 rounded-full transition-all duration-700 ease-out;
+}
+
+/* Enhanced form inputs */
+.input-enhanced {
+  @apply motion-safe:transition-all motion-safe:duration-200;
+}
+
+.input-enhanced:focus {
+  @apply ring-2 ring-brand-forest-500 border-brand-forest-500 motion-safe:scale-[1.02];
+}
+
+/* Custom scrollbar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(156 163 175) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(156 163 175);
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(107 114 128);
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Fade in up animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading states */
+.loading-overlay {
+  @apply absolute inset-0 bg-white dark:bg-neutral-900 bg-opacity-80 dark:bg-opacity-80;
+  @apply flex items-center justify-center backdrop-blur-sm;
+}
+
+/* Enhanced section wave divider */
+.section-divider-wave-enhanced {
+  @apply relative;
+}
+
+.section-divider-wave-enhanced::before {
+  content: '';
+  @apply absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-forest-200 dark:via-brand-forest-700 to-transparent;
+  animation: waveFlow 4s ease-in-out infinite;
+}
+
+@keyframes waveFlow {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scaleX(0.8);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scaleX(1.2);
+  }
+}
+
+/* Improved accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-line,
+  .float-gentle,
+  .pulse-gentle,
+  .skeleton,
+  .badge-glow,
+  .section-divider-wave-enhanced::before {
+    animation: none;
+  }
+  
+  .stagger-item {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .hover-lift:hover,
+  .card-premium:hover {
+    transform: none;
+  }
+}
+
+/* Utilitas sembunyikan scrollbar bawaan */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Floating WhatsApp Animation ─────────────────────── */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.3s ease-out forwards;
 }

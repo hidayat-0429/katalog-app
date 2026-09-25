@@ -58,12 +58,12 @@ export default function DeleteProductButton({ id, name }: DeleteProductButtonPro
           <div className="w-12 h-12 rounded-full bg-danger-bg flex items-center justify-center mx-auto mb-4">
             <AlertTriangle className="w-6 h-6 text-danger" />
           </div>
-          <h3 className="font-heading text-lg font-semibold text-charcoal mb-2">
+          <h3 className="font-heading text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
             Hapus Produk?
           </h3>
-          <p className="text-sm text-charcoal-muted leading-relaxed mb-6">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
             Apakah Anda yakin ingin menghapus produk <br />
-            {name ? <strong className="text-charcoal block mt-1">{name}</strong> : "ini"}{" "}
+            {name ? <strong className="text-neutral-900 dark:text-neutral-100 block mt-1">{name}</strong> : "ini"}{" "}
             dari katalog?
             <br />
             <br />
@@ -82,7 +82,7 @@ export default function DeleteProductButton({ id, name }: DeleteProductButtonPro
             </Button>
             <Button
               variant="primary"
-              className="flex-1 bg-danger hover:bg-red-700 border-danger focus:ring-red-500/30"
+              className="flex-1 bg-semantic-danger-DEFAULT hover:bg-semantic-danger-dark border-semantic-danger-DEFAULT focus:ring-semantic-danger-DEFAULT/30"
               onClick={handleDelete}
               disabled={isPending}
             >

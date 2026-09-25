@@ -7,7 +7,11 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
 }
 
 export const Table: React.FC<TableProps> = ({ className, children, ...props }) => {
-  const classes = cn('min-w-full divide-y divide-border', className);
+  const classes = cn(
+    'w-full border-collapse',
+    'text-sm text-left',
+    className
+  );
   return (
     <table className={classes} {...props}>
       {children}
@@ -16,28 +20,53 @@ export const Table: React.FC<TableProps> = ({ className, children, ...props }) =
 };
 
 export const TableHeader: React.FC<{ className?: string; children: React.ReactNode }> = ({ className, children }) => (
-  <thead className={cn('bg-bg-subtle', className)}>{children}</thead>
+  <thead className={cn(
+    'border-b border-neutral-200',
+    'dark:border-neutral-700',
+    className
+  )}>{children}</thead>
 );
 
 export const TableBody: React.FC<{ className?: string; children: React.ReactNode }> = ({ className, children }) => (
-  <tbody className={cn('bg-surface divide-y divide-border', className)}>{children}</tbody>
+  <tbody className={className}>{children}</tbody>
 );
 
 export const TableRow: React.FC<{ className?: string; children: React.ReactNode }> = ({ className, children }) => (
-  <tr className={cn('hover:bg-bg-subtle transition-colors duration-150', className)}>{children}</tr>
+  <tr className={cn(
+    'border-b border-neutral-100',
+    'motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out',
+    'hover:bg-neutral-50',
+    'dark:border-neutral-800',
+    'dark:hover:bg-neutral-800/50',
+    className
+  )}>{children}</tr>
 );
 
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   header?: boolean;
+  numeric?: boolean;
 }
 
-export const TableCell: React.FC<TableCellProps> = ({ header, className, ...props }) => {
+export const TableCell: React.FC<TableCellProps> = ({ header, numeric, className, ...props }) => {
   const Component = header ? 'th' : 'td';
   const baseClasses = header 
-    ? 'px-4 py-2 text-xs font-semibold text-charcoal-muted uppercase tracking-wider text-left' 
-    : 'px-4 py-2 text-sm text-charcoal align-middle';
+    ? cn(
+        'px-4 py-3',
+        'text-xs font-semibold uppercase tracking-wide',
+        'text-neutral-600 bg-neutral-50',
+        'dark:text-neutral-400 dark:bg-neutral-800/50'
+      )
+    : cn(
+        'px-4 py-3',
+        'text-neutral-900',
+        'dark:text-neutral-200',
+        numeric && 'font-mono tabular-nums'
+      );
   
   return <Component className={cn(baseClasses, className)} {...(props as any)} />;
 };
+
+// Helper for numeric data columns
+export const numericCellStyles = 'font-mono tabular-nums';
 
 export default Table;

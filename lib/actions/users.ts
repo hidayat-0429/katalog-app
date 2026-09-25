@@ -3,35 +3,44 @@
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+const updateProfileSchema = z.object({
+  name: z.string().min(2, "Nama penanggung jawab wajib diisi minimal 2 karakter."),
+  companyName: z.string().optional(),
+  phone: z
+    .string()
+    .min(1, "Nomor telepon/WhatsApp wajib diisi.")
+    .refine(
+      (val) => /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")),
+      { message: "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)" }
+    ),
+  address: z.string().min(10, "Alamat pengiriman wajib diisi dengan lengkap (minimal 10 karakter)."),
+});
 
 export async function updateProfile(formData: FormData) {
   const user = await requireUser();
 
-  const name = formData.get("name") as string;
-  const companyName = formData.get("companyName") as string;
-  const phone = formData.get("phone") as string;
-  const address = formData.get("address") as string;
+  const raw = {
+    name: (formData.get("name") as string | null)?.trim() || "",
+    companyName: (formData.get("companyName") as string | null)?.trim() || undefined,
+    phone: (formData.get("phone") as string | null)?.trim() || "",
+    address: (formData.get("address") as string | null)?.trim() || "",
+  };
 
-  if (!name || name.trim().length < 2) {
-    return { error: "Nama penanggung jawab wajib diisi minimal 2 karakter." };
-  }
-
-  if (!phone || phone.trim().length < 8) {
-    return { error: "Nomor telepon/WhatsApp wajib diisi dengan benar." };
-  }
-
-  if (!address || address.trim().length < 10) {
-    return { error: "Alamat pengiriman wajib diisi dengan lengkap." };
+  const parsed = updateProfileSchema.safeParse(raw);
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0].message };
   }
 
   try {
     await prisma.user.update({
       where: { id: user.id },
       data: {
-        name,
-        companyName: companyName || null,
-        phone,
-        address,
+        name: parsed.data.name,
+        companyName: parsed.data.companyName || null,
+        phone: parsed.data.phone,
+        address: parsed.data.address,
       },
     });
 

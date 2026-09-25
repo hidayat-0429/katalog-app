@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Etira Mushrooms",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Etira Mushrooms - Pasokan Jamur B2B",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
+      <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
         <Providers>
           {children}
         </Providers>

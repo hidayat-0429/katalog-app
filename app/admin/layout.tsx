@@ -1,5 +1,5 @@
 import { requireAdmin } from "@/lib/session";
-import AdminSidebar from "./AdminSidebar";
+import AdminLayoutClient from "./AdminLayoutClient";
 
 export default async function AdminLayout({
   children,
@@ -9,11 +9,8 @@ export default async function AdminLayout({
   await requireAdmin();
 
   return (
-    <div className="grid md:grid-cols-[240px_1fr] gap-8 py-2">
-      <AdminSidebar />
-
-      {/* Main Content */}
-      <div className="min-w-0">{children}</div>
-    </div>
+    <AdminLayoutClient>
+      {children}
+    </AdminLayoutClient>
   );
 }

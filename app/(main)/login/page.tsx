@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Lock, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { Input, Button } from '@/components/ui';
 
 export default function LoginPage() {
@@ -31,7 +31,11 @@ export default function LoginPage() {
         setLoading(false);
       } else {
         const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
-        const target = urlParams?.get('callbackUrl') || '/';
+        const rawCallback = urlParams?.get('callbackUrl') || '/';
+        // Validasi: hanya izinkan path relatif (dimulai '/') dan tidak mengandung '//' 
+        // untuk mencegah open redirect ke domain eksternal
+        const isSafeRedirect = rawCallback.startsWith('/') && !rawCallback.startsWith('//');
+        const target = isSafeRedirect ? rawCallback : '/';
         router.push(target);
         router.refresh();
       }
@@ -43,28 +47,35 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-sm mx-auto py-10 px-4">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        Kembali ke Beranda
+      </Link>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-charcoal dark:text-dark-text">Masuk ke Akun</h1>
-        <p className="text-sm text-charcoal-muted dark:text-dark-muted mt-1">
+        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Masuk ke Akun</h1>
+        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
           Akses katalog pemesanan dan riwayat transaksi
         </p>
       </div>
 
-      <div className="card p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="text-xs text-[#B91C1C] dark:text-[#F87171] flex items-center gap-2 bg-red-50 dark:bg-red-950/20 p-3 rounded border border-red-200 dark:border-red-900/30">
+            <div className="text-xs text-semantic-danger-DEFAULT dark:text-semantic-danger-DEFAULT flex items-center gap-2 bg-semantic-danger-light dark:bg-semantic-danger-darkBg p-3 rounded border border-semantic-danger-DEFAULT dark:border-semantic-danger-dark">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="email">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="email">
               Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <Input
                 id="email"
                 type="email"
@@ -73,16 +84,17 @@ export default function LoginPage() {
                 placeholder="nama@perusahaan.com"
                 required
                 disabled={loading}
+                className="pl-9"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal dark:text-dark-text mb-1" htmlFor="password">
+            <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="password">
               Kata Sandi
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted dark:text-dark-muted" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
               <Input
                 id="password"
                 type="password"
@@ -91,7 +103,7 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 required
                 disabled={loading}
-                className="input-with-icon w-full pl-9"
+                className="pl-9"
               />
             </div>
           </div>
@@ -102,9 +114,9 @@ export default function LoginPage() {
             
         </form>
 
-        <div className="mt-5 pt-4 border-t border-border dark:border-dark-border text-center text-xs text-charcoal-muted dark:text-dark-muted">
+        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
           Belum punya akun?{' '}
-          <Link href="/register" className="font-medium text-charcoal dark:text-dark-text underline underline-offset-2 hover:text-sage">
+          <Link href="/register" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
             Daftar di sini
           </Link>
         </div>
@@ -112,8 +124,8 @@ export default function LoginPage() {
 
       {/* Demo Credentials Box (Hanya tampil di lingkungan pengembangan) */}
       {process.env.NODE_ENV !== 'production' && (
-        <div className="mt-6 bg-bg-subtle dark:bg-dark-surface rounded p-4 border border-border dark:border-dark-border text-xs">
-          <p className="font-semibold text-charcoal dark:text-dark-text mb-2">Akun Uji Coba (Demo)</p>
+        <div className="mt-6 bg-neutral-50 dark:bg-neutral-800/50 rounded p-4 border border-neutral-200 dark:border-neutral-700 text-xs">
+          <p className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Akun Uji Coba (Demo)</p>
           <div className="space-y-1.5">
             <button
               type="button"
@@ -121,10 +133,10 @@ export default function LoginPage() {
                 setEmail('admin@katalog.test');
                 setPassword('admin123');
               }}
-              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-dark-bg border border-border dark:border-dark-border hover:border-charcoal dark:hover:border-dark-text text-left transition-colors"
+              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
               <span>Admin: admin@katalog.test</span>
-              <span className="text-[11px] text-charcoal-muted dark:text-dark-muted">admin123</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">admin123</span>
             </button>
 
             <button
@@ -133,10 +145,10 @@ export default function LoginPage() {
                 setEmail('buyer@katalog.test');
                 setPassword('buyer123');
               }}
-              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-dark-bg border border-border dark:border-dark-border hover:border-charcoal dark:hover:border-dark-text text-left transition-colors"
+              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
               <span>Pembeli: buyer@katalog.test</span>
-              <span className="text-[11px] text-charcoal-muted dark:text-dark-muted">buyer123</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">buyer123</span>
             </button>
           </div>
         </div>

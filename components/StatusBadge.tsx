@@ -28,7 +28,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
     switch (status.toUpperCase()) {
       case "PENDING": return "warning";
       case "DIPROSES": return "info";
-      case "DIKIRIM": return "purple";
+      case "DIKIRIM": return "earth";
       case "SELESAI": return "success";
       case "DIBATALKAN": return "danger";
       default: return "default";

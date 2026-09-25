@@ -33,7 +33,7 @@ export default function WhatsAppOrderButton({
     <button
       type="button"
       onClick={handleOpenWhatsApp}
-      className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-xs print:hidden" aria-label="Kirim konfirmasi order via WhatsApp" rel="noopener noreferrer"
+      className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ease-out shadow-xs print:hidden" aria-label="Kirim konfirmasi order via WhatsApp" rel="noopener noreferrer"
     >
       <MessageCircle className="w-4 h-4 fill-white" />
       <span>Konfirmasi ke WhatsApp Admin</span>

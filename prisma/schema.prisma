@@ -8,19 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum Role {
-  ADMIN
-  BUYER
-}
-
-enum OrderStatus {
-  PENDING
-  DIPROSES
-  DIKIRIM
-  SELESAI
-  DIBATALKAN
-}
-
 model User {
   id          String   @id @default(cuid())
   name        String
@@ -32,9 +19,8 @@ model User {
   address     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  orders Order[]
-  carts  Cart[]
+  carts       Cart[]
+  orders      Order[]
 }
 
 model Category {
@@ -47,33 +33,35 @@ model Category {
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
   name        String
   description String?
   price       Int
   unit        String
-  stock       Int      @default(0)
+  stock       Int         @default(0)
   imageUrl    String?
-  isActive    Boolean  @default(true)
-  isFeatured  Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  isActive    Boolean     @default(true)
+  isFeatured  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  carts       Cart[]
+  orderItems  OrderItem[]
+  category    Category    @relation(fields: [categoryId], references: [id])
 
-  carts      Cart[]
-  orderItems OrderItem[]
+  @@index([categoryId])
+  @@index([isActive])
 }
 
 model Cart {
   id        String   @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
 }
@@ -82,31 +70,48 @@ model Order {
   id              String      @id @default(cuid())
   orderNumber     String      @unique
   userId          String
-  user            User        @relation(fields: [userId], references: [id])
   status          OrderStatus @default(PENDING)
   totalPrice      Int
   shippingAddress String
   notes           String?
-
-  buyerName       String?
-  buyerEmail      String?
-  buyerPhone      String?
-  companyName     String?
-
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  buyerEmail      String?
+  buyerName       String?
+  buyerPhone      String?
+  companyName     String?
+  user            User        @relation(fields: [userId], references: [id])
+  items           OrderItem[]
 
-  items OrderItem[]
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model OrderItem {
   id          String  @id @default(cuid())
   orderId     String
-  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId   String
-  product     Product @relation(fields: [productId], references: [id])
   productName String
   price       Int
   quantity    Int
   subtotal    Int
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+enum Role {
+  ADMIN
+  BUYER
+}
+
+enum OrderStatus {
+  PENDING
+  DIPROSES
+  DIKIRIM
+  SELESAI
+  DIBATALKAN
 }

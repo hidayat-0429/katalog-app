@@ -22,9 +22,33 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
+    <div 
+      className={cn(
+        'fixed inset-0 z-50',
+        'flex items-center justify-center',
+        'bg-black/50 backdrop-blur-sm',
+        'motion-safe:transition-opacity motion-safe:duration-300 motion-safe:ease-out'
+      )}
+      onClick={onClose}
+    >
       <div
-        className={cn('bg-surface rounded-lg p-6 w-full max-w-md mx-4', className)}
+        data-state="open"
+        className={cn(
+          'relative w-full max-w-lg mx-4',
+          'bg-white rounded-lg shadow-sm',
+          'border border-neutral-200',
+          'p-6',
+          
+          // Animation
+          'motion-safe:transition-all motion-safe:duration-300 motion-safe:ease-out',
+          'data-[state=open]:scale-100 data-[state=open]:opacity-100',
+          'motion-reduce:transform-none',
+          
+          // Dark mode
+          'dark:bg-neutral-800 dark:border-neutral-700',
+          
+          className
+        )}
         onClick={e => e.stopPropagation()}
       >
         {title && <h2 className="text-lg font-heading mb-4">{title}</h2>}
