@@ -25,6 +25,7 @@ import HeroCinematic from "@/components/HeroCinematic";
 import ScrollReveal from "@/components/ScrollReveal";
 import TrustBanner from "@/components/TrustBanner";
 import FeaturesGrid from "@/components/FeaturesGrid";
+import LanguageSelectorCard from "@/components/LanguageSelectorCard";
 
 export default async function HomePage({
   searchParams,
@@ -85,6 +86,9 @@ export default async function HomePage({
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#faf9f6] dark:bg-[#0f1110] text-[#1f2421] dark:text-stone-100">
+
+      {/* Language Selector Card */}
+      {!isCatalogMode && <LanguageSelectorCard />}
 
       {/* -- MODE 1: KATALOG ----------------------------------- */}
       {isCatalogMode ? (

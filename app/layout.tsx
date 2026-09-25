@@ -3,7 +3,6 @@ import { Bricolage_Grotesque, Figtree, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import TopHeader from "@/components/TopHeader";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -61,12 +60,9 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
-        <TopHeader />
         <LocaleProvider>
           <Providers>
-            <div className="pt-14">
-              {children}
-            </div>
+            {children}
           </Providers>
         </LocaleProvider>
       </body>

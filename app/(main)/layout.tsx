@@ -7,7 +7,7 @@ import { Suspense } from "react";
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="flex min-h-screen pt-14">
+      <div className="flex min-h-screen">
         {/* Fixed Sidebar */}
         <Suspense fallback={null}>
           <AppSidebar />
