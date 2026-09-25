@@ -1,16 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { useLocale } from "@/components/LocaleProvider";
 import { useEffect, useState } from "react";
 
 export default function LanguageSwitcher() {
-  const [locale, setLocale] = useState<'id' | 'en'>('id');
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Get locale from localStorage on mount
-    const saved = localStorage.getItem('locale') as 'id' | 'en' | null;
-    setLocale(saved || 'id');
     setMounted(true);
   }, []);
 
@@ -18,9 +16,6 @@ export default function LanguageSwitcher() {
     if (locale === newLocale) return;
     
     localStorage.setItem('locale', newLocale);
-    setLocale(newLocale);
-    
-    // Trigger a refresh or emit event so other components can react
     window.dispatchEvent(new CustomEvent('localeChange', { detail: { locale: newLocale } }));
   };
 
