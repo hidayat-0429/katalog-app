@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -16,17 +20,17 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/katalog",
-        destination: "/?katalog=semua",
+        source: "/:locale/katalog",
+        destination: "/:locale?katalog=semua",
         permanent: true,
       },
       {
-        source: "/admin/dashboard",
-        destination: "/admin",
+        source: "/:locale/admin/dashboard",
+        destination: "/:locale/admin",
         permanent: true,
       },
     ];
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

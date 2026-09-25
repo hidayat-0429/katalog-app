@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "cart": "Cart",
+    "orders": "Orders",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Premium Mushrooms",
+    "subtitle": "for Professional Kitchens",
+    "description": "Trusted partner to 500+ premium restaurants in Indonesia. From grade A fresh mushrooms to ready-to-use preparations harvested in the morning, same-day delivery with international standard cold chain.",
+    "cta1": "View Product Catalog",
+    "cta2": "Contact Us"
+  },
+  "catalog": {
+    "title": "Product Catalog",
+    "search": "Search products...",
+    "apply": "Apply",
+    "reset": "Reset",
+    "allProducts": "All products"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "stock": "Stock",
+    "price": "Price",
+    "unit": "Unit"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Customer service contact, supply price consultation, and official orders from PT Eka Timur Raya.",
+    "whatsapp": "Chat Now",
+    "email": "Send Email",
+    "address": "Address",
+    "phone": "Phone",
+    "hours": "Operating Hours"
+  },
+  "about": {
+    "title": "About Company",
+    "companyName": "PT Eka Timur Raya",
+    "founded": "Year Founded",
+    "partners": "Restaurant & Horeca Partners",
+    "capacity": "Monthly Capacity",
+    "standards": "Official Quality Standards"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to commonly asked questions",
+    "stillHaveQuestions": "Still have questions?",
+    "contactUs": "Contact Us"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "allRightsReserved": "All rights reserved"
+  }
+}

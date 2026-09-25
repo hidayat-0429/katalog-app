@@ -7,6 +7,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
 import AppSidebarClient from "@/components/AppSidebarClient";
 import NavLinkActive from "@/components/NavLinkActive";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Suspense } from "react";
 
 export default async function AppSidebar() {
@@ -99,11 +100,15 @@ export default async function AppSidebar() {
           </div>
         )}
 
-        {/* Theme + Auth - Compact */}
+        {/* Theme + Language + Auth - Compact */}
         <div className="space-y-2">
           <div className="flex items-center justify-between px-3">
             <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Mode Tampilan</span>
             <ThemeToggle />
+          </div>
+          <div className="px-3">
+            <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5">Bahasa</p>
+            <LanguageSwitcher />
           </div>
           <div className="flex items-center gap-1.5">
             {user ? (

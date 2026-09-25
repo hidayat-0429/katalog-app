@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "catalog": "Katalog",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "faq": "FAQ",
+    "cart": "Keranjang",
+    "orders": "Pesanan",
+    "profile": "Profil",
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar"
+  },
+  "hero": {
+    "title": "Jamur Premium",
+    "subtitle": "untuk Dapur Profesional",
+    "description": "Partner terpercaya 500+ restoran premium di Indonesia. Dari jamur segar grade A hingga olahan siap pakai dipanen pagi, tiba same-day dengan cold chain berstandar internasional.",
+    "cta1": "Lihat Katalog Produk",
+    "cta2": "Hubungi Kami"
+  },
+  "catalog": {
+    "title": "Katalog Produk",
+    "search": "Cari produk...",
+    "apply": "Terapkan",
+    "reset": "Reset",
+    "allProducts": "Semua produk"
+  },
+  "product": {
+    "addToCart": "Tambah ke Keranjang",
+    "buyNow": "Beli Sekarang",
+    "stock": "Stok",
+    "price": "Harga",
+    "unit": "Satuan"
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "description": "Kontak layanan pelanggan, konsultasi harga pasokan, dan pemesanan resmi PT Eka Timur Raya.",
+    "whatsapp": "Chat Sekarang",
+    "email": "Kirim Email",
+    "address": "Alamat",
+    "phone": "Telepon",
+    "hours": "Jam Operasional"
+  },
+  "about": {
+    "title": "Tentang Perusahaan",
+    "companyName": "PT Eka Timur Raya",
+    "founded": "Tahun Berdiri",
+    "partners": "Mitra Restoran & Horeka",
+    "capacity": "Kapasitas per Bulan",
+    "standards": "Standar Mutu Resmi"
+  },
+  "faq": {
+    "title": "Pertanyaan Umum",
+    "description": "Temukan jawaban untuk pertanyaan yang sering diajukan",
+    "stillHaveQuestions": "Masih ada pertanyaan?",
+    "contactUs": "Hubungi Kami"
+  },
+  "footer": {
+    "about": "Tentang",
+    "contact": "Kontak",
+    "faq": "FAQ",
+    "allRightsReserved": "Semua hak dilindungi"
+  }
+}
