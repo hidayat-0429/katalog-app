@@ -36,26 +36,26 @@ async function main() {
   // 5 Kategori Resmi PT Eka Timur Raya (Etira Mushrooms)
   const catFresh = await prisma.category.upsert({
     where: { id: "cat-fresh" },
-    update: { name: "Fresh Mushrooms", description: "Jamur champignon dan portabella segar dipanen langsung dari kebun budidaya" },
-    create: { id: "cat-fresh", name: "Fresh Mushrooms", description: "Jamur champignon dan portabella segar dipanen langsung dari kebun budidaya" },
+    update: { name: "Jamur Segar", description: "Jamur champignon dan portabella segar dipanen langsung dari kebun budidaya" },
+    create: { id: "cat-fresh", name: "Jamur Segar", description: "Jamur champignon dan portabella segar dipanen langsung dari kebun budidaya" },
   });
 
   const catPouch = await prisma.category.upsert({
     where: { id: "cat-pouch" },
-    update: { name: "Pouched Mushrooms", description: "Jamur kancing dalam larutan garam steril kemasan retort pouch fleksibel" },
-    create: { id: "cat-pouch", name: "Pouched Mushrooms", description: "Jamur kancing dalam larutan garam steril kemasan retort pouch fleksibel" },
+    update: { name: "Jamur Pouch", description: "Jamur kancing dalam larutan garam steril kemasan retort pouch fleksibel" },
+    create: { id: "cat-pouch", name: "Jamur Pouch", description: "Jamur kancing dalam larutan garam steril kemasan retort pouch fleksibel" },
   });
 
   const catCanned = await prisma.category.upsert({
     where: { id: "cat-canned" },
-    update: { name: "Canned Mushrooms", description: "Jamur olahan steril dalam kemasan kaleng metal dan botol kaca" },
-    create: { id: "cat-canned", name: "Canned Mushrooms", description: "Jamur olahan steril dalam kemasan kaleng metal dan botol kaca" },
+    update: { name: "Jamur Kaleng", description: "Jamur olahan steril dalam kemasan kaleng metal dan botol kaca" },
+    create: { id: "cat-canned", name: "Jamur Kaleng", description: "Jamur olahan steril dalam kemasan kaleng metal dan botol kaca" },
   });
 
   const catFrozen = await prisma.category.upsert({
     where: { id: "cat-frozen" },
-    update: { name: "Frozen Mushrooms", description: "Jamur beku segar hasil proses cepat (IQF) pada hari yang sama setelah panen" },
-    create: { id: "cat-frozen", name: "Frozen Mushrooms", description: "Jamur beku segar hasil proses cepat (IQF) pada hari yang sama setelah panen" },
+    update: { name: "Jamur Beku", description: "Jamur beku segar hasil proses cepat (IQF) pada hari yang sama setelah panen" },
+    create: { id: "cat-frozen", name: "Jamur Beku", description: "Jamur beku segar hasil proses cepat (IQF) pada hari yang sama setelah panen" },
   });
 
   const catValueAdded = await prisma.category.upsert({

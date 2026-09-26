@@ -5,10 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useLocale, useSetLocale } from "@/components/LocaleProvider";
 
 export default function AppSidebarClient({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale();
+  const setLocale = useSetLocale();
 
   // Auto-close saat navigasi
   useEffect(() => {
@@ -65,6 +68,22 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
               </p>
             </div>
           </Link>
+        </div>
+        <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden" role="group" aria-label="Bahasa / Language">
+          {(['id', 'en'] as const).map((code) => (
+            <button
+              key={code}
+              onClick={() => setLocale(code)}
+              aria-pressed={locale === code}
+              className={`px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out ${
+                locale === code
+                  ? "bg-brand-forest-600 text-white"
+                  : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+              }`}
+            >
+              {code}
+            </button>
+          ))}
         </div>
       </header>
 

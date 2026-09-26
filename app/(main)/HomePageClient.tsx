@@ -25,7 +25,6 @@ import Container from '@/components/Container';
 import HeroCinematicWrapper from '@/components/HeroCinematicWrapper';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrustBanner from '@/components/TrustBanner';
-import FeaturesGrid from '@/components/FeaturesGrid';
 
 interface Category {
   id: string;
@@ -221,12 +220,7 @@ export default function HomePageClient({
             <TrustBanner />
           </ScrollReveal>
 
-          {/* 3. FEATURES GRID - B2B Highlights */}
-          <ScrollReveal>
-            <FeaturesGrid />
-          </ScrollReveal>
-
-          {/* 4. PRODUK PILIHAN */}
+          {/* 3. PRODUK PILIHAN */}
           <ScrollReveal>
             <section className="py-16 sm:py-24">
               <Container>
