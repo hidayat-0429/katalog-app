@@ -8,6 +8,7 @@ import Link from "next/link";
 import PaginationControls from "@/components/PaginationControls";
 import { OrderStatus, Order } from "@prisma/client";
 import { useTranslations } from "@/hooks/useTranslations";
+import { useLocale } from "@/components/LocaleProvider";
 
 interface PesananPageClientProps {
   orders: Array<Order & { items: Array<{ productName: string; quantity: number }>; _count: { items: number } }>;
@@ -17,15 +18,6 @@ interface PesananPageClientProps {
   totalPages: number;
 }
 
-const STATUS_TABS_ID = [
-  { value: "SEMUA", label: "Semua" },
-  { value: "PENDING", label: "Menunggu" },
-  { value: "DIPROSES", label: "Diproses" },
-  { value: "DIKIRIM", label: "Dikirim" },
-  { value: "SELESAI", label: "Selesai" },
-  { value: "DIBATALKAN", label: "Dibatalkan" },
-] as const;
-
 export default function PesananPageClient({
   orders,
   totalCount,
@@ -34,6 +26,8 @@ export default function PesananPageClient({
   totalPages,
 }: PesananPageClientProps) {
   const t = useTranslations();
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : 'id-ID';
 
   const STATUS_TABS = [
     { value: "SEMUA", label: t.orders.orderTabs.all },
@@ -111,7 +105,7 @@ export default function PesananPageClient({
                         {order.orderNumber}
                       </p>
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                        {new Date(order.createdAt).toLocaleDateString("id-ID", {
+                        {new Date(order.createdAt).toLocaleDateString(dateLocale, {
                           day: "numeric",
                           month: "long",
                           year: "numeric",
@@ -121,7 +115,7 @@ export default function PesananPageClient({
                   </div>
 
                   <div className="flex items-center gap-3 sm:flex-col sm:items-end">
-                    <StatusBadge status={order.status} />
+                    <StatusBadge status={order.status} label={t.status[order.status]} />
                     <span className="font-mono font-bold text-sm text-neutral-900 dark:text-neutral-100">
                       {formatRupiah(order.totalPrice)}
                     </span>

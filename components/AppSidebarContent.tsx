@@ -101,7 +101,7 @@ export default function AppSidebarContent({ user, cartCount = 0 }: AppSidebarCon
           </div>
           <div className="flex items-center gap-1.5">
             {user ? (
-              <SignOutButton />
+              <SignOutButton label={nav.logout} />
             ) : (
               <>
                 <Link

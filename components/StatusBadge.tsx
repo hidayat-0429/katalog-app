@@ -4,9 +4,10 @@ import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 
 interface StatusBadgeProps {
   status: string;
+  label?: string;
 }
 
-export default function StatusBadge({ status }: StatusBadgeProps) {
+export default function StatusBadge({ status, label }: StatusBadgeProps) {
   const getIcon = () => {
     switch (status.toUpperCase()) {
       case "PENDING":
@@ -38,7 +39,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
   return (
     <Badge variant={getVariant()}>
       {getIcon()}
-      <span>{statusLabel(status)}</span>
+      <span>{label ?? statusLabel(status)}</span>
     </Badge>
   );
 }

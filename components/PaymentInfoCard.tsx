@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import { Landmark, Copy, Check, ShieldCheck } from 'lucide-react'
+import { useTranslations } from '@/hooks/useTranslations'
 
 export default function PaymentInfoCard() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
+  const t = useTranslations()
 
   const bankAccounts = [
     {
@@ -29,7 +31,7 @@ export default function PaymentInfoCard() {
     <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-5">
       <div className="flex items-center gap-2 font-bold text-sm text-neutral-900 dark:text-neutral-100 border-b border-neutral-200 dark:border-neutral-700 pb-3">
         <Landmark className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
-        <span>Instruksi Pembayaran Transfer Bank</span>
+        <span>{t.payment.title}</span>
       </div>
 
       <div className="mt-3 space-y-2.5">
@@ -45,7 +47,7 @@ export default function PaymentInfoCard() {
               <p className="text-base font-bold text-neutral-900 dark:text-neutral-100 mt-0.5 tracking-wide">
                 {acc.accNumber}
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">a.n. {acc.holder}</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">{t.payment.onBehalfOf} {acc.holder}</p>
             </div>
 
             <button
@@ -56,12 +58,12 @@ export default function PaymentInfoCard() {
               {copiedIndex === idx ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-brand-forest-600 dark:text-brand-forest-400" />
-                  <span className="text-brand-forest-600 dark:text-brand-forest-400 font-semibold">Tersalin</span>
+                  <span className="text-brand-forest-600 dark:text-brand-forest-400 font-semibold">{t.payment.copied}</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5" />
-                  <span>Salin Rekening</span>
+                  <span>{t.payment.copy}</span>
                 </>
               )}
             </button>
@@ -72,7 +74,7 @@ export default function PaymentInfoCard() {
       <div className="mt-3 flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400 pt-2 border-t border-neutral-200 dark:border-neutral-700">
         <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400 shrink-0 mt-0.5" />
         <p>
-          Setelah melakukan transfer, mohon kirimkan konfirmasi melalui tombol WhatsApp di bawah ini agar pesanan Anda dapat langsung dipersiapkan oleh tim operasional.
+          {t.payment.afterTransfer}
         </p>
       </div>
     </div>

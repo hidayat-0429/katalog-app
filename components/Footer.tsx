@@ -73,8 +73,8 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Email</p>
-                <a href={`mailto:${process.env.NEXT_PUBLIC_COMPANY_EMAIL || "etira@gmail.com"}`} className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors break-all">
-                  {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "etira@gmail.com"}
+                <a href={`mailto:${process.env.NEXT_PUBLIC_COMPANY_EMAIL || "info@ekatimurraya.com"}`} className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors break-all">
+                  {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "info@ekatimurraya.com"}
                 </a>
               </div>
             </div>

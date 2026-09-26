@@ -24,28 +24,45 @@ export function getMinOrderText(
   return `${t?.moqPrefix ?? 'Min. order'} 12 ${unit || 'unit'}`;
 }
 
+import { formatText } from '@/lib/productText';
+
 /**
  * Kalkulasi konversi satuan ecer ke kemasan grosir (Karton / Dus)
  */
-export function getCartonConversion(unit: string, quantity: number) {
+export interface CartonTexts {
+  karton: string;
+  dus: string;
+  full: string;
+  fullRemaining: string;
+  below: string;
+}
+
+const CARTON_TEXTS_ID: CartonTexts = {
+  karton: 'Karton',
+  dus: 'Dus',
+  full: '≈ {count} {carton} Pas',
+  fullRemaining: '≈ {count} {carton} + {remaining} {unit}',
+  below: '{quantity} {unit} (Isi 1 {carton} = {perCarton} {unit})',
+};
+
+export function getCartonConversion(unit: string, quantity: number, texts?: Partial<CartonTexts>) {
+  const t = { ...CARTON_TEXTS_ID, ...texts };
   const u = (unit || '').toLowerCase();
   let perCarton = 24;
-  let cartonName = 'Karton';
+  let isDus = false;
 
   if (u.includes('kaleng')) {
     perCarton = 24;
-    cartonName = 'Karton';
   } else if (u.includes('pouch')) {
     perCarton = 20;
-    cartonName = 'Dus';
+    isDus = true;
   } else if (u.includes('pack')) {
     perCarton = 12;
-    cartonName = 'Karton';
   } else if (u.includes('keranjang') || u.includes('karton')) {
     perCarton = 1;
-    cartonName = 'Karton';
   }
 
+  const cartonName = isDus ? t.dus : t.karton;
   const cartons = Math.floor(quantity / perCarton);
   const remaining = quantity % perCarton;
 
@@ -54,9 +71,9 @@ export function getCartonConversion(unit: string, quantity: number) {
     cartonName,
     cartons,
     remaining,
-    text: cartons > 0 
-      ? `≈ ${cartons} ${cartonName}${remaining > 0 ? ` + ${remaining} ${unit}` : ' Pas'}`
-      : `${quantity} ${unit} (Isi 1 ${cartonName} = ${perCarton} ${unit})`,
+    text: cartons > 0
+      ? formatText(remaining > 0 ? t.fullRemaining : t.full, { count: cartons, carton: cartonName, remaining, unit })
+      : formatText(t.below, { quantity, unit, carton: cartonName, perCarton }),
   };
 }
 

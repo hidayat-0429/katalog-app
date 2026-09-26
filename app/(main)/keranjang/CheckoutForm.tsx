@@ -4,6 +4,9 @@ import { useState, useTransition } from 'react';
 import { ShoppingBag, MapPin, MessageSquare, AlertCircle, Loader2, Truck, Check, X } from 'lucide-react';
 import { checkout } from '@/lib/actions/cart';
 import { Button } from '@/components/ui';
+import { useTranslations } from '@/hooks/useTranslations';
+// Nilai option disimpan apa adanya ke kolom notes pesanan, jadi hanya labelnya yang diterjemahkan.
+import { SHIPPING_METHODS } from '@/lib/orderNotes';
 
 interface CheckoutFormProps {
   defaultAddress?: string;
@@ -16,10 +19,17 @@ interface OrderSummary {
 }
 
 export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps) {
+  const t = useTranslations();
+  const tc = t.checkout;
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [orderSummary, setOrderSummary] = useState<OrderSummary | null>(null);
+
+  const methodLabel = (value: string) => {
+    const found = SHIPPING_METHODS.find((m) => m.value === value);
+    return found ? t.fleet[found.labelKey] : value;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +41,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
     const notes = String(formData.get('notes') || '');
 
     if (!shippingAddress.trim()) {
-      setError('Alamat pengiriman wajib diisi');
+      setError(tc.addressRequired);
       return;
     }
 
@@ -81,31 +91,27 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="shippingMethod">
             <Truck className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
-            <span>Metode Armada Pengiriman</span>
+            <span>{tc.methodLabel}</span>
           </label>
           <select
             id="shippingMethod"
             name="shippingMethod"
             disabled={isPending || showConfirmation}
             className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out disabled:opacity-50 disabled:cursor-not-allowed"
-            defaultValue="Armada Truk Berpendingin (Cold Chain)"
+            defaultValue={SHIPPING_METHODS[0].value}
           >
-            <option value="Armada Truk Berpendingin (Cold Chain)">
-              Armada Truk Berpendingin (Cold Chain - Rekomendasi Jamur Segar &amp; Beku)
-            </option>
-            <option value="Kargo Logistik Kering (Kaleng &amp; Pouch)">
-              Kargo Logistik Kering (Khusus Kaleng &amp; Pouch Steril)
-            </option>
-            <option value="Ambil Mandiri di Pabrik (Purwodadi, Pasuruan)">
-              Ambil Mandiri di Gudang Pabrik (Purwodadi, Pasuruan)
-            </option>
+            {SHIPPING_METHODS.map((method) => (
+              <option key={method.value} value={method.value}>
+                {t.fleet[method.labelKey]}
+              </option>
+            ))}
           </select>
         </div>
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="shippingAddress">
             <MapPin className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
-            <span>Alamat Pengiriman Tujuan</span>
+            <span>{tc.addressLabel}</span>
           </label>
           <textarea
             id="shippingAddress"
@@ -115,14 +121,14 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
             rows={3}
             disabled={isPending || showConfirmation}
             className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-            placeholder="Alamat lengkap tujuan kirim..."
+            placeholder={tc.addressPlaceholder}
           />
         </div>
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="notes">
             <MessageSquare className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
-            <span>Catatan Khusus (Opsional)</span>
+            <span>{tc.notesLabel}</span>
           </label>
           <textarea
             id="notes"
@@ -130,7 +136,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
             rows={2}
             disabled={isPending || showConfirmation}
             className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-            placeholder="Contoh: Titip di pos satpam / hubungi penerima..."
+            placeholder={tc.notesPlaceholder}
           />
         </div>
         
@@ -139,12 +145,12 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
             {isPending ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Memproses Pesanan...</span>
+                <span>{tc.processing}</span>
               </>
             ) : (
               <>
                 <ShoppingBag className="w-4 h-4" />
-                <span>Review &amp; Konfirmasi Pesanan</span>
+                <span>{tc.reviewButton}</span>
               </>
             )}
           </Button>
@@ -161,26 +167,26 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
                 <Check className="w-5 h-5 text-brand-forest-600 dark:text-brand-forest-400" />
               </div>
               <h2 className="font-heading font-bold text-lg text-neutral-900 dark:text-neutral-100">
-                Konfirmasi Pesanan
+                {tc.confirmTitle}
               </h2>
             </div>
 
             {/* Content */}
             <div className="px-6 py-4 space-y-4">
               <div className="bg-neutral-50 dark:bg-neutral-700/30 border border-neutral-200 dark:border-neutral-600 rounded-lg p-4">
-                <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-3 font-semibold">Ringkasan Pengiriman:</p>
+                <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-3 font-semibold">{tc.summaryLabel}</p>
                 <div className="space-y-2.5 text-sm">
                   <div>
-                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">Metode</p>
-                    <p className="text-neutral-900 dark:text-neutral-100 font-medium">{orderSummary.shippingMethod}</p>
+                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.method}</p>
+                    <p className="text-neutral-900 dark:text-neutral-100 font-medium">{methodLabel(orderSummary.shippingMethod)}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">Alamat Pengiriman</p>
+                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.address}</p>
                     <p className="text-neutral-900 dark:text-neutral-100 whitespace-pre-wrap">{orderSummary.shippingAddress}</p>
                   </div>
                   {orderSummary.notes && (
                     <div>
-                      <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">Catatan</p>
+                      <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.notes}</p>
                       <p className="text-neutral-900 dark:text-neutral-100 italic">{orderSummary.notes}</p>
                     </div>
                   )}
@@ -188,7 +194,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
               </div>
 
               <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Setelah konfirmasi, pesanan akan dibuat dan Anda akan diarahkan ke halaman pesanan untuk menghubungi kami via WhatsApp.
+                {tc.afterConfirmNote}
               </p>
             </div>
 
@@ -200,7 +206,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
                 className="flex-1 px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100 font-semibold text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 <X className="w-4 h-4" />
-                <span>Ubah</span>
+                <span>{tc.editButton}</span>
               </button>
               <button
                 onClick={handleConfirm}
@@ -210,12 +216,12 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
                 {isPending ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Memproses...</span>
+                    <span>{tc.processingShort}</span>
                   </>
                 ) : (
                   <>
                     <Check className="w-4 h-4" />
-                    <span>Konfirmasi</span>
+                    <span>{tc.confirmButton}</span>
                   </>
                 )}
               </button>

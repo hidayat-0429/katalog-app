@@ -10,7 +10,9 @@
     "profile": "Profile",
     "login": "Login",
     "register": "Register",
-    "logout": "Logout"
+    "logout": "Logout",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "hero": {
     "title": "Premium Mushrooms",
@@ -436,6 +438,88 @@
     "totalPrice": "Total Price",
     "shippingNote": "Price does not include shipping costs. Shipping estimate will be confirmed by our operations team."
   },
+  "checkout": {
+    "methodLabel": "Delivery Fleet Method",
+    "addressLabel": "Destination Shipping Address",
+    "addressPlaceholder": "Full delivery address...",
+    "notesLabel": "Special Notes (Optional)",
+    "notesPlaceholder": "e.g. Leave with the security post / call the recipient...",
+    "reviewButton": "Review & Confirm Order",
+    "processing": "Processing Order...",
+    "confirmTitle": "Confirm Order",
+    "summaryLabel": "Shipping Summary:",
+    "method": "Method",
+    "address": "Shipping Address",
+    "notes": "Notes",
+    "afterConfirmNote": "After confirmation, the order will be created and you will be taken to the order page to contact us via WhatsApp.",
+    "editButton": "Edit",
+    "processingShort": "Processing...",
+    "confirmButton": "Confirm",
+    "addressRequired": "Shipping address is required"
+  },
+  "addToCart": {
+    "quantityLabel": "Order Quantity",
+    "addCarton": "+1 {carton} (+{perCarton})",
+    "wholesaleCalc": "Wholesale pack calculation:",
+    "cartButton": "+ Add to Cart",
+    "buyButton": "Order Now",
+    "addedToast": "Successfully added to your cart",
+    "unexpectedError": "An unexpected error occurred",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity"
+  },
+  "carton": {
+    "karton": "Carton",
+    "dus": "Box",
+    "full": "≈ {count} {carton} exactly",
+    "fullRemaining": "≈ {count} {carton} + {remaining} {unit}",
+    "below": "{quantity} {unit} (1 {carton} holds {perCarton} {unit})"
+  },
+  "cartRow": {
+    "removeAria": "Remove {name} from cart"
+  },
+  "status": {
+    "PENDING": "Pending",
+    "DIPROSES": "Processing",
+    "DIKIRIM": "Shipped",
+    "SELESAI": "Completed",
+    "DIBATALKAN": "Cancelled"
+  },
+  "invoice": {
+    "myOrders": "My Orders",
+    "title": "Order",
+    "printTitle": "OFFICIAL SUPPLY ORDER INVOICE",
+    "printSubtitle": "PT EKA TIMUR RAYA (ETIRA MUSHROOMS) · PURWODADI, PASURUAN",
+    "destination": "Delivery Information",
+    "transDate": "Transaction Date",
+    "buyer": "Ordered By",
+    "shipAddress": "Delivery Address",
+    "notes": "Notes",
+    "fleet": "Fleet",
+    "items": "Item Details",
+    "colProduct": "Product",
+    "colQty": "Qty",
+    "colPrice": "Price",
+    "colSubtotal": "Subtotal",
+    "total": "Total Payment",
+    "print": "Print Invoice",
+    "printTooltip": "Print Invoice",
+    "canceled": "Order Cancelled",
+    "canceledDesc": "This order has been cancelled and the product stock has been returned to the warehouse.",
+    "cancelButton": "Cancel Order",
+    "canceling": "Cancelling...",
+    "cancelConfirm": "Are you sure you want to cancel this order?",
+    "cancelFailed": "Failed to cancel the order. Please try again.",
+    "waButton": "Confirm via WhatsApp to Admin",
+    "waAria": "Send order confirmation via WhatsApp"
+  },
+  "payment": {
+    "title": "Bank Transfer Payment Instructions",
+    "onBehalfOf": "Account holder:",
+    "copy": "Copy Account Number",
+    "copied": "Copied",
+    "afterTransfer": "After transferring, please send confirmation using the WhatsApp button below so our operations team can start preparing your order."
+  },
   "tentang": {
     "title": "About Company",
     "subtitle": "Profile, quality dedication, and production facilities of PT Eka Timur Raya (Etira Mushrooms)",
@@ -485,7 +569,7 @@
     "facilityOlahanDesc": "Processing of value-added products such as mushroom nuggets, meatballs, and vegetable patties.",
     "location": "Factory Address",
     "locationTitle": "Purwodadi, Pasuruan",
-    "locationAddress": "Jl. Raya Purwodadi, Kec. Purwodadi, Kabupaten Pasuruan, East Java 67163.",
+    "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, East Java 67163.",
     "distanceSurabaya": "Distance to Surabaya:",
     "distanceSurabayaValue": "±65 km (Toll)",
     "coverage": "Fleet Coverage:",

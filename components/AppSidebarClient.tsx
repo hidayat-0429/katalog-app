@@ -6,12 +6,14 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLocale, useSetLocale } from "@/components/LocaleProvider";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function AppSidebarClient({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const locale = useLocale();
   const setLocale = useSetLocale();
+  const t = useTranslations();
 
   // Auto-close saat navigasi
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsOpen(true)}
-            aria-label="Buka menu navigasi"
+            aria-label={t.nav.openMenu}
             className="w-9 h-9 -ml-1 flex items-center justify-center rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
             <Menu className="w-5 h-5" />
@@ -109,7 +111,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
       >
         <button
           onClick={() => setIsOpen(false)}
-          aria-label="Tutup menu navigasi"
+          aria-label={t.nav.closeMenu}
           className="lg:hidden absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
         >
           <X className="w-4 h-4" />

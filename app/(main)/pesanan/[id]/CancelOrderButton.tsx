@@ -4,20 +4,22 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { XCircle, Loader2 } from "lucide-react";
 import { cancelOrder } from "@/lib/actions/orders";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function CancelOrderButton({ orderId }: { orderId: string }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const t = useTranslations();
 
   const handleCancel = () => {
-    if (confirm("Apakah Anda yakin ingin membatalkan pesanan ini?")) {
+    if (confirm(t.invoice.cancelConfirm)) {
       startTransition(async () => {
         try {
           await cancelOrder(orderId);
           router.refresh();
         } catch (error) {
           console.error("Gagal membatalkan pesanan", error);
-          alert("Gagal membatalkan pesanan. Silakan coba lagi.");
+          alert(t.invoice.cancelFailed);
         }
       });
     }
@@ -32,12 +34,12 @@ export default function CancelOrderButton({ orderId }: { orderId: string }) {
       {isPending ? (
         <>
           <Loader2 className="w-4 h-4 animate-spin" />
-          <span>Membatalkan...</span>
+          <span>{t.invoice.canceling}</span>
         </>
       ) : (
         <>
           <XCircle className="w-4 h-4" />
-          <span>Batalkan Pesanan</span>
+          <span>{t.invoice.cancelButton}</span>
         </>
       )}
     </button>

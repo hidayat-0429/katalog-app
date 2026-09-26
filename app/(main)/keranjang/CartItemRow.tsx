@@ -7,6 +7,8 @@ import { formatRupiah } from '@/lib/format';
 import { updateCartItem, removeCartItem } from '@/lib/actions/cart';
 import { useRouter } from 'next/navigation';
 import { getCartonConversion } from '@/lib/productImage';
+import { formatText } from '@/lib/productText';
+import { useTranslations } from '@/hooks/useTranslations';
 import { Card } from '@/components/ui';
 
 interface CartItemRowProps {
@@ -21,8 +23,9 @@ interface CartItemRowProps {
 
 export default function CartItemRow({ cartId, name, price, unit, quantity, stock, imageUrl }: CartItemRowProps) {
   const router = useRouter();
+  const t = useTranslations();
   const [isPending, startTransition] = useTransition();
-  const conversion = getCartonConversion(unit, quantity);
+  const conversion = getCartonConversion(unit, quantity, t.carton);
 
   const handleUpdate = (newQuantity: number) => {
     if (newQuantity < 1) return;
@@ -73,7 +76,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
             type="button"
             onClick={() => handleUpdate(quantity - 1)}
             disabled={quantity <= 1 || isPending}
-            aria-label="Kurangi jumlah"
+            aria-label={t.addToCart.decrease}
             className="w-7 h-7 flex items-center justify-center text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-30 transition-colors"
           >
             <Minus className="w-3 h-3" />
@@ -85,7 +88,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
             type="button"
             onClick={() => handleUpdate(quantity + 1)}
             disabled={quantity >= stock || isPending}
-            aria-label="Tambah jumlah"
+            aria-label={t.addToCart.increase}
             className="w-7 h-7 flex items-center justify-center text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-30 transition-colors"
           >
             <Plus className="w-3 h-3" />
@@ -101,7 +104,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
         <button
           onClick={handleRemove}
           disabled={isPending}
-          aria-label={`Hapus ${name} dari keranjang`}
+          aria-label={formatText(t.cartRow.removeAria, { name })}
           className="p-1.5 text-neutral-400 dark:text-neutral-500 hover:text-red-500 dark:hover:text-red-400 rounded-md transition-colors"
         >
           <Trash2 className="w-4 h-4" />

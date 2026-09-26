@@ -10,7 +10,9 @@
     "profile": "Profil",
     "login": "Masuk",
     "register": "Daftar",
-    "logout": "Keluar"
+    "logout": "Keluar",
+    "openMenu": "Buka menu navigasi",
+    "closeMenu": "Tutup menu navigasi"
   },
   "hero": {
     "title": "Jamur Premium",
@@ -436,6 +438,88 @@
     "totalPrice": "Total Harga",
     "shippingNote": "Harga belum termasuk biaya pengiriman. Estimasi ongkos kirim akan dikonfirmasi oleh tim operasional."
   },
+  "checkout": {
+    "methodLabel": "Metode Armada Pengiriman",
+    "addressLabel": "Alamat Pengiriman Tujuan",
+    "addressPlaceholder": "Alamat lengkap tujuan kirim...",
+    "notesLabel": "Catatan Khusus (Opsional)",
+    "notesPlaceholder": "Contoh: Titip di pos satpam / hubungi penerima...",
+    "reviewButton": "Review & Konfirmasi Pesanan",
+    "processing": "Memproses Pesanan...",
+    "confirmTitle": "Konfirmasi Pesanan",
+    "summaryLabel": "Ringkasan Pengiriman:",
+    "method": "Metode",
+    "address": "Alamat Pengiriman",
+    "notes": "Catatan",
+    "afterConfirmNote": "Setelah konfirmasi, pesanan akan dibuat dan Anda akan diarahkan ke halaman pesanan untuk menghubungi kami via WhatsApp.",
+    "editButton": "Ubah",
+    "processingShort": "Memproses...",
+    "confirmButton": "Konfirmasi",
+    "addressRequired": "Alamat pengiriman wajib diisi"
+  },
+  "addToCart": {
+    "quantityLabel": "Jumlah Pesanan",
+    "addCarton": "+1 {carton} (+{perCarton})",
+    "wholesaleCalc": "Kalkulasi Kemasan Grosir:",
+    "cartButton": "+ Keranjang",
+    "buyButton": "Pesan Langsung",
+    "addedToast": "Berhasil ditambahkan ke keranjang",
+    "unexpectedError": "Terjadi kesalahan yang tidak terduga",
+    "decrease": "Kurangi jumlah",
+    "increase": "Tambah jumlah"
+  },
+  "carton": {
+    "karton": "Karton",
+    "dus": "Dus",
+    "full": "≈ {count} {carton} Pas",
+    "fullRemaining": "≈ {count} {carton} + {remaining} {unit}",
+    "below": "{quantity} {unit} (Isi 1 {carton} = {perCarton} {unit})"
+  },
+  "cartRow": {
+    "removeAria": "Hapus {name} dari keranjang"
+  },
+  "status": {
+    "PENDING": "Menunggu",
+    "DIPROSES": "Diproses",
+    "DIKIRIM": "Dikirim",
+    "SELESAI": "Selesai",
+    "DIBATALKAN": "Dibatalkan"
+  },
+  "invoice": {
+    "myOrders": "Pesanan Saya",
+    "title": "Pesanan",
+    "printTitle": "FAKTUR PEMESANAN PASOKAN RESMI",
+    "printSubtitle": "PT EKA TIMUR RAYA (ETIRA MUSHROOMS) · PURWODADI, PASURUAN",
+    "destination": "Informasi Tujuan",
+    "transDate": "Tanggal Transaksi",
+    "buyer": "Pemesan",
+    "shipAddress": "Alamat Kirim",
+    "notes": "Catatan",
+    "fleet": "Armada",
+    "items": "Rincian Barang",
+    "colProduct": "Produk",
+    "colQty": "Qty",
+    "colPrice": "Harga",
+    "colSubtotal": "Subtotal",
+    "total": "Total Pembayaran",
+    "print": "Cetak Invoice",
+    "printTooltip": "Cetak Faktur / Invoice",
+    "canceled": "Pesanan Dibatalkan",
+    "canceledDesc": "Pesanan ini telah dibatalkan dan stok produk telah dikembalikan ke gudang.",
+    "cancelButton": "Batalkan Pesanan",
+    "canceling": "Membatalkan...",
+    "cancelConfirm": "Apakah Anda yakin ingin membatalkan pesanan ini?",
+    "cancelFailed": "Gagal membatalkan pesanan. Silakan coba lagi.",
+    "waButton": "Konfirmasi ke WhatsApp Admin",
+    "waAria": "Kirim konfirmasi order via WhatsApp"
+  },
+  "payment": {
+    "title": "Instruksi Pembayaran Transfer Bank",
+    "onBehalfOf": "a.n.",
+    "copy": "Salin Rekening",
+    "copied": "Tersalin",
+    "afterTransfer": "Setelah melakukan transfer, mohon kirimkan konfirmasi melalui tombol WhatsApp di bawah ini agar pesanan Anda dapat langsung dipersiapkan oleh tim operasional."
+  },
   "tentang": {
     "title": "Tentang Perusahaan",
     "subtitle": "Profil, dedikasi mutu, dan fasilitas produksi PT Eka Timur Raya (Etira Mushrooms)",
@@ -485,7 +569,7 @@
     "facilityOlahanDesc": "Pengolahan produk bernilai tambah seperti nugget jamur, bakso, dan patty nabati.",
     "location": "Alamat Pabrik",
     "locationTitle": "Purwodadi, Pasuruan",
-    "locationAddress": "Jl. Raya Purwodadi, Kec. Purwodadi, Kabupaten Pasuruan, Jawa Timur 67163.",
+    "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, Jawa Timur 67163.",
     "distanceSurabaya": "Jarak ke Surabaya:",
     "distanceSurabayaValue": "±65 km (Tol)",
     "coverage": "Jangkauan Armada:",

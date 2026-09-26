@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { addToCart, undoAddToCart } from '@/lib/actions/cart';
 import { useToast } from '@/components/Providers';
 import { getCartonConversion } from '@/lib/productImage';
+import { formatText } from '@/lib/productText';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface AddToCartFormProps {
   productId: string;
@@ -16,10 +18,11 @@ interface AddToCartFormProps {
 export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: AddToCartFormProps) {
   const router = useRouter();
   const toast = useToast();
+  const t = useTranslations();
   const [isPending, startTransition] = useTransition();
   const [quantity, setQuantity] = useState(1);
 
-  const conversion = getCartonConversion(unit, quantity);
+  const conversion = getCartonConversion(unit, quantity, t.carton);
 
   const handleDecrease = () => {
     if (quantity > 1) {
@@ -52,7 +55,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             router.push('/keranjang');
           } else {
             const addedQty = quantity;
-            toast('Berhasil ditambahkan ke keranjang', {
+            toast(t.addToCart.addedToast, {
               type: 'success',
               onUndo: async () => {
                 await undoAddToCart(productId, addedQty);
@@ -66,7 +69,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
         if (err?.digest?.startsWith('NEXT_REDIRECT') || err?.message?.includes('NEXT_REDIRECT')) {
           throw err;
         }
-        toast('Terjadi kesalahan yang tidak terduga', { type: 'error' });
+        toast(t.addToCart.unexpectedError, { type: 'error' });
       }
     });
   };
@@ -78,7 +81,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider">
-              Jumlah Pesanan ({unit})
+              {t.addToCart.quantityLabel} ({unit})
             </label>
             {conversion.perCarton > 1 && (
               <button
@@ -88,7 +91,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
                 className="text-[11px] font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline flex items-center gap-1 disabled:opacity-40"
               >
                 <PackageCheck className="w-3.5 h-3.5" />
-                <span>+1 {conversion.cartonName} (+{conversion.perCarton})</span>
+                <span>{formatText(t.addToCart.addCarton, { carton: conversion.cartonName, perCarton: conversion.perCarton })}</span>
               </button>
             )}
           </div>
@@ -97,6 +100,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             <button 
               type="button"
               onClick={handleDecrease}
+              aria-label={t.addToCart.decrease}
               disabled={quantity <= 1 || isPending}
               className="w-12 h-12 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
             >
@@ -104,6 +108,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             </button>
             <input 
               type="number"
+              aria-label={t.addToCart.quantityLabel}
               min="1"
               max={maxStock}
               value={quantity}
@@ -118,6 +123,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             <button 
               type="button"
               onClick={handleIncrease}
+              aria-label={t.addToCart.increase}
               disabled={quantity >= maxStock || isPending}
               className="w-12 h-12 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
             >
@@ -127,7 +133,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
 
           {/* Carton Conversion Hint */}
           <div className="mt-2.5 p-2 rounded-md bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200/80 dark:border-neutral-700/80 flex items-center justify-between text-xs">
-            <span className="text-neutral-500 dark:text-neutral-400">Kalkulasi Kemasan Grosir:</span>
+            <span className="text-neutral-500 dark:text-neutral-400">{t.addToCart.wholesaleCalc}</span>
             <span className="font-semibold text-neutral-900 dark:text-neutral-100">{conversion.text}</span>
           </div>
         </div>
@@ -141,7 +147,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
           disabled={isPending || quantity < 1 || quantity > maxStock}
         >
           {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShoppingCart className="w-4 h-4" />}
-          + Keranjang
+          {t.addToCart.cartButton}
         </button>
         <button 
           type="button"
@@ -150,7 +156,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
           disabled={isPending || quantity < 1 || quantity > maxStock}
         >
           {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <PackageCheck className="w-4 h-4" />}
-          Pesan Langsung
+          {t.addToCart.buyButton}
         </button>
       </div>
     </div>

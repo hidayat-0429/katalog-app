@@ -12,7 +12,7 @@ export default function FAQPageClient() {
   const t = useTranslations();
   const [openKey, setOpenKey] = useState<string | null>('product-0');
   const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || '6285816172367';
-  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || 'etira@gmail.com';
+  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || 'info@ekatimurraya.com';
   const waLink = `https://wa.me/${adminWa}?text=${encodeURIComponent(t.faq.waMessage)}`;
 
   return (
