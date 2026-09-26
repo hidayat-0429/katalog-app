@@ -34,7 +34,7 @@ export default function ContactPageClient() {
                   {t.contact.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-white/80">
-                  Respons cepat untuk konsultasi pesanan & spesifikasi.
+                  {t.contact.waSubtitle}
                 </p>
               </div>
               <MessageSquare className="w-5 h-5 text-white flex-shrink-0" />
@@ -60,7 +60,7 @@ export default function ContactPageClient() {
                 <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
                   {t.contact.address}
                 </h3>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Sentra Pengolahan</p>
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.contact.addressLabel}</p>
               </div>
             </div>
             <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -80,7 +80,7 @@ export default function ContactPageClient() {
                 <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
                   {t.contact.email}
                 </h3>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Tender & Kerja Sama</p>
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.contact.emailLabel}</p>
               </div>
             </div>
             <a

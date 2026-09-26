@@ -59,14 +59,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     };
     const title = titleMap[pathname];
     if (!title) return;
-    document.title = title;
-    // Adopsi <title> server oleh React saat hydration menimpa judul yang baru dipasang; pasang ulang setelahnya
-    const timers = [150, 500].map((ms) =>
-      setTimeout(() => {
-        document.title = title;
-      }, ms)
-    );
-    return () => timers.forEach(clearTimeout);
+
+    const apply = () => {
+      if (document.title !== title) document.title = title;
+    };
+    apply();
+
+    // React adopsi <title> server setelah effect ini jalan (tertunda di tab background), jadi
+    // jaga judul kita lewat observer alih-alih menebak jeda waktu.
+    const titleEl = document.querySelector('title');
+    if (!titleEl) return;
+    const observer = new MutationObserver(apply);
+    observer.observe(titleEl, { childList: true, characterData: true, subtree: true });
+    return () => observer.disconnect();
   }, [pathname, locale, mounted]);
 
   const setLocale = (newLocale: Locale) => {
