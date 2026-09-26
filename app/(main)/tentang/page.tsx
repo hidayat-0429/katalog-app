@@ -1,9 +1,11 @@
+import type { Metadata } from 'next';
+import { getServerMessages } from '@/lib/serverMessages';
 import TentangPageClient from './TentangPageClient';
 
-export const metadata = {
-  title: "Tentang Perusahaan | Etira Mushrooms",
-  description: "Profil PT Eka Timur Raya (Etira Mushrooms), supplier terpercaya produk jamur olahan dan segar untuk kebutuhan B2B industri kuliner.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerMessages();
+  return { title: t.metadata.about, description: t.about.description };
+}
 
 export default function TentangPage() {
   return <TentangPageClient />;

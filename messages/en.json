@@ -243,6 +243,7 @@
     "title": "Sign In",
     "subtitle": "Access order catalog and transaction history",
     "email": "Email",
+    "emailPlaceholder": "name@company.com",
     "password": "Password",
     "submit": "Sign In",
     "noAccount": "Don't have an account?",
@@ -300,6 +301,7 @@
     "subtitle": "Update your company contact information and shipping address.",
     "save": "Save Changes",
     "saved": "Changes saved successfully",
+    "userNotFound": "Account data not found.",
     "form": {
       "picTitle": "Contact Person Details",
       "name": "Full Name",
@@ -393,7 +395,8 @@
     "orders": "My Orders | Etira Mushrooms",
     "cart": "Cart | Etira Mushrooms",
     "login": "Login | Etira Mushrooms",
-    "register": "Register | Etira Mushrooms"
+    "register": "Register | Etira Mushrooms",
+    "productNotFound": "Product Not Found | Etira Mushrooms"
   },
   "common": {
     "menu": "MENU",
@@ -411,10 +414,16 @@
     "cancel": "Cancel",
     "backToHome": "Back to Home",
     "lightMode": "Switch to light mode",
-    "darkMode": "Switch to dark mode"
+    "darkMode": "Switch to dark mode",
+    "loadingTitle": "Loading data...",
+    "loadingHint": "Please wait a moment.",
+    "addressLine1": "Jl. Raya Nongkojajar KM 1.4",
+    "addressLine2": "Purwodadi, Pasuruan 67163",
+    "addressLine3": "East Java"
   },
   "productDetail": {
     "descriptionFallback": "Premium-quality food products ready for business kitchens and the culinary industry.",
+    "metaDescription": "Buy {name} at the best supply price from Etira Mushrooms.",
     "breadcrumb": {
       "home": "Home",
       "catalog": "Catalog",
@@ -595,6 +604,7 @@
     "location": "Factory Address",
     "locationTitle": "Purwodadi, Pasuruan",
     "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, East Java 67163.",
+    "facilityAlt": "PT Eka Timur Raya factory facilities",
     "distanceSurabaya": "Distance to Surabaya:",
     "distanceSurabayaValue": "±65 km (Toll)",
     "coverage": "Fleet Coverage:",
@@ -630,6 +640,21 @@
     "profileSaveFailed": "Something went wrong while saving your profile.",
     "fieldsRequired": "All fields are required",
     "messageFailed": "Something went wrong while sending your message"
+  },
+  "floatingWa": {
+    "tooltip": "Need help? Chat with us!",
+    "openChat": "Chat with our team on WhatsApp",
+    "closeChat": "Close chat",
+    "cs": "Customer Service",
+    "greeting": "👋 Hello! How can we help?",
+    "readyTo": "We can help you with:",
+    "itemPricing": "Product information & pricing",
+    "itemBulk": "Bulk / wholesale orders",
+    "itemSample": "Free sample requests",
+    "itemOem": "Custom packaging (OEM)",
+    "cta": "Chat via WhatsApp",
+    "replyTime": "Usually replies within minutes",
+    "prefill": "Hello Etira Mushrooms, I would like to know more about your mushroom products."
   }
 }
 

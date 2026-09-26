@@ -65,8 +65,8 @@ export default function ContactPageClient() {
             </div>
             <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
               PT Eka Timur Raya<br />
-              Jl. Raya Nongkojajar KM 1.4,<br />
-              Purwodadi, Pasuruan 67163, Jawa Timur.
+              {t.common.addressLine1},<br />
+              {t.common.addressLine2}, {t.common.addressLine3}
             </p>
           </div>
 

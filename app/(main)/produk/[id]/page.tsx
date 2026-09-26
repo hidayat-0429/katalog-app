@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
+import { getServerLocale, getServerMessages } from '@/lib/serverMessages';
+import { localizeProduct, formatText } from '@/lib/productText';
 import ProductDetailPageClient from './ProductDetailPageClient';
 
 interface ProductDetailPageProps {
@@ -11,20 +13,22 @@ interface ProductDetailPageProps {
 
 export async function generateMetadata({ params }: ProductDetailPageProps) {
   const { id } = await params;
+  const [t, locale] = await Promise.all([getServerMessages(), getServerLocale()]);
   const product = await prisma.product.findUnique({
     where: { id },
   });
 
   if (!product || !product.isActive) {
     return {
-      title: "Produk Tidak Ditemukan | Etira Mushrooms",
+      title: t.metadata.productNotFound,
     };
   }
 
-  const title = `${product.name} | Etira Mushrooms`;
-  const description = product.description 
-    ? product.description.substring(0, 160) 
-    : `Beli ${product.name} dengan harga pasokan terbaik di Etira Mushrooms.`;
+  const { name, description: productDescription } = localizeProduct(product, locale);
+  const title = `${name} | Etira Mushrooms`;
+  const description = productDescription
+    ? productDescription.substring(0, 160)
+    : formatText(t.productDetail.metaDescription, { name });
 
   return {
     title,
@@ -38,7 +42,7 @@ export async function generateMetadata({ params }: ProductDetailPageProps) {
           url: product.imageUrl || "/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: product.name,
+          alt: name,
         },
       ],
     },

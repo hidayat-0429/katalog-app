@@ -2,11 +2,14 @@
 
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function FloatingWhatsApp() {
+  const t = useTranslations();
+  const tw = t.floatingWa;
   const [isOpen, setIsOpen] = useState(false);
   const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
-  const waLink = `https://wa.me/${adminWa}?text=Halo%20Etira%20Mushrooms%2C%20saya%20tertarik%20untuk%20mengetahui%20lebih%20lanjut%20tentang%20produk%20jamur%20Anda.`;
+  const waLink = `https://wa.me/${adminWa}?text=${encodeURIComponent(tw.prefill)}`;
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function FloatingWhatsApp() {
         {!isOpen && (
           <div className="hidden lg:block opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
             <div className="bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-neutral-200 dark:border-neutral-700">
-              Butuh bantuan? Chat kami!
+              {tw.tooltip}
             </div>
           </div>
         )}
@@ -32,12 +35,12 @@ export default function FloatingWhatsApp() {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-white text-sm">Etira Mushrooms</h3>
-                <p className="text-xs text-white/80">Customer Service</p>
+                <p className="text-xs text-white/80">{tw.cs}</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-white/80 hover:text-white transition-colors"
-                aria-label="Close chat"
+                aria-label={tw.closeChat}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -47,16 +50,16 @@ export default function FloatingWhatsApp() {
             <div className="p-4">
               <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-3 mb-4">
                 <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-                  👋 Halo! Ada yang bisa kami bantu?
+                  {tw.greeting}
                 </p>
                 <p className="text-xs text-neutral-500 dark:text-neutral-500">
-                  Kami siap membantu Anda dengan:
+                  {tw.readyTo}
                 </p>
                 <ul className="text-xs text-neutral-600 dark:text-neutral-400 mt-2 space-y-1">
-                  <li>• Informasi produk & harga</li>
-                  <li>• Pemesanan bulk/grosir</li>
-                  <li>• Request sample gratis</li>
-                  <li>• Custom packaging (OEM)</li>
+                  <li>&bull; {tw.itemPricing}</li>
+                  <li>&bull; {tw.itemBulk}</li>
+                  <li>&bull; {tw.itemSample}</li>
+                  <li>&bull; {tw.itemOem}</li>
                 </ul>
               </div>
 
@@ -68,11 +71,11 @@ export default function FloatingWhatsApp() {
                 className="flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-lg py-3 font-semibold text-sm transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                Chat via WhatsApp
+                {tw.cta}
               </a>
 
               <p className="text-center text-xs text-neutral-500 dark:text-neutral-400 mt-3">
-                Biasanya membalas dalam beberapa menit
+                {tw.replyTime}
               </p>
             </div>
           </div>
@@ -82,7 +85,7 @@ export default function FloatingWhatsApp() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="group relative w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
-          aria-label="WhatsApp Chat"
+          aria-label={tw.openChat}
         >
           {isOpen ? (
             <X className="w-6 h-6 text-white" />

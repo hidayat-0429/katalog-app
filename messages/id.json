@@ -243,6 +243,7 @@
     "title": "Masuk ke Akun",
     "subtitle": "Akses katalog pemesanan dan riwayat transaksi",
     "email": "Email",
+    "emailPlaceholder": "nama@perusahaan.com",
     "password": "Kata Sandi",
     "submit": "Masuk",
     "noAccount": "Belum punya akun?",
@@ -300,6 +301,7 @@
     "subtitle": "Perbarui informasi kontak dan alamat pengiriman perusahaan Anda.",
     "save": "Simpan Perubahan",
     "saved": "Perubahan berhasil disimpan",
+    "userNotFound": "Data akun tidak ditemukan.",
     "form": {
       "picTitle": "Data Penanggung Jawab",
       "name": "Nama Lengkap",
@@ -393,7 +395,8 @@
     "orders": "Pesanan Saya | Etira Mushrooms",
     "cart": "Keranjang | Etira Mushrooms",
     "login": "Masuk | Etira Mushrooms",
-    "register": "Daftar | Etira Mushrooms"
+    "register": "Daftar | Etira Mushrooms",
+    "productNotFound": "Produk Tidak Ditemukan | Etira Mushrooms"
   },
   "common": {
     "menu": "MENU",
@@ -411,10 +414,16 @@
     "cancel": "Batal",
     "backToHome": "Kembali ke Beranda",
     "lightMode": "Aktifkan mode terang",
-    "darkMode": "Aktifkan mode gelap"
+    "darkMode": "Aktifkan mode gelap",
+    "loadingTitle": "Memuat Data...",
+    "loadingHint": "Mohon tunggu sebentar.",
+    "addressLine1": "Jl. Raya Nongkojajar KM 1.4",
+    "addressLine2": "Purwodadi, Pasuruan 67163",
+    "addressLine3": "Jawa Timur"
   },
   "productDetail": {
     "descriptionFallback": "Produk pangan bermutu tinggi siap untuk kebutuhan dapur usaha dan industri kuliner.",
+    "metaDescription": "Beli {name} dengan harga pasokan terbaik dari Etira Mushrooms.",
     "breadcrumb": {
       "home": "Beranda",
       "catalog": "Katalog",
@@ -595,6 +604,7 @@
     "location": "Alamat Pabrik",
     "locationTitle": "Purwodadi, Pasuruan",
     "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, Jawa Timur 67163.",
+    "facilityAlt": "Fasilitas Pabrik PT Eka Timur Raya",
     "distanceSurabaya": "Jarak ke Surabaya:",
     "distanceSurabayaValue": "±65 km (Tol)",
     "coverage": "Jangkauan Armada:",
@@ -630,6 +640,21 @@
     "profileSaveFailed": "Terjadi kesalahan saat menyimpan pembaruan profil.",
     "fieldsRequired": "Semua field harus diisi",
     "messageFailed": "Terjadi kesalahan saat memproses pesan"
+  },
+  "floatingWa": {
+    "tooltip": "Butuh bantuan? Chat kami!",
+    "openChat": "Chat tim kami via WhatsApp",
+    "closeChat": "Tutup chat",
+    "cs": "Layanan Pelanggan",
+    "greeting": "👋 Halo! Ada yang bisa kami bantu?",
+    "readyTo": "Kami siap membantu Anda dengan:",
+    "itemPricing": "Informasi produk & harga",
+    "itemBulk": "Pemesanan bulk/grosir",
+    "itemSample": "Request sample gratis",
+    "itemOem": "Custom packaging (OEM)",
+    "cta": "Chat via WhatsApp",
+    "replyTime": "Biasanya membalas dalam beberapa menit",
+    "prefill": "Halo Etira Mushrooms, saya tertarik untuk mengetahui lebih lanjut tentang produk jamur Anda."
   }
 }
 

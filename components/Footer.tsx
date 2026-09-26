@@ -54,7 +54,7 @@ export default function Footer() {
             </h5>
             <div className="space-y-3">
               <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Jl. Raya Nongkojajar KM 1.4<br />Purwodadi, Pasuruan 67163<br />Jawa Timur
+                {t.common.addressLine1}<br />{t.common.addressLine2}<br />{t.common.addressLine3}
               </p>
             </div>
           </div>

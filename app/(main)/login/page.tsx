@@ -83,7 +83,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="nama@perusahaan.com"
+                placeholder={t.login.emailPlaceholder}
                 required
                 disabled={loading}
                 className="pl-9"

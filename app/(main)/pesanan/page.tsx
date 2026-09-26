@@ -1,11 +1,14 @@
+import type { Metadata } from "next";
 import { requireUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import { getServerMessages } from "@/lib/serverMessages";
 import PesananPageClient from "./PesananPageClient";
 import { OrderStatus } from "@prisma/client";
 
-export const metadata = {
-  title: "Pesanan Saya | Etira Mushrooms",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerMessages();
+  return { title: t.metadata.orders, description: t.orders.description };
+}
 
 const ITEMS_PER_PAGE = 10;
 

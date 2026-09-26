@@ -60,7 +60,7 @@ export default function RegisterPage() {
         }
       }
     } catch (err) {
-      setError(t.register.error || 'Terjadi kesalahan yang tidak terduga');
+      setError(t.register.error);
       setLoading(false);
     }
   };
