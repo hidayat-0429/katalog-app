@@ -33,21 +33,23 @@ model Category {
 }
 
 model Product {
-  id          String      @id @default(cuid())
-  categoryId  String
-  name        String
-  description String?
-  price       Int
-  unit        String
-  stock       Int         @default(0)
-  imageUrl    String?
-  isActive    Boolean     @default(true)
-  isFeatured  Boolean     @default(false)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  carts       Cart[]
-  orderItems  OrderItem[]
-  category    Category    @relation(fields: [categoryId], references: [id])
+  id           String      @id @default(cuid())
+  categoryId   String
+  name         String
+  nameEn       String?
+  description  String?
+  descriptionEn String?
+  price        Int
+  unit         String
+  stock        Int         @default(0)
+  imageUrl     String?
+  isActive     Boolean     @default(true)
+  isFeatured   Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  carts        Cart[]
+  orderItems   OrderItem[]
+  category     Category    @relation(fields: [categoryId], references: [id])
 
   @@index([categoryId])
   @@index([isActive])

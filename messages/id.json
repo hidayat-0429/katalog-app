@@ -387,6 +387,7 @@
     "darkMode": "Aktifkan mode gelap"
   },
   "productDetail": {
+    "descriptionFallback": "Produk pangan bermutu tinggi siap untuk kebutuhan dapur usaha dan industri kuliner.",
     "breadcrumb": {
       "home": "Beranda",
       "catalog": "Katalog",

@@ -7,11 +7,14 @@ import CheckoutForm from './CheckoutForm';
 import { formatRupiah } from '@/lib/format';
 import EmptyState from '@/components/EmptyState';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useLocale } from '@/components/LocaleProvider';
+import { localizeProduct } from '@/lib/productText';
 
 interface CartItem {
   id: string;
   product: {
     name: string;
+    nameEn?: string | null;
     price: number;
     unit: string;
     stock: number;
@@ -27,6 +30,7 @@ interface CartPageClientProps {
 
 export default function CartPageClient({ cartItems, defaultAddress }: CartPageClientProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
@@ -60,7 +64,7 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
               <CartItemRow
                 key={item.id}
                 cartId={item.id}
-                name={item.product.name}
+                name={localizeProduct(item.product, locale).name}
                 price={item.product.price}
                 unit={item.product.unit}
                 quantity={item.quantity}

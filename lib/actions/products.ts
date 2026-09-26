@@ -8,8 +8,10 @@ import { z } from "zod";
 
 const productSchema = z.object({
   name: z.string().min(2, "Nama produk minimal 2 karakter"),
+  nameEn: z.string().optional().nullable(),
   categoryId: z.string().min(1, "Kategori wajib dipilih"),
   description: z.string().optional().nullable(),
+  descriptionEn: z.string().optional().nullable(),
   price: z.number({ invalid_type_error: "Harga harus berupa angka" }).int("Harga harus bilangan bulat").min(0, "Harga tidak boleh negatif"),
   unit: z.string().min(1, "Satuan kemasan wajib diisi"),
   stock: z.number({ invalid_type_error: "Stok harus berupa angka" }).int("Stok harus bilangan bulat").min(0, "Stok tidak boleh negatif"),
@@ -27,8 +29,10 @@ function parseProductForm(formData: FormData) {
 
   return {
     name: String(formData.get("name") || "").trim(),
+    nameEn: String(formData.get("nameEn") || "").trim() || null,
     categoryId: String(formData.get("categoryId") || "").trim(),
     description: String(formData.get("description") || "").trim() || null,
+    descriptionEn: String(formData.get("descriptionEn") || "").trim() || null,
     price,
     unit: String(formData.get("unit") || "").trim(),
     stock,

@@ -8,6 +8,8 @@ import { formatRupiah } from '@/lib/format';
 import AddToCartForm from './AddToCartForm';
 import { getProductPlaceholderImage, getMinOrderText } from '@/lib/productImage';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useLocale } from '@/components/LocaleProvider';
+import { localizeProduct } from '@/lib/productText';
 import { Product, Category } from '@prisma/client';
 
 interface ProductDetailPageClientProps {
@@ -17,12 +19,14 @@ interface ProductDetailPageClientProps {
 
 export default function ProductDetailPageClient({ product, user }: ProductDetailPageClientProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   if (!product || !product.isActive) {
     notFound();
   }
 
-  const displayImage = product.imageUrl || getProductPlaceholderImage(product.name, product.category?.name);
+  const { name: displayName, description: displayDescription } = localizeProduct(product, locale);
+  const displayImage = product.imageUrl || getProductPlaceholderImage(displayName, product.category?.name);
   const minOrder = getMinOrderText(product.unit, t.productCard);
 
   return (
@@ -46,7 +50,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
           </Link>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <span className="text-neutral-900 dark:text-neutral-100 font-medium truncate">
-            {product.name}
+            {displayName}
           </span>
         </nav>
 
@@ -56,7 +60,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             <div className="relative aspect-[4/3] sm:aspect-square bg-neutral-50 dark:bg-neutral-800/50 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 sticky top-20">
               <Image 
                 src={displayImage} 
-                alt={product.name}
+                alt={displayName}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -73,7 +77,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
               </span>
               
               <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4 leading-snug">
-                {product.name}
+                {displayName}
               </h1>
               
               <div className="pt-2 mb-6">
@@ -92,14 +96,14 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
 
               {/* Short Description */}
               <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-                {product.description || 'Produk pangan bermutu tinggi siap untuk kebutuhan dapur usaha dan industri kuliner.'}
+                {displayDescription || t.productDetail.descriptionFallback}
               </p>
 
               {/* Stock Status */}
               <div className="flex items-center gap-2 font-sans text-xs text-neutral-500 dark:text-neutral-400 mb-4">
                 <Package className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
                 <span>
-                  {t.product.stock}: <strong className="text-neutral-900 dark:text-neutral-100">{product.stock > 0 ? `Tersedia ${product.stock} ${product.unit}` : 'Habis'}</strong>
+                  {t.product.stock}: <strong className="text-neutral-900 dark:text-neutral-100">{product.stock > 0 ? `${t.productCard.available}: ${product.stock} ${product.unit}` : t.productCard.outOfStock}</strong>
                 </span>
               </div>
 

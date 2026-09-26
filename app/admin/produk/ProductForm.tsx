@@ -8,8 +8,10 @@ import { Button } from '@/components/ui'
 interface ProductData {
   id?: string;
   name: string;
+  nameEn?: string | null;
   categoryId: string;
   description?: string | null;
+  descriptionEn?: string | null;
   price: number;
   unit: string;
   stock: number;
@@ -131,8 +133,26 @@ export default function ProductForm({ categories, product, action }: ProductForm
           </div>
 
           <div>
+            <label htmlFor="nameEn" className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+              Nama Produk (Bahasa Inggris)
+              <span className="normal-case font-normal text-neutral-400 dark:text-neutral-500"> — opsional</span>
+            </label>
+            <input type="text" id="nameEn" name="nameEn" defaultValue={product?.nameEn || ''} className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500" placeholder="Contoh: Canned White Mushrooms 425g" />
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1.5">Kosongkan jika nama Inggris mengikuti nama Indonesia.</p>
+          </div>
+
+          <div>
             <label htmlFor="description" className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">Deskripsi</label>
             <textarea id="description" name="description" defaultValue={product?.description || ''} rows={4} className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none" placeholder="Spesifikasi, mutu, dan keterangan isi kemasan..." />
+          </div>
+
+          <div>
+            <label htmlFor="descriptionEn" className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+              Deskripsi (Bahasa Inggris)
+              <span className="normal-case font-normal text-neutral-400 dark:text-neutral-500"> — opsional</span>
+            </label>
+            <textarea id="descriptionEn" name="descriptionEn" defaultValue={product?.descriptionEn || ''} rows={4} className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none" placeholder="Specifications, quality, and packaging details..." />
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1.5">Hanya tampil saat pengunjung memakai bahasa Inggris. Kosongkan untuk memakai deskripsi Indonesia.</p>
           </div>
         </div>
       </div>

@@ -25,6 +25,8 @@ import Container from '@/components/Container';
 import HeroCinematicWrapper from '@/components/HeroCinematicWrapper';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrustBanner from '@/components/TrustBanner';
+import { useLocale } from '@/components/LocaleProvider';
+import { localizeProduct } from '@/lib/productText';
 
 interface Category {
   id: string;
@@ -34,6 +36,7 @@ interface Category {
 interface Product {
   id: string;
   name: string;
+  nameEn?: string | null;
   price: number;
   unit: string;
   stock: number;
@@ -70,6 +73,7 @@ export default function HomePageClient({
   categoryId,
 }: HomePageClientProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#faf9f6] dark:bg-[#0f1110] text-[#1f2421] dark:text-stone-100">
@@ -179,7 +183,7 @@ export default function HomePageClient({
                     <ProductCard
                       key={product.id}
                       id={product.id}
-                      name={product.name}
+                      name={localizeProduct(product, locale).name}
                       price={product.price}
                       unit={product.unit}
                       stock={product.stock}
@@ -250,7 +254,7 @@ export default function HomePageClient({
                       <ScrollReveal key={product.id} delay={idx * 100}>
                         <ProductCard
                           id={product.id}
-                          name={product.name}
+                          name={localizeProduct(product, locale).name}
                           price={product.price}
                           unit={product.unit}
                           stock={product.stock}

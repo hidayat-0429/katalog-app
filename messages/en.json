@@ -387,6 +387,7 @@
     "darkMode": "Switch to dark mode"
   },
   "productDetail": {
+    "descriptionFallback": "Premium-quality food products ready for business kitchens and the culinary industry.",
     "breadcrumb": {
       "home": "Home",
       "catalog": "Catalog",
