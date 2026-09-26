@@ -257,6 +257,17 @@
     "copyright": "Seluruh hak cipta dilindungi.",
     "tagline": "Pasokan Langsung Pabrik & Perkebunan Jamur"
   },
+  "metadata": {
+    "default": "Etira Mushrooms | Pasokan Jamur B2B PT Eka Timur Raya",
+    "about": "Tentang Perusahaan | Etira Mushrooms",
+    "contact": "Hubungi Kami | Etira Mushrooms",
+    "faq": "FAQ - Pertanyaan Umum",
+    "profile": "Profil & Alamat | Etira Mushrooms",
+    "orders": "Pesanan Saya | Etira Mushrooms",
+    "cart": "Keranjang | Etira Mushrooms",
+    "login": "Masuk | Etira Mushrooms",
+    "register": "Daftar | Etira Mushrooms"
+  },
   "common": {
     "menu": "MENU",
     "access": "AKSES",
@@ -271,7 +282,9 @@
     "edit": "Edit",
     "save": "Simpan",
     "cancel": "Batal",
-    "backToHome": "Kembali ke Beranda"
+    "backToHome": "Kembali ke Beranda",
+    "lightMode": "Aktifkan mode terang",
+    "darkMode": "Aktifkan mode gelap"
   },
   "productDetail": {
     "breadcrumb": {

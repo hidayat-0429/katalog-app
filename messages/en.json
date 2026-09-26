@@ -257,6 +257,17 @@
     "copyright": "All rights reserved.",
     "tagline": "Direct Supply from Factory & Mushroom Farms"
   },
+  "metadata": {
+    "default": "Etira Mushrooms | B2B Mushroom Supply by PT Eka Timur Raya",
+    "about": "About the Company | Etira Mushrooms",
+    "contact": "Contact Us | Etira Mushrooms",
+    "faq": "FAQ - Frequently Asked Questions",
+    "profile": "Profile & Address | Etira Mushrooms",
+    "orders": "My Orders | Etira Mushrooms",
+    "cart": "Cart | Etira Mushrooms",
+    "login": "Login | Etira Mushrooms",
+    "register": "Register | Etira Mushrooms"
+  },
   "common": {
     "menu": "MENU",
     "access": "ACCESS",
@@ -271,7 +282,9 @@
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
   },
   "productDetail": {
     "breadcrumb": {

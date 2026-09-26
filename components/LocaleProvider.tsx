@@ -1,6 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import idMessages from '@/messages/id.json';
+import enMessages from '@/messages/en.json';
 
 type Locale = 'id' | 'en';
 
@@ -14,6 +17,7 @@ const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('id');
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Get locale from localStorage on mount
@@ -37,6 +41,33 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     window.addEventListener('localeChange', handleLocaleChange);
     return () => window.removeEventListener('localeChange', handleLocaleChange);
   }, []);
+
+  // Sinkronkan judul tab browser dengan locale aktif (route tanpa map, mis. /produk/[id], pakai judul server)
+  useEffect(() => {
+    if (!mounted || !pathname) return;
+    const m = (locale === 'en' ? enMessages : idMessages).metadata;
+    const titleMap: Record<string, string> = {
+      '/': m.default,
+      '/tentang': m.about,
+      '/kontak': m.contact,
+      '/faq': m.faq,
+      '/profil': m.profile,
+      '/pesanan': m.orders,
+      '/keranjang': m.cart,
+      '/login': m.login,
+      '/register': m.register,
+    };
+    const title = titleMap[pathname];
+    if (!title) return;
+    document.title = title;
+    // Adopsi <title> server oleh React saat hydration menimpa judul yang baru dipasang; pasang ulang setelahnya
+    const timers = [150, 500].map((ms) =>
+      setTimeout(() => {
+        document.title = title;
+      }, ms)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [pathname, locale, mounted]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);

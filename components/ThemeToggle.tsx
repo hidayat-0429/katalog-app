@@ -3,9 +3,11 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations();
   // Hindari hydration mismatch: render setelah mount
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -22,7 +24,7 @@ export default function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="w-12 h-12 flex items-center justify-center rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-stone-800 border border-neutral-200 dark:border-neutral-700 transition-colors"
-      aria-label={isDark ? "Aktifkan mode terang" : "Aktifkan mode gelap"}
+      aria-label={isDark ? t.common.lightMode : t.common.darkMode}
     >
       {isDark ? (
         <Sun className="w-5 h-5" />
