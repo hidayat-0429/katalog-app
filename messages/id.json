@@ -396,7 +396,8 @@
     "cart": "Keranjang | Etira Mushrooms",
     "login": "Masuk | Etira Mushrooms",
     "register": "Daftar | Etira Mushrooms",
-    "productNotFound": "Produk Tidak Ditemukan | Etira Mushrooms"
+    "productNotFound": "Produk Tidak Ditemukan | Etira Mushrooms",
+    "homeDescription": "Jamur olahan kaleng & pouch steril, jamur segar panen harian, dan produk pangan beku langsung dari pabrik PT Eka Timur Raya, Pasuruan."
   },
   "common": {
     "menu": "MENU",
@@ -655,6 +656,16 @@
     "cta": "Chat via WhatsApp",
     "replyTime": "Biasanya membalas dalam beberapa menit",
     "prefill": "Halo Etira Mushrooms, saya tertarik untuk mengetahui lebih lanjut tentang produk jamur Anda."
+  },
+  "notFound": {
+    "heading": "Halaman Tidak Ditemukan",
+    "description": "Maaf, halaman atau produk yang Anda cari mungkin telah dihapus, dipindahkan, atau tautannya tidak valid.",
+    "catalogCta": "Lihat Katalog"
+  },
+  "errorPage": {
+    "heading": "Terjadi Kesalahan Sistem",
+    "description": "Maaf, kami mengalami gangguan teknis saat memproses permintaan Anda. Hal ini bisa disebabkan oleh koneksi yang tidak stabil atau pembaruan sistem yang sedang berlangsung.",
+    "retry": "Coba Muat Ulang"
   }
 }
 

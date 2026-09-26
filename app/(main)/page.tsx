@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { getServerMessages } from "@/lib/serverMessages";
 import HomePageClient from "./HomePageClient";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerMessages();
+  return { title: t.metadata.default, description: t.metadata.homeDescription };
+}
 
 export default async function HomePage({
   searchParams,

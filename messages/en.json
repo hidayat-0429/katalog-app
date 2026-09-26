@@ -396,7 +396,8 @@
     "cart": "Cart | Etira Mushrooms",
     "login": "Login | Etira Mushrooms",
     "register": "Register | Etira Mushrooms",
-    "productNotFound": "Product Not Found | Etira Mushrooms"
+    "productNotFound": "Product Not Found | Etira Mushrooms",
+    "homeDescription": "Sterile canned and retort pouch mushrooms, daily-harvest fresh mushrooms, and frozen food supply direct from the PT Eka Timur Raya factory in Pasuruan."
   },
   "common": {
     "menu": "MENU",
@@ -655,6 +656,16 @@
     "cta": "Chat via WhatsApp",
     "replyTime": "Usually replies within minutes",
     "prefill": "Hello Etira Mushrooms, I would like to know more about your mushroom products."
+  },
+  "notFound": {
+    "heading": "Page Not Found",
+    "description": "Sorry, the page or product you are looking for may have been removed, moved, or the link is no longer valid.",
+    "catalogCta": "View Catalog"
+  },
+  "errorPage": {
+    "heading": "System Error",
+    "description": "Sorry, we hit a technical problem while processing your request. This can be caused by an unstable connection or a system update in progress.",
+    "retry": "Reload"
   }
 }
 

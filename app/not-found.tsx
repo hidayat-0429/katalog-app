@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { SearchX } from "lucide-react";
 import { Button } from "@/components/ui";
+import { getServerMessages } from "@/lib/serverMessages";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getServerMessages();
+
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
       <div className="w-20 h-20 bg-bg-subtle border border-border rounded-full flex items-center justify-center text-charcoal-muted mb-6">
@@ -12,18 +15,18 @@ export default function NotFound() {
         404
       </h1>
       <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-semibold text-charcoal mb-4">
-        Halaman Tidak Ditemukan
+        {t.notFound.heading}
       </h2>
       <p className="font-sans text-sm sm:text-base text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
-        Maaf, halaman atau produk yang Anda cari mungkin telah dihapus, dipindahkan, atau tautannya tidak valid.
+        {t.notFound.description}
       </p>
       
       <div className="flex gap-3 font-sans">
         <Link href="/">
-          <Button variant="primary">Kembali ke Beranda</Button>
+          <Button variant="primary">{t.common.backToHome}</Button>
         </Link>
         <Link href="/?katalog=semua">
-          <Button variant="secondary">Lihat Katalog</Button>
+          <Button variant="secondary">{t.notFound.catalogCta}</Button>
         </Link>
       </div>
     </div>

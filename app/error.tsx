@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function GlobalError({
   error,
@@ -11,6 +12,8 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations();
+
   useEffect(() => {
     // Log the error to an error reporting service if available
     console.error("Global Application Error Captured:", error);
@@ -23,17 +26,17 @@ export default function GlobalError({
       </div>
       
       <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-charcoal mb-4">
-        Terjadi Kesalahan Sistem
+        {t.errorPage.heading}
       </h1>
       
       <p className="font-sans text-sm sm:text-base text-charcoal-muted max-w-md mx-auto mb-8 leading-relaxed">
-        Maaf, kami mengalami gangguan teknis saat memproses permintaan Anda. Hal ini bisa disebabkan oleh koneksi yang tidak stabil atau pembaruan sistem yang sedang berlangsung.
+        {t.errorPage.description}
       </p>
       
       <div className="flex gap-4">
         <Button variant="primary" onClick={() => reset()} className="gap-2">
           <RefreshCw className="w-4 h-4" />
-          <span>Coba Muat Ulang</span>
+          <span>{t.errorPage.retry}</span>
         </Button>
       </div>
     </div>
