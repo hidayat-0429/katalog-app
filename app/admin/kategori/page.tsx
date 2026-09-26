@@ -42,6 +42,11 @@ export default async function AdminCategoriesPage() {
               <Input type="text" id="name" name="name" required className="w-full text-xs" placeholder="Contoh: Jamur Segar / Pouch" />
             </div>
             <div className="space-y-1">
+              <label htmlFor="nameEn" className="font-medium text-neutral-900 dark:text-neutral-100">Nama Kategori (Bahasa Inggris) - opsional</label>
+              <Input type="text" id="nameEn" name="nameEn" className="w-full text-xs" placeholder="Contoh: Fresh Mushrooms" />
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-400">Dipakai saat pengunjung memakai situs bahasa Inggris. Kosongkan bila tidak perlu.</p>
+            </div>
+            <div className="space-y-1">
               <label htmlFor="description" className="font-medium text-neutral-900 dark:text-neutral-100">Keterangan (Opsional)</label>
               <textarea id="description" name="description" className="input w-full min-h-[70px] text-xs" placeholder="Deskripsi singkat jenis produk..." />
             </div>
@@ -74,6 +79,7 @@ export default async function AdminCategoriesPage() {
                 <EditCategoryButton
                   id={category.id}
                   currentName={category.name}
+                  currentNameEn={category.nameEn}
                   currentDescription={category.description}
                 />
                 <DeleteCategoryButton id={category.id} disabled={category._count.products > 0} />

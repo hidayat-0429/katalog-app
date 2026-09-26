@@ -26,11 +26,12 @@ import HeroCinematicWrapper from '@/components/HeroCinematicWrapper';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrustBanner from '@/components/TrustBanner';
 import { useLocale } from '@/components/LocaleProvider';
-import { localizeProduct } from '@/lib/productText';
+import { localizeProduct, localizeName } from '@/lib/productText';
 
 interface Category {
   id: string;
   name: string;
+  nameEn?: string | null;
 }
 
 interface Product {
@@ -46,6 +47,7 @@ interface Product {
   updatedAt: Date;
   category: {
     name: string;
+    nameEn?: string | null;
   };
 }
 
@@ -168,7 +170,7 @@ export default function HomePageClient({
                           : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-stone-800'
                       }`}
                     >
-                      {cat.name}
+                      {localizeName(cat, locale)}
                     </Link>
                   );
                 })}
@@ -188,7 +190,7 @@ export default function HomePageClient({
                       unit={product.unit}
                       stock={product.stock}
                       imageUrl={product.imageUrl}
-                      categoryName={product.category.name}
+                      categoryName={product.category.name} categoryNameEn={product.category.nameEn}
                       createdAt={product.createdAt}
                       updatedAt={product.updatedAt}
                     />
@@ -259,7 +261,7 @@ export default function HomePageClient({
                           unit={product.unit}
                           stock={product.stock}
                           imageUrl={product.imageUrl}
-                          categoryName={product.category.name}
+                          categoryName={product.category.name} categoryNameEn={product.category.nameEn}
                           createdAt={product.createdAt}
                           updatedAt={product.updatedAt}
                         />

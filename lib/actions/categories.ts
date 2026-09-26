@@ -7,10 +7,13 @@ import { revalidatePath } from "next/cache";
 export async function createCategory(formData: FormData) {
   await requireAdmin();
   const name = String(formData.get("name") || "").trim();
+  const nameEn = String(formData.get("nameEn") || "").trim();
   const description = String(formData.get("description") || "").trim();
   if (!name) return { error: "Nama kategori wajib diisi" };
 
-  await prisma.category.create({ data: { name, description: description || null } });
+  await prisma.category.create({
+    data: { name, nameEn: nameEn || null, description: description || null },
+  });
   revalidatePath("/admin/kategori");
   revalidatePath("/");
   return { success: true };
@@ -19,6 +22,7 @@ export async function createCategory(formData: FormData) {
 export async function updateCategory(id: string, formData: FormData) {
   await requireAdmin();
   const name = String(formData.get("name") || "").trim();
+  const nameEn = String(formData.get("nameEn") || "").trim();
   const description = String(formData.get("description") || "").trim();
   if (!name) return { error: "Nama kategori wajib diisi" };
 
@@ -27,7 +31,7 @@ export async function updateCategory(id: string, formData: FormData) {
 
   await prisma.category.update({
     where: { id },
-    data: { name, description: description || null },
+    data: { name, nameEn: nameEn || null, description: description || null },
   });
   revalidatePath("/admin/kategori");
   revalidatePath("/");

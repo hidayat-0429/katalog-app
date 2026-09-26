@@ -7,14 +7,16 @@ import { updateCategory } from '@/lib/actions/categories';
 interface EditCategoryButtonProps {
   id: string;
   currentName: string;
+  currentNameEn?: string | null;
   currentDescription?: string | null;
 }
 
-export default function EditCategoryButton({ id, currentName, currentDescription }: EditCategoryButtonProps) {
+export default function EditCategoryButton({ id, currentName, currentNameEn, currentDescription }: EditCategoryButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState('');
   const [name, setName] = useState(currentName);
+  const [nameEn, setNameEn] = useState(currentNameEn || '');
   const [description, setDescription] = useState(currentDescription || '');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,6 +91,21 @@ export default function EditCategoryButton({ id, currentName, currentDescription
                   disabled={isPending}
                   className="input w-full text-xs disabled:opacity-50"
                   placeholder="Contoh: Jamur Segar / Pouch"
+                />
+              </div>
+              <div className="space-y-1">
+                <label htmlFor="edit-nameEn" className="font-medium text-neutral-900 dark:text-neutral-100">
+                  Nama Kategori (Bahasa Inggris) - opsional
+                </label>
+                <input
+                  type="text"
+                  id="edit-nameEn"
+                  name="nameEn"
+                  value={nameEn}
+                  onChange={(e) => setNameEn(e.target.value)}
+                  disabled={isPending}
+                  className="input w-full text-xs disabled:opacity-50"
+                  placeholder="Contoh: Fresh Mushrooms"
                 />
               </div>
               <div className="space-y-1">

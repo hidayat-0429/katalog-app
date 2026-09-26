@@ -9,7 +9,7 @@ import AddToCartForm from './AddToCartForm';
 import { getProductPlaceholderImage, getMinOrderText } from '@/lib/productImage';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useLocale } from '@/components/LocaleProvider';
-import { localizeProduct } from '@/lib/productText';
+import { localizeProduct, localizeName } from '@/lib/productText';
 import { Product, Category } from '@prisma/client';
 
 interface ProductDetailPageClientProps {
@@ -26,6 +26,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
   }
 
   const { name: displayName, description: displayDescription } = localizeProduct(product, locale);
+  const displayCategory = product.category ? localizeName(product.category, locale) : null;
   const displayImage = product.imageUrl || getProductPlaceholderImage(displayName, product.category?.name);
   const minOrder = getMinOrderText(product.unit, t.productCard);
 
@@ -46,7 +47,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             href={`/?katalog=semua&kategori=${product.categoryId}`}
             className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out"
           >
-            {product.category?.name || t.productDetail.breadcrumb.category}
+            {displayCategory || t.productDetail.breadcrumb.category}
           </Link>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <span className="text-neutral-900 dark:text-neutral-100 font-medium truncate">
@@ -73,7 +74,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
           <div className="flex flex-col">
             <div className="mb-6">
               <span className="font-sans text-xs font-semibold uppercase tracking-wider text-brand-forest-600 dark:text-brand-forest-400 block mb-2">
-                {product.category?.name || 'Produk Pangan'}
+                {displayCategory}
               </span>
               
               <h1 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4 leading-snug">

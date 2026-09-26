@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ChefHat } from "lucide-react";
 import { formatRupiah } from "@/lib/format";
 import { getProductPlaceholderImage, getMinOrderText } from "@/lib/productImage";
+import { localizeName } from "@/lib/productText";
+import { useLocale } from "@/components/LocaleProvider";
 import { useTranslations } from "@/hooks/useTranslations";
 
 // Smart context mapping based on product name
@@ -46,6 +48,7 @@ interface ProductCardProps {
   stock: number;
   imageUrl: string | null;
   categoryName: string;
+  categoryNameEn?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }
@@ -58,13 +61,16 @@ export default function ProductCard({
   stock,
   imageUrl,
   categoryName,
+  categoryNameEn,
 }: ProductCardProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const isOutOfStock = stock === 0;
   const isLowStock = stock > 0 && stock <= 10;
   const displayImage = imageUrl || getProductPlaceholderImage(name, categoryName);
   const minOrder = getMinOrderText(unit, t.productCard);
   const usageContext = getUsageContext(name, categoryName, t);
+  const displayCategory = localizeName({ name: categoryName, nameEn: categoryNameEn }, locale);
 
   return (
     <Link
@@ -85,7 +91,7 @@ export default function ProductCard({
         {/* Top-left: Category Badge */}
         <div className="absolute top-2.5 left-2.5">
           <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-200 border border-neutral-200/80 dark:border-neutral-700/80 backdrop-blur-xs shadow-xs">
-            {categoryName}
+            {displayCategory}
           </span>
         </div>
 
