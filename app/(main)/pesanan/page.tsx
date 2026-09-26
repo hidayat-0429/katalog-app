@@ -19,7 +19,9 @@ export default async function PesananPage({
 }) {
   const user = await requireUser();
   const { status, page } = await searchParams;
-  const currentStatus = status || "SEMUA";
+  // Nilai status datang dari URL, jadi wajib salah satu enum atau SEMUA
+  const currentStatus =
+    status && (Object.values(OrderStatus) as string[]).includes(status) ? status : "SEMUA";
   const currentPage = Math.max(1, Number(page) || 1);
 
   const where =

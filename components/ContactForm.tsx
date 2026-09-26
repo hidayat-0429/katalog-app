@@ -12,6 +12,8 @@ interface ContactFormData {
   phone: string;
   subject: string;
   message: string;
+  // Umpan bot: kolom ini tidak pernah ditampilkan ke manusia
+  website: string;
 }
 
 const EMPTY_FORM: ContactFormData = {
@@ -21,6 +23,7 @@ const EMPTY_FORM: ContactFormData = {
   phone: '',
   subject: '',
   message: '',
+  website: '',
 };
 
 const SUBJECT_OPTIONS = ['inquiry', 'bulkOrder', 'partnership', 'technical', 'other'] as const;
@@ -106,6 +109,19 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.website}
+          onChange={handleChange}
+        />
+      </div>
+
       {/* Status Messages */}
       {submitStatus === 'success' && (
         <div className="p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-lg flex items-start gap-3">

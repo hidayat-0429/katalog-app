@@ -4,7 +4,19 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 import { OrderStatus } from "@prisma/client";
+import { statusLabel } from "@/lib/format";
 import { getServerMessages } from "@/lib/serverMessages";
+
+const ALLOWED_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
+  PENDING: ["DIPROSES", "DIBATALKAN"],
+  DIPROSES: ["DIKIRIM", "DIBATALKAN"],
+  DIKIRIM: ["SELESAI"],
+  SELESAI: [],
+  DIBATALKAN: [],
+};
+
+// Barang yang sudah diberangkatkan tidak boleh kembali dihitung sebagai stok
+const RESTOCKABLE_STATUSES: OrderStatus[] = ["PENDING", "DIPROSES"];
 
 export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   await requireAdmin();
@@ -19,12 +31,20 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
       throw new Error("Pesanan tidak ditemukan");
     }
 
-    if (order.status === "DIBATALKAN") {
-      throw new Error("Pesanan yang sudah dibatalkan tidak dapat diubah statusnya lagi");
+    if (!ALLOWED_TRANSITIONS[order.status].includes(status)) {
+      throw new Error(`Pesanan berstatus ${statusLabel(order.status)} tidak bisa diubah ke ${statusLabel(status)}`);
     }
 
-    // Jika admin membatalkan pesanan, kembalikan stok barang ke gudang
-    if (status === "DIBATALKAN") {
+    // Ambil transisinya secara atomik supaya dua admin tidak sama-sama mengembalikan stok
+    const { count } = await tx.order.updateMany({
+      where: { id: orderId, status: order.status },
+      data: { status },
+    });
+    if (count === 0) {
+      throw new Error("Status pesanan baru saja diubah, muat ulang halaman ini");
+    }
+
+    if (status === "DIBATALKAN" && RESTOCKABLE_STATUSES.includes(order.status)) {
       for (const item of order.items) {
         await tx.product.update({
           where: { id: item.productId },
@@ -32,11 +52,6 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
         });
       }
     }
-
-    await tx.order.update({
-      where: { id: orderId },
-      data: { status },
-    });
   });
 
   revalidatePath("/admin/pesanan");
@@ -53,24 +68,26 @@ export async function cancelOrder(orderId: string) {
 
   try {
     await prisma.$transaction(async (tx) => {
+      // Klaim pembatalannya bersyarat supaya dua klik tidak sama-sama mengembalikan stok
+      const { count } = await tx.order.updateMany({
+        where: { id: orderId, userId: user.id, status: "PENDING" },
+        data: { status: "DIBATALKAN" },
+      });
+
+      if (count === 0) {
+        const existing = await tx.order.findUnique({ where: { id: orderId } });
+        if (!existing || existing.userId !== user.id) {
+          throw new Error(t.server.orderNotFound);
+        }
+        throw new Error(t.server.orderAlreadyProcessed);
+      }
+
       const order = await tx.order.findUnique({
         where: { id: orderId },
         include: { items: true },
       });
 
-      if (!order || order.userId !== user.id) {
-        throw new Error(t.server.orderNotFound);
-      }
-      if (order.status !== "PENDING") {
-        throw new Error(t.server.orderAlreadyProcessed);
-      }
-
-      await tx.order.update({
-        where: { id: orderId },
-        data: { status: "DIBATALKAN" },
-      });
-
-      for (const item of order.items) {
+      for (const item of order?.items ?? []) {
         await tx.product.update({
           where: { id: item.productId },
           data: { stock: { increment: item.quantity } },

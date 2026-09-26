@@ -14,8 +14,10 @@ export default async function AdminOrdersPage({
   searchParams: Promise<{ status?: string, page?: string }>
 }) {
   const { status, page } = await searchParams;
-  const currentStatus = status || 'SEMUA'
-  const currentPage = Number(page) || 1;
+  // Nilai status datang dari URL, jadi wajib salah satu enum atau SEMUA
+  const currentStatus =
+    status && (Object.values(OrderStatus) as string[]).includes(status) ? status : 'SEMUA'
+  const currentPage = Number.isInteger(Number(page)) && Number(page) > 0 ? Number(page) : 1;
   
   const where = currentStatus !== 'SEMUA' 
     ? { status: currentStatus as OrderStatus } 

@@ -46,17 +46,25 @@ export async function registerUser(formData: FormData) {
   }
 
   const hashed = await bcrypt.hash(parsed.data.password, 10);
-  await prisma.user.create({
-    data: {
-      name: parsed.data.name,
-      email: parsed.data.email,
-      password: hashed,
-      companyName: parsed.data.companyName,
-      phone: parsed.data.phone,
-      address: parsed.data.address,
-      role: "BUYER",
-    },
-  });
+  try {
+    await prisma.user.create({
+      data: {
+        name: parsed.data.name,
+        email: parsed.data.email,
+        password: hashed,
+        companyName: parsed.data.companyName,
+        phone: parsed.data.phone,
+        address: parsed.data.address,
+        role: "BUYER",
+      },
+    });
+  } catch (err: any) {
+    // Dua pendaftaran bersamaan lolos cek findUnique di atas; index unik yang menghentikan yang kedua
+    if (err?.code === "P2002") {
+      return { error: t.server.emailTaken };
+    }
+    return { error: t.server.unexpected };
+  }
 
   return { success: true };
 }

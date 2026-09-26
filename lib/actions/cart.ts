@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getServerMessages } from "@/lib/serverMessages";
 import { formatText } from "@/lib/productText";
+import { SHIPPING_METHODS, fleetLabelKey } from "@/lib/orderNotes";
 
 export async function addToCart(productId: string, quantity: number) {
   const user = await requireUser();
@@ -72,9 +73,11 @@ export async function checkout(formData: FormData) {
   const user = await prisma.user.findUnique({ where: { id: sessionUser.id } });
   if (!user) return { error: t.server.userNotFound };
 
-  const shippingAddress = String(formData.get("shippingAddress") || "").trim();
-  const shippingMethod = String(formData.get("shippingMethod") || "Armada Truk Berpendingin (Cold Chain)").trim();
-  const rawNotes = String(formData.get("notes") || "").trim();
+  const shippingAddress = String(formData.get("shippingAddress") || "").trim().slice(0, 500);
+  const rawShippingMethod = String(formData.get("shippingMethod") || "").trim();
+  // Nilai armada tersimpan apa adanya di dalam Order.notes, jadi hanya terima tiga pilihan bawaan.
+  const shippingMethod = fleetLabelKey(rawShippingMethod) ? rawShippingMethod : SHIPPING_METHODS[0].value;
+  const rawNotes = String(formData.get("notes") || "").trim().slice(0, 1000);
   const notes = `[Armada: ${shippingMethod}]${rawNotes ? ` - Catatan: ${rawNotes}` : ""}`;
 
   if (!shippingAddress) return { error: t.server.addressRequired };
@@ -105,11 +108,15 @@ export async function checkout(formData: FormData) {
   let orderId: string;
   try {
     const order = await prisma.$transaction(async (tx) => {
-      // Re-verifikasi stok di dalam transaksi agar aman dari race conditions
+      // Kunci stok lebih dulu: updateMany bersyarat gagal kalau dua pesanan merebut stok yang sama,
+      // dan error di bawah me-rollback semua pengurangan yang sudah sukses.
       for (const item of cartItems) {
-        const freshProduct = await tx.product.findUnique({ where: { id: item.productId } });
-        if (!freshProduct || freshProduct.stock < item.quantity) {
-          throw new Error(formatText(t.server.insufficientStockDuringOrder, { name: freshProduct?.name ?? t.server.fallbackProduct }));
+        const { count } = await tx.product.updateMany({
+          where: { id: item.productId, stock: { gte: item.quantity } },
+          data: { stock: { decrement: item.quantity } },
+        });
+        if (count === 0) {
+          throw new Error(formatText(t.server.insufficientStockDuringOrder, { name: item.product.name }));
         }
       }
 
@@ -135,13 +142,6 @@ export async function checkout(formData: FormData) {
           },
         },
       });
-
-      for (const item of cartItems) {
-        await tx.product.update({
-          where: { id: item.productId },
-          data: { stock: { decrement: item.quantity } },
-        });
-      }
 
       await tx.cart.deleteMany({ where: { userId: user.id } });
 
