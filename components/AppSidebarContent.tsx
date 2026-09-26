@@ -7,16 +7,16 @@ import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
 import NavLinkActive from "@/components/NavLinkActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { Suspense } from "react";
 import { useLocale } from "@/components/LocaleProvider";
 import idMessages from "@/messages/id.json";
 import enMessages from "@/messages/en.json";
 
 export interface AppSidebarContentProps {
   user: any;
+  cartCount?: number;
 }
 
-export default function AppSidebarContent({ user }: AppSidebarContentProps) {
+export default function AppSidebarContent({ user, cartCount = 0 }: AppSidebarContentProps) {
   const locale = useLocale();
   const messages = locale === 'en' ? enMessages : idMessages;
   const nav = messages.nav;
@@ -60,11 +60,7 @@ export default function AppSidebarContent({ user }: AppSidebarContentProps) {
             href="/keranjang"
             icon={<ShoppingCart className="w-4 h-4" />}
             label={nav.cart}
-            badge={
-              <Suspense fallback={null}>
-                <CartBadge userId={user.id} />
-              </Suspense>
-            }
+            badge={<CartBadge count={cartCount} />}
           />
           <NavLinkActive href="/pesanan" icon={<ClipboardList className="w-4 h-4" />} label={nav.orders} />
           <NavLinkActive href="/profil" icon={<User className="w-4 h-4" />} label={nav.profile} />
