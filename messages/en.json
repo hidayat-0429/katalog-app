@@ -207,18 +207,18 @@
       },
       {
         "group": "ordering",
-        "q": "Where can I buy these products?",
-        "a": "Retail variants such as Etira Mushroom Whole and Slice are available online through marketplaces like Shopee and Tokopedia via our resellers. For B2B wholesale orders, please contact our sales team directly."
+        "q": "How do I place an order for my business?",
+        "a": "B2B orders go straight through this catalog: pick your products, set the volume, then confirm on WhatsApp. Our team prepares the invoice and schedules the delivery. Retail packs are also available through authorized resellers on marketplaces."
       },
       {
         "group": "ordering",
-        "q": "What is the price range?",
-        "a": "Small size (250 g): roughly Rp16,500–Rp21,500. Large size (900 g): roughly Rp39,900–Rp51,000. For wholesale orders above 20 kg we offer more competitive B2B pricing."
+        "q": "How is pricing structured?",
+        "a": "Prices shown in the catalog are B2B supply prices per unit with a stated minimum order. Tiered pricing is available for larger volumes; contact our team for a quote based on your commodities and supply schedule."
       },
       {
         "group": "ordering",
-        "q": "What are the conditions for complaints on online purchases?",
-        "a": "Most retail stores require claims within 24 hours of delivery, supported by a photo of the physical shipping label and an unboxing video as valid evidence. For B2B purchases, contact our customer service with product photos as documentation."
+        "q": "What should I do if there is an issue with my delivery?",
+        "a": "Contact our customer service as soon as the goods arrive, including your order or invoice number and product photos as documentation. Our operations team will follow it up with you."
       },
       {
         "group": "ordering",

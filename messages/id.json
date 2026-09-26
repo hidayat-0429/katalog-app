@@ -207,18 +207,18 @@
       },
       {
         "group": "ordering",
-        "q": "Di mana produk ini bisa dibeli?",
-        "a": "Varian eceran seperti Etira Mushroom Whole atau Etira Mushroom Slice tersedia secara online di marketplace seperti Shopee dan Tokopedia melalui berbagai reseller. Untuk pembelian grosir B2B, silakan hubungi tim sales kami langsung."
+        "q": "Bagaimana cara melakukan pemesanan untuk bisnis saya?",
+        "a": "Pemesanan B2B dilakukan langsung melalui katalog ini: pilih produk, tentukan volume, lalu konfirmasi lewat WhatsApp. Tim kami memproses faktur dan menjadwalkan pengirimannya. Varian eceran juga tersedia lewat reseller resmi di marketplace."
       },
       {
         "group": "ordering",
-        "q": "Berapa kisaran harganya?",
-        "a": "Ukuran kecil (250 gram): Kisaran Rp16.500 - Rp21.500. Ukuran besar (900 gram): Kisaran Rp39.900 - Rp51.000. Untuk pembelian grosir di atas 20kg, kami menawarkan harga khusus B2B yang lebih kompetitif."
+        "q": "Bagaimana struktur harganya?",
+        "a": "Semua harga yang tampil di katalog adalah harga pasok B2B per satuan dengan minimum order tertentu. Penawaran bertingkat tersedia untuk volume besar; hubungi tim kami untuk estimasi sesuai komoditas dan jadwal pasok Anda."
       },
       {
         "group": "ordering",
-        "q": "Apa syarat mengajukan komplain jika membeli secara online?",
-        "a": "Mayoritas toko retail mewajibkan klaim diajukan maksimal 24 jam sejak paket diterima, lengkap dengan foto resi fisik serta video unboxing sebagai bukti sah. Untuk pembelian B2B, hubungi customer service kami dengan foto produk sebagai dokumentasi."
+        "q": "Bagaimana jika ada masalah dengan pengiriman saya?",
+        "a": "Hubungi customer service kami segera setelah barang diterima, sertakan nomor pesanan atau faktur beserta foto produk sebagai dokumentasi. Tim operasional kami akan menindaklanjutinya bersama Anda."
       },
       {
         "group": "ordering",
