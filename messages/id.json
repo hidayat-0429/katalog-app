@@ -17,7 +17,60 @@
     "subtitle": "untuk Dapur Profesional",
     "description": "Partner terpercaya 500+ restoran premium di Indonesia. Dari jamur segar grade A hingga olahan siap pakai dipanen pagi, tiba same-day dengan cold chain berstandar internasional.",
     "cta1": "Lihat Katalog Produk",
-    "cta2": "Hubungi Kami"
+    "cta2": "Hubungi Kami",
+    "imageAlt": "Jamur segar PT Eka Timur Raya",
+    "statusBadge": "Sejak 1999 · HACCP Certified · 500+ Clients",
+    "statPartners": "Mitra Horeka",
+    "statCapacity": "Kapasitas/Bulan",
+    "statFreshness": "Kesegaran Terjamin",
+    "statExperience": "Pengalaman",
+    "statTon": " ton",
+    "statHour": " jam",
+    "statYear": " tahun"
+  },
+  "trustBanner": {
+    "eyebrow": "Dipercaya oleh 500+ Bisnis Kuliner",
+    "title": "Partner Terpercaya Industri F&B",
+    "certLabel": "Sertifikasi Internasional",
+    "certText": "Semua produk diproses dengan standar keamanan pangan internasional dan bersertifikat halal untuk pasar premium Indonesia."
+  },
+  "features": {
+    "eyebrow": "Mengapa Memilih Etira",
+    "title": "Keunggulan untuk Bisnis Anda",
+    "subtitle": "Solusi pasokan jamur terpadu untuk restoran, hotel, catering, dan industri kuliner dengan standar kualitas tertinggi.",
+    "haccpTitle": "HACCP Certified",
+    "haccpDesc": "Standar keamanan pangan internasional untuk pasar premium",
+    "deliveryTitle": "Same-Day Delivery",
+    "deliveryDesc": "Dipanen pagi, tiba hari ini dengan cold chain terjamin",
+    "pricingTitle": "Bulk Pricing",
+    "pricingDesc": "Harga khusus untuk pembelian volume dengan tier discount",
+    "experienceTitle": "25+ Tahun Pengalaman",
+    "experienceDesc": "Partner terpercaya sejak 1999 untuk industri F&B Indonesia",
+    "ctaTitle": "Butuh pasokan dalam jumlah besar?",
+    "ctaDesc": "Hubungi tim kami untuk konsultasi harga khusus dan sample produk gratis.",
+    "ctaButton": "Konsultasi Sekarang"
+  },
+  "productCard": {
+    "available": "Tersedia",
+    "outOfStock": "Stok Habis",
+    "soldOutOverlay": "Persediaan Habis",
+    "remainingPrefix": "Sisa",
+    "remainingSuffix": "",
+    "supplyPrice": "Harga Pasokan",
+    "order": "Pesan",
+    "detailLabel": "Detail produk",
+    "moqCans": "Min. order 24 kaleng (1 karton)",
+    "moqPouches": "Min. order 20 pouch (1 dus)",
+    "moqPacks": "Min. order 10 pack (1 karton)",
+    "moqKg": "Min. order 10 kg",
+    "moqPrefix": "Min. order",
+    "usageChampignon": "Ideal untuk Pizza & Pasta",
+    "usageProcessed": "Siap Goreng & Sajikan"
+  },
+  "pagination": {
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "ariaLabel": "Navigasi halaman"
   },
   "catalog": {
     "title": "Katalog Produk",
@@ -207,7 +260,18 @@
     "about": "Tentang",
     "contact": "Kontak",
     "faq": "FAQ",
-    "allRightsReserved": "Semua hak dilindungi"
+    "allRightsReserved": "Semua hak dilindungi",
+    "description": "Produsen dan pemasok terpercaya jamur kancing segar, olahan kaleng steril, pouch retort, dan produk beku untuk industri kuliner dan Horeka di seluruh Indonesia.",
+    "navigation": "Navigasi",
+    "catalogProduct": "Katalog Produk",
+    "aboutCompany": "Tentang Perusahaan",
+    "contactOrder": "Kontak & Pemesanan",
+    "faqLink": "Pertanyaan Umum (FAQ)",
+    "partnerPortal": "Portal Masuk Mitra",
+    "officeTitle": "Kantor & Fasilitas",
+    "contactTitle": "Kontak",
+    "copyright": "Seluruh hak cipta dilindungi.",
+    "tagline": "Pasokan Langsung Pabrik & Perkebunan Jamur"
   },
   "common": {
     "menu": "MENU",

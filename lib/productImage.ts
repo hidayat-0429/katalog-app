@@ -12,13 +12,16 @@ export function getProductPlaceholderImage(name: string, categoryName?: string |
 /**
  * Returns Minimum Order Quantity (MOQ) text based on product unit
  */
-export function getMinOrderText(unit: string): string {
+export function getMinOrderText(
+  unit: string,
+  t?: { moqCans: string; moqPouches: string; moqPacks: string; moqKg: string; moqPrefix: string }
+): string {
   const u = (unit || '').toLowerCase();
-  if (u.includes('kaleng')) return 'Min. order 24 kaleng (1 karton)';
-  if (u.includes('pouch')) return 'Min. order 20 pouch (1 dus)';
-  if (u.includes('pack')) return 'Min. order 10 pack (1 karton)';
-  if (u.includes('kg')) return 'Min. order 10 kg';
-  return `Min. order 12 ${unit || 'unit'}`;
+  if (u.includes('kaleng')) return t?.moqCans ?? 'Min. order 24 kaleng (1 karton)';
+  if (u.includes('pouch')) return t?.moqPouches ?? 'Min. order 20 pouch (1 dus)';
+  if (u.includes('pack')) return t?.moqPacks ?? 'Min. order 10 pack (1 karton)';
+  if (u.includes('kg')) return t?.moqKg ?? 'Min. order 10 kg';
+  return `${t?.moqPrefix ?? 'Min. order'} 12 ${unit || 'unit'}`;
 }
 
 /**

@@ -17,7 +17,60 @@
     "subtitle": "for Professional Kitchens",
     "description": "Trusted partner to 500+ premium restaurants in Indonesia. From grade A fresh mushrooms to ready-to-use preparations harvested in the morning, same-day delivery with international standard cold chain.",
     "cta1": "View Product Catalog",
-    "cta2": "Contact Us"
+    "cta2": "Contact Us",
+    "imageAlt": "Fresh mushrooms from PT Eka Timur Raya",
+    "statusBadge": "Since 1999 · HACCP Certified · 500+ Clients",
+    "statPartners": "HoReCa Partners",
+    "statCapacity": "Capacity/Month",
+    "statFreshness": "Freshness Guaranteed",
+    "statExperience": "Experience",
+    "statTon": " tons",
+    "statHour": " hrs",
+    "statYear": " yrs"
+  },
+  "trustBanner": {
+    "eyebrow": "Trusted by 500+ Culinary Businesses",
+    "title": "Trusted Partner in the F&B Industry",
+    "certLabel": "International Certifications",
+    "certText": "All products are processed to international food safety standards and are halal-certified for the premium Indonesian market."
+  },
+  "features": {
+    "eyebrow": "Why Choose Etira",
+    "title": "Advantages for Your Business",
+    "subtitle": "An integrated mushroom supply solution for restaurants, hotels, catering, and the culinary industry with the highest quality standards.",
+    "haccpTitle": "HACCP Certified",
+    "haccpDesc": "International food safety standards for the premium market",
+    "deliveryTitle": "Same-Day Delivery",
+    "deliveryDesc": "Harvested in the morning, arriving today with a guaranteed cold chain",
+    "pricingTitle": "Bulk Pricing",
+    "pricingDesc": "Special pricing for volume purchases with tiered discounts",
+    "experienceTitle": "25+ Years of Experience",
+    "experienceDesc": "A trusted partner since 1999 for Indonesia's F&B industry",
+    "ctaTitle": "Need supplies in large volumes?",
+    "ctaDesc": "Contact our team for special pricing consultation and free product samples.",
+    "ctaButton": "Consult Now"
+  },
+  "productCard": {
+    "available": "In Stock",
+    "outOfStock": "Out of Stock",
+    "soldOutOverlay": "Sold Out",
+    "remainingPrefix": "Only",
+    "remainingSuffix": "left",
+    "supplyPrice": "Supply Price",
+    "order": "Order",
+    "detailLabel": "Product detail",
+    "moqCans": "Min. order 24 cans (1 carton)",
+    "moqPouches": "Min. order 20 pouches (1 box)",
+    "moqPacks": "Min. order 10 packs (1 carton)",
+    "moqKg": "Min. order 10 kg",
+    "moqPrefix": "Min. order",
+    "usageChampignon": "Ideal for Pizza & Pasta",
+    "usageProcessed": "Ready to Fry & Serve"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "ariaLabel": "Page navigation"
   },
   "catalog": {
     "title": "Product Catalog",
@@ -207,7 +260,18 @@
     "about": "About",
     "contact": "Contact",
     "faq": "FAQ",
-    "allRightsReserved": "All rights reserved"
+    "allRightsReserved": "All rights reserved",
+    "description": "A trusted producer and supplier of fresh button mushrooms, sterile canned products, retort pouches, and frozen goods for the culinary and HoReCa industries across Indonesia.",
+    "navigation": "Navigation",
+    "catalogProduct": "Product Catalog",
+    "aboutCompany": "About the Company",
+    "contactOrder": "Contact & Orders",
+    "faqLink": "Frequently Asked Questions (FAQ)",
+    "partnerPortal": "Partner Login Portal",
+    "officeTitle": "Office & Facilities",
+    "contactTitle": "Contact",
+    "copyright": "All rights reserved.",
+    "tagline": "Direct Supply from Factory & Mushroom Farms"
   },
   "common": {
     "menu": "MENU",

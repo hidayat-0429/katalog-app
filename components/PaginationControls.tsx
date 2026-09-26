@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface PaginationControlsProps {
   currentPage: number;
@@ -9,6 +10,7 @@ interface PaginationControlsProps {
 }
 
 export default function PaginationControls({ currentPage, totalPages }: PaginationControlsProps) {
+  const t = useTranslations();
   const searchParams = useSearchParams();
   const baseParams = new URLSearchParams(searchParams?.toString() ?? "");
   baseParams.delete("page");
@@ -47,16 +49,16 @@ export default function PaginationControls({ currentPage, totalPages }: Paginati
   const btnNav = `${btnBase} bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:bg-neutral-800/50 gap-2 px-4`;
 
   return (
-    <nav aria-label="Navigasi halaman" className="flex items-center gap-1.5 flex-wrap justify-center">
+    <nav aria-label={t.pagination.ariaLabel} className="flex items-center gap-1.5 flex-wrap justify-center">
       {currentPage > 1 ? (
         <Link href={buildHref(currentPage - 1)} className={btnNav}>
           <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Sebelumnya</span>
+          <span className="hidden sm:inline">{t.pagination.previous}</span>
         </Link>
       ) : (
         <span className={btnDisabled}>
           <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Sebelumnya</span>
+          <span className="hidden sm:inline">{t.pagination.previous}</span>
         </span>
       )}
 
@@ -77,12 +79,12 @@ export default function PaginationControls({ currentPage, totalPages }: Paginati
 
       {currentPage < totalPages ? (
         <Link href={buildHref(currentPage + 1)} className={btnNav}>
-          <span className="hidden sm:inline">Berikutnya</span>
+          <span className="hidden sm:inline">{t.pagination.next}</span>
           <ChevronRight className="w-4 h-4" />
         </Link>
       ) : (
         <span className={btnDisabled}>
-          <span className="hidden sm:inline">Berikutnya</span>
+          <span className="hidden sm:inline">{t.pagination.next}</span>
           <ChevronRight className="w-4 h-4" />
         </span>
       )}

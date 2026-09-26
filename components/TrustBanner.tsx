@@ -1,6 +1,11 @@
+"use client";
+
 import { ShieldCheck, Award, Users } from "lucide-react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function TrustBanner() {
+  const t = useTranslations();
+
   const clients = [
     { name: "Premium Restaurant Co.", category: "Fine Dining" },
     { name: "Culinary Group Asia", category: "Multi-concept" },
@@ -25,11 +30,11 @@ export default function TrustBanner() {
           <div className="inline-flex items-center gap-2 mb-3">
             <Users className="w-5 h-5 text-brand-forest-600 dark:text-brand-forest-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Dipercaya oleh 500+ Bisnis Kuliner
+              {t.trustBanner.eyebrow}
             </span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Partner Terpercaya Industri F&amp;B
+            {t.trustBanner.title}
           </h2>
         </div>
 
@@ -60,7 +65,7 @@ export default function TrustBanner() {
           <div className="inline-flex items-center gap-2 mb-4">
             <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400" />
             <span className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
-              Sertifikasi Internasional
+              {t.trustBanner.certLabel}
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -75,7 +80,7 @@ export default function TrustBanner() {
             ))}
           </div>
           <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-4 text-center max-w-2xl">
-            Semua produk diproses dengan standar keamanan pangan internasional dan bersertifikat halal untuk pasar premium Indonesia.
+            {t.trustBanner.certText}
           </p>
         </div>
 

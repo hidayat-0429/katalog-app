@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, PackageSearch, Clock, Medal } from "lucide-react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface StatItem {
   value: string;
@@ -12,13 +13,6 @@ interface StatItem {
   label: string;
   icon: React.ElementType;
 }
-
-const STATS: StatItem[] = [
-  { value: "500", numericValue: 500, suffix: "+", label: "Mitra Horeka", icon: Building2 },
-  { value: "50", numericValue: 50, suffix: " ton", label: "Kapasitas/Bulan", icon: PackageSearch },
-  { value: "24", numericValue: 24, suffix: " jam", label: "Kesegaran Terjamin", icon: Clock },
-  { value: "25", numericValue: 25, suffix: " tahun", label: "Pengalaman", icon: Medal },
-];
 
 function AnimatedCounter({
   target,
@@ -74,6 +68,15 @@ export default function HeroCinematic({
   cta1Text = "Lihat Katalog Produk",
   cta2Text = "Hubungi Kami"
 }: HeroCinematicProps = {}) {
+  const t = useTranslations();
+
+  const STATS: StatItem[] = [
+    { value: "500", numericValue: 500, suffix: "+", label: t.hero.statPartners, icon: Building2 },
+    { value: "50", numericValue: 50, suffix: t.hero.statTon, label: t.hero.statCapacity, icon: PackageSearch },
+    { value: "24", numericValue: 24, suffix: t.hero.statHour, label: t.hero.statFreshness, icon: Clock },
+    { value: "25", numericValue: 25, suffix: t.hero.statYear, label: t.hero.statExperience, icon: Medal },
+  ];
+
   const heroRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -126,7 +129,7 @@ export default function HeroCinematic({
         >
           <Image
             src="/og-image.png"
-            alt="Jamur segar PT Eka Timur Raya"
+            alt={t.hero.imageAlt}
             fill
             priority
             sizes="100vw"
@@ -178,7 +181,7 @@ export default function HeroCinematic({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-fresh-400" />
             </span>
             <span className="text-xs font-medium text-white/50 tracking-wide">
-              Sejak 1999 &nbsp;·&nbsp; HACCP Certified &nbsp;·&nbsp; 500+ Clients
+              {t.hero.statusBadge}
             </span>
           </div>
 

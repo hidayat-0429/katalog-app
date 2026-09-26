@@ -23,7 +23,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
   }
 
   const displayImage = product.imageUrl || getProductPlaceholderImage(product.name, product.category?.name);
-  const minOrder = getMinOrderText(product.unit);
+  const minOrder = getMinOrderText(product.unit, t.productCard);
 
   return (
     <div className="w-full px-6 sm:px-8 lg:px-16">
