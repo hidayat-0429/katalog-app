@@ -1,12 +1,68 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 import { getServerMessages } from "@/lib/serverMessages";
 import HomePageClient from "./HomePageClient";
+
+type ProductWithCategory = Prisma.ProductGetPayload<{ include: { category: true } }>;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerMessages();
   return { title: t.metadata.default, description: t.metadata.homeDescription };
+}
+
+const LIMIT = 12;
+
+// Tiap perjalanan ke database remote butuh ±175 ms, jadi data beranda — yang
+// isinya sama untuk semua pengunjung — diambil dari cache. Aksi produk,
+// kategori, dan pesanan memanggil revalidateTag("beranda") saat mengubah data.
+const getHomeHighlights = unstable_cache(
+  async () => {
+    const [totalCount, products, featuredProducts] = await Promise.all([
+      prisma.product.count({ where: { isActive: true } }),
+      prisma.product.findMany({
+        where: { isActive: true },
+        include: { category: true },
+        orderBy: { createdAt: "desc" },
+        take: 4,
+      }),
+      prisma.product.findMany({
+        where: { isActive: true, isFeatured: true },
+        include: { category: true },
+        take: 4,
+      }),
+    ]);
+    return { totalCount, products, featuredProducts };
+  },
+  ["home-highlights"],
+  { revalidate: 120, tags: ["beranda"] }
+);
+
+const getCategories = unstable_cache(
+  () => prisma.category.findMany({ orderBy: { name: "asc" } }),
+  ["product-categories"],
+  { revalidate: 600, tags: ["beranda"] }
+);
+
+// Mode katalog punya hasil berbeda per kombinasi filter + halaman, jadi tidak di-cache.
+async function loadCatalogPage(where: Prisma.ProductWhereInput, rawPage?: string) {
+  const totalCount = await prisma.product.count({ where });
+  const totalPages = Math.max(Math.ceil(totalCount / LIMIT), 1);
+
+  const parsed = Number(rawPage);
+  const requestedPage = Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
+  const safePage = Math.min(requestedPage, totalPages);
+
+  const products = await prisma.product.findMany({
+    where,
+    include: { category: true },
+    orderBy: { createdAt: "desc" },
+    skip: (safePage - 1) * LIMIT,
+    take: LIMIT,
+  });
+
+  return { totalCount, totalPages, safePage, products };
 }
 
 export default async function HomePage({
@@ -35,46 +91,28 @@ export default async function HomePage({
   if (categoryId) whereClause.categoryId = categoryId;
   if (q) whereClause.name = { contains: q, mode: "insensitive" };
 
-  const orderByClause: Prisma.ProductOrderByWithRelationInput = { createdAt: "desc" };
-
-  const limit = 12;
-  const totalCount = await prisma.product.count({ where: whereClause });
-  const totalPages = Math.max(Math.ceil(totalCount / limit), 1);
-
-  const rawPage = Number(resolvedSearchParams.page);
-  const requestedPage = Number.isInteger(rawPage) && rawPage > 0 ? rawPage : 1;
-  const safePage = Math.min(requestedPage, totalPages);
-  const skip = (safePage - 1) * limit;
-
-  const [categories, products, featuredProducts] = await Promise.all([
-    prisma.category.findMany({ orderBy: { name: "asc" } }),
-    prisma.product.findMany({
-      where: whereClause,
-      include: { category: true },
-      orderBy: orderByClause,
-      skip: isCatalogMode ? skip : 0,
-      take: isCatalogMode ? limit : 4,
-    }),
-    !isCatalogMode
-      ? prisma.product.findMany({
-          where: { isActive: true, isFeatured: true },
-          include: { category: true },
-          take: 4,
-        })
-      : Promise.resolve([]),
+  const [categories, data] = await Promise.all([
+    getCategories(),
+    isCatalogMode
+      ? loadCatalogPage(whereClause, resolvedSearchParams.page).then((d) => ({
+          ...d,
+          featuredProducts: [] as ProductWithCategory[],
+        }))
+      : getHomeHighlights().then((d) => ({ ...d, safePage: 1, totalPages: 1 })),
   ]);
 
-  const curatedProducts = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 4);
+  const curatedProducts =
+    data.featuredProducts.length > 0 ? data.featuredProducts : data.products.slice(0, 4);
 
   return (
     <HomePageClient
       isCatalogMode={isCatalogMode}
       categories={categories}
-      products={products}
+      products={data.products}
       curatedProducts={curatedProducts}
-      totalCount={totalCount}
-      safePage={safePage}
-      totalPages={totalPages}
+      totalCount={data.totalCount}
+      safePage={data.safePage}
+      totalPages={data.totalPages}
       q={q}
       categoryId={categoryId}
     />

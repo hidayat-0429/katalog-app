@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { cache } from 'react';
 import { getCurrentUser } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
 import { getServerLocale, getServerMessages } from '@/lib/serverMessages';
@@ -11,12 +12,16 @@ interface ProductDetailPageProps {
   }>;
 }
 
+// Metadata dan body halaman ini sama-sama butuh produk yang sama; cache() membuat
+// satu permintaan per pengunjung, bukan dua perjalanan ke database.
+const findProduct = cache((id: string) =>
+  prisma.product.findUnique({ where: { id }, include: { category: true } })
+);
+
 export async function generateMetadata({ params }: ProductDetailPageProps) {
   const { id } = await params;
   const [t, locale] = await Promise.all([getServerMessages(), getServerLocale()]);
-  const product = await prisma.product.findUnique({
-    where: { id },
-  });
+  const product = await findProduct(id);
 
   if (!product || !product.isActive) {
     return {
@@ -53,10 +58,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   const user = await getCurrentUser();
   const { id } = await params;
 
-  const product = await prisma.product.findUnique({
-    where: { id },
-    include: { category: true },
-  });
+  const product = await findProduct(id);
 
   if (!product || !product.isActive) {
     notFound();

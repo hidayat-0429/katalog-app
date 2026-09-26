@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/session";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -61,6 +61,7 @@ export async function createProduct(formData: FormData) {
   await prisma.product.create({ data: parsed.data });
   revalidatePath("/admin/produk");
   revalidatePath("/");
+  revalidateTag("beranda");
   redirect("/admin/produk");
 }
 
@@ -97,6 +98,7 @@ export async function updateProduct(id: string, formData: FormData) {
   revalidatePath("/admin/produk");
   revalidatePath(`/admin/produk/${id}`);
   revalidatePath("/");
+  revalidateTag("beranda");
   redirect("/admin/produk");
 }
 
@@ -126,5 +128,6 @@ export async function deleteProduct(id: string) {
   }
   revalidatePath("/admin/produk");
   revalidatePath("/");
+  revalidateTag("beranda");
 }
 

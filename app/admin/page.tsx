@@ -5,47 +5,34 @@ import Link from 'next/link'
 import { Package, ClipboardList, Users, Clock, TrendingUp, Trophy, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 export default async function AdminDashboardPage() {
-  const [totalProduk, totalPesanan, totalUser, pesananPending, totalRevenueResult, produkTerlaris, pesananTerbaru] = await Promise.all([
-    prisma.product.count(),
-    prisma.order.count(),
-    prisma.user.count(),
-    prisma.order.count({ where: { status: 'PENDING' } }),
-    prisma.order.aggregate({
-      where: { status: { not: 'DIBATALKAN' } },
-      _sum: { totalPrice: true }
-    }),
-    prisma.orderItem.findMany({
-      where: {
-        order: {
-          status: { not: 'DIBATALKAN' }
+  // Satu kali bolak-balik ke database remote butuh ±175 ms, jadi angka ringkasan
+  // dan produk terlaris diambil sebagai query gabungan — bukan tujuh terpisah.
+  // Totals dan SUM dikirim PostgreSQL sebagai bigint, jadi dikonversi ke number.
+  const [statistik, produkTerlaris, pesananTerbaru] = await Promise.all([
+    prisma.$queryRaw<
+      [
+        {
+          totalProduk: bigint
+          totalPesanan: bigint
+          totalPengguna: bigint
+          perluDiproses: bigint
+          omzet: bigint | null
         }
-      },
-      select: {
-        productId: true,
-        quantity: true,
-        product: {
-          select: { id: true, name: true }
-        }
-      }
-    }).then(items => {
-      const map = new Map<string, { product: { id: string; name: string } | null; quantity: number }>();
-      for (const item of items) {
-        const existing = map.get(item.productId);
-        if (existing) {
-          existing.quantity += item.quantity;
-        } else {
-          map.set(item.productId, { product: item.product, quantity: item.quantity });
-        }
-      }
-      return Array.from(map.entries())
-        .sort((a, b) => b[1].quantity - a[1].quantity)
-        .slice(0, 5)
-        .map(([productId, val]) => ({
-          productId,
-          _sum: { quantity: val.quantity },
-          product: val.product,
-        }));
-    }),
+      ]
+    >`SELECT (SELECT count(*) FROM "Product") AS "totalProduk",
+            (SELECT count(*) FROM "Order") AS "totalPesanan",
+            (SELECT count(*) FROM "User") AS "totalPengguna",
+            (SELECT count(*) FROM "Order" WHERE status = 'PENDING') AS "perluDiproses",
+            (SELECT sum("totalPrice") FROM "Order" WHERE status <> 'DIBATALKAN') AS omzet`,
+    prisma.$queryRaw<{ productId: string; name: string; quantity: bigint }[]>`SELECT oi."productId",
+              COALESCE(p."name", 'Produk') AS name,
+              sum(oi.quantity) AS quantity
+       FROM "OrderItem" oi
+       JOIN "Order" o ON o.id = oi."orderId" AND o.status <> 'DIBATALKAN'
+       LEFT JOIN "Product" p ON p.id = oi."productId"
+       GROUP BY oi."productId", p."name"
+       ORDER BY quantity DESC
+       LIMIT 5`,
     prisma.order.findMany({
       take: 5,
       orderBy: { createdAt: 'desc' },
@@ -53,7 +40,12 @@ export default async function AdminDashboardPage() {
     })
   ])
 
-  const totalRevenue = totalRevenueResult._sum.totalPrice || 0
+  const totals = statistik[0]
+  const totalProduk = Number(totals.totalProduk)
+  const totalPesanan = Number(totals.totalPesanan)
+  const totalUser = Number(totals.totalPengguna)
+  const pesananPending = Number(totals.perluDiproses)
+  const totalRevenue = Number(totals.omzet ?? 0)
 
   const stats = [
     {
@@ -205,10 +197,10 @@ export default async function AdminDashboardPage() {
                     <span className="w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 flex items-center justify-center text-[11px] font-bold text-neutral-600 dark:text-neutral-400 shrink-0">
                       {index + 1}
                     </span>
-                    <span className="font-sans text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">{item.product?.name || 'Produk'}</span>
+                    <span className="font-sans text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">{item.name}</span>
                   </div>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[11px] font-semibold bg-semantic-success-light dark:bg-semantic-success-darkBg text-semantic-success-dark dark:text-green-200 border border-semantic-success-DEFAULT">
-                    {item._sum.quantity} terjual
+                    {Number(item.quantity)} terjual
                   </span>
                 </div>
               ))

@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireUser } from "@/lib/session";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { OrderStatus } from "@prisma/client";
 import { statusLabel } from "@/lib/format";
 import { getServerMessages } from "@/lib/serverMessages";
@@ -59,6 +59,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   revalidatePath("/pesanan");
   revalidatePath(`/pesanan/${orderId}`);
   revalidatePath("/");
+  revalidateTag("beranda");
 }
 
 

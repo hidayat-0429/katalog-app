@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/session";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function createCategory(formData: FormData) {
   await requireAdmin();
@@ -16,6 +16,7 @@ export async function createCategory(formData: FormData) {
   });
   revalidatePath("/admin/kategori");
   revalidatePath("/");
+  revalidateTag("beranda");
   return { success: true };
 }
 
@@ -35,6 +36,7 @@ export async function updateCategory(id: string, formData: FormData) {
   });
   revalidatePath("/admin/kategori");
   revalidatePath("/");
+  revalidateTag("beranda");
   return { success: true };
 }
 
@@ -45,5 +47,6 @@ export async function deleteCategory(id: string) {
   await prisma.category.delete({ where: { id } });
   revalidatePath("/admin/kategori");
   revalidatePath("/");
+  revalidateTag("beranda");
   return { success: true };
 }
