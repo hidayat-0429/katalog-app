@@ -299,7 +299,22 @@
     "title": "Profile & Address",
     "subtitle": "Update your company contact information and shipping address.",
     "save": "Save Changes",
-    "saved": "Changes saved successfully"
+    "saved": "Changes saved successfully",
+    "form": {
+      "picTitle": "Contact Person Details",
+      "name": "Full Name",
+      "company": "Business / Company Name",
+      "optional": "optional",
+      "emailLabel": "Account Email",
+      "emailLocked": "Email is used to sign in and cannot be changed.",
+      "contactTitle": "Contact & Delivery",
+      "phone": "Phone / WhatsApp Number",
+      "address": "Primary Delivery Address",
+      "addressPlaceholder": "Street, RT/RW, Village, District, City, Postal Code...",
+      "addressHint": "This address is applied automatically when you create a new order.",
+      "saving": "Saving...",
+      "unexpectedError": "An unexpected error occurred."
+    }
   },
   "homepage": {
     "selectedProducts": "Our Products",

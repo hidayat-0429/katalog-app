@@ -299,7 +299,22 @@
     "title": "Profil & Alamat",
     "subtitle": "Perbarui informasi kontak dan alamat pengiriman perusahaan Anda.",
     "save": "Simpan Perubahan",
-    "saved": "Perubahan berhasil disimpan"
+    "saved": "Perubahan berhasil disimpan",
+    "form": {
+      "picTitle": "Data Penanggung Jawab",
+      "name": "Nama Lengkap",
+      "company": "Nama Usaha / Perusahaan",
+      "optional": "opsional",
+      "emailLabel": "Alamat Email Akun",
+      "emailLocked": "Email digunakan untuk login dan tidak dapat diubah.",
+      "contactTitle": "Kontak & Pengiriman",
+      "phone": "Nomor Telepon / WhatsApp",
+      "address": "Alamat Pengiriman Utama",
+      "addressPlaceholder": "Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kodepos...",
+      "addressHint": "Alamat ini otomatis dipakai saat Anda membuat pesanan baru.",
+      "saving": "Menyimpan...",
+      "unexpectedError": "Terjadi kesalahan yang tidak terduga."
+    }
   },
   "homepage": {
     "selectedProducts": "Produk Kami",
