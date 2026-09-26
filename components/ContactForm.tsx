@@ -71,7 +71,7 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Simulate email sending (in production, integrate with nodemailer or email service)
+      // Submission is stored in the database and shown on /admin/pesan
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -81,7 +81,8 @@ export default function ContactForm() {
       });
 
       if (!response.ok) {
-        throw new Error(tf.errors.sendFailed);
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || tf.errors.sendFailed);
       }
 
       setSubmitStatus('success');

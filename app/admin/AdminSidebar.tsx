@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, Tag, ClipboardList, ArrowLeft, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutDashboard, Package, Tag, ClipboardList, Mail, ArrowLeft, PanelLeftClose, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
@@ -13,11 +13,18 @@ const navItems = [
   { href: "/admin/produk", label: "Produk", icon: Package },
   { href: "/admin/kategori", label: "Kategori", icon: Tag },
   { href: "/admin/pesanan", label: "Pesanan", icon: ClipboardList },
+  { href: "/admin/pesan", label: "Pesan Masuk", icon: Mail },
 ];
 
 interface AdminSidebarProps {
   isCollapsed?: boolean;
   onToggle?: () => void;
+}
+
+// "/admin/pesan" must not light up while visiting "/admin/pesanan"
+function isActivePath(pathname: string | null, href: string, exact?: boolean) {
+  if (!pathname) return false;
+  return exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSidebarProps) {
@@ -73,7 +80,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
           )}
           
           {navItems.map(({ href, label, icon: Icon, exact }) => {
-            const isActive = exact ? pathname === href : pathname?.startsWith(href) ?? false;
+            const isActive = isActivePath(pathname, href, exact);
             return (
               <Link
                 key={href}
@@ -163,7 +170,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
         {/* Mobile Nav */}
         <nav className="flex gap-1 overflow-x-auto px-3 py-2 bg-neutral-50 dark:bg-neutral-800/50 no-scrollbar">
           {navItems.map(({ href, label, exact }) => {
-            const isActive = exact ? pathname === href : pathname?.startsWith(href) ?? false;
+            const isActive = isActivePath(pathname, href, exact);
             return (
               <Link
                 key={href}

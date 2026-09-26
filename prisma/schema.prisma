@@ -106,6 +106,22 @@ model OrderItem {
   @@index([productId])
 }
 
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String
+  phone     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([isRead])
+}
+
 enum Role {
   ADMIN
   BUYER
