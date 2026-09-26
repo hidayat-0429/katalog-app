@@ -19,22 +19,22 @@ function getUsageContext(
   const category = categoryName.toLowerCase();
 
   // Context mapping based on mushroom type
-  if (name.includes('shiitake')) return 'Perfect for Ramen & Asian Cuisine';
+  if (name.includes('shiitake')) return t.productCard.usageShiitake;
   if (name.includes('champignon') || name.includes('button')) return t.productCard.usageChampignon;
-  if (name.includes('oyster') || name.includes('tiram')) return 'Best for Stir-fry & Soup';
-  if (name.includes('enoki')) return 'Great for Hotpot & Salad';
-  if (name.includes('shimeji')) return 'Premium Japanese Dishes';
-  if (name.includes('portobello')) return 'Gourmet Steak & Burger';
+  if (name.includes('oyster') || name.includes('tiram')) return t.productCard.usageOyster;
+  if (name.includes('enoki')) return t.productCard.usageEnoki;
+  if (name.includes('shimeji')) return t.productCard.usageShimeji;
+  if (name.includes('portobello')) return t.productCard.usagePortobello;
 
   // Context based on product type
-  if (name.includes('kaleng') || name.includes('canned')) return 'Ready-to-use, Long Shelf Life';
-  if (name.includes('beku') || name.includes('frozen')) return 'Frozen Fresh, Easy Storage';
-  if (name.includes('pouch')) return 'Convenient Portion Control';
-  if (name.includes('nugget') || name.includes('bakso')) return 'Ready-to-fry Snack';
+  if (name.includes('kaleng') || name.includes('canned')) return t.productCard.usageCanned;
+  if (name.includes('beku') || name.includes('frozen')) return t.productCard.usageFrozen;
+  if (name.includes('pouch')) return t.productCard.usagePouch;
+  if (name.includes('nugget') || name.includes('bakso')) return t.productCard.usageSnack;
 
   // Default by category
   if (category.includes('olahan')) return t.productCard.usageProcessed;
-  if (category.includes('segar')) return 'Fresh Daily Harvest';
+  if (category.includes('segar')) return t.productCard.usageFresh;
 
   return null;
 }

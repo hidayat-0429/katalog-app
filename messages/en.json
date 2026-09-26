@@ -51,7 +51,17 @@
     "moqKg": "Min. order 10 kg",
     "moqPrefix": "Min. order",
     "usageChampignon": "Ideal for Pizza & Pasta",
-    "usageProcessed": "Ready to Fry & Serve"
+    "usageProcessed": "Ready to Fry & Serve",
+    "usageShiitake": "Perfect for Ramen & Asian Cuisine",
+    "usageOyster": "Best for Stir-fry & Soup",
+    "usageEnoki": "Great for Hotpot & Salad",
+    "usageShimeji": "Premium Japanese Dishes",
+    "usagePortobello": "Gourmet Steak & Burger",
+    "usageCanned": "Ready-to-use, Long Shelf Life",
+    "usageFrozen": "Frozen Fresh, Easy Storage",
+    "usagePouch": "Convenient Portion Control",
+    "usageSnack": "Ready-to-fry Snack",
+    "usageFresh": "Fresh Daily Harvest"
   },
   "pagination": {
     "previous": "Previous",

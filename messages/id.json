@@ -51,7 +51,17 @@
     "moqKg": "Min. order 10 kg",
     "moqPrefix": "Min. order",
     "usageChampignon": "Ideal untuk Pizza & Pasta",
-    "usageProcessed": "Siap Goreng & Sajikan"
+    "usageProcessed": "Siap Goreng & Sajikan",
+    "usageShiitake": "Cocok untuk Ramen & Masakan Asia",
+    "usageOyster": "Paling Nikmat untuk Tumisan & Sup",
+    "usageEnoki": "Cocok untuk Hotpot & Salad",
+    "usageShimeji": "Hidangan Jepang Premium",
+    "usagePortobello": "Steak & Burger Gourmet",
+    "usageCanned": "Siap Pakai & Tahan Lama",
+    "usageFrozen": "Beku Segar, Penyimpanan Praktis",
+    "usagePouch": "Porsi Praktis Tinggal Pakai",
+    "usageSnack": "Cemilan Siap Goreng",
+    "usageFresh": "Panen Segar Setiap Hari"
   },
   "pagination": {
     "previous": "Sebelumnya",
