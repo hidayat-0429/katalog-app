@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Figtree, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import { LocaleProvider } from "@/components/LocaleProvider";
+import { getServerLocale, getServerMessages } from "@/lib/serverMessages";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -22,43 +23,46 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com"),
-  title: "Etira Mushrooms | Pasokan Jamur B2B PT Eka Timur Raya",
-  description: "Sistem pemesanan pasokan jamur olahan kaleng & pouch steril, jamur segar panen harian, dan produk pangan beku langsung dari pabrik PT Eka Timur Raya, Pasuruan.",
-  keywords: [
-    "jamur kancing", "supplier jamur", "jamur kaleng", "jamur pouch steril",
-    "etira mushrooms", "eka timur raya", "pabrik jamur pasuruan", "B2B jamur"
-  ],
-  openGraph: {
-    title: "Etira Mushrooms | Pasokan Jamur B2B",
-    description: "Pemesanan pasokan jamur olahan kaleng & pouch steril, langsung dari pabrik PT Eka Timur Raya.",
-    type: "website",
-    locale: "id_ID",
-    siteName: "Etira Mushrooms",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Etira Mushrooms - Pasokan Jamur B2B",
-      },
-    ],
-  },
-  icons: {
-    icon: "/logos/etira-company-logo.png",
-    shortcut: "/logos/etira-company-logo.png",
-    apple: "/logos/etira-company-logo.png",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, locale] = await Promise.all([getServerMessages(), getServerLocale()]);
 
-export default function RootLayout({ 
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com"),
+    title: t.metadata.default,
+    description: t.metadata.homeDescription,
+    keywords: t.metadata.keywords,
+    openGraph: {
+      title: t.metadata.default,
+      description: t.metadata.homeDescription,
+      type: "website",
+      locale: locale === 'en' ? "en_US" : "id_ID",
+      siteName: "Etira Mushrooms",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: t.metadata.ogImageAlt,
+        },
+      ],
+    },
+    icons: {
+      icon: "/logos/etira-company-logo.png",
+      shortcut: "/logos/etira-company-logo.png",
+      apple: "/logos/etira-company-logo.png",
+    },
+  };
+}
+
+export default async function RootLayout({
   children
-}: { 
+}: {
   children: React.ReactNode;
 }) {
+  const locale = await getServerLocale();
+
   return (
-    <html lang="id" className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
         <LocaleProvider>
           <Providers>

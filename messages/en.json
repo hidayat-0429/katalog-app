@@ -397,7 +397,12 @@
     "login": "Login | Etira Mushrooms",
     "register": "Register | Etira Mushrooms",
     "productNotFound": "Product Not Found | Etira Mushrooms",
-    "homeDescription": "Sterile canned and retort pouch mushrooms, daily-harvest fresh mushrooms, and frozen food supply direct from the PT Eka Timur Raya factory in Pasuruan."
+    "homeDescription": "Sterile canned and retort pouch mushrooms, daily-harvest fresh mushrooms, and frozen food supply direct from the PT Eka Timur Raya factory in Pasuruan.",
+    "ogImageAlt": "Etira Mushrooms - B2B Mushroom Supply",
+    "keywords": [
+      "button mushrooms", "mushroom supplier", "canned mushrooms", "sterile retort pouch mushrooms",
+      "etira mushrooms", "eka timur raya", "mushroom factory pasuruan", "B2B mushroom wholesale"
+    ]
   },
   "common": {
     "menu": "MENU",

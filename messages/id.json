@@ -397,7 +397,12 @@
     "login": "Masuk | Etira Mushrooms",
     "register": "Daftar | Etira Mushrooms",
     "productNotFound": "Produk Tidak Ditemukan | Etira Mushrooms",
-    "homeDescription": "Jamur olahan kaleng & pouch steril, jamur segar panen harian, dan produk pangan beku langsung dari pabrik PT Eka Timur Raya, Pasuruan."
+    "homeDescription": "Jamur olahan kaleng & pouch steril, jamur segar panen harian, dan produk pangan beku langsung dari pabrik PT Eka Timur Raya, Pasuruan.",
+    "ogImageAlt": "Etira Mushrooms - Pasokan Jamur B2B",
+    "keywords": [
+      "jamur kancing", "supplier jamur", "jamur kaleng", "jamur pouch steril",
+      "etira mushrooms", "eka timur raya", "pabrik jamur pasuruan", "B2B jamur"
+    ]
   },
   "common": {
     "menu": "MENU",
