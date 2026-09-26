@@ -125,7 +125,68 @@
     "title": "Pertanyaan Umum (FAQ)",
     "description": "Temukan jawaban untuk pertanyaan yang sering diajukan tentang produk dan layanan kami",
     "stillHaveQuestions": "Masih ada pertanyaan?",
-    "contactUs": "Hubungi Kami"
+    "contactUs": "Hubungi Kami",
+    "contactDescription": "Tim kami siap membantu Anda. Hubungi kami melalui WhatsApp atau email.",
+    "whatsappUs": "WhatsApp Kami",
+    "emailUs": "Email Kami",
+    "waMessage": "Halo, saya ingin bertanya tentang produk jamur Etira",
+    "groups": {
+      "product": "Produk & Pengolahan",
+      "quality": "Kualitas & Keamanan",
+      "ordering": "Harga & Pemesanan"
+    },
+    "items": [
+      {
+        "group": "product",
+        "q": "Apa saja jenis produk Etira Mushroom yang tersedia?",
+        "a": "Kami menyediakan jamur dalam berbagai varian: jamur segar (fresh), kemasan kantong/pouch, kemasan kaleng (canned), hingga varian beku (frozen). Bentuknya tersedia dalam varian utuh (Whole) maupun irisan (Slice) sesuai kebutuhan Anda."
+      },
+      {
+        "group": "product",
+        "q": "Bagaimana cara mengolah jamur kemasan pouch/kaleng?",
+        "a": "Jamur dikemas dalam larutan air garam ringan untuk menjaga ketahanannya. Jamur ini berstatus ready to cook (siap olah). Anda cukup meniriskan airnya, dibilas sedikit jika diperlukan, lalu langsung ditumis atau dicampurkan ke sup, pasta, pizza, atau masakan favorit Anda."
+      },
+      {
+        "group": "product",
+        "q": "Berapa lama jamur segar bisa bertahan?",
+        "a": "Jamur segar dapat bertahan 5-7 hari jika disimpan dalam kulkas dengan suhu 2-4°C. Kami merekomendasikan penggunaan dalam 3 hari untuk kesegaran optimal. Untuk penyimpanan lebih lama, produk kaleng atau frozen kami tahan hingga 2+ tahun."
+      },
+      {
+        "group": "quality",
+        "q": "Bagaimana kualitas dan kesegarannya dijaga?",
+        "a": "Jamur ditanam di fasilitas kontrol iklim modern di ketinggian 1.850 mdpl dekat Gunung Bromo. Pemrosesan dan pengemasan dilakukan pada hari yang sama saat jamur dipetik demi menjaga kesegaran maksimal. Kami juga menerapkan standar sterilisasi internasional HACCP."
+      },
+      {
+        "group": "quality",
+        "q": "Apakah produk ini aman dan legal?",
+        "a": "Ya, produk Etira Mushroom diproses secara steril dengan standar internasional dan memiliki sertifikasi resmi BPOM dan Halal MUI. Semua produk melalui quality control ketat di setiap tahap produksi."
+      },
+      {
+        "group": "quality",
+        "q": "Apa saja kandungan nutrisinya?",
+        "a": "Jamur kancing ini cocok untuk menu diet karena rendah kalori, tinggi serat, kaya akan protein, vitamin D, serta antioksidan alami. Teksturnya yang kenyal dan padat juga sering dijadikan alternatif pengganti daging dalam berbagai masakan vegetarian."
+      },
+      {
+        "group": "ordering",
+        "q": "Di mana produk ini bisa dibeli?",
+        "a": "Varian eceran seperti Etira Mushroom Whole atau Etira Mushroom Slice tersedia secara online di marketplace seperti Shopee dan Tokopedia melalui berbagai reseller. Untuk pembelian grosir B2B, silakan hubungi tim sales kami langsung."
+      },
+      {
+        "group": "ordering",
+        "q": "Berapa kisaran harganya?",
+        "a": "Ukuran kecil (250 gram): Kisaran Rp16.500 - Rp21.500. Ukuran besar (900 gram): Kisaran Rp39.900 - Rp51.000. Untuk pembelian grosir di atas 20kg, kami menawarkan harga khusus B2B yang lebih kompetitif."
+      },
+      {
+        "group": "ordering",
+        "q": "Apa syarat mengajukan komplain jika membeli secara online?",
+        "a": "Mayoritas toko retail mewajibkan klaim diajukan maksimal 24 jam sejak paket diterima, lengkap dengan foto resi fisik serta video unboxing sebagai bukti sah. Untuk pembelian B2B, hubungi customer service kami dengan foto produk sebagai dokumentasi."
+      },
+      {
+        "group": "ordering",
+        "q": "Apakah ada layanan pembelian untuk bisnis kuliner?",
+        "a": "Ya, kami menawarkan layanan khusus untuk restoran, hotel, katering, dan industri pangan lainnya. Tersedia opsi pembelian grosir dengan harga spesial, jadwal pengiriman rutin, dan konsultasi penggunaan produk sesuai kebutuhan menu Anda."
+      }
+    ]
   },
   "login": {
     "title": "Masuk ke Akun",

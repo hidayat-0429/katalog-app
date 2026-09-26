@@ -104,7 +104,7 @@
     "title": "About Company",
     "companyName": "PT Eka Timur Raya",
     "founded": "Year Founded",
-    "partners": "Restaurant & Horeca Partners",
+    "partners": "Restaurant & HoReCa Partners",
     "capacity": "Monthly Capacity",
     "standards": "Official Quality Standards",
     "profile": "Company Profile",
@@ -116,7 +116,7 @@
     "visionTitle": "Our Vision",
     "missionTitle": "Our Mission",
     "advantages": "B2B Supply Advantages",
-    "advantagesSubtitle": "Why hundreds of culinary and Horeca industry partners trust their supplies to Etira",
+    "advantagesSubtitle": "Why hundreds of culinary and HoReCa industry partners trust their supplies to Etira",
     "facilities": "Production & Logistics Facilities",
     "facilitiesSubtitle": "Integrated infrastructure in Purwodadi, Pasuruan",
     "location": "Factory Address"
@@ -125,7 +125,68 @@
     "title": "Frequently Asked Questions (FAQ)",
     "description": "Find answers to commonly asked questions about our products and services",
     "stillHaveQuestions": "Still have questions?",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "contactDescription": "Our team is ready to help. Reach us on WhatsApp or email.",
+    "whatsappUs": "WhatsApp Us",
+    "emailUs": "Email Us",
+    "waMessage": "Hello, I would like to ask about Etira mushroom products",
+    "groups": {
+      "product": "Products & Preparation",
+      "quality": "Quality & Safety",
+      "ordering": "Pricing & Ordering"
+    },
+    "items": [
+      {
+        "group": "product",
+        "q": "What product variants does Etira Mushroom offer?",
+        "a": "We offer mushrooms in several variants: fresh, pouch, canned, and frozen. Each is available whole or sliced, depending on your needs."
+      },
+      {
+        "group": "product",
+        "q": "How do I prepare pouch or canned mushrooms?",
+        "a": "The mushrooms are packed in a light brine to preserve them and are ready to cook. Simply drain, rinse briefly if needed, then stir-fry or add them directly to soup, pasta, pizza, or your favorite dishes."
+      },
+      {
+        "group": "product",
+        "q": "How long do fresh mushrooms last?",
+        "a": "Fresh mushrooms keep for 5–7 days refrigerated at 2–4°C. For optimal freshness we recommend using them within 3 days. For longer storage, our canned and frozen products last over 2 years."
+      },
+      {
+        "group": "quality",
+        "q": "How are quality and freshness maintained?",
+        "a": "Our mushrooms are grown in modern climate-controlled facilities at 1,850 masl near Mount Bromo. Processing and packaging happen the same day as harvest to preserve maximum freshness, under international HACCP sterilization standards."
+      },
+      {
+        "group": "quality",
+        "q": "Are the products safe and legally registered?",
+        "a": "Yes. Etira Mushroom products are processed sterilely to international standards and hold official BPOM and MUI Halal certifications. Every batch passes strict quality control at each production stage."
+      },
+      {
+        "group": "quality",
+        "q": "What is the nutritional content?",
+        "a": "Button mushrooms suit diet menus: low in calories, high in fiber, and rich in protein, vitamin D, and natural antioxidants. Their firm, meaty texture also makes them a common meat substitute in vegetarian cooking."
+      },
+      {
+        "group": "ordering",
+        "q": "Where can I buy these products?",
+        "a": "Retail variants such as Etira Mushroom Whole and Slice are available online through marketplaces like Shopee and Tokopedia via our resellers. For B2B wholesale orders, please contact our sales team directly."
+      },
+      {
+        "group": "ordering",
+        "q": "What is the price range?",
+        "a": "Small size (250 g): roughly Rp16,500–Rp21,500. Large size (900 g): roughly Rp39,900–Rp51,000. For wholesale orders above 20 kg we offer more competitive B2B pricing."
+      },
+      {
+        "group": "ordering",
+        "q": "What are the conditions for complaints on online purchases?",
+        "a": "Most retail stores require claims within 24 hours of delivery, supported by a photo of the physical shipping label and an unboxing video as valid evidence. For B2B purchases, contact our customer service with product photos as documentation."
+      },
+      {
+        "group": "ordering",
+        "q": "Do you supply culinary businesses?",
+        "a": "Yes. We run a dedicated service for restaurants, hotels, catering, and other food businesses, with wholesale pricing, scheduled recurring deliveries, and product consultation tailored to your menu needs."
+      }
+    ]
   },
   "login": {
     "title": "Sign In",
@@ -213,7 +274,7 @@
     "feature2Desc": "Harvested each morning, sorted by size and integrity.",
     "feature3": "Direct Factory Processing",
     "feature3Desc": "Cans and sterile retort pouches processed at the Purwodadi facility.",
-    "feature4": "Routine Horeca Supply",
+    "feature4": "Routine HoReCa Supply",
     "feature4Desc": "Continuous volumes for restaurants, hotels, and food manufacturing.",
     "deliveryGuarantee": "Delivery Quality Guarantee",
     "fleetAndLogistics": "Fleet & Logistics Options",
@@ -339,7 +400,7 @@
     "title": "About Company",
     "subtitle": "Profile, quality dedication, and production facilities of PT Eka Timur Raya (Etira Mushrooms)",
     "founded": "Year Founded",
-    "partners": "Restaurant & Horeca Partners",
+    "partners": "Restaurant & HoReCa Partners",
     "capacity": "Monthly Capacity",
     "standards": "Official Quality Standards",
     "history": "History & Journey",
@@ -361,7 +422,7 @@
     "missionBullet1": "Apply international HACCP & Halal sterilization standards",
     "missionBullet2": "Ensure cold chain refrigeration to maintain harvest freshness",
     "advantages": "B2B Supply Advantages",
-    "advantagesSubtitle": "Why hundreds of culinary and Horeca industry partners trust their supplies to Etira",
+    "advantagesSubtitle": "Why hundreds of culinary and HoReCa industry partners trust their supplies to Etira",
     "advantage1": "50+ Ton/Month Capacity",
     "advantage1Desc": "Ensures consistent stock availability without supply fluctuations for restaurant chains and processing facilities.",
     "advantage2": "HACCP & Halal Certification",
