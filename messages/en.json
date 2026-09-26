@@ -599,6 +599,37 @@
     "distanceSurabayaValue": "±65 km (Toll)",
     "coverage": "Fleet Coverage:",
     "coverageValue": "National (Java-Bali)"
+  },
+  "server": {
+    "unexpected": "An unexpected error occurred.",
+    "productUnavailable": "This product is unavailable",
+    "minQuantity": "Quantity must be at least 1",
+    "addMoreToCart": "You can only add {count} more to your cart (available stock: {stock})",
+    "cartAtStockLimit": "Your cart already reaches the available stock ({stock})",
+    "itemNotFound": "Item not found",
+    "quantityExceedsStock": "Quantity exceeds the available stock",
+    "userNotFound": "Account not found",
+    "addressRequired": "Shipping address is required",
+    "addressTooShort": "The shipping address is too short. Please provide the full address (minimum 10 characters)",
+    "cartEmpty": "Your cart is still empty",
+    "insufficientStock": "Not enough stock for \"{name}\" ({stock} left)",
+    "insufficientStockDuringOrder": "Stock for \"{name}\" ran out while processing your order",
+    "fallbackProduct": "this product",
+    "orderFailed": "Failed to process the order",
+    "orderNotFound": "Order not found",
+    "orderAlreadyProcessed": "This order is already in progress and can no longer be cancelled",
+    "cancelFailed": "Failed to cancel the order",
+    "nameMin2": "The contact person's name needs at least 2 characters.",
+    "nameRegisterMin": "Name needs at least 2 characters",
+    "emailInvalid": "Invalid email address",
+    "passwordMin": "Password needs at least 6 characters",
+    "emailTaken": "This email is already registered",
+    "phoneRequired": "Phone / WhatsApp number is required.",
+    "phoneInvalid": "Invalid phone / WhatsApp number (example: 08123456789 or +628123456789)",
+    "addressMin10": "Please provide the full shipping address (minimum 10 characters).",
+    "profileSaveFailed": "Something went wrong while saving your profile.",
+    "fieldsRequired": "All fields are required",
+    "messageFailed": "Something went wrong while sending your message"
   }
 }
 

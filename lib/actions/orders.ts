@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin, requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 import { OrderStatus } from "@prisma/client";
+import { getServerMessages } from "@/lib/serverMessages";
 
 export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   await requireAdmin();
@@ -48,6 +49,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
 
 export async function cancelOrder(orderId: string) {
   const user = await requireUser();
+  const t = await getServerMessages();
 
   try {
     await prisma.$transaction(async (tx) => {
@@ -57,10 +59,10 @@ export async function cancelOrder(orderId: string) {
       });
 
       if (!order || order.userId !== user.id) {
-        throw new Error("Pesanan tidak ditemukan");
+        throw new Error(t.server.orderNotFound);
       }
       if (order.status !== "PENDING") {
-        throw new Error("Pesanan sudah diproses, tidak bisa dibatalkan");
+        throw new Error(t.server.orderAlreadyProcessed);
       }
 
       await tx.order.update({
@@ -80,6 +82,6 @@ export async function cancelOrder(orderId: string) {
     revalidatePath(`/pesanan/${orderId}`);
     return { success: true };
   } catch (err: any) {
-    return { error: err?.message || "Gagal membatalkan pesanan" };
+    return { error: err?.message || t.server.cancelFailed };
   }
 }

@@ -15,7 +15,11 @@ export default function CancelOrderButton({ orderId }: { orderId: string }) {
     if (confirm(t.invoice.cancelConfirm)) {
       startTransition(async () => {
         try {
-          await cancelOrder(orderId);
+          const res = await cancelOrder(orderId);
+          if (res?.error) {
+            alert(res.error);
+            return;
+          }
           router.refresh();
         } catch (error) {
           console.error("Gagal membatalkan pesanan", error);

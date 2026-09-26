@@ -72,7 +72,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
         if (err?.message?.includes('NEXT_REDIRECT')) {
           throw err;
         }
-        setError(err?.message || 'Terjadi kesalahan saat memproses pesanan');
+        setError(err?.message || t.server.orderFailed);
         setShowConfirmation(false);
       }
     });

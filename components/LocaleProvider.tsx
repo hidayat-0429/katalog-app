@@ -7,6 +7,12 @@ import enMessages from '@/messages/en.json';
 
 type Locale = 'id' | 'en';
 
+// Server action tidak bisa membaca localStorage, jadi mirror locale ke cookie
+// supaya pesan validasi ikut bahasa pengunjung.
+function writeLocaleCookie(value: Locale) {
+  document.cookie = `locale=${value}; path=/; max-age=31536000; samesite=lax`;
+}
+
 interface LocaleContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
@@ -23,7 +29,8 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     // Get locale from localStorage on mount
     const saved = (localStorage.getItem('locale') as Locale) || 'id';
     setLocaleState(saved);
-    
+    writeLocaleCookie(saved);
+
     // Update HTML lang attribute
     document.documentElement.lang = saved;
     
@@ -36,6 +43,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
       setLocaleState(newLocale);
       document.documentElement.lang = newLocale;
       localStorage.setItem('locale', newLocale);
+      writeLocaleCookie(newLocale);
     };
 
     window.addEventListener('localeChange', handleLocaleChange);
@@ -77,6 +85,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     localStorage.setItem('locale', newLocale);
+    writeLocaleCookie(newLocale);
     document.documentElement.lang = newLocale;
   };
 

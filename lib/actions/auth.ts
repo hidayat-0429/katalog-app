@@ -3,23 +3,29 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { getServerMessages } from "@/lib/serverMessages";
 
-const registerSchema = z.object({
-  name: z.string().min(2, "Nama minimal 2 karakter"),
-  email: z.string().email("Email tidak valid"),
-  password: z.string().min(6, "Password minimal 6 karakter"),
-  companyName: z.string().optional(),
-  phone: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")), {
-      message: "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)",
-    }),
-  address: z.string().optional(),
-});
+type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
+
+function buildRegisterSchema(t: ServerMessages) {
+  return z.object({
+    name: z.string().min(2, t.server.nameRegisterMin),
+    email: z.string().email(t.server.emailInvalid),
+    password: z.string().min(6, t.server.passwordMin),
+    companyName: z.string().optional(),
+    phone: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")), {
+        message: t.server.phoneInvalid,
+      }),
+    address: z.string().optional(),
+  });
+}
 
 export async function registerUser(formData: FormData) {
-  const parsed = registerSchema.safeParse({
+  const t = await getServerMessages();
+  const parsed = buildRegisterSchema(t).safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
@@ -36,7 +42,7 @@ export async function registerUser(formData: FormData) {
     where: { email: parsed.data.email },
   });
   if (existing) {
-    return { error: "Email sudah terdaftar" };
+    return { error: t.server.emailTaken };
   }
 
   const hashed = await bcrypt.hash(parsed.data.password, 10);

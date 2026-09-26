@@ -4,13 +4,16 @@ import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getServerMessages } from "@/lib/serverMessages";
+import { formatText } from "@/lib/productText";
 
 export async function addToCart(productId: string, quantity: number) {
   const user = await requireUser();
+  const t = await getServerMessages();
 
   const product = await prisma.product.findUnique({ where: { id: productId } });
-  if (!product || !product.isActive) return { error: "Produk tidak tersedia" };
-  if (quantity < 1) return { error: "Jumlah minimal 1" };
+  if (!product || !product.isActive) return { error: t.server.productUnavailable };
+  if (quantity < 1) return { error: t.server.minQuantity };
 
   const existingItem = await prisma.cart.findUnique({
     where: { userId_productId: { userId: user.id, productId } },
@@ -21,8 +24,8 @@ export async function addToCart(productId: string, quantity: number) {
     const sisaBisaDitambah = product.stock - (existingItem?.quantity || 0);
     return {
       error: sisaBisaDitambah > 0
-        ? `Hanya dapat menambahkan ${sisaBisaDitambah} lagi ke keranjang (stok tersedia: ${product.stock})`
-        : `Jumlah di keranjang sudah mencapai batas stok tersedia (${product.stock})`,
+        ? formatText(t.server.addMoreToCart, { count: sisaBisaDitambah, stock: product.stock })
+        : formatText(t.server.cartAtStockLimit, { stock: product.stock }),
     };
   }
 
@@ -38,13 +41,14 @@ export async function addToCart(productId: string, quantity: number) {
 
 export async function updateCartItem(cartId: string, quantity: number) {
   const user = await requireUser();
+  const t = await getServerMessages();
   const cart = await prisma.cart.findUnique({ where: { id: cartId }, include: { product: true } });
-  if (!cart || cart.userId !== user.id) return { error: "Item tidak ditemukan" };
+  if (!cart || cart.userId !== user.id) return { error: t.server.itemNotFound };
 
   if (quantity < 1) {
     await prisma.cart.delete({ where: { id: cartId } });
   } else {
-    if (quantity > cart.product.stock) return { error: "Jumlah melebihi stok tersedia" };
+    if (quantity > cart.product.stock) return { error: t.server.quantityExceedsStock };
     await prisma.cart.update({ where: { id: cartId }, data: { quantity } });
   }
 
@@ -63,28 +67,29 @@ export async function removeCartItem(cartId: string) {
 
 export async function checkout(formData: FormData) {
   const sessionUser = await requireUser();
-  
+  const t = await getServerMessages();
+
   const user = await prisma.user.findUnique({ where: { id: sessionUser.id } });
-  if (!user) return { error: "User tidak ditemukan" };
+  if (!user) return { error: t.server.userNotFound };
 
   const shippingAddress = String(formData.get("shippingAddress") || "").trim();
   const shippingMethod = String(formData.get("shippingMethod") || "Armada Truk Berpendingin (Cold Chain)").trim();
   const rawNotes = String(formData.get("notes") || "").trim();
   const notes = `[Armada: ${shippingMethod}]${rawNotes ? ` - Catatan: ${rawNotes}` : ""}`;
 
-  if (!shippingAddress) return { error: "Alamat pengiriman wajib diisi" };
-  if (shippingAddress.length < 10) return { error: "Alamat pengiriman terlalu singkat, harap isi dengan alamat lengkap (minimal 10 karakter)" };
+  if (!shippingAddress) return { error: t.server.addressRequired };
+  if (shippingAddress.length < 10) return { error: t.server.addressTooShort };
 
   const cartItems = await prisma.cart.findMany({
     where: { userId: user.id },
     include: { product: true },
   });
 
-  if (cartItems.length === 0) return { error: "Keranjang masih kosong" };
+  if (cartItems.length === 0) return { error: t.server.cartEmpty };
 
   for (const item of cartItems) {
     if (item.quantity > item.product.stock) {
-      return { error: `Stok "${item.product.name}" tidak mencukupi (sisa: ${item.product.stock})` };
+      return { error: formatText(t.server.insufficientStock, { name: item.product.name, stock: item.product.stock }) };
     }
   }
 
@@ -104,7 +109,7 @@ export async function checkout(formData: FormData) {
       for (const item of cartItems) {
         const freshProduct = await tx.product.findUnique({ where: { id: item.productId } });
         if (!freshProduct || freshProduct.stock < item.quantity) {
-          throw new Error(`Stok "${freshProduct?.name || 'produk'}" tidak mencukupi saat proses checkout`);
+          throw new Error(formatText(t.server.insufficientStockDuringOrder, { name: freshProduct?.name ?? t.server.fallbackProduct }));
         }
       }
 
@@ -145,7 +150,7 @@ export async function checkout(formData: FormData) {
 
     orderId = order.id;
   } catch (err: any) {
-    return { error: err?.message || "Gagal memproses pesanan" };
+    return { error: err?.message || t.server.orderFailed };
   }
 
   revalidatePath("/keranjang");
@@ -155,6 +160,7 @@ export async function checkout(formData: FormData) {
 
 export async function undoAddToCart(productId: string, quantityToRemove: number = 1) {
   const user = await requireUser();
+  const t = await getServerMessages();
   // Find cart item for this user and product
   const existingItem = await prisma.cart.findUnique({
     where: { userId_productId: { userId: user.id, productId } },
@@ -174,5 +180,5 @@ export async function undoAddToCart(productId: string, quantityToRemove: number 
     revalidatePath("/keranjang");
     return { success: true };
   }
-  return { error: "Item not found in cart" };
+  return { error: t.server.itemNotFound };
 }

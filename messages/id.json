@@ -599,6 +599,37 @@
     "distanceSurabayaValue": "±65 km (Tol)",
     "coverage": "Jangkauan Armada:",
     "coverageValue": "Nasional (Jawa-Bali)"
+  },
+  "server": {
+    "unexpected": "Terjadi kesalahan yang tidak terduga.",
+    "productUnavailable": "Produk tidak tersedia",
+    "minQuantity": "Jumlah minimal 1",
+    "addMoreToCart": "Hanya dapat menambahkan {count} lagi ke keranjang (stok tersedia: {stock})",
+    "cartAtStockLimit": "Jumlah di keranjang sudah mencapai batas stok tersedia ({stock})",
+    "itemNotFound": "Item tidak ditemukan",
+    "quantityExceedsStock": "Jumlah melebihi stok tersedia",
+    "userNotFound": "Akun tidak ditemukan",
+    "addressRequired": "Alamat pengiriman wajib diisi",
+    "addressTooShort": "Alamat pengiriman terlalu singkat, harap isi dengan alamat lengkap (minimal 10 karakter)",
+    "cartEmpty": "Keranjang masih kosong",
+    "insufficientStock": "Stok \"{name}\" tidak mencukupi (sisa: {stock})",
+    "insufficientStockDuringOrder": "Stok \"{name}\" tidak mencukupi saat memproses pesanan",
+    "fallbackProduct": "produk ini",
+    "orderFailed": "Gagal memproses pesanan",
+    "orderNotFound": "Pesanan tidak ditemukan",
+    "orderAlreadyProcessed": "Pesanan sudah diproses, tidak bisa dibatalkan",
+    "cancelFailed": "Gagal membatalkan pesanan",
+    "nameMin2": "Nama penanggung jawab wajib diisi minimal 2 karakter.",
+    "nameRegisterMin": "Nama minimal 2 karakter",
+    "emailInvalid": "Email tidak valid",
+    "passwordMin": "Password minimal 6 karakter",
+    "emailTaken": "Email sudah terdaftar",
+    "phoneRequired": "Nomor telepon/WhatsApp wajib diisi.",
+    "phoneInvalid": "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)",
+    "addressMin10": "Alamat pengiriman wajib diisi dengan lengkap (minimal 10 karakter).",
+    "profileSaveFailed": "Terjadi kesalahan saat menyimpan pembaruan profil.",
+    "fieldsRequired": "Semua field harus diisi",
+    "messageFailed": "Terjadi kesalahan saat memproses pesan"
   }
 }
 

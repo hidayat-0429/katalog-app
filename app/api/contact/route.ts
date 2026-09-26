@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerMessages } from '@/lib/serverMessages';
 
 // Contact form endpoint (logs submissions, ready for email service integration)
 export async function POST(request: NextRequest) {
+  const t = await getServerMessages();
   try {
     const body = await request.json();
     const { name, email, company, phone, subject, message } = body;
@@ -9,7 +11,7 @@ export async function POST(request: NextRequest) {
     // Validation
     if (!name || !email || !company || !phone || !subject || !message) {
       return NextResponse.json(
-        { error: 'Semua field harus diisi' },
+        { error: t.server.fieldsRequired },
         { status: 400 }
       );
     }
@@ -18,7 +20,7 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Email tidak valid' },
+        { error: t.server.emailInvalid },
         { status: 400 }
       );
     }
@@ -47,7 +49,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Contact API Error:', error);
     return NextResponse.json(
-      { error: 'Terjadi kesalahan saat memproses pesan' },
+      { error: t.server.messageFailed },
       { status: 500 }
     );
   }

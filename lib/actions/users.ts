@@ -4,22 +4,28 @@ import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getServerMessages } from "@/lib/serverMessages";
 
-const updateProfileSchema = z.object({
-  name: z.string().min(2, "Nama penanggung jawab wajib diisi minimal 2 karakter."),
-  companyName: z.string().optional(),
-  phone: z
-    .string()
-    .min(1, "Nomor telepon/WhatsApp wajib diisi.")
-    .refine(
-      (val) => /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")),
-      { message: "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)" }
-    ),
-  address: z.string().min(10, "Alamat pengiriman wajib diisi dengan lengkap (minimal 10 karakter)."),
-});
+type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
+
+function buildProfileSchema(t: ServerMessages) {
+  return z.object({
+    name: z.string().min(2, t.server.nameMin2),
+    companyName: z.string().optional(),
+    phone: z
+      .string()
+      .min(1, t.server.phoneRequired)
+      .refine(
+        (val) => /^(\+62|62|08)[0-9]{8,13}$/.test(val.replace(/[\s-]/g, "")),
+        { message: t.server.phoneInvalid }
+      ),
+    address: z.string().min(10, t.server.addressMin10),
+  });
+}
 
 export async function updateProfile(formData: FormData) {
   const user = await requireUser();
+  const t = await getServerMessages();
 
   const raw = {
     name: (formData.get("name") as string | null)?.trim() || "",
@@ -28,7 +34,7 @@ export async function updateProfile(formData: FormData) {
     address: (formData.get("address") as string | null)?.trim() || "",
   };
 
-  const parsed = updateProfileSchema.safeParse(raw);
+  const parsed = buildProfileSchema(t).safeParse(raw);
   if (!parsed.success) {
     return { error: parsed.error.issues[0].message };
   }
@@ -49,6 +55,6 @@ export async function updateProfile(formData: FormData) {
     return { success: true };
   } catch (error: any) {
     console.error("Update profile error:", error);
-    return { error: "Terjadi kesalahan saat menyimpan pembaruan profil." };
+    return { error: t.server.profileSaveFailed };
   }
 }
