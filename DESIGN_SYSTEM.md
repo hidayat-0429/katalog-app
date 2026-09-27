@@ -322,17 +322,15 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    sudah tampil (mis. `semantic-danger-500` = `#ef4444`), jadi perpindahan nama tidak
    mengubah piksel — kecuali `green-200` → `semantic-success-200` (`#a7f3d0`) yang
    sedikit lebih ke-arah emerald.
-3. Banyak kelas di `@layer components` sudah tidak dipakai sama sekali (mati):
-   `.btn-cta`, `.btn-ghost`, `.card-hover`, `.section-title`, `.section-subtitle`,
-   `.table-*`, `.nav-link*`, `.sidebar-link*`, `.page-*`, `.stat-*`, `.empty-icon-wrap`,
-   `.divider`, `.pill*`, `.focus-ring`, `.gradient-text`, `.btn-enhanced`,
-   `.card-premium`, `.badge-glow`, `.badge-fresh`, `.badge-premium`, `.badge-chef-choice`,
-   `.btn-forest`, `.btn-amber`, `.btn-earth`, `.btn-fresh`, `.hover-lift`,
-   `.stagger-item`, `.float-gentle`, `.pulse-gentle`, `.progress-*`, `.animate-loading`,
-   `.toast-*`, `.loading-overlay`, `.animate-slideInUp`, `.card`, `.badge`, `.scrollbar-thin`,
-   `.hero-grain`. Jangan menulis kode baru di atasnya; hapus saat file tersebut dibersihkan.
-   Yang **hidup** di golongan ini: `.btn-primary`, `.btn-secondary`, `.btn-danger`,
-   `.btn-icon`, `.input`, `.input-with-icon` — dipakai form & tombol admin.
+3. Semua kelas mati di `app/globals.css` sudah dibuang — 75 aturan, 881 jadi 382 baris.
+   Yang tersisa di `@layer components` cuma yang benar-benar dipakai kode:
+   `.btn-primary`, `.btn-secondary`, `.btn-danger`, `.btn-icon`, `.input`,
+   `.input-with-icon`, `.card`, `.badge`, `.divider` (dipakai form & tombol admin,
+   `components/ui/Card`, dan beranda). Jangan menambah kelas baru di layer ini —
+   komponen baru menulis class Tailwind langsung atau lewat varian `components/ui`.
+   Utilitas yang masih hidup dan dipakai: `.reveal-hidden*`, `.reveal-visible`,
+   `.hero-stagger*`, `.shimmer-line`, `.section-divider-wave`, `.feature-card-num`,
+   `.skeleton`, `.will-change-transform`, `.no-scrollbar`, `.animate-slideInUp`.
 5. Ikon `w-3.5 h-3.5` sering muncul di dalam badge/tombol kecil — ini acceptable, tetapi
    kalau membuat komponen baru pilih `size` dari skala (`w-4`, `w-5`, `w-6`).
 
