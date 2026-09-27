@@ -29,7 +29,9 @@ export default async function AdminProductsPage({
     ? {
         OR: [
           { name: { contains: search, mode: "insensitive" as const } },
+          { nameEn: { contains: search, mode: "insensitive" as const } },
           { category: { name: { contains: search, mode: "insensitive" as const } } },
+          { category: { nameEn: { contains: search, mode: "insensitive" as const } } },
         ],
       }
     : {};

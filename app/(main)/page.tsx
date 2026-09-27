@@ -89,7 +89,11 @@ export default async function HomePage({
 
   const whereClause: Prisma.ProductWhereInput = { isActive: true };
   if (categoryId) whereClause.categoryId = categoryId;
-  if (q) whereClause.name = { contains: q, mode: "insensitive" };
+  // Pembeli berbahasa Inggris mengetik "frozen", bukan "beku" — cari di kedua nama.
+  if (q) {
+    const matches = { contains: q, mode: "insensitive" as const };
+    whereClause.OR = [{ name: matches }, { nameEn: matches }];
+  }
 
   const [categories, data] = await Promise.all([
     getCategories(),
