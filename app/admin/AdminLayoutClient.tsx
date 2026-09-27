@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
+import AdminInboxProvider from "./AdminInboxProvider";
 
 export default function AdminLayoutClient({
   children,
@@ -11,6 +12,7 @@ export default function AdminLayoutClient({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
+    <AdminInboxProvider>
     <div className="flex min-h-screen bg-neutral-50 dark:bg-bg">
       {/* Sidebar kiri - desktop only */}
       <aside 
@@ -39,5 +41,6 @@ export default function AdminLayoutClient({
         </main>
       </div>
     </div>
+    </AdminInboxProvider>
   );
 }

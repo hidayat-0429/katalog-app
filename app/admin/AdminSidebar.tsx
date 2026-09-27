@@ -7,13 +7,23 @@ import { LayoutDashboard, Package, Tag, ClipboardList, Mail, ArrowLeft, PanelLef
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
+import NotificationToggle from "./NotificationToggle";
+import { useAdminInbox } from "./AdminInboxProvider";
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  exact?: boolean;
+  badge?: "pending" | "unread";
+};
+
+const navItems: NavItem[] = [
   { href: "/admin", label: "Ringkasan", icon: LayoutDashboard, exact: true },
   { href: "/admin/produk", label: "Produk", icon: Package },
   { href: "/admin/kategori", label: "Kategori", icon: Tag },
-  { href: "/admin/pesanan", label: "Pesanan", icon: ClipboardList },
-  { href: "/admin/pesan", label: "Pesan Masuk", icon: Mail },
+  { href: "/admin/pesanan", label: "Pesanan", icon: ClipboardList, badge: "pending" },
+  { href: "/admin/pesan", label: "Pesan Masuk", icon: Mail, badge: "unread" },
 ];
 
 interface AdminSidebarProps {
@@ -27,9 +37,78 @@ function isActivePath(pathname: string | null, href: string, exact?: boolean) {
   return exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 }
 
+const NAV_BADGE_META = {
+  pending: {
+    tone: "bg-semantic-warning-DEFAULT text-white",
+    description: "pesanan perlu diproses",
+  },
+  unread: {
+    tone: "bg-semantic-info-DEFAULT text-white",
+    description: "pesan belum dibaca",
+  },
+} as const;
+
+function useNavBadge(kind: "pending" | "unread") {
+  const { pendingOrders, unreadMessages } = useAdminInbox();
+  const count = kind === "pending" ? pendingOrders : unreadMessages;
+  return { count, ...NAV_BADGE_META[kind] };
+}
+
+function NavBadge({
+  kind,
+  collapsed,
+}: {
+  kind: "pending" | "unread";
+  collapsed: boolean;
+}) {
+  const { count, tone, description } = useNavBadge(kind);
+  if (count <= 0) return null;
+
+  if (collapsed) {
+    return (
+      <span
+        className={cn(
+          "absolute right-1.5 top-1/2 -translate-y-1/2 h-2 w-2 rounded-full ring-2 ring-neutral-50 dark:ring-surface",
+          tone
+        )}
+        title={`${count} ${description}`}
+      />
+    );
+  }
+
+  return (
+    <span
+      className={cn(
+        "ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[11px] font-bold tabular-nums",
+        tone
+      )}
+      title={`${count} ${description}`}
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  );
+}
+
+function MobileNavBadge({ kind }: { kind: "pending" | "unread" }) {
+  const { count, tone, description } = useNavBadge(kind);
+  if (count <= 0) return null;
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-bold tabular-nums",
+        tone
+      )}
+      title={`${count} ${description}`}
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  );
+}
+
+
 export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSidebarProps) {
   const pathname = usePathname();
-
   return (
     <>
       {/* Desktop: vertical nav with surface differentiation */}
@@ -79,7 +158,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             <div className="h-4" /> // spacing
           )}
           
-          {navItems.map(({ href, label, icon: Icon, exact }) => {
+          {navItems.map(({ href, label, icon: Icon, exact, badge }) => {
             const isActive = isActivePath(pathname, href, exact);
             return (
               <Link
@@ -99,6 +178,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
                 )}
                 <Icon className={cn("w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-105", isActive && "text-brand-forest-600 dark:text-brand-forest-500")} />
                 {!isCollapsed && <span className="truncate">{label}</span>}
+                {badge && <NavBadge kind={badge} collapsed={isCollapsed} />}
               </Link>
             );
           })}
@@ -106,6 +186,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
 
         {/* Bottom Actions */}
         <div className={cn("p-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-col gap-3 shrink-0", isCollapsed ? "items-center px-2" : "px-4")}>
+          <NotificationToggle iconOnly={isCollapsed} />
           {!isCollapsed && (
             <div className="flex items-center justify-between px-2">
               <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Mode Tampilan</span>
@@ -156,6 +237,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <NotificationToggle iconOnly />
             <ThemeToggle />
             <Link
               href="/"
@@ -169,20 +251,21 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
 
         {/* Mobile Nav */}
         <nav className="flex gap-1 overflow-x-auto px-3 py-2 bg-neutral-50 dark:bg-neutral-800/50 no-scrollbar">
-          {navItems.map(({ href, label, exact }) => {
+          {navItems.map(({ href, label, exact, badge }) => {
             const isActive = isActivePath(pathname, href, exact);
             return (
               <Link
                 key={href}
                 href={href}
                 className={cn(
-                  "px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-150 ease-out",
+                  "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-150 ease-out",
                   isActive
                     ? "bg-brand-forest-600 dark:bg-brand-forest-500 text-white"
                     : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-white dark:hover:bg-neutral-700/50"
                 )}
               >
                 {label}
+                {badge && <MobileNavBadge kind={badge} />}
               </Link>
             );
           })}
