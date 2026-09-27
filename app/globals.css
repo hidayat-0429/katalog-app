@@ -5,67 +5,51 @@
 /* ─── Base ─────────────────────────────────────────────── */
 @layer base {
   :root {
-    /* Sweetgreen-Inspired Premium Palette */
-    --bg: 250 249 246;              /* Cream base - warmer than stark white */
-    --bg-subtle: 240 235 224;       /* Light beige - earth.100 */
+    /* Duotone System: Primary Green + Neutral Gray */
+    --bg: 250 249 246;              /* Warm cream base */
+    --bg-subtle: 241 243 245;       /* Light neutral - neutral.100 */
     --surface: 255 255 255;         /* Pure white for cards */
-    --primary: 45 90 39;            /* Deep forest green - forest.500 */
-    --primary-hover: 30 74 26;      /* Forest hover - forest.600 */
-    --primary-light: 240 247 240;   /* Light sage background - forest.50 */
-    --cta: 217 119 6;               /* Premium amber - amber.500 */
-    --cta-hover: 184 98 10;         /* Amber hover - amber.600 */
-    --charcoal: 31 36 33;           /* Slightly warmer charcoal */
-    --charcoal-muted: 100 107 102;  /* Muted text with slight warmth */
-    --border: 225 215 199;          /* Warm earth border - earth.200 */
-    --border-subtle: 240 235 224;   /* Subtle earth border - earth.100 */
-    --danger: 185 74 72;            /* Keep existing danger */
-    --danger-bg: 253 240 239;       /* Keep existing danger bg */
-
-    /* Fresh/Success indicators for food freshness */
-    --fresh: 22 163 74;             /* Fresh green - fresh.500 */
-    --fresh-bg: 220 252 231;        /* Fresh background - fresh.100 */
-    --fresh-light: 187 247 208;     /* Fresh badge - fresh.200 */
-
-    /* Secondary earth tones */
-    --earth: 139 115 85;            /* Rich earth brown - earth.500 */
-    --earth-light: 240 235 224;     /* Light earth - earth.100 */
-    --earth-muted: 207 192 168;     /* Muted earth - earth.300 */
-
-    /* Legacy compatibility */
-    --info: 59 130 246;
+    --primary: 45 90 39;            /* Forest green 500 */
+    --primary-hover: 30 74 26;      /* Forest green 600 */
+    --primary-light: 240 247 240;   /* Forest green 50 */
+    --charcoal: 33 37 41;           /* Neutral 900 for text */
+    --charcoal-muted: 134 142 150;  /* Neutral 600 for secondary text */
+    --border: 222 226 230;          /* Neutral 300 */
+    --border-subtle: 233 236 239;   /* Neutral 200 */
+    
+    /* Semantic colors (functional only) */
+    --success: 16 185 129;          /* Green for status */
+    --success-bg: 209 250 229;
+    --warning: 245 158 11;          /* Orange for warnings */
+    --warning-bg: 254 243 199;
+    --danger: 239 68 68;            /* Red for errors */
+    --danger-bg: 254 226 226;
+    --info: 59 130 246;             /* Blue for info */
     --info-bg: 219 234 254;
-    --success: var(--fresh);
-    --success-bg: var(--fresh-bg);
-    --warning: var(--cta);
-    --warning-bg: 253 244 225;
   }
 
   .dark {
-    /* Dark mode: neutral charcoal (sama dengan nilai yang sudah dipakai kartu/halaman) */
-    --bg: 15 17 16;                 /* #0F1110 - halaman */
-    --bg-subtle: 26 26 22;          /* #1A1A16 - panel & input */
-    --surface: 20 23 21;            /* #141715 - kartu */
-    --primary: 144 184 138;         /* Lighter forest for dark mode */
-    --primary-hover: 164 204 158;   /* Forest hover in dark */
-    --primary-light: 22 42 19;      /* Dark forest accent */
-    --cta: 217 119 6;               /* Keep vibrant amber in dark */
-    --cta-hover: 242 159 63;        /* Lighter amber hover */
-    --charcoal: 245 245 240;        /* Warm white for dark mode text */
-    --charcoal-muted: 180 180 170;  /* Muted warm text */
-    --border: 33 37 41;             /* #212529 - sama seperti border kartu yang sudah ada */
-    --border-subtle: 26 26 22;      /* #1A1A16 - senada dengan panel */
-    --danger: 224 108 106;          /* Keep existing */
-    --danger-bg: 62 30 30;          /* Keep existing */
-
-    /* Dark mode fresh indicators */
-    --fresh: 34 197 94;             /* Brighter fresh for dark */
-    --fresh-bg: 20 83 45;           /* Dark fresh bg */
-    --fresh-light: 22 101 52;       /* Dark fresh accent */
-
-    /* Dark earth tones */
-    --earth: 139 115 85;            /* Keep earth brown */
-    --earth-light: 36 46 33;        /* Dark earth background */
-    --earth-muted: 68 58 45;        /* Muted dark earth */
+    /* Dark mode: Clean neutral elevation */
+    --bg: 15 17 16;                 /* Darkest base */
+    --bg-subtle: 33 37 41;          /* Neutral 900 - panels */
+    --surface: 52 58 64;            /* Neutral 800 - cards */
+    --primary: 107 155 107;         /* Forest 400 - lighter for dark */
+    --primary-hover: 143 184 143;   /* Forest 300 - hover */
+    --primary-light: 15 26 13;      /* Forest 800 - dark accent */
+    --charcoal: 248 249 250;        /* Neutral 50 - light text */
+    --charcoal-muted: 173 181 189;  /* Neutral 500 - muted text */
+    --border: 73 80 87;             /* Neutral 700 */
+    --border-subtle: 52 58 64;      /* Neutral 800 */
+    
+    /* Dark semantic colors */
+    --success: 34 197 94;
+    --success-bg: 6 78 59;
+    --warning: 251 191 36;
+    --warning-bg: 120 53 15;
+    --danger: 248 113 113;
+    --danger-bg: 127 29 29;
+    --info: 96 165 250;
+    --info-bg: 30 58 138;
   }
 }
 
@@ -89,7 +73,7 @@ body {
 /* ─── Component Utilities ──────────────────────────────── */
 @layer components {
 
-  /* Primary Button: Solid olive green */
+  /* Primary Button: Forest green */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            bg-primary hover:bg-primary-hover text-white

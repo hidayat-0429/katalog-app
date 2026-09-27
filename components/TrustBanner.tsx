@@ -17,8 +17,8 @@ export default function TrustBanner() {
 
   const certifications = [
     { name: "HACCP", color: "bg-brand-forest-100 dark:bg-brand-forest-900/30 text-brand-forest-700 dark:text-brand-forest-300 border-brand-forest-200 dark:border-brand-forest-800" },
-    { name: "Halal MUI", color: "bg-brand-fresh-100 dark:bg-brand-fresh-900/30 text-brand-fresh-700 dark:text-brand-fresh-300 border-brand-fresh-200 dark:border-brand-fresh-800" },
-    { name: "ISO 22000", color: "bg-brand-earth-100 dark:bg-brand-earth-900/30 text-brand-earth-700 dark:text-brand-earth-300 border-brand-earth-200 dark:border-brand-earth-800" },
+    { name: "Halal MUI", color: "bg-semantic-success-100 dark:bg-semantic-success-900/30 text-semantic-success-700 dark:text-semantic-success-300 border-semantic-success-200 dark:border-semantic-success-800" },
+    { name: "ISO 22000", color: "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700" },
   ];
 
   return (

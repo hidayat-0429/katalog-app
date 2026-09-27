@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 
 export type ButtonVariant =
   | 'primary'
-  | 'cta'
   | 'secondary'
   | 'danger'
   | 'ghost'
@@ -33,36 +32,33 @@ const variantClasses: Record<ButtonVariant, string> = {
     'active:bg-brand-forest-800',
     'border border-brand-forest-700',
     'dark:bg-brand-forest-500 dark:hover:bg-brand-forest-600',
-    'dark:border-brand-forest-600'
-  ),
-  cta: cn(
-    'bg-brand-amber-500 text-white',
-    'hover:bg-brand-amber-600',
-    'active:bg-brand-amber-700',
-    'border border-brand-amber-600',
-    'dark:bg-brand-amber-500 dark:hover:bg-brand-amber-600',
-    'dark:border-brand-amber-600'
+    'dark:border-brand-forest-600',
+    'focus:ring-brand-forest-500/20'
   ),
   secondary: cn(
     'bg-white text-neutral-700 border border-neutral-300',
     'hover:bg-neutral-50 hover:border-neutral-400',
     'dark:bg-neutral-800 dark:text-neutral-200',
-    'dark:border-neutral-600 dark:hover:bg-neutral-700'
+    'dark:border-neutral-600 dark:hover:bg-neutral-700',
+    'focus:ring-neutral-500/20'
   ),
   danger: cn(
     'bg-semantic-danger-DEFAULT text-white',
     'hover:bg-semantic-danger-600 border border-semantic-danger-600',
-    'dark:bg-semantic-danger-600 dark:hover:bg-semantic-danger-700'
+    'dark:bg-semantic-danger-600 dark:hover:bg-semantic-danger-700',
+    'focus:ring-semantic-danger-500/20'
   ),
   ghost: cn(
     'bg-transparent text-neutral-700 border border-transparent',
     'hover:bg-neutral-100 hover:border-neutral-200',
-    'dark:text-neutral-200 dark:hover:bg-neutral-800'
+    'dark:text-neutral-200 dark:hover:bg-neutral-800',
+    'focus:ring-neutral-500/20'
   ),
   icon: cn(
     'bg-transparent text-neutral-600 border-0 p-2',
     'hover:bg-neutral-100 hover:text-neutral-900',
-    'dark:text-neutral-300 dark:hover:bg-neutral-800'
+    'dark:text-neutral-300 dark:hover:bg-neutral-800',
+    'focus:ring-neutral-500/20'
   ),
 };
 

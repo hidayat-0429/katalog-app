@@ -63,60 +63,23 @@ const config: Config = {
         "dark-cta": "rgb(var(--cta) / <alpha-value>)",
         "dark-cta-text": "rgb(var(--charcoal) / <alpha-value>)",
 
-        // Design System V2: Sweetgreen-Inspired Premium Food Palette
+        // Duotone System: Primary Green + Neutral Gray
+        // Simplified from multi-color palette for cleaner, more focused brand identity
         brand: {
-          // Deep Forest Green (Primary) - Inspired by Sweetgreen's signature green
+          // Primary: Forest Green (Natural, Organic, Growth)
+          // Used for: CTAs, links, active states, brand moments
           forest: {
-            50: '#f0f7f0',   // Lightest sage for backgrounds
-            100: '#d8ebd8',  // Light sage for subtle elements  
-            200: '#b8d4b8',  // Medium-light for borders
-            300: '#8fb88f',  // Mid-tone for muted elements
-            400: '#6b9b6b',  // Active states
-            500: '#2d5a27',  // Primary brand color - rich forest
+            50: '#f0f7f0',   // Lightest - backgrounds, hover states
+            100: '#d8ebd8',  // Light - subtle accents
+            200: '#b8d4b8',  // Medium-light - borders
+            300: '#8fb88f',  // Mid-tone - disabled states
+            400: '#6b9b6b',  // Medium - muted elements
+            500: '#2d5a27',  // Primary brand color
             600: '#1e4a1a',  // Hover states
             700: '#163a13',  // Pressed states
             800: '#0f2a0c',  // Deep accent
-            900: '#081a05',  // Darkest for text
+            900: '#081a05',  // Darkest
           },
-          // Warm Earth Brown (Secondary) - Premium natural feel
-          earth: {
-            50: '#faf8f5',   // Cream background
-            100: '#f0ebe0',  // Light beige for cards
-            200: '#e1d7c7',  // Warm neutral borders
-            300: '#cfc0a8',  // Mid-tone earth
-            400: '#b8a082',  // Muted earth accent
-            500: '#8b7355',  // Rich brown secondary
-            600: '#725d44',  // Brown hover
-            700: '#5a4834',  // Brown pressed
-            800: '#423525',  // Deep brown
-            900: '#2b2217',  // Darkest earth
-          },
-          // Premium Amber (Accent) - Warmth and appetite appeal
-          amber: {
-            50: '#fefbf3',   // Lightest amber glow
-            100: '#fdf4e1',  // Soft amber background
-            200: '#fae6c1',  // Light amber for badges
-            300: '#f6d496',  // Medium amber
-            400: '#f1bc68',  // Active amber
-            500: '#d97706',  // Rich amber accent - Sweetgreen inspired
-            600: '#b8620a',  // Amber hover
-            700: '#8f4d08',  // Amber pressed
-            800: '#6b3a06',  // Deep amber
-            900: '#4a2704',  // Darkest amber
-          },
-          // Fresh Green (Success/Freshness Indicators)  
-          fresh: {
-            50: '#f0fdf4',   // Lightest fresh
-            100: '#dcfce7',  // Light fresh background
-            200: '#bbf7d0',  // Fresh badge background
-            300: '#86efac',  // Fresh indicator
-            400: '#4ade80',  // Fresh active
-            500: '#16a34a',  // Fresh primary
-            600: '#15803d',  // Fresh hover
-            700: '#166534',  // Fresh pressed
-            800: '#14532d',  // Deep fresh
-            900: '#0f3d26',  // Darkest fresh
-          }
         },
 
         // Design System V2: Neutral Colors (Cool Grays for Data Presentation)

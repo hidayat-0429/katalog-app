@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-export type BadgeVariant = 'default' | 'outline' | 'info' | 'success' | 'warning' | 'danger' | 'earth';
+export type BadgeVariant = 'default' | 'outline' | 'info' | 'success' | 'warning' | 'danger';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
@@ -42,11 +42,6 @@ const variantMap: Record<BadgeVariant, string> = {
     'bg-semantic-danger-light text-semantic-danger-dark',
     'border border-semantic-danger-DEFAULT',
     'dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200'
-  ),
-  earth: cn(
-    'bg-brand-earth-50 text-brand-earth-700',
-    'border border-brand-earth-200',
-    'dark:bg-brand-earth-900/40 dark:text-brand-earth-300'
   ),
 };
 

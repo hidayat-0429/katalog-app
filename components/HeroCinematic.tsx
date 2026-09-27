@@ -175,8 +175,8 @@ export default function HeroCinematic({
             style={{ transitionDelay: "80ms" }}
           >
             <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-fresh-400 opacity-40" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-fresh-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-forest-400 opacity-40" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-forest-400" />
             </span>
             <span className="text-xs font-medium text-white/50 tracking-wide">
               {t.hero.statusBadge}
@@ -191,7 +191,7 @@ export default function HeroCinematic({
             <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-white">
               {title}
             </span>
-            <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-brand-fresh-300">
+            <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-brand-forest-300">
               {subtitle}
             </span>
           </h1>

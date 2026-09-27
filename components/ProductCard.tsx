@@ -102,7 +102,7 @@ export default function ProductCard({
               {t.productCard.outOfStock}
             </span>
           ) : isLowStock ? (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-brand-earth-50 dark:bg-brand-earth-950/60 text-brand-earth-700 dark:text-brand-earth-300 border border-brand-earth-200 dark:border-brand-earth-800 shadow-xs">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-semantic-warning-light dark:bg-semantic-warning-darkBg text-semantic-warning-dark dark:text-semantic-warning-200 border border-semantic-warning-DEFAULT dark:border-semantic-warning-700 shadow-xs">
               {`${t.productCard.remainingPrefix} ${stock} ${unit} ${t.productCard.remainingSuffix}`.trim()}
             </span>
           ) : (
@@ -131,7 +131,7 @@ export default function ProductCard({
         {/* Usage Context Badge - NEW */}
         {usageContext && (
           <div className="flex items-center gap-1.5 text-xs">
-            <ChefHat className="w-3.5 h-3.5 text-brand-amber-600 dark:text-brand-amber-400 flex-shrink-0" />
+            <ChefHat className="w-3.5 h-3.5 text-brand-forest-600 dark:text-brand-forest-400 flex-shrink-0" />
             <span className="text-neutral-600 dark:text-neutral-400 italic">{usageContext}</span>
           </div>
         )}
