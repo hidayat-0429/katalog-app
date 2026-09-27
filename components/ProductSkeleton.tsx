@@ -4,7 +4,7 @@
  */
 export default function ProductSkeleton() {
   return (
-    <div className="h-full flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden animate-pulse">
+    <div className="h-full flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden motion-safe:animate-pulse">
       {/* Image Skeleton */}
       <div className="w-full aspect-square bg-neutral-200 dark:bg-neutral-700" />
 
@@ -40,17 +40,13 @@ export default function ProductSkeleton() {
  */
 interface ProductSkeletonGridProps {
   count?: number;
-  cols?: number;
 }
 
-export function ProductSkeletonGrid({ count = 4, cols = 4 }: ProductSkeletonGridProps) {
+export function ProductSkeletonGrid({ count = 4 }: ProductSkeletonGridProps) {
+  // Kelas grid disamakan dengan grid kartu produk yang sebenarnya supaya
+  // tata letak tidak melompat saat data masuk.
   return (
-    <div
-      className="grid gap-5"
-      style={{
-        gridTemplateColumns: `repeat(auto-fill, minmax(240px, 1fr))`,
-      }}
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {Array.from({ length: count }).map((_, i) => (
         <ProductSkeleton key={i} />
       ))}
