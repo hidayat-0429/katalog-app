@@ -104,7 +104,7 @@ export default async function AdminMessagesPage({
             </div>
           ))
         ) : (
-          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center text-neutral-500 dark:text-neutral-400 font-sans text-xs">
+          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-neutral-500 dark:text-neutral-400 font-sans text-xs">
             {currentFilter === 'BELUM'
               ? 'Tidak ada pesan yang belum dibaca.'
               : currentFilter === 'DIBACA'

@@ -51,8 +51,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   ),
   danger: cn(
     'bg-semantic-danger-DEFAULT text-white',
-    'hover:bg-red-600 border border-red-600',
-    'dark:bg-red-600 dark:hover:bg-red-700'
+    'hover:bg-semantic-danger-600 border border-semantic-danger-600',
+    'dark:bg-semantic-danger-600 dark:hover:bg-semantic-danger-700'
   ),
   ghost: cn(
     'bg-transparent text-neutral-700 border border-transparent',

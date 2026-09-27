@@ -47,7 +47,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 mt-6">
       {error && (
-        <div className="text-sm text-semantic-danger-dark flex items-center gap-2 bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
+        <div className="text-sm text-semantic-danger-dark flex items-center gap-2 bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200 dark:border-semantic-danger-900">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -61,7 +61,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
           <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
             {tf.picTitle}
           </h3>
@@ -121,7 +121,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
           </div>
         </div>
 
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
           <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
             {tf.contactTitle}
           </h3>

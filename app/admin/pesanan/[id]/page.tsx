@@ -54,7 +54,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
       {/* Info grid */}
       <div className="grid md:grid-cols-2 gap-5">
         {/* Pelanggan */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
           <h2 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-4">
             <User className="w-3.5 h-3.5" /> Informasi Pelanggan
           </h2>
@@ -83,7 +83,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
         </div>
 
         {/* Pengiriman */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
           <h2 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-4">
             <MapPin className="w-3.5 h-3.5" /> Tujuan Pengiriman
           </h2>
@@ -103,7 +103,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
       </div>
 
       {/* Tabel barang */}
-      <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
+      <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
         <div className="px-5 py-3.5 border-b border-neutral-200 dark:border-neutral-700 flex items-center gap-1.5">
           <Package className="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-400" />
           <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">Barang Dipesan</h2>

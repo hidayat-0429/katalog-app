@@ -31,7 +31,7 @@ export default async function AdminCategoriesPage() {
 
       <div className="grid md:grid-cols-[1fr_2fr] gap-6 items-start">
         {/* Add Form */}
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-5 sticky top-20">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-5 sticky top-20">
           <h2 className="flex items-center gap-2 font-semibold text-sm text-neutral-900 dark:text-neutral-100 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">
             <Plus className="w-4 h-4 text-neutral-900 dark:text-neutral-100" />
             <span>Tambah Kategori</span>
@@ -60,7 +60,7 @@ export default async function AdminCategoriesPage() {
         {/* Category List */}
         <div className="flex flex-col gap-2.5">
           {categories.map(category => (
-            <div key={category.id} className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 flex items-center justify-between group hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors duration-200">
+            <div key={category.id} className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-4 flex items-center justify-between group hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors duration-200">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded flex items-center justify-center shrink-0 text-neutral-500 dark:text-neutral-400">
                   <Tag className="w-4 h-4" />
@@ -87,7 +87,7 @@ export default async function AdminCategoriesPage() {
             </div>
           ))}
           {categories.length === 0 && (
-            <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs">
+            <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs">
               Belum ada kategori yang dibuat.
             </div>
           )}

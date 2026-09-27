@@ -117,7 +117,7 @@ export default async function AdminDashboardPage() {
       {/* Stat grid 2x2 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Perlu diproses */}
-        <div className={`rounded-lg border p-6 bg-white dark:bg-neutral-800 transition-colors duration-200 ease-out ${pesananPending > 0 ? 'border-semantic-warning-DEFAULT/40 bg-semantic-warning-light/30 dark:bg-semantic-warning-darkBg/20' : 'border-neutral-200 dark:border-neutral-700'}`}>
+        <div className={`rounded-lg border p-6 bg-surface transition-colors duration-200 ease-out ${pesananPending > 0 ? 'border-semantic-warning-DEFAULT/40 bg-semantic-warning-light/30 dark:bg-semantic-warning-darkBg/20' : 'border-neutral-200 dark:border-neutral-700'}`}>
           <div className={`w-9 h-9 rounded-lg flex items-center justify-center mb-4 ${pesananPending > 0 ? 'bg-semantic-warning-DEFAULT/15 text-semantic-warning-DEFAULT' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-400'}`}>
             <Clock className="w-4 h-4" />
           </div>
@@ -134,7 +134,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Total pesanan */}
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6 transition-colors duration-200 ease-out">
           <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
             <ClipboardList className="w-4 h-4" />
           </div>
@@ -148,7 +148,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Total produk */}
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6 transition-colors duration-200 ease-out">
           <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
             <Package className="w-4 h-4" />
           </div>
@@ -162,7 +162,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Total user */}
-        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 transition-colors duration-200 ease-out">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6 transition-colors duration-200 ease-out">
           <div className="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
             <Users className="w-4 h-4" />
           </div>
@@ -177,7 +177,7 @@ export default async function AdminDashboardPage() {
       {/* Bottom grid */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Produk terlaris */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Trophy className="w-4 h-4 text-semantic-warning-DEFAULT" />
@@ -199,7 +199,7 @@ export default async function AdminDashboardPage() {
                     </span>
                     <span className="font-sans text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">{item.name}</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[11px] font-semibold bg-semantic-success-light dark:bg-semantic-success-darkBg text-semantic-success-dark dark:text-green-200 border border-semantic-success-DEFAULT">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[11px] font-semibold bg-semantic-success-light dark:bg-semantic-success-darkBg text-semantic-success-dark dark:text-semantic-success-200 border border-semantic-success-DEFAULT">
                     {Number(item.quantity)} terjual
                   </span>
                 </div>
@@ -209,7 +209,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Pesanan terbaru */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />

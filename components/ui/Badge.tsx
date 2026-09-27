@@ -26,22 +26,22 @@ const variantMap: Record<BadgeVariant, string> = {
   info: cn(
     'bg-semantic-info-light text-semantic-info-dark',
     'border border-semantic-info-DEFAULT',
-    'dark:bg-semantic-info-darkBg dark:text-blue-200'
+    'dark:bg-semantic-info-darkBg dark:text-semantic-info-200'
   ),
   success: cn(
     'bg-semantic-success-light text-semantic-success-dark',
     'border border-semantic-success-DEFAULT',
-    'dark:bg-semantic-success-darkBg dark:text-green-200'
+    'dark:bg-semantic-success-darkBg dark:text-semantic-success-200'
   ),
   warning: cn(
     'bg-semantic-warning-light text-semantic-warning-dark',
     'border border-semantic-warning-DEFAULT',
-    'dark:bg-semantic-warning-darkBg dark:text-amber-200'
+    'dark:bg-semantic-warning-darkBg dark:text-semantic-warning-200'
   ),
   danger: cn(
     'bg-semantic-danger-light text-semantic-danger-dark',
     'border border-semantic-danger-DEFAULT',
-    'dark:bg-semantic-danger-darkBg dark:text-red-200'
+    'dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200'
   ),
   earth: cn(
     'bg-brand-earth-50 text-brand-earth-700',

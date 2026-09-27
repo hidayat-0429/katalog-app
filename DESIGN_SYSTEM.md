@@ -31,9 +31,11 @@ Referensi kode:
    tambahkan token/varian baru di `tailwind.config.ts` atau `globals.css`.
 
 Catatan penting: `neutral` di proyek ini **bukan** abu bawaan Tailwind. Skalanya sudah
-ditimpa (`#f8f9fa` → `#212529`) dan merupakan bagian resmi sistem. Yang dilarang adalah
-warna bawaan lain (`blue-*`, `green-*`, `emerald-*`, `red-*`, `stone-*`), kecuali
-pengecualian yang didaftarkan di §11.
+ditimpa (`#f8f9fa` → `#212529`) dan merupakan bagian resmi sistem. Warna bawaan lain
+(`blue-*`, `green-*`, `emerald-*`, `red-*`, `amber-*`, `stone-*`) **sudah habis** dari
+kode — jangan ditulis lagi; state form dan badge pakai tangga `semantic-*`. Satu-satunya
+warna di luar palet yang diizinkan adalah hijau WhatsApp (`#25D366`) dan scrim foto
+gelap (`#0d1a10`) di hero — lihat §8.
 
 ### Token CSS (nilai sebenarnya)
 
@@ -66,8 +68,27 @@ untuk garis. Jangan menulis ulang nilai-nilai ini sebagai hex di class — sebut
 - `brand.amber` 50–900 — amber premium (500 `#d97706`)
 - `brand.earth` 50–900 — cokelat/tanah hangat
 - `brand.fresh` 50–900 — hijau segar untuk indikator stok/kesegaran
-- `neutral` 50–900 — abu dingin (teks sekunder, border, latar gelap)
-- `semantic.success|warning|danger|info` → `.light` `DEFAULT` `.dark` `.darkBg`
+- `neutral` 50–900 — abu dingin (teks sekunder, border, latar kontrol)
+- `semantic.success|warning|danger|info` — masing-masing punya tangga **50–900** plus
+  alias lama `.light` `DEFAULT` `.dark` `.darkBg`. Tangga ini yang dipakai untuk state
+  form (border error, teks sukses, badge info). Nama bawaan Tailwind (`red-*`,
+  `emerald-*`, `blue-*`, `green-*`, `amber-*`, `stone-*`) sudah tidak ada di kode dan
+  jangan ditulis lagi — sebut `semantic-*`.
+
+### Tangga elevasi (dua mode)
+
+| Peran | Light | Dark | Class |
+|---|---|---|---|
+| Latar halaman | `#FAF9F6` | `#0F1110` | `bg-bg` |
+| Panel tenggelam / inset | `#F0EBE0` | `#1A1A16` | `bg-bg-subtle` |
+| Kartu, popover, modal, footer, band | `#FFFFFF` | `#141715` | `bg-surface` |
+| Kontrol form (input, select, textarea, tombol sekunder, baris pilihan) | `#FFFFFF` | `#343a40` | `bg-white dark:bg-neutral-800` |
+| Kartu/status aktif | `#FFFFFF` | `#343a40` | `bg-white dark:bg-neutral-800` |
+
+Aturannya: **wadah** memakai `bg-surface` (satu warna kartu di seluruh aplikasi, dark-nya
+netral `#141715`), **kontrol** sengaja tetap `neutral-800` supaya field masih terbaca di
+atas kartu. Jangan pakai `bg-white` polos untuk wadah — di mode gelap warnanya tidak ikut
+berubah dan langsung jadi tapak putih menyala.
 
 Warna font yang dipakai: display/headline = **Bricolage Grotesque** (`font-display` /
 `font-heading`), body & UI = **Figtree** (`font-sans`, default), angka/harga/kode order =
@@ -171,13 +192,14 @@ harga/label pendek di kartu memakai latar `bg-white/90` agar terbaca di atas gam
 
 ### Input / Card / Table / Modal / Toggle
 - `Input`: `rounded-md border-neutral-300 bg-white` + `focus:ring-2 ring-brand-forest-500`,
-  dark memakai `neutral-800`. Label: `text-xs uppercase tracking-wider` + `Figtree medium`.
-- `Card`: `rounded-lg border-neutral-200 bg-white p-6`, prop `hover` menambah border/latar
+  dark memakai `neutral-800` (sengaja — kontrol harus lebih terang dari kartunya).
+  Label: `text-xs uppercase tracking-wider` + `Figtree medium`.
+- `Card`: `rounded-lg border-neutral-200 bg-surface p-6`, prop `hover` menambah border/latar
   saat disentuh. Kartu konten umum: `bg-surface border-border`.
 - `Table`: header `bg-bg-subtle text-charcoal-muted uppercase text-xs`, baris
   `border-b border-border`, hover `bg-bg`, padding `px-4 py-3`.
 - `Modal`: overlay `bg-black/50 backdrop-blur-sm` (salah satu dari sedikit blur yang
-  diizinkan), panel `bg-surface rounded-xl border border-border shadow-lg`.
+  diizinkan), panel `bg-surface rounded-lg border border-neutral-200 shadow-sm`.
 - Placeholder: `text-charcoal-muted` / `placeholder:text-neutral-400`.
 
 ### Empty state & loading
@@ -285,18 +307,22 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 
 Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
 
-1. ~~`stone-*`~~ dan ~~hex mentah di class~~ sudah dibersihkan (2026-09-27): `stone-*`
-   digantikan `neutral-*`, dan `dark:bg-[#…]`/`bg-[#faf9f6]` digantikan token
-   `bg-surface` / `bg-bg` / `bg-bg-subtle`. Jangan kembalikan keduanya.
-2. `bg-white` masih dipakai di primitif `components/ui/*` (`Button` secondary, `Card`,
-   `Input`, `Modal`) dengan pasangan `dark:bg-neutral-800`. Nilai ini **berbeda** dari
-   `bg-surface` (gelap netral `#141715`). Keputusannya: konversi primitif ke `bg-surface`
-   supaya satu sumber, atau biarkan `neutral-800` sebagai warna "form/control" khusus.
-   Belum diputuskan — jangan dianggap salah kalau melihatnya.
-3. `blue-200 / green-200 / amber-200 / red-200` dipakai di varian `Badge` untuk teks
-   dark mode. Diizinkan **hanya** di dalam `components/ui/Badge.tsx`; di luar itu gunakan
-   `semantic.*`.
-4. Banyak kelas di `@layer components` sudah tidak dipakai sama sekali (mati):
+1. Sudah dibersihkan (2026-09-27), jangan kembalikan:
+   - `stone-*` → `neutral-*`;
+   - hex mentah di class (`dark:bg-[#141715]`, `bg-[#faf9f6]`, `#0f1110`, `#1a1a16`,
+     `#222220`) → token `bg-surface` / `bg-bg` / `bg-bg-subtle`;
+   - warna bawaan Tailwind (`red-*`, `emerald-*`, `green-*`, `blue-*`) → tangga
+     `semantic-danger|success|info-*`. Teks dark mode di `Badge` sekarang
+     `semantic-*-200`, bukan `blue-200`/`green-200` lagi;
+   - wadah (`Card`, `Modal` panel, kartu admin, `TrustBanner`, popover WhatsApp) dipaksa
+     ke `bg-surface`. Yang sengaja **tidak** disatukan: kontrol (`Input`, `Button`
+     secondary, `PaginationControls`, baris pilihan pembayaran, kartu aktif) tetap
+     `bg-white dark:bg-neutral-800` supaya masih bedaan dari kartunya.
+2. Nilai `semantic-*` yang baru ditambahkan ke tema adalah salinan persis dari warna yang
+   sudah tampil (mis. `semantic-danger-500` = `#ef4444`), jadi perpindahan nama tidak
+   mengubah piksel — kecuali `green-200` → `semantic-success-200` (`#a7f3d0`) yang
+   sedikit lebih ke-arah emerald.
+3. Banyak kelas di `@layer components` sudah tidak dipakai sama sekali (mati):
    `.btn-cta`, `.btn-ghost`, `.card-hover`, `.section-title`, `.section-subtitle`,
    `.table-*`, `.nav-link*`, `.sidebar-link*`, `.page-*`, `.stat-*`, `.empty-icon-wrap`,
    `.divider`, `.pill*`, `.focus-ring`, `.gradient-text`, `.btn-enhanced`,

@@ -99,7 +99,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
 
       {/* Progress timeline */}
       {!isCanceled ? (
-        <div className="mb-8 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 print:hidden">
+        <div className="mb-8 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 print:hidden">
           <div className="relative flex justify-between items-center px-2">
             <div className="absolute left-2 right-2 top-[7px] h-0.5 bg-neutral-200 dark:bg-neutral-700 z-0">
               {currentStepIndex > 0 && (
@@ -114,7 +114,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
               const current = i === currentStepIndex;
               return (
                 <div key={step} className="relative z-10 flex flex-col items-center gap-2">
-                  <div className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${done ? "bg-brand-forest-600 dark:bg-brand-forest-700 border-brand-forest-600 dark:border-brand-forest-700" : "bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700"} ${current ? "ring-4 ring-brand-forest-500/20" : ""}`} />
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${done ? "bg-brand-forest-600 dark:bg-brand-forest-700 border-brand-forest-600 dark:border-brand-forest-700" : "bg-surface border-neutral-200 dark:border-neutral-700"} ${current ? "ring-4 ring-brand-forest-500/20" : ""}`} />
                   <span className={`text-[10px] sm:text-xs font-medium ${done ? "text-brand-forest-600 dark:text-brand-forest-400 font-semibold" : "text-neutral-500 dark:text-neutral-400"}`}>
                     {statusText(step)}
                   </span>
@@ -125,10 +125,10 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
         </div>
       ) : (
         <div className="mb-6 bg-semantic-danger-light dark:bg-semantic-danger-darkBg border border-semantic-danger-DEFAULT/30 rounded-xl p-4 flex items-start gap-3 print:hidden">
-          <AlertCircle className="w-5 h-5 text-semantic-danger-dark dark:text-red-300 shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-semantic-danger-dark dark:text-semantic-danger-300 shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-sm text-semantic-danger-dark dark:text-red-300">{t.invoice.canceled}</p>
-            <p className="text-xs text-semantic-danger-dark/80 dark:text-red-300/80 mt-0.5">{t.invoice.canceledDesc}</p>
+            <p className="font-semibold text-sm text-semantic-danger-dark dark:text-semantic-danger-300">{t.invoice.canceled}</p>
+            <p className="text-xs text-semantic-danger-dark/80 dark:text-semantic-danger-300/80 mt-0.5">{t.invoice.canceledDesc}</p>
           </div>
         </div>
       )}
@@ -136,7 +136,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
       {/* Info + Rincian */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
         {/* Info pemesan & pengiriman */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 flex flex-col gap-4 font-sans">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 flex flex-col gap-4 font-sans">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 flex items-center gap-1.5">
             <Package className="w-3.5 h-3.5" /> {t.invoice.destination}
           </h2>
@@ -175,7 +175,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
         </div>
 
         {/* Tabel rincian barang */}
-        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden md:col-span-2 font-sans">
+        <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden md:col-span-2 font-sans">
           <div className="px-5 py-3.5 border-b border-neutral-200 dark:border-neutral-700">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.invoice.items}</h2>
           </div>

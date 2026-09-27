@@ -97,7 +97,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {formError && (
-        <div className="text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT flex items-center gap-2 dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
+        <div className="text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT flex items-center gap-2 dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200 dark:border-semantic-danger-900">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{formError}</span>
         </div>
@@ -107,7 +107,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
       <input type="hidden" name="imageUrl" value={imageUrl} />
 
       {/* Info Produk */}
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
         <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
           Informasi Produk
         </h3>
@@ -158,7 +158,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
       </div>
 
       {/* Harga & Stok */}
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
         <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
           Harga &amp; Persediaan
         </h3>
@@ -184,7 +184,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
       </div>
 
       {/* Media & Gambar Produk */}
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
         <div className="flex items-center justify-between mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
           <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100">Foto Produk</h3>
           <div className="inline-flex items-center gap-1 bg-neutral-100 dark:bg-neutral-700 p-1 rounded-md border border-neutral-200 dark:border-neutral-600">
@@ -210,7 +210,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
         </div>
 
         {uploadError && (
-          <div className="mb-4 text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
+          <div className="mb-4 text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200 dark:border-semantic-danger-900">
             {uploadError}
           </div>
         )}
@@ -241,7 +241,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
               </div>
             ) : (
               <div className="flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
+                <div className="w-12 h-12 rounded-lg bg-surface border border-neutral-300 dark:border-neutral-600 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
                   <Upload className="w-6 h-6" />
                 </div>
                 <div>
@@ -272,7 +272,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
         {/* Live Preview & Remove */}
         {imageUrl && (
           <div className="flex items-center gap-4 p-3 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-md mt-4">
-            <div className="relative w-16 h-16 rounded-md overflow-hidden bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shrink-0">
+            <div className="relative w-16 h-16 rounded-md overflow-hidden bg-surface border border-neutral-200 dark:border-neutral-700 shrink-0">
               <Image 
                 src={imageUrl} 
                 alt="Preview Produk" 
@@ -300,7 +300,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
       </div>
 
       {/* Settings */}
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
         <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
           Visibilitas &amp; Status
         </h3>

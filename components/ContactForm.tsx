@@ -124,11 +124,11 @@ export default function ContactForm() {
 
       {/* Status Messages */}
       {submitStatus === 'success' && (
-        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-lg flex items-start gap-3">
-          <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+        <div className="p-4 bg-semantic-success-50 dark:bg-semantic-success-900/30 border border-semantic-success-200 dark:border-semantic-success-800 rounded-lg flex items-start gap-3">
+          <CheckCircle className="w-5 h-5 text-semantic-success-600 dark:text-semantic-success-400 flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-emerald-900 dark:text-emerald-100 text-sm">{tf.successTitle}</h3>
-            <p className="text-xs text-emerald-700 dark:text-emerald-200 mt-1">
+            <h3 className="font-semibold text-semantic-success-900 dark:text-semantic-success-100 text-sm">{tf.successTitle}</h3>
+            <p className="text-xs text-semantic-success-700 dark:text-semantic-success-200 mt-1">
               {tf.successBody}
             </p>
           </div>
@@ -136,11 +136,11 @@ export default function ContactForm() {
       )}
 
       {submitStatus === 'error' && (
-        <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+        <div className="p-4 bg-semantic-danger-50 dark:bg-semantic-danger-900/30 border border-semantic-danger-200 dark:border-semantic-danger-800 rounded-lg flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-semantic-danger-600 dark:text-semantic-danger-400 flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-red-900 dark:text-red-100 text-sm">{tf.errorTitle}</h3>
-            <p className="text-xs text-red-700 dark:text-red-200 mt-1">{errorMessage}</p>
+            <h3 className="font-semibold text-semantic-danger-900 dark:text-semantic-danger-100 text-sm">{tf.errorTitle}</h3>
+            <p className="text-xs text-semantic-danger-700 dark:text-semantic-danger-200 mt-1">{errorMessage}</p>
           </div>
         </div>
       )}
@@ -148,7 +148,7 @@ export default function ContactForm() {
       {/* Name */}
       <div>
         <label htmlFor="name" className={labelClass}>
-          {tf.name} <span className="text-red-500">*</span>
+          {tf.name} <span className="text-semantic-danger-500">*</span>
         </label>
         <input
           type="text"
@@ -165,7 +165,7 @@ export default function ContactForm() {
       {/* Email */}
       <div>
         <label htmlFor="email" className={labelClass}>
-          {tf.email} <span className="text-red-500">*</span>
+          {tf.email} <span className="text-semantic-danger-500">*</span>
         </label>
         <input
           type="email"
@@ -183,7 +183,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="company" className={labelClass}>
-            {tf.company} <span className="text-red-500">*</span>
+            {tf.company} <span className="text-semantic-danger-500">*</span>
           </label>
           <input
             type="text"
@@ -199,7 +199,7 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="phone" className={labelClass}>
-            {tf.phone} <span className="text-red-500">*</span>
+            {tf.phone} <span className="text-semantic-danger-500">*</span>
           </label>
           <input
             type="tel"
@@ -217,7 +217,7 @@ export default function ContactForm() {
       {/* Subject */}
       <div>
         <label htmlFor="subject" className={labelClass}>
-          {tf.subject} <span className="text-red-500">*</span>
+          {tf.subject} <span className="text-semantic-danger-500">*</span>
         </label>
         <select
           id="subject"
@@ -239,7 +239,7 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="message" className={labelClass}>
-          {tf.message} <span className="text-red-500">*</span>
+          {tf.message} <span className="text-semantic-danger-500">*</span>
         </label>
         <textarea
           id="message"

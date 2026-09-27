@@ -717,7 +717,7 @@ button:not(:disabled):active {
 /* Enhanced card effects */
 .card-premium {
   @apply motion-safe:transition-all motion-safe:duration-300;
-  @apply hover:shadow-2xl hover:shadow-emerald-500/10;
+  @apply hover:shadow-2xl hover:shadow-semantic-success-500/10;
 }
 
 .card-premium:hover {

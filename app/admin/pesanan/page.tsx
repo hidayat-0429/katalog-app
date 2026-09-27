@@ -78,7 +78,7 @@ export default async function AdminOrdersPage({
         {orders.length > 0 ? (
           orders.map((order) => (
             <Link key={order.id} href={`/admin/pesanan/${order.id}`} className="block group">
-              <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 flex flex-col sm:flex-row justify-between gap-3 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors duration-200 ease-out font-sans">
+              <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-4 flex flex-col sm:flex-row justify-between gap-3 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors duration-200 ease-out font-sans">
                 <div className="flex flex-col gap-0.5">
                   <div className="font-mono font-bold text-sm text-neutral-900 dark:text-neutral-100 tabular-nums">{order.orderNumber}</div>
                   <div className="text-xs text-neutral-700 dark:text-neutral-300">
@@ -98,7 +98,7 @@ export default async function AdminOrdersPage({
             </Link>
           ))
         ) : (
-          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center text-neutral-500 dark:text-neutral-400 font-sans text-xs">
+          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-neutral-500 dark:text-neutral-400 font-sans text-xs">
             Belum ada pesanan{currentStatus !== 'SEMUA' ? ` dengan status ${statusLabel(currentStatus as OrderStatus)}` : ''}.
           </div>
         )}

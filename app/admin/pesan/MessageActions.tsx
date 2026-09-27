@@ -61,7 +61,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
           onClick={() => setIsModalOpen(true)}
           disabled={isPending}
           title="Hapus Pesan"
-          className="p-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
+          className="p-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-semantic-danger-600 dark:hover:text-semantic-danger-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
         >
           <Trash2 className="w-4 h-4" />
         </button>
@@ -95,7 +95,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
                 run(() => deleteContactMessage(id), "Pesan berhasil dihapus.")
               }
               disabled={isPending}
-              className="flex-1 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-medium inline-flex items-center justify-center gap-2 disabled:opacity-50"
+              className="flex-1 py-2 rounded-lg bg-semantic-danger-600 hover:bg-semantic-danger-700 text-white text-sm font-medium inline-flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Ya, Hapus"}
             </button>

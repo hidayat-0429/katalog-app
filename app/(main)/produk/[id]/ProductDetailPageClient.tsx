@@ -153,7 +153,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   {t.productDetail.outOfStock}
                 </button>
               ) : (
-                <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
+                <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-4">
                   <AddToCartForm productId={product.id} maxStock={product.stock} unit={product.unit} />
                 </div>
               )}

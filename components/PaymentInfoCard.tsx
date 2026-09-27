@@ -28,7 +28,7 @@ export default function PaymentInfoCard() {
   }
 
   return (
-    <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-5">
+    <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-5">
       <div className="flex items-center gap-2 font-bold text-sm text-neutral-900 dark:text-neutral-100 border-b border-neutral-200 dark:border-neutral-700 pb-3">
         <Landmark className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
         <span>{t.payment.title}</span>

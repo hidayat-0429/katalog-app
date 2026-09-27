@@ -93,7 +93,7 @@ export default async function AdminProductsPage({
         )}
       </form>
 
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-white dark:bg-neutral-800">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-surface">
         {products.length > 0 ? (
           <div className="overflow-x-auto">
             <Table>

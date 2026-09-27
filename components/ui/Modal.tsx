@@ -35,7 +35,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
         data-state="open"
         className={cn(
           'relative w-full max-w-lg mx-4',
-          'bg-white rounded-lg shadow-sm',
+          'bg-surface rounded-lg shadow-sm',
           'border border-neutral-200',
           'p-6',
           
@@ -45,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
           'motion-reduce:transform-none',
           
           // Dark mode
-          'dark:bg-neutral-800 dark:border-neutral-700',
+          'dark:border-neutral-700',
           
           className
         )}

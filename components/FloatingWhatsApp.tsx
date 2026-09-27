@@ -19,7 +19,7 @@ export default function FloatingWhatsApp() {
         {/* Tooltip bubble - shows when hovering */}
         {!isOpen && (
           <div className="hidden lg:block opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-            <div className="bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <div className="bg-surface text-neutral-900 dark:text-neutral-100 px-4 py-2 rounded-lg shadow-lg text-sm font-medium border border-neutral-200 dark:border-neutral-700">
               {tw.tooltip}
             </div>
           </div>
@@ -27,7 +27,7 @@ export default function FloatingWhatsApp() {
 
         {/* Quick message popup */}
         {isOpen && (
-          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 w-72 sm:w-80 overflow-hidden animate-slideInUp">
+          <div className="bg-surface rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 w-72 sm:w-80 overflow-hidden animate-slideInUp">
             {/* Header */}
             <div className="bg-gradient-to-r from-[#25D366] to-[#20bd5a] p-4 flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
@@ -94,8 +94,8 @@ export default function FloatingWhatsApp() {
               <MessageCircle className="w-6 h-6 text-white" />
               {/* Ping animation */}
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-semantic-danger-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-semantic-danger-500"></span>
               </span>
             </>
           )}

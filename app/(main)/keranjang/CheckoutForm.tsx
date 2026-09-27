@@ -82,7 +82,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
     <>
       <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
-          <div className="text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT flex items-start gap-2 dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
+          <div className="text-sm text-semantic-danger-dark bg-semantic-danger-light p-3 rounded-md border border-semantic-danger-DEFAULT flex items-start gap-2 dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200 dark:border-semantic-danger-900">
             <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
@@ -160,7 +160,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
       {/* Confirmation Modal */}
       {showConfirmation && orderSummary && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-          <div className="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 max-w-md w-full shadow-lg">
+          <div className="bg-surface rounded-xl border border-neutral-200 dark:border-neutral-700 max-w-md w-full shadow-lg">
             {/* Header */}
             <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-brand-forest-100 dark:bg-brand-forest-900/30 flex items-center justify-center">

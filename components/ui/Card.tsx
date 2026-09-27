@@ -12,10 +12,10 @@ export const Card: React.FC<CardProps> = ({ className, hover = false, children, 
   const cardStyles = cn(
     // Base structure
     'rounded-lg border border-neutral-200',
-    'bg-white p-6',
+    'bg-surface p-6',
     
     // Dark mode
-    'dark:bg-neutral-800 dark:border-neutral-700',
+    'dark:border-neutral-700',
     
     // Transition
     'motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-out'

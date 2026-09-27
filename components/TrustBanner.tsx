@@ -22,7 +22,7 @@ export default function TrustBanner() {
   ];
 
   return (
-    <section className="w-full px-6 sm:px-8 lg:px-16 py-12 sm:py-16 bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+    <section className="w-full px-6 sm:px-8 lg:px-16 py-12 sm:py-16 bg-surface border-y border-neutral-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}

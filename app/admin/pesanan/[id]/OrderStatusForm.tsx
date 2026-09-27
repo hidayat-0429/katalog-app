@@ -36,14 +36,14 @@ export default function OrderStatusForm({ orderId, currentStatus }: { orderId: s
   }
 
   return (
-    <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+    <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
       <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
         <RefreshCw className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
         <span>Perbarui Status Pesanan</span>
       </h2>
 
       {error && (
-        <div className="flex items-start gap-2 text-sm text-semantic-danger-dark bg-semantic-danger-light border border-semantic-danger-DEFAULT rounded-md p-3 mb-4 dark:bg-semantic-danger-darkBg dark:text-red-200 dark:border-red-900">
+        <div className="flex items-start gap-2 text-sm text-semantic-danger-dark bg-semantic-danger-light border border-semantic-danger-DEFAULT rounded-md p-3 mb-4 dark:bg-semantic-danger-darkBg dark:text-semantic-danger-200 dark:border-semantic-danger-900">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>

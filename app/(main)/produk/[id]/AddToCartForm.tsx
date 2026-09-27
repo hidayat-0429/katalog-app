@@ -96,7 +96,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             )}
           </div>
 
-          <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-white dark:bg-neutral-800">
+          <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-surface">
             <button 
               type="button"
               onClick={handleDecrease}

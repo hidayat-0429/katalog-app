@@ -63,7 +63,7 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6">
+      <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="text-xs text-semantic-danger-DEFAULT dark:text-semantic-danger-DEFAULT flex items-center gap-2 bg-semantic-danger-light dark:bg-semantic-danger-darkBg p-3 rounded border border-semantic-danger-DEFAULT dark:border-semantic-danger-dark">

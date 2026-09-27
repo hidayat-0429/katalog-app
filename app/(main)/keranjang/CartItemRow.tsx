@@ -71,7 +71,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
       {/* Controls kanan */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         {/* Stepper */}
-        <div className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-md overflow-hidden bg-white dark:bg-neutral-800">
+        <div className="flex items-center border border-neutral-200 dark:border-neutral-700 rounded-md overflow-hidden bg-surface">
           <button
             type="button"
             onClick={() => handleUpdate(quantity - 1)}
@@ -105,7 +105,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
           onClick={handleRemove}
           disabled={isPending}
           aria-label={formatText(t.cartRow.removeAria, { name })}
-          className="p-1.5 text-neutral-400 dark:text-neutral-500 hover:text-red-500 dark:hover:text-red-400 rounded-md transition-colors"
+          className="p-1.5 text-neutral-400 dark:text-neutral-500 hover:text-semantic-danger-500 dark:hover:text-semantic-danger-400 rounded-md transition-colors"
         >
           <Trash2 className="w-4 h-4" />
         </button>

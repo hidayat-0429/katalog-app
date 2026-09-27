@@ -51,7 +51,7 @@ export default function ContactPageClient() {
           </div>
 
           {/* Address */}
-          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="flex items-start gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center shrink-0 text-brand-forest-600 dark:text-brand-forest-400">
                 <MapPin className="w-4 h-4" />
@@ -71,7 +71,7 @@ export default function ContactPageClient() {
           </div>
 
           {/* Email */}
-          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="flex items-start gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center shrink-0 text-brand-forest-600 dark:text-brand-forest-400">
                 <Mail className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default function ContactPageClient() {
           </div>
 
           {/* Operational Hours */}
-          <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-neutral-100 dark:border-neutral-700">
               <div className="w-7 h-7 rounded-md bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
                 <Clock className="w-4 h-4" />
@@ -122,7 +122,7 @@ export default function ContactPageClient() {
         </div>
 
         {/* Right Column - Contact Form (spans 2 columns) */}
-        <div className="lg:col-span-2 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-8">
+        <div className="lg:col-span-2 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-8">
           <div className="mb-6">
             <h2 className="font-heading text-xl md:text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
               {t.contact.sendMessage}

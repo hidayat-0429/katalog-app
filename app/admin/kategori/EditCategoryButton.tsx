@@ -57,7 +57,7 @@ export default function EditCategoryButton({ id, currentName, currentNameEn, cur
             onClick={() => !isPending && setIsOpen(false)}
           />
           {/* Modal */}
-          <div className="relative w-full max-w-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-md p-6">
+          <div className="relative w-full max-w-md bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-neutral-200 dark:border-neutral-700">
               <h2 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">Edit Kategori</h2>
               <button

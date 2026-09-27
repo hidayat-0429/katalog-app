@@ -4,7 +4,7 @@
  */
 export default function ProductSkeleton() {
   return (
-    <div className="h-full flex flex-col bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden animate-pulse">
+    <div className="h-full flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden animate-pulse">
       {/* Image Skeleton */}
       <div className="w-full aspect-square bg-neutral-200 dark:bg-neutral-700" />
 

@@ -392,7 +392,7 @@ export default function HomePageClient({
                       <ScrollReveal key={num} delay={idx * 120}>
                         <div
                           data-num={num}
-                          className="feature-card-num flex flex-col gap-4 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-600 motion-safe:transition-all motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-0.5"
+                          className="feature-card-num flex flex-col gap-4 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface hover:border-neutral-300 dark:hover:border-neutral-600 motion-safe:transition-all motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-0.5"
                         >
                           <div className="flex items-center justify-between">
                             <div className="w-16 h-16 rounded-lg bg-brand-forest-100 dark:bg-brand-forest-900/30 flex items-center justify-center">
