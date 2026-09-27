@@ -2,11 +2,11 @@
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Package, ChevronRight, Info } from 'lucide-react';
 import { formatRupiah } from '@/lib/format';
 import AddToCartForm from './AddToCartForm';
-import { getProductPlaceholderImage, getMinOrderText } from '@/lib/productImage';
+import { getMinOrderText } from '@/lib/productImage';
+import ProductVisual from '@/components/ProductVisual';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useLocale } from '@/components/LocaleProvider';
 import { localizeProduct, localizeName } from '@/lib/productText';
@@ -27,7 +27,6 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
 
   const { name: displayName, description: displayDescription } = localizeProduct(product, locale);
   const displayCategory = product.category ? localizeName(product.category, locale) : null;
-  const displayImage = product.imageUrl || getProductPlaceholderImage(displayName, product.category?.name);
   const minOrder = getMinOrderText(product.unit, t.productCard);
 
   return (
@@ -59,12 +58,11 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
           {/* Left: Product Image - Sticky */}
           <div>
             <div className="relative aspect-[4/3] sm:aspect-square bg-neutral-50 dark:bg-neutral-800/50 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 sticky top-20">
-              <Image 
-                src={displayImage} 
-                alt={displayName}
-                fill
+              <ProductVisual
+                imageUrl={product.imageUrl}
+                name={displayName}
+                categoryName={product.category?.name}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
                 priority
               />
             </div>

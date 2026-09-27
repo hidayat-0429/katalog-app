@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ChefHat } from "lucide-react";
 import { formatRupiah } from "@/lib/format";
-import { getProductPlaceholderImage, getMinOrderText } from "@/lib/productImage";
+import { getMinOrderText } from "@/lib/productImage";
+import ProductVisual from "@/components/ProductVisual";
 import { localizeName } from "@/lib/productText";
 import { useLocale } from "@/components/LocaleProvider";
 import { useTranslations } from "@/hooks/useTranslations";
@@ -67,7 +67,6 @@ export default function ProductCard({
   const locale = useLocale();
   const isOutOfStock = stock === 0;
   const isLowStock = stock > 0 && stock <= 10;
-  const displayImage = imageUrl || getProductPlaceholderImage(name, categoryName);
   const minOrder = getMinOrderText(unit, t.productCard);
   const usageContext = getUsageContext(name, categoryName, t);
   const displayCategory = localizeName({ name: categoryName, nameEn: categoryNameEn }, locale);
@@ -80,13 +79,14 @@ export default function ProductCard({
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
-        <Image
-          src={displayImage}
-          alt={name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover object-center motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-105"
-        />
+        <div className="motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-105 absolute inset-0">
+          <ProductVisual
+            imageUrl={imageUrl}
+            name={name}
+            categoryName={categoryName}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+        </div>
 
         {/* Top-left: Category Badge */}
         <div className="absolute top-2.5 left-2.5">

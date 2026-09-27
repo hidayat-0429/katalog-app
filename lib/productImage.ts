@@ -1,15 +1,4 @@
 /**
- * Provides curated, reliable, and high-quality food & product images
- * as fallbacks when a product doesn't have an uploaded image yet.
- */
-export function getProductPlaceholderImage(name: string, categoryName?: string | null): string {
-  const query = `${name || ''} ${categoryName || ''}`.toLowerCase();
-
-  // All products use local image
-  return '/hero-branding.jpg';
-}
-
-/**
  * Returns Minimum Order Quantity (MOQ) text based on product unit
  */
 export function getMinOrderText(
