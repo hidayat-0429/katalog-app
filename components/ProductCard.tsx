@@ -75,7 +75,7 @@ export default function ProductCard({
     <Link
       href={`/produk/${id}`}
       aria-label={`${t.productCard.detailLabel} ${name}`}
-      className="group flex flex-col bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden motion-safe:transition-all motion-safe:duration-200 hover:border-brand-forest-500 dark:hover:border-brand-forest-500 hover:shadow-md"
+      className="group flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden motion-safe:transition-all motion-safe:duration-200 hover:border-brand-forest-500 dark:hover:border-brand-forest-500 hover:shadow-md"
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">

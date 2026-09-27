@@ -41,10 +41,10 @@
   }
 
   .dark {
-    /* Dark mode with warmer, more premium feeling */
-    --bg: 15 20 13;                 /* Deep forest background */
-    --bg-subtle: 24 32 21;          /* Subtle forest */
-    --surface: 31 41 28;            /* Forest surface */
+    /* Dark mode: neutral charcoal (sama dengan nilai yang sudah dipakai kartu/halaman) */
+    --bg: 15 17 16;                 /* #0F1110 - halaman */
+    --bg-subtle: 26 26 22;          /* #1A1A16 - panel & input */
+    --surface: 20 23 21;            /* #141715 - kartu */
     --primary: 144 184 138;         /* Lighter forest for dark mode */
     --primary-hover: 164 204 158;   /* Forest hover in dark */
     --primary-light: 22 42 19;      /* Dark forest accent */
@@ -52,8 +52,8 @@
     --cta-hover: 242 159 63;        /* Lighter amber hover */
     --charcoal: 245 245 240;        /* Warm white for dark mode text */
     --charcoal-muted: 180 180 170;  /* Muted warm text */
-    --border: 44 54 41;             /* Dark forest border */
-    --border-subtle: 36 46 33;      /* Subtle dark border */
+    --border: 33 37 41;             /* #212529 - sama seperti border kartu yang sudah ada */
+    --border-subtle: 26 26 22;      /* #1A1A16 - senada dengan panel */
     --danger: 224 108 106;          /* Keep existing */
     --danger-bg: 62 30 30;          /* Keep existing */
     

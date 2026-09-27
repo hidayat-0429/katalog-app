@@ -144,7 +144,7 @@ export default function HeroCinematic({
 
 
         {/* Fade ke halaman di bawah */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#faf9f6] dark:from-[#0f1110] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-bg dark:from-bg to-transparent" />
       </div>
 
       {/* Content */}

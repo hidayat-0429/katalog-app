@@ -78,7 +78,7 @@ export default function HomePageClient({
   const locale = useLocale();
 
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-[#faf9f6] dark:bg-[#0f1110] text-[#1f2421] dark:text-stone-100">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-bg text-charcoal">
       {/* -- MODE 1: KATALOG ----------------------------------- */}
       {isCatalogMode ? (
         <section className="py-10 sm:py-14">
@@ -94,10 +94,10 @@ export default function HomePageClient({
               </Link>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
-                  <h1 className="font-heading text-3xl sm:text-3xl font-bold tracking-tight text-charcoal dark:text-stone-100">
+                  <h1 className="font-heading text-3xl sm:text-3xl font-bold tracking-tight text-charcoal dark:text-neutral-100">
                     {t.catalog.title}
                   </h1>
-                  <p className="font-sans text-sm text-charcoal-muted dark:text-stone-400 mt-2 max-w-xl leading-relaxed">
+                  <p className="font-sans text-sm text-charcoal-muted dark:text-neutral-400 mt-2 max-w-xl leading-relaxed">
                     {t.homepage.selectedProductsDescription}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export default function HomePageClient({
             </div>
 
             {/* Toolbar */}
-            <div className="bg-white dark:bg-[#141715] border border-stone-200 dark:border-stone-800 rounded-xl p-4 mb-8 flex flex-col lg:flex-row gap-4">
+            <div className="bg-surface border border-neutral-200 dark:border-neutral-800 rounded-xl p-4 mb-8 flex flex-col lg:flex-row gap-4">
               <form action="/" method="GET" className="flex flex-col sm:flex-row gap-3 flex-1">
                 <input type="hidden" name="katalog" value="semua" />
                 {categoryId && <input type="hidden" name="kategori" value={categoryId} />}
@@ -121,7 +121,7 @@ export default function HomePageClient({
                     defaultValue={q}
                     placeholder={t.catalog.search}
                     aria-label={t.catalog.search}
-                    className="w-full pl-10 pr-4 py-2.5 text-sm bg-bg-subtle dark:bg-[#1a1a16] border border-stone-200 dark:border-stone-700 rounded-lg text-charcoal dark:text-stone-100 placeholder:text-charcoal-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 motion-safe:transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 text-sm bg-bg-subtle border border-neutral-200 dark:border-neutral-700 rounded-lg text-charcoal placeholder:text-charcoal-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 motion-safe:transition-all"
                   />
                 </div>
 
@@ -135,7 +135,7 @@ export default function HomePageClient({
                 {q && (
                   <Link
                     href={categoryId ? `/?katalog=semua&kategori=${categoryId}` : '/?katalog=semua'}
-                    className="text-sm text-charcoal-muted hover:text-charcoal font-medium py-2.5 px-3 rounded-lg border border-stone-200 dark:border-stone-700 hover:bg-bg-subtle motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out text-center shrink-0"
+                    className="text-sm text-charcoal-muted hover:text-charcoal font-medium py-2.5 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-bg-subtle motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out text-center shrink-0"
                   >
                     {t.catalog.reset}
                   </Link>
@@ -143,13 +143,13 @@ export default function HomePageClient({
               </form>
 
               {/* Tab kategori */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-0.5 lg:border-l lg:border-stone-200 lg:dark:border-stone-800 lg:pl-4">
+              <div className="flex items-center gap-2 overflow-x-auto pb-0.5 lg:border-l lg:border-neutral-200 lg:dark:border-neutral-800 lg:pl-4">
                 <Link
                   href={q ? `/?katalog=semua&q=${encodeURIComponent(q)}` : '/?katalog=semua'}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out ${
                     !categoryId
                       ? 'bg-primary text-white'
-                      : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-stone-800'
+                      : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-neutral-800'
                   }`}
                 >
                   {t.catalog.allProducts}
@@ -167,7 +167,7 @@ export default function HomePageClient({
                       className={`px-3 py-3 rounded-lg text-xs font-semibold whitespace-nowrap motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out ${
                         isActive
                           ? 'bg-primary text-white'
-                          : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-stone-800'
+                          : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-neutral-800'
                       }`}
                     >
                       {localizeName(cat, locale)}
@@ -314,7 +314,7 @@ export default function HomePageClient({
                     },
                   ].map(({ step, icon: Icon, title, desc }, idx) => (
                     <ScrollReveal key={step} delay={idx * 120}>
-                      <div className="h-full flex flex-col p-6 sm:p-8 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#141715] shadow-xs">
+                      <div className="h-full flex flex-col p-6 sm:p-8 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-surface shadow-xs">
                         <div className="flex items-center justify-between mb-6">
                           <div className="w-12 h-12 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-900/30 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
                             <Icon className="w-6 h-6 stroke-[2px]" />
@@ -476,7 +476,7 @@ export default function HomePageClient({
                   },
                 ].map(({ icon: Icon, title, badge, badgeColor, desc }, idx) => (
                   <ScrollReveal key={title} delay={idx * 120}>
-                    <div className="h-full flex flex-col p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#141715] hover:border-neutral-300 dark:hover:border-neutral-700 motion-safe:transition-all">
+                    <div className="h-full flex flex-col p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-surface hover:border-neutral-300 dark:hover:border-neutral-700 motion-safe:transition-all">
                       <div className="flex items-center justify-between gap-2 mb-4">
                         <div className="w-11 h-11 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-800 dark:text-neutral-200">
                           <Icon className="w-5 h-5 stroke-[2px]" />

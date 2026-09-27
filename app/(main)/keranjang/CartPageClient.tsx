@@ -85,7 +85,7 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
 
           {/* Summary */}
           <div className="lg:col-span-5 lg:sticky lg:top-8">
-            <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
+            <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
               {/* Header */}
               <div className="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center gap-2">
                 <Receipt className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />

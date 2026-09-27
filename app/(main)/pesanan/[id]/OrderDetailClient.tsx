@@ -70,14 +70,14 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
       </div>
 
       {/* Print header */}
-      <div className="hidden print:flex items-center justify-between border-b border-stone-300 pb-4 mb-6 font-sans">
+      <div className="hidden print:flex items-center justify-between border-b border-neutral-300 pb-4 mb-6 font-sans">
         <div>
-          <h1 className="font-heading text-xl font-bold text-stone-900">{t.invoice.printTitle}</h1>
-          <p className="text-xs text-stone-600 mt-0.5">{t.invoice.printSubtitle}</p>
+          <h1 className="font-heading text-xl font-bold text-neutral-900">{t.invoice.printTitle}</h1>
+          <p className="text-xs text-neutral-600 mt-0.5">{t.invoice.printSubtitle}</p>
         </div>
         <div className="text-right text-xs">
-          <p className="font-mono font-bold text-stone-900">{order.orderNumber}</p>
-          <p className="text-stone-500">{created.toLocaleDateString(dateLocale, { dateStyle: "long" })}</p>
+          <p className="font-mono font-bold text-neutral-900">{order.orderNumber}</p>
+          <p className="text-neutral-500">{created.toLocaleDateString(dateLocale, { dateStyle: "long" })}</p>
         </div>
       </div>
 

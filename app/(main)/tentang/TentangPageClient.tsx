@@ -20,7 +20,7 @@ export default function TentangPageClient() {
       </div>
 
       {/* Stats Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl mb-8">
         {[
           { value: "1999", label: t.tentang.founded, icon: CalendarDays },
           { value: "500+", label: t.tentang.partners, icon: Users2 },
@@ -57,7 +57,7 @@ export default function TentangPageClient() {
           </div>
 
           {/* Right: Content */}
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-7 h-7 rounded-md bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
@@ -101,7 +101,7 @@ export default function TentangPageClient() {
 
         <div className="grid md:grid-cols-2 gap-6 items-stretch">
           {/* Card Visi */}
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
@@ -131,7 +131,7 @@ export default function TentangPageClient() {
           </div>
 
           {/* Card Misi */}
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
@@ -174,7 +174,7 @@ export default function TentangPageClient() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="w-9 h-9 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-3">
               <Package className="w-5 h-5" />
             </div>
@@ -186,7 +186,7 @@ export default function TentangPageClient() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="w-9 h-9 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-3">
               <ShieldCheck className="w-5 h-5" />
             </div>
@@ -198,7 +198,7 @@ export default function TentangPageClient() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="w-9 h-9 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-3">
               <Building2 className="w-5 h-5" />
             </div>
@@ -210,7 +210,7 @@ export default function TentangPageClient() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div className="w-9 h-9 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-3">
               <MapPin className="w-5 h-5" />
             </div>
@@ -237,7 +237,7 @@ export default function TentangPageClient() {
 
         <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {/* Lini Fasilitas (2 cols) */}
-          <div className="md:col-span-2 bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-6">
+          <div className="md:col-span-2 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-6">
             <h3 className="font-heading font-bold text-base text-neutral-900 dark:text-neutral-100 mb-3">
               {t.tentang.facilitiesTitle}
             </h3>
@@ -281,7 +281,7 @@ export default function TentangPageClient() {
           </div>
 
           {/* Lokasi Card (1 col) */}
-          <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-6 flex flex-col justify-between">
             <div>
               <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-3">
                 <MapPin className="w-4 h-4" />

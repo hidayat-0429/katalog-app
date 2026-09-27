@@ -33,7 +33,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
   return (
     <>
       {/* Desktop: vertical nav with surface differentiation */}
-      <div className="hidden lg:flex flex-col h-full bg-neutral-50 dark:bg-[#141715]">
+      <div className="hidden lg:flex flex-col h-full bg-neutral-50 dark:bg-surface">
         {/* Logo Section */}
         <div className={cn("py-6 shrink-0 flex items-center transition-all overflow-hidden", isCollapsed ? "px-0 justify-center flex-col gap-4" : "px-5 gap-3")}>
           <div className="w-8 h-8 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
@@ -133,7 +133,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
       </div>
 
       {/* Mobile: Header + horizontal scroll nav */}
-      <div className="lg:hidden flex flex-col bg-white dark:bg-[#141715]">
+      <div className="lg:hidden flex flex-col bg-surface">
         {/* Mobile Header */}
         <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-800">
           <div className="flex items-center gap-3">

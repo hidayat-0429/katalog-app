@@ -11,10 +11,10 @@ export default function AdminLayoutClient({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-neutral-50 dark:bg-[#0f1110]">
+    <div className="flex min-h-screen bg-neutral-50 dark:bg-bg">
       {/* Sidebar kiri - desktop only */}
       <aside 
-        className={`fixed left-0 top-0 bottom-0 bg-white dark:bg-[#141715] border-r border-neutral-200 dark:border-neutral-800 overflow-y-auto hidden lg:block z-40 no-scrollbar transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 bottom-0 bg-surface border-r border-neutral-200 dark:border-neutral-800 overflow-y-auto hidden lg:block z-40 no-scrollbar transition-all duration-300 ease-in-out ${
           isCollapsed ? "w-[72px]" : "w-[260px]"
         }`}
       >
@@ -28,7 +28,7 @@ export default function AdminLayoutClient({
         }`}
       >
         {/* Mobile nav bar */}
-        <div className="lg:hidden border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#141715]">
+        <div className="lg:hidden border-b border-neutral-200 dark:border-neutral-800 bg-surface">
           <AdminSidebar isCollapsed={false} />
         </div>
         

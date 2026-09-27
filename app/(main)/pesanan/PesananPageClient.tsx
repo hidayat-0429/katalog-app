@@ -60,7 +60,7 @@ export default function PesananPageClient({
               href={`/pesanan${tab.value === "SEMUA" ? "" : `?status=${tab.value}`}`}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors duration-150 ease-out ${
                 isActive
-                  ? "bg-white dark:bg-[#222220] text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-200 dark:border-neutral-700"
+                  ? "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-200 dark:border-neutral-700"
                   : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
               }`}
             >
@@ -92,7 +92,7 @@ export default function PesananPageClient({
               <Link
                 key={order.id}
                 href={`/pesanan/${order.id}`}
-                className="group bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 sm:p-5 flex flex-col gap-3 hover:border-neutral-400 dark:hover:border-neutral-500 sm:hover:-translate-y-0.5 transition-all duration-200 ease-out"
+                className="group bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 sm:p-5 flex flex-col gap-3 hover:border-neutral-400 dark:hover:border-neutral-500 sm:hover:-translate-y-0.5 transition-all duration-200 ease-out"
               >
                 {/* Baris atas: nomor pesanan + status + total */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">

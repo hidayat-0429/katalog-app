@@ -8,7 +8,7 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="border-t border-neutral-200 dark:border-neutral-800 bg-[#faf9f6] dark:bg-[#141715] text-neutral-600 dark:text-neutral-400 transition-colors duration-200">
+    <footer className="border-t border-neutral-200 dark:border-neutral-800 bg-bg dark:bg-surface text-neutral-600 dark:text-neutral-400 transition-colors duration-200">
       <Container className="py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
 

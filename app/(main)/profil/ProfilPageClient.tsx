@@ -25,7 +25,7 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
       </div>
 
       {/* Avatar + info ringkas */}
-      <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 flex items-center gap-4 mb-6">
+      <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 flex items-center gap-4 mb-6">
         <div className="w-12 h-12 rounded-full bg-brand-forest-100 dark:bg-brand-forest-900/30 flex items-center justify-center shrink-0">
           <UserCircle2 className="w-7 h-7 text-brand-forest-600 dark:text-brand-forest-400" />
         </div>
@@ -39,7 +39,7 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
       </div>
 
       {/* Form */}
-      <div className="bg-white dark:bg-[#141715] border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 sm:p-6">
+      <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 sm:p-6">
         <ProfilForm user={user} />
       </div>
     </div>

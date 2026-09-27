@@ -42,7 +42,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
   return (
     <>
       {/* Mobile Top App Bar */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-[#141715]/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-4 flex items-center justify-between shadow-xs">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-surface/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-4 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsOpen(true)}
@@ -101,7 +101,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
       <aside
         className={`
           fixed top-0 left-0 h-screen z-50 w-64
-          bg-[#faf9f6] dark:bg-[#141715]
+          bg-bg dark:bg-surface
           border-r border-neutral-200 dark:border-neutral-800
           flex flex-col shadow-xl lg:shadow-none
           transition-transform duration-300 ease-in-out
