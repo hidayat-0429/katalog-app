@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -14,11 +14,34 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
   const locale = useLocale();
   const setLocale = useSetLocale();
   const t = useTranslations();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
 
   // Auto-close saat navigasi
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  // Esc menutup drawer, sama seperti perilaku menu mobile pada umumnya
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
+  // Fokus pindah ke drawer saat dibuka, lalu kembali ke tombol menu saat ditutup
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (isOpen) {
+      panelRef.current?.focus();
+    } else if (wasOpen.current) {
+      triggerRef.current?.focus();
+    }
+    wasOpen.current = isOpen;
+  }, [isOpen]);
 
   // Tutup drawer jika resize ke desktop
   useEffect(() => {
@@ -45,8 +68,11 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
       <header className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-surface/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-4 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-2.5">
           <button
+            ref={triggerRef}
             onClick={() => setIsOpen(true)}
             aria-label={t.nav.openMenu}
+            aria-expanded={isOpen}
+            aria-controls="app-sidebar"
             className="w-9 h-9 -ml-1 flex items-center justify-center rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
             <Menu className="w-5 h-5" />
@@ -92,6 +118,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
       {/* Backdrop Overlay */}
       {isOpen && (
         <div
+          aria-hidden="true"
           className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity"
           onClick={() => setIsOpen(false)}
         />
@@ -99,14 +126,21 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
 
       {/* Sidebar Drawer */}
       <aside
+        id="app-sidebar"
+        ref={panelRef}
+        tabIndex={-1}
+        role={isOpen ? "dialog" : "navigation"}
+        aria-modal={isOpen ? true : undefined}
+        aria-label={t.nav.menuTitle}
         className={`
-          fixed top-0 left-0 h-screen z-50 w-64
+          fixed top-0 left-0 h-dvh z-50 w-64
           bg-bg dark:bg-surface
           border-r border-neutral-200 dark:border-neutral-800
           flex flex-col shadow-xl lg:shadow-none
-          transition-transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0 lg:z-40
+          transition-[transform,visibility] duration-300 ease-in-out
+          outline-none
+          ${isOpen ? "translate-x-0 visible" : "-translate-x-full invisible"}
+          lg:translate-x-0 lg:visible lg:z-40
         `}
       >
         <button
@@ -117,7 +151,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
           <X className="w-4 h-4" />
         </button>
 
-        <div className="flex flex-col h-full overflow-y-auto no-scrollbar">
+        <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-[env(safe-area-inset-bottom)]">
           {children}
         </div>
       </aside>

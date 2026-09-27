@@ -12,7 +12,8 @@
     "register": "Daftar",
     "logout": "Keluar",
     "openMenu": "Buka menu navigasi",
-    "closeMenu": "Tutup menu navigasi"
+    "closeMenu": "Tutup menu navigasi",
+    "menuTitle": "Menu navigasi"
   },
   "hero": {
     "title": "Jamur Premium",

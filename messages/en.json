@@ -12,7 +12,8 @@
     "register": "Register",
     "logout": "Logout",
     "openMenu": "Open navigation menu",
-    "closeMenu": "Close navigation menu"
+    "closeMenu": "Close navigation menu",
+    "menuTitle": "Navigation menu"
   },
   "hero": {
     "title": "Premium Mushrooms",
