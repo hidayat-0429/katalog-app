@@ -6,17 +6,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { OrderStatus } from "@prisma/client";
 import { statusLabel } from "@/lib/format";
 import { getServerMessages } from "@/lib/serverMessages";
-
-const ALLOWED_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
-  PENDING: ["DIPROSES", "DIBATALKAN"],
-  DIPROSES: ["DIKIRIM", "DIBATALKAN"],
-  DIKIRIM: ["SELESAI"],
-  SELESAI: [],
-  DIBATALKAN: [],
-};
-
-// Barang yang sudah diberangkatkan tidak boleh kembali dihitung sebagai stok
-const RESTOCKABLE_STATUSES: OrderStatus[] = ["PENDING", "DIPROSES"];
+import { canTransition, shouldRestockOnCancel } from "@/lib/orderStatus";
 
 export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   await requireAdmin();
@@ -31,7 +21,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
       throw new Error("Pesanan tidak ditemukan");
     }
 
-    if (!ALLOWED_TRANSITIONS[order.status].includes(status)) {
+    if (!canTransition(order.status, status)) {
       throw new Error(`Pesanan berstatus ${statusLabel(order.status)} tidak bisa diubah ke ${statusLabel(status)}`);
     }
 
@@ -44,7 +34,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
       throw new Error("Status pesanan baru saja diubah, muat ulang halaman ini");
     }
 
-    if (status === "DIBATALKAN" && RESTOCKABLE_STATUSES.includes(order.status)) {
+    if (status === "DIBATALKAN" && shouldRestockOnCancel(order.status)) {
       for (const item of order.items) {
         await tx.product.update({
           where: { id: item.productId },

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { OrderStatus } from '@prisma/client'
 import { updateOrderStatus } from '@/lib/actions/orders'
 import { statusLabel } from '@/lib/format'
+import { canTransition } from '@/lib/orderStatus'
 import { Clock, Loader, Truck, CheckCircle, XCircle, RefreshCw, Loader2, AlertCircle } from 'lucide-react'
 
 export default function OrderStatusForm({ orderId, currentStatus }: { orderId: string, currentStatus: OrderStatus }) {
@@ -58,7 +59,7 @@ export default function OrderStatusForm({ orderId, currentStatus }: { orderId: s
             <button
               key={s.value}
               onClick={() => handleUpdate(s.value)}
-              disabled={isActive || isPending || (currentStatus === 'DIBATALKAN') || (currentStatus === 'SELESAI' && s.value !== 'SELESAI')}
+              disabled={isActive || isPending || !canTransition(currentStatus, s.value)}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-out ${
                 isActive 
                   ? 'bg-brand-forest-600 text-white border border-brand-forest-700 dark:bg-brand-forest-500' 

@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Tipe Prisma dipakai kode produksi dan tes, jadi generate dulu.
+      - run: npx prisma generate
+
+      - run: npm run type-check
+
+      - run: npm run lint
+
+      # Sengaja tidak ada `next build`: halaman sitemap memanggil database,
+      # jadi build butuh koneksi ke Supabase yang tidak ada di CI.
+      - run: npm test
