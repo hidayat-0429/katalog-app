@@ -86,8 +86,8 @@ export default function HeroCinematic({
   const handleScroll = useCallback(() => {
     if (!imageRef.current || !heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
-    const scrolled = -rect.top * 0.25;
-    imageRef.current.style.transform = `translateY(${scrolled}px) scale(1.06)`;
+    const scrolled = -rect.top * 0.12;
+    imageRef.current.style.transform = `translateY(${scrolled}px) scale(1.02)`;
   }, []);
 
   useEffect(() => {
@@ -125,23 +125,21 @@ export default function HeroCinematic({
         <div
           ref={imageRef}
           className="absolute inset-[-6%] transition-transform duration-75 ease-linear will-change-transform"
-          style={{ transform: "translateY(0) scale(1.06)" }}
+          style={{ transform: "translateY(0) scale(1.02)" }}
         >
           <Image
-            src="/og-image.png"
+            src="/og-image.webp"
             alt={t.hero.imageAlt}
             fill
             priority
+            quality={85}
             sizes="100vw"
             className="object-cover object-center"
           />
         </div>
 
-        {/* Gradasi lebih ringan foto masih terlihat di sisi kanan */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1a10]/90 via-[#0d1a10]/60 to-[#0d1a10]/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1a10]/55 via-transparent to-transparent" />
-
-
+        {/* Simplified single gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/35 to-transparent" />
 
         {/* Fade ke halaman di bawah */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-bg dark:from-bg to-transparent" />
@@ -177,7 +175,7 @@ export default function HeroCinematic({
             style={{ transitionDelay: "80ms" }}
           >
             <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-fresh-400 opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-fresh-400 opacity-40" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-fresh-400" />
             </span>
             <span className="text-xs font-medium text-white/50 tracking-wide">
@@ -220,7 +218,7 @@ export default function HeroCinematic({
             </Link>
             <Link
               href="/kontak"
-              className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/14 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/25 hover:border-white/45 hover:bg-white/15 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
             >
               {cta2Text}
             </Link>
@@ -229,10 +227,10 @@ export default function HeroCinematic({
           {/* Stats */}
           <div
             ref={statsRef}
-            className={`grid grid-cols-2 sm:grid-cols-4 gap-5 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "500ms" }}
           >
-            {STATS.map((item) => (
+            {STATS.slice(0, 3).map((item, idx) => (
               <div key={item.label} className="group">
                 <item.icon className="w-4 h-4 text-white/50 mb-2 opacity-70 group-hover:opacity-100 transition-opacity duration-200" />
                 <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -256,8 +254,8 @@ export default function HeroCinematic({
         className={`absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
         style={{ transitionDelay: "900ms" }}
       >
-        <div className="w-5 h-8 rounded-full border border-white/15 flex justify-center pt-2">
-          <div className="w-1 h-2 rounded-full bg-white/30 animate-bounce" />
+        <div className="w-5 h-8 rounded-full border border-white/10 flex justify-center pt-2">
+          <div className="w-1 h-2 rounded-full bg-white/20 animate-bounce" />
         </div>
       </div>
     </section>
