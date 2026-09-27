@@ -13,7 +13,13 @@
     "logout": "Logout",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
-    "menuTitle": "Navigation menu"
+    "menuTitle": "Navigation menu",
+    "sectionMenu": "Menu",
+    "sectionAccess": "Access",
+    "adminPortal": "Admin Portal",
+    "activeAccount": "Active account",
+    "displayMode": "Display mode",
+    "language": "Language"
   },
   "hero": {
     "title": "Premium Mushrooms",

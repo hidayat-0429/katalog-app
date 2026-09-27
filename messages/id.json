@@ -13,7 +13,13 @@
     "logout": "Keluar",
     "openMenu": "Buka menu navigasi",
     "closeMenu": "Tutup menu navigasi",
-    "menuTitle": "Menu navigasi"
+    "menuTitle": "Menu navigasi",
+    "sectionMenu": "Menu",
+    "sectionAccess": "Akses",
+    "adminPortal": "Portal Admin",
+    "activeAccount": "Akun aktif",
+    "displayMode": "Mode tampilan",
+    "language": "Bahasa"
   },
   "hero": {
     "title": "Jamur Premium",

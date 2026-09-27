@@ -1,16 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import { getCurrentUser } from "@/lib/session";
-import { prisma } from "@/lib/prisma";
 import AppSidebarClient from "@/components/AppSidebarClient";
 import AppSidebarContent from "@/components/AppSidebarContent";
-import { Suspense } from "react";
+import CartCountBadge from "@/components/CartCountBadge";
 
 export default async function AppSidebar() {
   const user = await getCurrentUser();
-  const cartCount = user?.role === "BUYER"
-    ? await prisma.cart.count({ where: { userId: user.id } })
-    : 0;
+  const buyerId = user?.role === "BUYER" ? user.id : null;
 
   return (
     <AppSidebarClient>
@@ -37,7 +35,14 @@ export default async function AppSidebar() {
 
       {/* Client-side content that listens to locale changes */}
       <Suspense fallback={null}>
-        <AppSidebarContent user={user} cartCount={cartCount} />
+        <AppSidebarContent
+          user={user}
+          cartBadge={
+            <Suspense fallback={null}>
+              <CartCountBadge userId={buyerId} />
+            </Suspense>
+          }
+        />
       </Suspense>
     </AppSidebarClient>
   );
