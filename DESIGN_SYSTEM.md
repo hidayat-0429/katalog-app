@@ -1,121 +1,318 @@
-# Design System PT Eka Timur Raya (B2B Jamur)
+# Design System PT Eka Timur Raya (Etira Mushrooms) — B2B Jamur
 
-## Warna
+Dokumen ini adalah **satu-satunya sumber kebenaran** untuk tampilan. Ia mendeskripsikan
+sistem yang **benar-benar terpakai di kode**, bukan rencana lama. Kalau dokumen dan kode
+bertabrakan, kodenya yang benar dan dokumen inilah yang harus diperbaiki.
 
-### Light Mode
-- Background utama: `#FAFAF7` (off-white hangat)
-- Background subtle / kartu: `#F5F4F0`
-- Surface (modal, dropdown): `#FFFFFF`
-- Primary (olive green): `#4A5D3A`
-- Primary hover: `#3D4E30`
-- Primary light (badge/bg aksen): `#E8EFE3`
-- CTA (amber): `#E8A33D`
-- CTA hover: `#D4922F`
-- Text utama: `#1F2419`
-- Text muted: `#6B7263`
-- Border: `#E5E3DC` (1px solid, konsisten)
-- Danger/Error: `#B94A48`
-- Danger bg: `#FDF0EF`
+Menggantikan: `DESIGN_SYSTEM.md` versi lama, `DESIGN_GUIDELINES.md`, dan
+`CONSISTENCY_REVIEW_SUMMARY.md` (kedua file terakhir tinggal catatan sejarah; jangan
+dipakai sebagai acuan).
 
-### Dark Mode
-- Background utama: `#141410`
-- Background subtle: `#1C1C18`
-- Surface: `#222220`
-- Primary: `#7FA882`
-- Primary hover: `#95BC98`
-- CTA: `#E8A33D`
-- Text utama: `#E5E5E0`
-- Text muted: `#9C9C90`
-- Border: `#2C2C28`
+Referensi kode:
+- Token & tema: `app/globals.css`, `tailwind.config.ts`
+- Primitif UI: `components/ui/` (`Button`, `Badge`, `Input`, `Card`, `Table`, `Modal`, `Toggle`, `index.ts`)
+- Komponen domain: `components/ProductCard.tsx`, `components/ProductVisual.tsx`, `components/StatusBadge.tsx`, `components/HeroCinematic.tsx`
+- helper angka/tanggal: `lib/format.ts` (`formatRupiah`, `statusLabel`)
 
-### Status Pills
-| Status     | Background | Text      |
-|------------|-----------|-----------|
-| Menunggu   | `#FDF3E3` | `#8B6914` |
-| Diproses   | `#E8F1FB` | `#1A5FB4` |
-| Dikirim    | `#F0E8FB` | `#6C3FA0` |
-| Selesai    | `#EAF4EA` | `#2D5A27` |
-| Dibatalkan | `#FDF0EF` | `#B94A48` |
-| Netral     | `#F1F0EB` | `#6B7263` |
+---
 
-## Tipografi
+## 1. Cara memilih warna (urutan prioritas)
 
-- **Heading** (h1–h3): `Bricolage Grotesque`  bold, tracking tight
-- **Body / paragraf**: `Figtree`  regular/medium
-- **Angka, harga, kode pesanan**: `font-mono` (JetBrains Mono atau Inter monospace fallback)
-- **Format harga**: `Rp 150.000` (tanpa desimal, titik sebagai pemisah ribuan)
-- **Satuan**: ditulis jelas setelah harga → `/kg`, `/karton`, `/pak`, `/kaleng`, `/pouch`
+1. **Pakai primitif `components/ui/*`** kalau sudah ada bentuknya (tombol, badge, input,
+   kartu, tabel, modal, toggle). Primitif ini sudah membawa varian light + dark.
+2. **Pakai token CSS-var** (`bg-bg`, `bg-bg-subtle`, `bg-surface`, `text-charcoal`,
+   `text-charcoal-muted`, `border-border`, `border-border-subtle`, `primary`, `cta`,
+   `danger`, `info`, `success`, `warning`) untuk permukaan dan teks halaman. Token ini
+   **otomatis berubah di dark mode** karena nilainya di-override di blok `.dark` — jadi
+   tidak perlu menulis `dark:` sama sekali.
+3. **Pakai skala literal** (`brand-forest-*`, `brand-earth-*`, `brand-amber-*`,
+   `brand-fresh-*`, `neutral-*`, `semantic-*`) hanya kalau butuh tone spesifik/aksen.
+   Skala ini **tidak** otomatis — setiap pemakaian wajib ditemani varian `dark:`.
+4. **Jangan** hard-code hex di class (`bg-[#faf9f6]`). Kalau warna belum ada di tema,
+   tambahkan token/varian baru di `tailwind.config.ts` atau `globals.css`.
 
-## Aturan Visual
+Catatan penting: `neutral` di proyek ini **bukan** abu bawaan Tailwind. Skalanya sudah
+ditimpa (`#f8f9fa` → `#212529`) dan merupakan bagian resmi sistem. Yang dilarang adalah
+warna bawaan lain (`blue-*`, `green-*`, `emerald-*`, `red-*`, `stone-*`), kecuali
+pengecualian yang didaftarkan di §11.
 
-### Wajib
-- Border radius maksimal `10px` (gunakan `rounded`, `rounded-md`, atau `rounded-lg max-[10px]`)
-- Border: selalu `1px solid` menggunakan warna border dari palet, tidak ada border tebal
-- Ikon: **Lucide React** saja, tidak ada emoji sebagai ikon dekoratif
-- Bahasa: **Indonesia** untuk semua label, tombol, pesan error, dan placeholder
-- Setiap komponen baru HARUS menggunakan warna & font dari dokumen ini
+### Token CSS (nilai sebenarnya)
 
-### Dilarang
-- ❌ Gradasi / gradient
-- ❌ Warna purple / ungu (kecuali status pill "Dikirim")
-- ❌ Glassmorphism / blur / backdrop-filter
-- ❌ Box-shadow besar (shadow hanya boleh untuk dropdown & modal, dan harus tipis: `shadow-sm` maks)
-- ❌ Emoji sebagai ikon (🏭❄️📦 dsb)  ganti dengan ikon Lucide yang sesuai
-- ❌ Animasi berlebihan hanya transisi halus (`transition-colors`, `transition-opacity`)
+| Token | Light | Dark | Dipakai untuk |
+|---|---|---|---|
+| `bg` | `#FAF9F6` | `#0F140D` | Latar halaman |
+| `bg-subtle` | `#F0EBE0` | `#182015` | Panel, blok aksen, placeholder produk |
+| `surface` | `#FFFFFF` | `#1F291C` | Kartu, popover, modal |
+| `primary` | `#2D5A27` | `#90B88A` | Aksi utama, tautan aktif, garis fokus |
+| `primary-hover` | `#1E4A1A` | `#A4CC9E` | Hover aksi utama |
+| `primary-light` | `#F0F7F0` | `#162A13` | Latar terpilih, `::selection` |
+| `cta` | `#D97706` | `#D97706` | Tombol ajakan (order, WhatsApp), highlight |
+| `cta-hover` | `#B8620A` | `#F29F3F` | Hover CTA |
+| `charcoal` | `#1F2421` | `#F5F5F0` | Teks utama |
+| `charcoal-muted` | `#646B66` | `#B4B4AA` | Teks sekunder, caption, ikon placeholder |
+| `border` | `#E1D7C7` | `#2C3629` | Garis pemisah 1px |
+| `border-subtle` | `#F0EBE0` | `#242E21` | Garis dalam panel |
+| `danger` | `#B94A48` | `#E06C6A` | Kesalahan, hapus, pembatalan |
+| `danger-bg` | `#FDF0EF` | `#3E1E1E` | Latar pesan error |
+| `fresh` | `#16A34A` | `#22C55E` | Segar / tersedia |
+| `earth` | `#8B7355` | `#8B7355` | Aksen sekunder (dikirim, kategori) |
 
-## Komponen Referensi
+### Skala literal yang tersedia
 
-### Tombol
-- **Primary**: bg `#4A5D3A`, text white, hover `#3D4E30`, rounded `8px`, padding `10px 20px`
-- **CTA / Aksi utama**: bg `#E8A33D`, text `#1F2419`, hover `#D4922F`
-- **Secondary**: bg transparent, border `1px #E5E3DC`, text `#1F2419`, hover bg `#F5F4F0`
-- **Danger**: bg transparent, border `1px #B94A48`, text `#B94A48`, hover bg `#FDF0EF`
-- **Disabled**: opacity `0.5`, cursor `not-allowed`
+- `brand.forest` 50–900 — hijau hutan (500 `#2d5a27`, 600 `#1e4a1a`)
+- `brand.amber` 50–900 — amber premium (500 `#d97706`)
+- `brand.earth` 50–900 — cokelat/tanah hangat
+- `brand.fresh` 50–900 — hijau segar untuk indikator stok/kesegaran
+- `neutral` 50–900 — abu dingin (teks sekunder, border, latar gelap)
+- `semantic.success|warning|danger|info` → `.light` `DEFAULT` `.dark` `.darkBg`
 
-### Kartu Produk (ProductCard)
-- Border: `1px solid #E5E3DC`
-- Radius: `8px`
-- Foto: rasio `4:3`, object-fit cover
-- Nama produk: `Figtree` semibold, 1 baris (truncate)
-- Harga: `font-mono` bold + satuan muted (`/karton`)
-- Badge stok: kecil, di pojok, bg sesuai status pill
+Warna font yang dipakai: display/headline = **Bricolage Grotesque** (`font-display` /
+`font-heading`), body & UI = **Figtree** (`font-sans`, default), angka/harga/kode order =
+**JetBrains Mono** (`font-mono`).
 
-### Input / Form
-- Border: `1px solid #E5E3DC`
-- Radius: `8px`
-- Focus: border `#4A5D3A`, ring tipis `2px #E8EFE3`
-- Placeholder: text muted `#6B7263`
-- Label: `Figtree` medium, ukuran kecil (`text-xs`), uppercase tracking wider
+---
 
-### Tabel (Admin)
-- Header: bg `#F5F4F0`, text `#6B7263`, uppercase, `text-xs`
-- Row: border-bottom `1px #E5E3DC`
-- Row hover: bg `#FAFAF7`
-- Padding rapi: `px-4 py-3`
+## 2. Radius, border, bayangan — dijaga oleh tema, bukan oleh disiplin
 
-## Struktur Layout
+`tailwind.config.ts` sudah memotong skalanya, jadi class "terlarang" secara fisik tidak
+bisa menghasilkan tampilan yang salah:
 
-### Navbar
-- Tinggi: `64px`
-- Background: `#FAFAF7` (light) / `#141410` (dark)
-- Border-bottom: `1px solid #E5E3DC`
-- Logo: teks bold `Bricolage Grotesque`
-- Nav items: `Figtree` medium, hover underline atau color shift ke primary
+| Class | Hasil | Kapan |
+|---|---|---|
+| `rounded-sm` | 4px | badge kecil, chip |
+| `rounded` / `rounded-md` | 6px | input, tombol kecil, panel |
+| `rounded-lg` | 8px | **default** kartu, tombol, container |
+| `rounded-xl` / `rounded-2xl` | 10px (dibatasi) | kartu besar, modal |
+| `rounded-full` | pil | avatar, dot, pill status |
 
-### Footer
-- Background: `#F5F4F0` (light) / `#1C1C18` (dark)
-- Border-top: `1px solid #E5E3DC`
-- Grid 3 kolom: Brand info | Navigasi | Kontak
-- Teks: `text-xs` sampai `text-sm`, warna muted
+- Border: selalu `1px` (`border`, `border-border`). Tidak ada border tebal.
+- Bayangan: `shadow-md`, `shadow-lg`, `shadow-xl` **semuanya disamakan** menjadi
+  `0 1px 3px rgb(0 0 0 / .1)`. Pakai nama apa pun, hasilnya tipis. Utamakan `shadow-sm`
+  dan hanya beri bayangan pada layer melayang (dropdown, modal, sidebar mobile).
+- Bentuk kartu yang benar umumnya **tanpa bayangan**: `rounded-lg border border-border bg-surface`.
 
-### Admin Sidebar
-- Background: `#4A5D3A` (olive green solid)
-- Text: white
-- Active menu: bg `#3D4E30`, border-left `3px solid #E8A33D`
-- Ikon menu: Lucide, ukuran `18px`, warna white/muted
+---
 
-## Catatan untuk AI / Developer
-- Jangan mengubah logika apapun: `use server`, `useTransition`, `startTransition`, server actions, Prisma calls, routing JANGAN DISENTUH
-- Hanya ubah: class Tailwind CSS, struktur HTML/JSX, dan impor font/ikon
-- Pastikan semua perubahan tetap responsif (mobile-first) dan mendukung dark mode
-- Gunakan custom color dari `tailwind.config.ts` jangan pakai warna Tailwind default (blue-500 dsb) kecuali memang sesuai palet di atas
+## 3. Tipografi
+
+Skala `fontSize` sudah membawa line-height dan letter-spacing sendiri; makin besar teks,
+makin rapat tracking-nya (mulai `xl` ke atas). Jangan menambah `tracking-*` manual
+kecuali untuk label uppercase.
+
+| Peran | Kelas |
+|---|---|
+| Judul hero | `font-display text-4xl sm:text-5xl` (hingga `text-6xl/7xl` di hero) |
+| Judul bagian (H1) | `font-display text-3xl sm:text-4xl` |
+| Sub-bagian (H2) | `font-display text-2xl sm:text-3xl` |
+| Judul komponen (H3) | `font-display text-xl sm:text-2xl` |
+| Judul kecil (H4) | `font-sans text-lg font-semibold` |
+| Body | `font-sans text-base` |
+| Teks sekunder / caption | `text-sm text-charcoal-muted` |
+| Label form, meta | `text-xs uppercase tracking-wider` |
+| Helper text | `text-[11px]` (jarang), breadcrumb `text-[10px]` |
+| Harga, nomor order, angka | `font-mono` + `font-semibold` |
+
+- Format harga: `Rp 150.000` tanpa desimal, titik sebagai pemisah ribuan → selalu lewat
+  `formatRupiah()`, jangan menulis angka manual.
+- Satuan ditulis setelah harga dengan gaya muted: `Rp 12.000<span class="text-charcoal-muted">/kg</span>`.
+- Heading pendek: maksimal 2 baris di desktop, `leading-tight`.
+
+---
+
+## 4. Spacing
+
+Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`=16,
+`6`=24, `8`=32, `12`=48, `16`=64.
+
+- Dalam komponen: `gap-2` (ikon+teks), `gap-3` (antar field), `gap-4` (isi kartu).
+- Antar elemen: `mb-2` / `mb-4` / `mb-6` / `mb-8`.
+- Bagian halaman: `py-12 sm:py-16 lg:py-20`; section hero lebih longgar.
+- Container: `px-4 sm:px-6 lg:px-8` (homepage memakai `px-6 sm:px-8 lg:px-16` untuk
+  ruang ekstra di desktop — boleh, asal konsisten satu halaman).
+- Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
+  CTA `px-6 py-3`, input `px-3 py-2`.
+- Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
+  (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
+
+---
+
+## 5. Primitif UI (`components/ui/`)
+
+Impor dari `@/components/ui`. Semua primitif menerima `className` tambahan.
+
+### Button
+`<Button variant size>` — variant: `primary | cta | secondary | danger | ghost | icon`,
+size: `sm | md | lg`.
+- `primary` = `brand-forest-600` → hover 700 → active 800, dark `brand-forest-500`.
+- `cta` = `brand-amber-500`, untuk aksi komersial (pesan, lanjut WhatsApp).
+- `secondary` = latar surface + `neutral-300` border; `danger` = `semantic-danger`.
+- Semua variant sudah membawa: `inline-flex items-center justify-center gap-2`,
+  `active:scale-95`, `focus:ring-2 focus:ring-offset-2`, `disabled:opacity-50`.
+- Jangan menimpa warna tombol dengan `className` kecuali benar-benar perlu.
+
+### Badge / StatusBadge
+`<Badge variant>` — `default | outline | info | success | warning | danger | earth`;
+dasarnya `inline-flex items-center px-2 py-1 text-xs font-medium rounded-sm`.
+`<StatusBadge status label?>` memetakan status pesanan ke varian + ikon Lucide:
+
+| Status | Varian | Ikon |
+|---|---|---|
+| `PENDING` | `warning` | `Clock` |
+| `DIPROSES` | `info` | `Loader` (`animate-spin`) |
+| `DIKIRIM` | `earth` | `Truck` |
+| `SELESAI` | `success` | `CheckCircle` |
+| `DIBATALKAN` | `danger` | `XCircle` |
+
+Label datang dari `statusLabel()`. Untuk kesegaran/stok ada `FreshnessBadge`; badge
+harga/label pendek di kartu memakai latar `bg-white/90` agar terbaca di atas gambar.
+
+### Input / Card / Table / Modal / Toggle
+- `Input`: `rounded-md border-neutral-300 bg-white` + `focus:ring-2 ring-brand-forest-500`,
+  dark memakai `neutral-800`. Label: `text-xs uppercase tracking-wider` + `Figtree medium`.
+- `Card`: `rounded-lg border-neutral-200 bg-white p-6`, prop `hover` menambah border/latar
+  saat disentuh. Kartu konten umum: `bg-surface border-border`.
+- `Table`: header `bg-bg-subtle text-charcoal-muted uppercase text-xs`, baris
+  `border-b border-border`, hover `bg-bg`, padding `px-4 py-3`.
+- `Modal`: overlay `bg-black/50 backdrop-blur-sm` (salah satu dari sedikit blur yang
+  diizinkan), panel `bg-surface rounded-xl border border-border shadow-lg`.
+- Placeholder: `text-charcoal-muted` / `placeholder:text-neutral-400`.
+
+### Empty state & loading
+- `EmptyState` untuk list kosong (ikon Lucide + 1 kalimat + tombol aksi).
+- Skeleton: `ProductSkeleton.tsx` + `.shimmer-line`; jangan `animate-spin` penuh halaman.
+- Setiap perubahan status async memakai `useTransition`/`startTransition` — bagian logika,
+  jangan diutak-atik (§12).
+
+---
+
+## 6. Gambar produk: `ProductVisual`
+
+`components/ProductVisual.tsx` menangani realita bahwa sebagian besar produk **belum punya
+foto asli**.
+
+- Kalau `imageUrl` benar-benar foto → `<Image fill sizes … className="object-cover object-center" />`.
+- Kalau `imageUrl` kosong **atau** menunjuk ke salah satu `PLACEHOLDER_ASSETS`
+  (`/hero-branding.jpg`, `/og-image.png`, `/etira.png`) → panel placeholder:
+  `bg-bg-subtle border border-border-subtle` + ikon Lucide besar (`w-1/3 max-w-24`,
+  `strokeWidth 1.25`, `text-charcoal-muted`), `aria-hidden`.
+- Ikon dipilih dari nama/kategori: `beku|frozen|iqf` → `Snowflake`, `kaleng|canned` →
+  `Package`, `pouch|retort|sachet` → `Boxes`, `nugget|bakso|olahan` → `ChefHat`,
+  `segar|fresh` → `Leaf`, sisanya `Sprout`.
+- Rasio foto kartu produk **4:3** (`aspect-[4/3]`); halaman detail pakai wadah kotak
+  sticky. Zoom hover: `group-hover:scale-105` dengan `motion-safe:transition-transform`.
+- Jangan memakai satu foto yang sama untuk semua produk sebagai "filler"; placeholder ikon
+  lebih jujur dan langsung tergantikan saat admin mengunggah foto.
+
+---
+
+## 7. Motion
+
+- **Semua** animasi transitions ditulis dengan prefix `motion-safe:` (lihat `Button`,
+  `Badge`, `Card`, `ProductCard`). Ini syarat, bukan saran.
+- Durasi hanya `150ms` (klik, fokus), `200ms` (hover kartu/badge), `300ms` (modal,
+  perubahan besar). Easing: `ease-out` (`cubic-bezier(0,0,.2,1)`).
+- `globals.css` punya blok `prefers-reduced-motion` yang mematikan shimmer, float, pulse,
+  badge-glow, divider wave, stagger dan hover-lift.
+- Kosakata kelas yang **hidup** dan boleh dipakai: `.hero-stagger` +
+  `.hero-stagger-visible`, `.reveal-hidden` / `.reveal-hidden-left|right` +
+  `.reveal-visible` (lewat `components/ScrollReveal.tsx`), `.shimmer-line`
+  (`components/ProductSkeleton.tsx`), `.skeleton`, `.no-scrollbar`,
+  `.section-divider-wave`, `.feature-card-num`, `.input` / `.input-with-icon`
+  (form admin).
+- Animasi looping hanya untuk hal yang benar-benar menyatakan "hidup": dot status
+  (`animate-ping` di hero), indikator loading (`animate-spin` pada `Loader`), dan
+  `animate-bounce` kecil pada scroll cue. Maksimal dua elemen beranimasi loop per halaman.
+- Munculnya elemen: geser + fade pendek (150–300ms) atau stagger, bukan bounce/pop besar.
+
+---
+
+## 8. Zona pengecualian efek
+
+Larangan lama ("tanpa gradien, tanpa blur") **tidak** dipakai sebagai aturan buta. Sistem
+yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu disengaja:
+
+| Lokasi | Efek yang diizinkan |
+|---|---|
+| `components/HeroCinematic.tsx` | overlay gradien di **atas foto** (`bg-gradient-to-r/-t` dengan warna gelap), parallax, bottom-fade ke `bg`, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue |
+| Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
+| `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
+| `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |
+| `components/FloatingWhatsApp.tsx` | gradien hijau WhatsApp (`#25D366` → `#20bd5a`) — warna merek pihak ketiga, sengaja di luar palet |
+
+Di luar daftar ini: **tidak ada** gradien, blur, glassmorphism, atau animasi besar.
+Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
+(`.gradient-text` sudah mati — jangan dihidupkan lagi).
+
+---
+
+## 9. Bahasa & i18n
+
+- **Situs publik: dua bahasa, Indonesia dan Inggris.** Semua string lewat
+  `messages/id.json` / `messages/en.json`, diakses dengan `useTranslations()`
+  (klien) atau `getServerMessages()` (server action, route handler, metadata).
+  Locale disimpan di localStorage dan dicermin ke cookie `locale` lewat
+  `components/LocaleProvider.tsx`.
+  Kunci kedua file harus **selalu sama jumlahnya** (saat ini 567/567).
+- **Panel admin: hanya bahasa Indonesia.** Ini keputusan lingkup, bukan kelalaian —
+  jangan diterjemahkan.
+- Semua label, tombol, placeholder, dan pesan error publik mengikuti locale aktif;
+  jangan menulis string Indonesia/Inggris mentah di JSX kalau kuncinya sudah ada.
+- Ikon: **Lucide React**. Emoji tidak dipakai sebagai ikon dekoratif.
+
+---
+
+## 10. Dark mode
+
+- Mekanisme: `darkMode: "class"` + `.dark` di `globals.css`; toggle di
+  `components/ThemeToggle.tsx`.
+- Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri.
+- Kalau memakai skala literal (`brand-*`, `neutral-*`), wajib tambahkan varian `dark:`
+  untuk latar, teks, dan border — pola standar: `bg-white dark:bg-neutral-800`,
+  `text-neutral-900 dark:text-neutral-100`, `border-neutral-300 dark:border-neutral-600`.
+- Jangan memakai `bg-black`/`text-white` polos untuk permukaan; pakai `bg-bg`/`text-charcoal`.
+  Teks putih di atas tombol hijau/biru itu wajar dan tetap boleh.
+- Dark bukan tema sekunder: cek setiap perubahan UI di kedua mode.
+
+---
+
+## 11. Utang teknis yang diketahui (jangan ditiru, perbaiki kalau menyentuhnya)
+
+Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
+
+1. `stone-*` dipakai di `app/(main)/HomePageClient.tsx` dan
+   `app/(main)/pesanan/[id]/OrderDetailClient.tsx`. `stone` tidak ada di tema (bawaan
+   Tailwind). Ganti dengan `neutral-*` atau token var saat menyentuh file itu.
+2. Hex mentah di class: `bg-[#faf9f6]`, `dark:bg-[#0f1110]`, `dark:bg-[#141715]`,
+   `dark:bg-[#1a1a16]`. Nilai-nilai ini sedikit berbeda dari token dan tidak ikut
+   berubah otomatis → ganti ke `bg-bg`, `bg-surface`, `bg-bg-subtle`.
+3. `blue-200 / green-200 / amber-200 / red-200` dipakai di varian `Badge` untuk teks
+   dark mode. Diizinkan **hanya** di dalam `components/ui/Badge.tsx`; di luar itu gunakan
+   `semantic.*`.
+4. Banyak kelas di `@layer components` sudah tidak dipakai sama sekali (mati):
+   `.btn-cta`, `.btn-ghost`, `.card-hover`, `.section-title`, `.section-subtitle`,
+   `.table-*`, `.nav-link*`, `.sidebar-link*`, `.page-*`, `.stat-*`, `.empty-icon-wrap`,
+   `.divider`, `.pill*`, `.focus-ring`, `.gradient-text`, `.btn-enhanced`,
+   `.card-premium`, `.badge-glow`, `.badge-fresh`, `.badge-premium`, `.badge-chef-choice`,
+   `.btn-forest`, `.btn-amber`, `.btn-earth`, `.btn-fresh`, `.hover-lift`,
+   `.stagger-item`, `.float-gentle`, `.pulse-gentle`, `.progress-*`, `.animate-loading`,
+   `.toast-*`, `.loading-overlay`, `.animate-slideInUp`, `.card`, `.badge`, `.scrollbar-thin`,
+   `.hero-grain`. Jangan menulis kode baru di atasnya; hapus saat file tersebut dibersihkan.
+   Yang **hidup** di golongan ini: `.btn-primary`, `.btn-secondary`, `.btn-danger`,
+   `.btn-icon`, `.input`, `.input-with-icon` — dipakai form & tombol admin.
+5. Ikon `w-3.5 h-3.5` sering muncul di dalam badge/tombol kecil — ini acceptable, tetapi
+   kalau membuat komponen baru pilih `size` dari skala (`w-4`, `w-5`, `w-6`).
+
+---
+
+## 12. Aturan kerja (tetap dari versi lama, masih berlaku)
+
+- **Jangan mengubah logika apa pun** saat mengerjakan tampilan: `use server`,
+  `useTransition`, `startTransition`, server actions, pemanggilan Prisma, `revalidateTag` /
+  `revalidatePath`, routing, dan struktur `messages/*.json` tidak disentuh.
+- Boleh diubah: class Tailwind, struktur JSX/HTML, impor font/ikon, dan token di tema.
+- Mobile-first dan responsif: setiap komponen diuji di ~360px, tablet, dan desktop.
+- Sebelum menyelesaikan perubahan tampilan, jalankan `npx tsc --noEmit`,
+  `npx next lint`, dan `npm run build`.
+- Aksesibilitas tetap syarat: kontras teks ≥ 4.5:1 di kedua mode, `focus:ring` jangan
+  dihapus, elemen dekoratif (`aria-hidden`) tidak boleh dibaca screen reader, gambar
+  butuh `alt` bermakna dalam bahasa aktif.

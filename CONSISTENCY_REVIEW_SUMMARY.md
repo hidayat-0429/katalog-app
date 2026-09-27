@@ -1,5 +1,9 @@
 # Laporan Konsistensi Design System - Etira Mushrooms B2B Platform
 
+> ⚠️ **Laporan sesaat, bukan acuan.** Dokumen resmi sekarang ada di `DESIGN_SYSTEM.md`.
+> Angka, daftar file, dan status di bawah menggambarkan kondisi saat review itu dibuat
+> dan sudah tertinggal dari kode (tabel route, jumlah file, dan aturan bahasa berubah).
+
 ## 📋 Executive Summary
 
 Telah dilakukan review menyeluruh dan perbaikan konsistensi pewarnaan dan ukuran di seluruh aplikasi B2B PT Eka Timur Raya. Semua perubahan berhasil diimplementasikan tanpa error dan build sukses.

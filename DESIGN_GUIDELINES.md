@@ -1,5 +1,10 @@
 # Design System Guidelines - Etira Mushrooms
 
+> ⚠️ **Dokumen lama — sudah digantikan.** Baca `DESIGN_SYSTEM.md` sebagai acuan.
+> File ini dipertahankan hanya sebagai catatan sejarah; isinya tidak selalu cocok
+> dengan kode yang berjalan (mis. skala radius dan bayangan kini dibatasi di
+> `tailwind.config.ts`, dan aturan "Indonesia saja" sudah tidak berlaku untuk situs publik).
+
 ## Typography Scale (Konsisten untuk semua komponen)
 
 ### Headings
