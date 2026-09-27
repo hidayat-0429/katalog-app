@@ -5,8 +5,7 @@ sistem yang **benar-benar terpakai di kode**, bukan rencana lama. Kalau dokumen 
 bertabrakan, kodenya yang benar dan dokumen inilah yang harus diperbaiki.
 
 Menggantikan: `DESIGN_SYSTEM.md` versi lama, `DESIGN_GUIDELINES.md`, dan
-`CONSISTENCY_REVIEW_SUMMARY.md` (kedua file terakhir tinggal catatan sejarah; jangan
-dipakai sebagai acuan).
+`CONSISTENCY_REVIEW_SUMMARY.md` (keduanya sudah dihapus dari repo).
 
 Referensi kode:
 - Token & tema: `app/globals.css`, `tailwind.config.ts`
@@ -40,22 +39,26 @@ pengecualian yang didaftarkan di §11.
 
 | Token | Light | Dark | Dipakai untuk |
 |---|---|---|---|
-| `bg` | `#FAF9F6` | `#0F140D` | Latar halaman |
-| `bg-subtle` | `#F0EBE0` | `#182015` | Panel, blok aksen, placeholder produk |
-| `surface` | `#FFFFFF` | `#1F291C` | Kartu, popover, modal |
+| `bg` | `#FAF9F6` | `#0F1110` | Latar halaman |
+| `bg-subtle` | `#F0EBE0` | `#1A1A16` | Panel, blok aksen, input, placeholder produk |
+| `surface` | `#FFFFFF` | `#141715` | Kartu, popover, modal, footer |
 | `primary` | `#2D5A27` | `#90B88A` | Aksi utama, tautan aktif, garis fokus |
 | `primary-hover` | `#1E4A1A` | `#A4CC9E` | Hover aksi utama |
 | `primary-light` | `#F0F7F0` | `#162A13` | Latar terpilih, `::selection` |
-| `cta` | `#D97706` | `#D97706` | Tombol ajakan (order, WhatsApp), highlight |
+| `cta` | `#D97706` | `#D97706` | Tombol ajakan (order, lanjut WhatsApp), highlight |
 | `cta-hover` | `#B8620A` | `#F29F3F` | Hover CTA |
 | `charcoal` | `#1F2421` | `#F5F5F0` | Teks utama |
 | `charcoal-muted` | `#646B66` | `#B4B4AA` | Teks sekunder, caption, ikon placeholder |
-| `border` | `#E1D7C7` | `#2C3629` | Garis pemisah 1px |
-| `border-subtle` | `#F0EBE0` | `#242E21` | Garis dalam panel |
+| `border` | `#E1D7C7` | `#212529` | Garis pemisah 1px |
+| `border-subtle` | `#F0EBE0` | `#1A1A16` | Garis dalam panel |
 | `danger` | `#B94A48` | `#E06C6A` | Kesalahan, hapus, pembatalan |
 | `danger-bg` | `#FDF0EF` | `#3E1E1E` | Latar pesan error |
 | `fresh` | `#16A34A` | `#22C55E` | Segar / tersedia |
 | `earth` | `#8B7355` | `#8B7355` | Aksen sekunder (dikirim, kategori) |
+
+Mode gelap memakai tangga elevasi netral (bukan hijau): `bg` paling gelap untuk halaman,
+`bg-subtle` untuk panel yang tenggelam, `surface` untuk kartu melayang, `border` `#212529`
+untuk garis. Jangan menulis ulang nilai-nilai ini sebagai hex di class — sebut tokennya.
 
 ### Skala literal yang tersedia
 
@@ -265,7 +268,10 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 
 - Mekanisme: `darkMode: "class"` + `.dark` di `globals.css`; toggle di
   `components/ThemeToggle.tsx`.
-- Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri.
+- Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri — tidak perlu
+  varian `dark:` sama sekali. Ini jalur utama untuk permukaan dan teks.
+- **Hex mentah di class dilarang**, termasuk `dark:bg-[#141715]`. Nilainya sekarang sudah
+  menjadi token (`bg-surface`), jadi menulis hex berarti membuat sumber kebenaran kedua.
 - Kalau memakai skala literal (`brand-*`, `neutral-*`), wajib tambahkan varian `dark:`
   untuk latar, teks, dan border — pola standar: `bg-white dark:bg-neutral-800`,
   `text-neutral-900 dark:text-neutral-100`, `border-neutral-300 dark:border-neutral-600`.
@@ -279,12 +285,14 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 
 Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
 
-1. `stone-*` dipakai di `app/(main)/HomePageClient.tsx` dan
-   `app/(main)/pesanan/[id]/OrderDetailClient.tsx`. `stone` tidak ada di tema (bawaan
-   Tailwind). Ganti dengan `neutral-*` atau token var saat menyentuh file itu.
-2. Hex mentah di class: `bg-[#faf9f6]`, `dark:bg-[#0f1110]`, `dark:bg-[#141715]`,
-   `dark:bg-[#1a1a16]`. Nilai-nilai ini sedikit berbeda dari token dan tidak ikut
-   berubah otomatis → ganti ke `bg-bg`, `bg-surface`, `bg-bg-subtle`.
+1. ~~`stone-*`~~ dan ~~hex mentah di class~~ sudah dibersihkan (2026-09-27): `stone-*`
+   digantikan `neutral-*`, dan `dark:bg-[#…]`/`bg-[#faf9f6]` digantikan token
+   `bg-surface` / `bg-bg` / `bg-bg-subtle`. Jangan kembalikan keduanya.
+2. `bg-white` masih dipakai di primitif `components/ui/*` (`Button` secondary, `Card`,
+   `Input`, `Modal`) dengan pasangan `dark:bg-neutral-800`. Nilai ini **berbeda** dari
+   `bg-surface` (gelap netral `#141715`). Keputusannya: konversi primitif ke `bg-surface`
+   supaya satu sumber, atau biarkan `neutral-800` sebagai warna "form/control" khusus.
+   Belum diputuskan — jangan dianggap salah kalau melihatnya.
 3. `blue-200 / green-200 / amber-200 / red-200` dipakai di varian `Badge` untuk teks
    dark mode. Diizinkan **hanya** di dalam `components/ui/Badge.tsx`; di luar itu gunakan
    `semantic.*`.
