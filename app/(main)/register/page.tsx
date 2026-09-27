@@ -214,7 +214,7 @@ export default function RegisterPage() {
 
         <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
           {t.register.haveAccount}{' '}
-          <Link href="/login" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
+          <Link href="/login" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-forest-600 dark:hover:text-brand-forest-400">
             {t.register.login}
           </Link>
         </div>

@@ -631,6 +631,7 @@
     "insufficientStock": "Stok \"{name}\" tidak mencukupi (sisa: {stock})",
     "insufficientStockDuringOrder": "Stok \"{name}\" tidak mencukupi saat memproses pesanan",
     "tooManyRequests": "Terlalu banyak kiriman dari perangkat ini, coba lagi beberapa menit lagi.",
+    "tooManyAttempts": "Terlalu banyak percobaan dari perangkat ini, coba lagi beberapa menit lagi.",
     "orderFailed": "Gagal memproses pesanan",
     "orderNotFound": "Pesanan tidak ditemukan",
     "orderAlreadyProcessed": "Pesanan sudah diproses, tidak bisa dibatalkan",

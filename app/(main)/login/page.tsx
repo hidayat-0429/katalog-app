@@ -29,7 +29,7 @@ export default function LoginPage() {
       });
 
       if (res?.error) {
-        setError(t.login.error);
+        setError(res.error === 'RateLimited' ? t.server.tooManyAttempts : t.login.error);
         setLoading(false);
       } else {
         const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
@@ -118,7 +118,7 @@ export default function LoginPage() {
 
         <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
           {t.login.noAccount}{' '}
-          <Link href="/register" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-sage-600 dark:hover:text-brand-sage-400">
+          <Link href="/register" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-forest-600 dark:hover:text-brand-forest-400">
             {t.login.register}
           </Link>
         </div>

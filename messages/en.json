@@ -631,6 +631,7 @@
     "insufficientStock": "Not enough stock for \"{name}\" ({stock} left)",
     "insufficientStockDuringOrder": "Stock for \"{name}\" ran out while processing your order",
     "tooManyRequests": "Too many messages from this device, please try again in a few minutes.",
+    "tooManyAttempts": "Too many attempts from this device, please try again in a few minutes.",
     "orderFailed": "Failed to process the order",
     "orderNotFound": "Order not found",
     "orderAlreadyProcessed": "This order is already in progress and can no longer be cancelled",

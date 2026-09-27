@@ -1,9 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { getServerMessages } from "@/lib/serverMessages";
+import { clientIp, isRateLimited } from "@/lib/rateLimit";
 
 type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
 
@@ -25,6 +27,13 @@ function buildRegisterSchema(t: ServerMessages) {
 
 export async function registerUser(formData: FormData) {
   const t = await getServerMessages();
+
+  // Satu perangkat maksimal beberapa akun per jam; diperiksa sebelum validasi
+  // supaya upaya terus-menerus tidak ikut membebani database.
+  if (isRateLimited("register", clientIp(await headers()))) {
+    return { error: t.server.tooManyAttempts };
+  }
+
   const parsed = buildRegisterSchema(t).safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
