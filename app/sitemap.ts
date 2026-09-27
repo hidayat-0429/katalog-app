@@ -1,6 +1,10 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
+// Dibangkitkan tiap permintaan: produk baru dari dasbor admin langsung masuk
+// peta situs, dan proses build tidak lagi butuh akses ke database.
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://etiramushrooms.com'
 
@@ -12,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       select: { id: true, updatedAt: true },
     })
   } catch (err) {
-    console.warn('Sitemap: Tidak dapat menjangkau basis data saat build, melewati produk dinamis:', err)
+    console.warn('Sitemap: Tidak dapat menjangkau basis data, melewati produk dinamis:', err)
   }
 
   const productUrls = activeProducts.map((product) => ({
@@ -38,7 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/kontak`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
     ...productUrls,

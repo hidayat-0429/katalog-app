@@ -84,7 +84,7 @@ npm run build        # build produksi
 ```
 Tes difokuskan ke jalur yang paling mahal kalau rusak: cegah *oversell* di *checkout*, aturan status pesanan, pembatas laju, dan keseimbangan kunci terjemahan ID/EN. Tes memakai *mock* Prisma sehingga tidak pernah menulis ke database.
 
-CI (GitHub Actions) menjalankan `type-check`, `lint`, dan `test` pada setiap *push* ke `main` dan setiap pull request. `next build` sengaja tidak dijalankan di CI karena halaman `/sitemap.xml` memanggil database saat proses *build*.
+CI (GitHub Actions) menjalankan `type-check`, `lint`, `test`, dan `next build` pada setiap *push* ke `main` dan setiap pull request. Build tidak butuh koneksi database: `/sitemap.xml` dibangkitkan saat permintaan, bukan saat *build*, dan seluruh halaman memang dinamis.
 
 ## 📁 Struktur Direktori Utama
 - `app/` → Konfigurasi App Router Next.js (halaman publik & privat); rute dengan data disertai `loading.tsx`
@@ -99,12 +99,45 @@ CI (GitHub Actions) menjalankan `type-check`, `lint`, dan `test` pada setiap *pu
 - `tests/` → Tes Vitest
 - `.github/workflows/` → Definisi CI
 
-## 🌐 Catatan Sebelum Naik ke Produksi
-1. `NEXTAUTH_URL` dan `NEXT_PUBLIC_BASE_URL` harus diisi URL final (`https://...`).
-2. Ganti `NEXTAUTH_SECRET` dengan nilai acak baru; jangan pakai nilai dari pengembangan.
-3. Isi `ADMIN_SEED_PASSWORD` / `BUYER_SEED_PASSWORD` (atau buat akun lalu hapus akun demo).
-4. Skema diterapkan ke database produksi dengan `npx prisma migrate deploy`, bukan `migrate dev`.
-5. `SUPABASE_SERVICE_ROLE_KEY` hanya boleh ada di sisi server — jangan dipindah ke variabel `NEXT_PUBLIC_*`.
+## 🌐 Deploy ke Vercel
+
+**1. Impor repositori.** Di Vercel: *Add New → Project* → pilih repositori GitHub ini. *Framework Preset* biarkan **Next.js**, *Build Command* `npm run build`, *Output Directory* `.next`.
+
+**2. Klien Prisma.** `package.json` punya skrip `"postinstall": "prisma generate"`, jadi klien database terbentuk otomatis saat Vercel menjalankan `npm install`. Tanpa baris ini build gagal dengan pesan *"Cannot find module '@prisma/client'"* atau *"query engine not found"*.
+
+**3. Environment Variables** (isi di *Project → Settings → Environment Variables*, untuk *Production* — dan *Preview* bila perlu):
+
+| Variabel | Nilai |
+| --- | --- |
+| `DATABASE_URL` | URL **pooler** Supabase (`...supabase.co:6543/...`), tambahkan `?pgbouncer=true&connection_limit=1` bila belum ada |
+| `DIRECT_URL` | URL **langsung** Supabase (`...supabase.co:5432/...`), tanpa pooler |
+| `NEXTAUTH_SECRET` | String acak baru, minimal 32 karakter — jangan pakai nilai dari lokal |
+| `NEXTAUTH_URL` | `https://domain-final-anda` |
+| `NEXT_PUBLIC_BASE_URL` | Sama persis dengan `NEXTAUTH_URL` (dipakai metadata, *open graph*, dan *sitemap*) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Proyek Supabase tempat gambar produk disimpan |
+| `SUPABASE_SERVICE_ROLE_KEY` | Hanya di server; **jangan** dipindah ke variabel `NEXT_PUBLIC_*` |
+| `NEXT_PUBLIC_ADMIN_PHONE` | Nomor WhatsApp, format internasional tanpa `+` |
+| `NEXT_PUBLIC_COMPANY_EMAIL` | Email yang tampil di kontak dan *footer* |
+| `ADMIN_SEED_PASSWORD`, `BUYER_SEED_PASSWORD` | Opsional, hanya bila kamu menjalankan seeder di produksi |
+
+`DATABASE_URL` dan `DIRECT_URL` tetap dibutuhkan walau `npm run build` tidak lagi menyentuh database (halaman `/sitemap.xml` sudah dibangkitkan saat permintaan, bukan saat *build*).
+
+**4. Region fungsi.** Di *Project → Settings → Function Region*, pilih region yang paling dekat dengan lokasi database Supabase-mu (untuk server di Singapura, biasanya Hong Kong atau Mumbai yang paling dekat; bawaan Vercel adalah `iad1` di Amerika Serikat). Setiap halaman memanggil database beberapa kali, jadi selisihnya terasa: 20 ms per panggilan vs 200 ms.
+
+**5. Terapkan skema ke database produksi** dari mesin lokal:
+```bash
+npx prisma migrate deploy
+```
+Jangan `migrate dev` di database yang sudah berisi data pesanan.
+
+**6. Ganti sandi akun demo.** Seeder jatuh ke `admin123` / `buyer123` kalau `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` kosong. Akun `admin@katalog.test` yang sudah ada di database harus diganti sandinya (atau hapus akunnya) sebelum situs bisa diakses orang lain.
+
+**7. Deploy dan uji.** Setelah *deploy*, cek: masuk sebagai buyer, tambah ke keranjang, *checkout* tanpa mengirim pesanan, unggah gambar produk dari dasbor admin (butuh `SUPABASE_SERVICE_ROLE_KEY`), dan cetak faktur.
+
+### Yang berubah perilakunya di serverless
+- **Pembatas laju bersifat per-instance.** Hitungan login/daftar/kontak disimpan di memori proses, jadi di Vercel tiap instance hotungannya sendiri. Lapisan ini tetap menahan bot naif, tapi bukan pengganti pembatas laju di sisi database atau *edge*.
+- **Cache `unstable_cache` juga per-instance.** Halaman pertama setelah instance dingin dibuat ulang; itu normal dan tidak mengubah data.
+- **Waktu tunggu database.** Kalau Supabase-mu sedang *paused* (plan gratis), permintaan pertama bisa kena *cold start* beberapa detik.
 
 ---
 *Proyek ini dikembangkan sebagai pemenuhan tugas Praktik Kerja Nyata (PKN) Program Studi Teknik Informatika.*
