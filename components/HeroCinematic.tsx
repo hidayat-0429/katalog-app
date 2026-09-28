@@ -147,49 +147,49 @@ export default function HeroCinematic({
       </div>
 
       {/* Content — tiga zona vertikal: lockup di atas, cerita di tengah, angka di dasar hero */}
-      <div className="relative z-10 flex flex-1 w-full flex-col items-center px-6 sm:px-10 lg:px-16 pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-20">
+      <div className="relative z-10 flex flex-1 w-full flex-col items-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-20">
         {/* Logo + Nama brand */}
         <div
-          className={`flex items-center justify-center gap-3 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+          className={`flex items-center justify-center gap-4 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
           style={{ transitionDelay: "0ms" }}
         >
-          <div className="relative w-14 h-14">
+          <div className="relative w-16 h-16">
             <Image
               src="/logos/etira-product-logo.png"
               alt="Etira Logo"
               fill
               className="object-contain drop-shadow-md"
-              sizes="56px"
+              sizes="64px"
             />
           </div>
-          <div className="h-4 w-px bg-white/25" />
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">
+          <div className="h-5 w-px bg-white/25" />
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
             PT Eka Timur Raya
           </span>
         </div>
 
         {/* Zona tengah: flex-1 + justify-center supaya sisa tinggi viewport ketiban di atas-bawah
             blok ini, bukan mengendap jadi pita foto kosong di bawah statistik */}
-        <div className="flex w-full max-w-2xl flex-1 flex-col items-center justify-center text-center">
+        <div className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center text-center">
           <h1
             className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "80ms" }}
           >
-            <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-white">
+            <span className="block text-[2.6rem] sm:text-6xl lg:text-[4.5rem] text-white">
               {title}
             </span>
-            <span className="block text-[1.7rem] sm:text-3xl lg:text-[2.1rem] font-semibold text-white">
+            <span className="block text-[1.7rem] sm:text-4xl lg:text-[2.7rem] font-semibold text-white">
               {subtitle}
             </span>
           </h1>
 
           <div
-            className={`h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`h-1 w-20 rounded-full bg-brand-forest-300 mt-6 mb-7 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "130ms" }}
           />
 
           <p
-            className={`text-sm sm:text-base text-white/80 leading-relaxed max-w-xl mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "180ms" }}
           >
             {description}
@@ -201,14 +201,14 @@ export default function HeroCinematic({
           >
             <Link
               href="/?katalog=semua"
-              className="group inline-flex items-center gap-2 bg-brand-forest-600 hover:bg-brand-forest-500 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-lg shadow-brand-forest-900/40"
+              className="group inline-flex items-center gap-2 bg-brand-forest-600 hover:bg-brand-forest-500 text-white px-7 py-3.5 rounded-xl font-semibold text-base transition-all duration-200 shadow-lg shadow-brand-forest-900/40"
             >
               {cta1Text}
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/kontak"
-              className="inline-flex items-center gap-2 bg-white/10 border border-white/25 hover:border-white/45 hover:bg-white/15 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/25 hover:border-white/45 hover:bg-white/15 text-white px-7 py-3.5 rounded-xl font-semibold text-base transition-all duration-200"
             >
               {cta2Text}
             </Link>
@@ -217,13 +217,13 @@ export default function HeroCinematic({
 
         <div
           ref={statsRef}
-          className={`w-full max-w-3xl grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+          className={`w-full max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-7 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
           style={{ transitionDelay: "380ms" }}
         >
           {STATS.map((item) => (
             <div key={item.label} className="group flex flex-col items-center">
-              <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
-              <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <item.icon className="w-5 h-5 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+              <p className="font-mono text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 {typeof item.numericValue === "number" ? (
                   <AnimatedCounter
                     target={item.numericValue}
@@ -234,7 +234,7 @@ export default function HeroCinematic({
                   item.value
                 )}
               </p>
-              <p className="text-[11px] text-white/75 mt-0.5 font-medium leading-snug">
+              <p className="text-xs text-white/75 mt-1 font-medium leading-snug">
                 {item.label}
               </p>
             </div>
