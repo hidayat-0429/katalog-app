@@ -168,7 +168,10 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 
 - Dalam komponen: `gap-2` (ikon+teks), `gap-3` (antar field), `gap-4` (isi kartu).
 - Antar elemen: `mb-2` / `mb-4` / `mb-6` / `mb-8`.
-- Bagian halaman: `py-12 sm:py-16 lg:py-20`; section hero lebih longgar.
+- Bagian halaman: halaman publik dengan satu kolom isi (`/faq`, `/profil`, `/pesanan`,
+  `/keranjang`, `/kontak`, `/tentang`, invoice) pakai `py-8`; section homepage lebih longgar
+  (`py-10 sm:py-14` / `py-16 sm:py-24`). Hero anchor-nya di atas (`items-start` +
+  `pt-16 sm:pt-20 lg:pt-24`), bukan tengah, supaya tidak ada pita kosong di atas blok logo.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru

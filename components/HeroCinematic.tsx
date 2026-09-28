@@ -118,7 +118,7 @@ export default function HeroCinematic({
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[92vh] sm:min-h-screen flex items-start overflow-hidden"
     >
       {/* Background image with parallax */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -146,7 +146,7 @@ export default function HeroCinematic({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-8 sm:pt-12 pb-20 sm:pb-28">
+      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-28">
         <div className="max-w-xl">
 
           {/* Logo + Nama brand */}
