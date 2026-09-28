@@ -257,12 +257,7 @@
     "register": "Register here",
     "error": "Email or password is incorrect",
     "errorGeneral": "An error occurred, please try again later",
-    "backToHome": "Back to Home",
-    "demoCredentials": "Demo Account",
-    "adminEmail": "Admin: admin@katalog.test",
-    "adminPassword": "admin123",
-    "buyerEmail": "Buyer: buyer@katalog.test",
-    "buyerPassword": "buyer123"
+    "backToHome": "Back to Home"
   },
   "register": {
     "title": "Register Account",

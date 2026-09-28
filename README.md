@@ -69,10 +69,10 @@ npm run dev
 Buka [http://localhost:3000](http://localhost:3000) di browser Anda. Cukup **satu** server development dalam satu waktu — dua instance yang berbagi folder `.next` akan merusak cache.
 
 **6. Akun Demo untuk Uji Coba**
-- **Admin:** `admin@katalog.test`
+- **Admin:** `admin@etiramushrooms.com`
 - **Buyer (Klien):** `buyer@katalog.test`
 
-Password keduanya dibaca dari `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` di `.env`. Bila kedua variabel itu dikosongkan, seeder jatuh ke nilai bawaan `admin123` / `buyer123` — jadi selalu isi keduanya untuk instance yang benar-benar dipakai.
+Password keduanya dibaca dari `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` di `.env`. Keduanya **wajib** terisi: kalau kosong, `npm run seed` langsung gagal alih-alih jatuh ke sandi bawaan yang bisa ditebak. Untuk akun yang sudah ada di database, seeder tidak mengubah sandi maupun datanya (`update: {}`), jadi menjalankan seed pada database yang sudah terisi aman.
 
 ## 🧪 Perintah Lainnya
 ```bash
@@ -118,7 +118,7 @@ CI (GitHub Actions) menjalankan `type-check`, `lint`, `test`, dan `next build` p
 | `SUPABASE_SERVICE_ROLE_KEY` | Hanya di server; **jangan** dipindah ke variabel `NEXT_PUBLIC_*` |
 | `NEXT_PUBLIC_ADMIN_PHONE` | Nomor WhatsApp, format internasional tanpa `+` |
 | `NEXT_PUBLIC_COMPANY_EMAIL` | Email yang tampil di kontak dan *footer* |
-| `ADMIN_SEED_PASSWORD`, `BUYER_SEED_PASSWORD` | Opsional, hanya bila kamu menjalankan seeder di produksi |
+| `ADMIN_SEED_PASSWORD`, `BUYER_SEED_PASSWORD` | Wajib terisi bila menjalankan `npm run seed`; tidak ada nilai bawaan |
 
 `DATABASE_URL` dan `DIRECT_URL` tetap dibutuhkan walau `npm run build` tidak lagi menyentuh database (halaman `/sitemap.xml` sudah dibangkitkan saat permintaan, bukan saat *build*).
 
@@ -130,7 +130,7 @@ npx prisma migrate deploy
 ```
 Jangan `migrate dev` di database yang sudah berisi data pesanan.
 
-**6. Ganti sandi akun demo.** Seeder jatuh ke `admin123` / `buyer123` kalau `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` kosong. Akun `admin@katalog.test` yang sudah ada di database harus diganti sandinya (atau hapus akunnya) sebelum situs bisa diakses orang lain.
+**6. Kunci sandi akun demo.** `buyer@katalog.test` masih memakai sandi seed yang tertulis di dokumentasi ini, dan halaman login bisa diakses siapa pun. Ganti sandinya lewat **Admin → Pengguna → ikon kunci** sebelum situs diakses orang lain; untuk `admin@etiramushrooms.com` gunakan **Profil → Kata Sandi**. Seeder tidak akan memulihkan sandi lama karena akun yang sudah ada tidak pernah ditimpa.
 
 **7. Deploy dan uji.** Setelah *deploy*, cek: masuk sebagai buyer, tambah ke keranjang, *checkout* tanpa mengirim pesanan, unggah gambar produk dari dasbor admin (butuh `SUPABASE_SERVICE_ROLE_KEY`), dan cetak faktur.
 

@@ -3,22 +3,30 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
+// Tidak ada nilai bawaan: seed yang lupa diisi variabelnya harus gagal, bukan
+// malah membuat akun dengan sandi yang bisa ditebak siapa pun.
+function seedPassword(name: string) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} belum diisi di .env. Seeder sengaja tidak punya sandi bawaan.`);
+  }
+  return value;
+}
+
 async function main() {
-  const adminRawPassword = process.env.ADMIN_SEED_PASSWORD || "admin123";
-  const adminPassword = await bcrypt.hash(adminRawPassword, 10);
+  const adminPassword = await bcrypt.hash(seedPassword("ADMIN_SEED_PASSWORD"), 10);
   await prisma.user.upsert({
-    where: { email: "admin@katalog.test" },
+    where: { email: "admin@etiramushrooms.com" },
     update: {},
     create: {
-      name: "Admin Operasional",
-      email: "admin@katalog.test",
+      name: "Admin Operasional PT Eka Timur Raya",
+      email: "admin@etiramushrooms.com",
       password: adminPassword,
       role: "ADMIN",
     },
   });
 
-  const buyerRawPassword = process.env.BUYER_SEED_PASSWORD || "buyer123";
-  const buyerPassword = await bcrypt.hash(buyerRawPassword, 10);
+  const buyerPassword = await bcrypt.hash(seedPassword("BUYER_SEED_PASSWORD"), 10);
   await prisma.user.upsert({
     where: { email: "buyer@katalog.test" },
     update: {},
@@ -206,8 +214,8 @@ async function main() {
   }
 
   console.log("Seed selesai. Data dummy berhasil disinkronkan.");
-  console.log("Admin: admin@katalog.test / admin123");
-  console.log("Buyer: buyer@katalog.test / buyer123");
+  console.log("Admin: admin@etiramushrooms.com (sandi dari ADMIN_SEED_PASSWORD, kecuali akunnya sudah ada)");
+  console.log("Buyer: buyer@katalog.test (sandi dari BUYER_SEED_PASSWORD, kecuali akunnya sudah ada)");
 }
 
 main()

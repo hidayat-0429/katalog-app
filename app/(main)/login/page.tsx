@@ -123,38 +123,6 @@ export default function LoginPage() {
           </Link>
         </div>
       </div>
-
-      {/* Demo Credentials Box (Hanya tampil di lingkungan pengembangan) */}
-      {process.env.NODE_ENV !== 'production' && (
-        <div className="mt-6 bg-neutral-50 dark:bg-neutral-800/50 rounded p-4 border border-neutral-200 dark:border-neutral-700 text-xs">
-          <p className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">{t.login.demoCredentials}</p>
-          <div className="space-y-1.5">
-            <button
-              type="button"
-              onClick={() => {
-                setEmail('admin@katalog.test');
-                setPassword('admin123');
-              }}
-              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
-            >
-              <span>{t.login.adminEmail}</span>
-              <span className="text-[11px] text-charcoal-muted">{t.login.adminPassword}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                setEmail('buyer@katalog.test');
-                setPassword('buyer123');
-              }}
-              className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
-            >
-              <span>{t.login.buyerEmail}</span>
-              <span className="text-[11px] text-charcoal-muted">{t.login.buyerPassword}</span>
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -257,12 +257,7 @@
     "register": "Daftar di sini",
     "error": "Email atau password tidak sesuai",
     "errorGeneral": "Terjadi kesalahan, silakan coba beberapa saat lagi",
-    "backToHome": "Kembali ke Beranda",
-    "demoCredentials": "Akun Uji Coba (Demo)",
-    "adminEmail": "Admin: admin@katalog.test",
-    "adminPassword": "admin123",
-    "buyerEmail": "Pembeli: buyer@katalog.test",
-    "buyerPassword": "buyer123"
+    "backToHome": "Kembali ke Beranda"
   },
   "register": {
     "title": "Pendaftaran Akun",
