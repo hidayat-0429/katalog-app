@@ -17,6 +17,7 @@ export const RATE_LIMITS = {
   register: { windowMs: 60 * 60 * 1000, max: 5 },
   loginEmail: { windowMs: 15 * 60 * 1000, max: 8 },
   loginIp: { windowMs: 15 * 60 * 1000, max: 30 },
+  changePassword: { windowMs: 15 * 60 * 1000, max: 5 },
 } satisfies Record<string, Bucket>;
 
 function hitsFor(name: keyof typeof RATE_LIMITS): Map<string, number[]> {

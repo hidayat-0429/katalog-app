@@ -323,6 +323,16 @@
       "addressHint": "Alamat ini otomatis dipakai saat Anda membuat pesanan baru.",
       "saving": "Menyimpan...",
       "unexpectedError": "Terjadi kesalahan yang tidak terduga."
+    },
+    "password": {
+      "title": "Kata Sandi",
+      "current": "Sandi Saat Ini",
+      "new": "Sandi Baru",
+      "confirm": "Ulangi Sandi Baru",
+      "hint": "Minimal 6 karakter. Sandi disimpan terenkripsi, bahkan tim kami tidak dapat membacanya.",
+      "save": "Ubah Sandi",
+      "saving": "Mengubah...",
+      "saved": "Kata sandi berhasil diubah."
     }
   },
   "homepage": {
@@ -652,6 +662,10 @@
     "phoneInvalid": "Nomor telepon/WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)",
     "addressMin10": "Alamat pengiriman wajib diisi dengan lengkap (minimal 10 karakter).",
     "profileSaveFailed": "Terjadi kesalahan saat menyimpan pembaruan profil.",
+    "passwordConfirmMismatch": "Konfirmasi sandi tidak sama dengan sandi baru.",
+    "passwordSameAsOld": "Sandi baru harus berbeda dari sandi saat ini.",
+    "passwordCurrentWrong": "Sandi saat ini tidak sesuai.",
+    "passwordChangeFailed": "Terjadi kesalahan saat mengubah kata sandi.",
     "fieldsRequired": "Semua field harus diisi",
     "messageFailed": "Terjadi kesalahan saat memproses pesan"
   },

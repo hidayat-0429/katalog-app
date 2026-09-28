@@ -2,11 +2,18 @@
 
 import { UserCircle2 } from "lucide-react";
 import ProfilForm from "./ProfilForm";
+import PasswordForm from "./PasswordForm";
 import { useTranslations } from "@/hooks/useTranslations";
-import { User } from "@prisma/client";
 
 interface ProfilPageClientProps {
-  user: User;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    companyName: string | null;
+    phone: string | null;
+    address: string | null;
+  };
 }
 
 export default function ProfilPageClient({ user }: ProfilPageClientProps) {
@@ -41,6 +48,11 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
       {/* Form */}
       <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 sm:p-6">
         <ProfilForm user={user} />
+      </div>
+
+      {/* Kata sandi */}
+      <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 sm:p-6 mt-6">
+        <PasswordForm />
       </div>
     </div>
   );

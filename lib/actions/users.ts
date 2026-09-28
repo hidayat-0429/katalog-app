@@ -1,10 +1,13 @@
 "use server";
 
+import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { requireUser } from "@/lib/session";
+import { requireAdmin, requireUser } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import bcrypt from "bcryptjs";
 import { getServerMessages } from "@/lib/serverMessages";
+import { clientIp, isRateLimited } from "@/lib/rateLimit";
 
 type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
 
@@ -57,4 +60,91 @@ export async function updateProfile(formData: FormData) {
     console.error("Update profile error:", error);
     return { error: t.server.profileSaveFailed };
   }
+}
+
+function buildChangePasswordSchema(t: ServerMessages) {
+  return z
+    .object({
+      currentPassword: z.string().min(1, t.server.fieldsRequired),
+      newPassword: z.string().min(6, t.server.passwordMin),
+      confirmPassword: z.string(),
+    })
+    .refine((val) => val.newPassword === val.confirmPassword, {
+      message: t.server.passwordConfirmMismatch,
+    })
+    .refine((val) => val.newPassword !== val.currentPassword, {
+      message: t.server.passwordSameAsOld,
+    });
+}
+
+export async function changePassword(formData: FormData) {
+  const user = await requireUser();
+  const t = await getServerMessages();
+
+  // Setiap percobaan memaksa server membandingkan hash bcrypt, jadi dibatasi per
+  // akun sekaligus per IP.
+  if (isRateLimited("changePassword", `${user.id}:${clientIp(await headers())}`)) {
+    return { error: t.server.tooManyAttempts };
+  }
+
+  const parsed = buildChangePasswordSchema(t).safeParse({
+    currentPassword: String(formData.get("currentPassword") ?? ""),
+    newPassword: String(formData.get("newPassword") ?? ""),
+    confirmPassword: String(formData.get("confirmPassword") ?? ""),
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0].message };
+  }
+
+  const record = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: { password: true },
+  });
+  if (!record) return { error: t.server.userNotFound };
+
+  const valid = await bcrypt.compare(parsed.data.currentPassword, record.password);
+  if (!valid) return { error: t.server.passwordCurrentWrong };
+
+  try {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { password: await bcrypt.hash(parsed.data.newPassword, 10) },
+    });
+  } catch (error: any) {
+    console.error("Change password error:", error);
+    return { error: t.server.passwordChangeFailed };
+  }
+
+  return { success: true };
+}
+
+export async function resetUserPassword(formData: FormData) {
+  await requireAdmin();
+
+  const parsed = z
+    .object({
+      userId: z.string().min(1),
+      newPassword: z.string().min(6, "Sandi baru minimal 6 karakter."),
+    })
+    .safeParse({
+      userId: String(formData.get("userId") ?? ""),
+      newPassword: String(formData.get("newPassword") ?? ""),
+    });
+  if (!parsed.success) {
+    return { error: "Pengguna tidak ditentukan." };
+  }
+
+  const target = await prisma.user.findUnique({
+    where: { id: parsed.data.userId },
+    select: { id: true },
+  });
+  if (!target) return { error: "Pengguna tidak ditemukan." };
+
+  await prisma.user.update({
+    where: { id: target.id },
+    data: { password: await bcrypt.hash(parsed.data.newPassword, 10) },
+  });
+
+  revalidatePath("/admin/pengguna");
+  return { success: true };
 }

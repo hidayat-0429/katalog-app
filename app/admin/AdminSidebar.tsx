@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, Tag, ClipboardList, Mail, ArrowLeft, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutDashboard, Package, Tag, ClipboardList, Mail, Users, ArrowLeft, PanelLeftClose, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
@@ -24,6 +24,7 @@ const navItems: NavItem[] = [
   { href: "/admin/kategori", label: "Kategori", icon: Tag },
   { href: "/admin/pesanan", label: "Pesanan", icon: ClipboardList, badge: "pending" },
   { href: "/admin/pesan", label: "Pesan Masuk", icon: Mail, badge: "unread" },
+  { href: "/admin/pengguna", label: "Pengguna", icon: Users },
 ];
 
 interface AdminSidebarProps {

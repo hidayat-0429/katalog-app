@@ -323,6 +323,16 @@
       "addressHint": "This address is applied automatically when you create a new order.",
       "saving": "Saving...",
       "unexpectedError": "An unexpected error occurred."
+    },
+    "password": {
+      "title": "Password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Repeat New Password",
+      "hint": "At least 6 characters. Passwords are stored encrypted, so even our team cannot read them.",
+      "save": "Change Password",
+      "saving": "Changing...",
+      "saved": "Password updated successfully."
     }
   },
   "homepage": {
@@ -652,6 +662,10 @@
     "phoneInvalid": "Invalid phone / WhatsApp number (example: 08123456789 or +628123456789)",
     "addressMin10": "Please provide the full shipping address (minimum 10 characters).",
     "profileSaveFailed": "Something went wrong while saving your profile.",
+    "passwordConfirmMismatch": "The confirmation does not match the new password.",
+    "passwordSameAsOld": "The new password must differ from your current password.",
+    "passwordCurrentWrong": "Your current password is incorrect.",
+    "passwordChangeFailed": "Something went wrong while changing your password.",
     "fieldsRequired": "All fields are required",
     "messageFailed": "Something went wrong while sending your message"
   },
