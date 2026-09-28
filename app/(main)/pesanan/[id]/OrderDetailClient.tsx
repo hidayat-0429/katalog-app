@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { formatRupiah } from '@/lib/format';
 import StatusBadge from '@/components/StatusBadge';
+import Container from '@/components/Container';
 import CancelOrderButton from './CancelOrderButton';
 import PrintInvoiceButton from '@/components/PrintInvoiceButton';
 import WhatsAppOrderButton from '@/components/WhatsAppOrderButton';
@@ -57,7 +58,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
   const fleetText = fk ? t.fleet[fk] : fleetValue;
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-4xl">
 
       {/* Breadcrumb + aksi cetak */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8 print:hidden">
@@ -86,7 +87,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <ClipboardCheck className="w-5 h-5 text-charcoal-muted" />
-            <h1 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+            <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
               {t.invoice.title} {order.orderNumber}
             </h1>
           </div>
@@ -231,6 +232,6 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
         ) : <div />}
         {order.status === "PENDING" && <CancelOrderButton orderId={order.id} />}
       </div>
-    </div>
+    </Container>
   );
 }

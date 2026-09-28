@@ -143,8 +143,9 @@ kecuali untuk label uppercase.
 | Peran | Kelas |
 |---|---|
 | Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `text-[2.6rem] sm:text-5xl lg:text-[3.5rem] font-bold`, baris kedua `text-[1.7rem] sm:text-3xl lg:text-[2.1rem] font-semibold` — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
-| Judul bagian (H1) | `font-display text-3xl sm:text-4xl` |
-| Sub-bagian (H2) | `font-display text-2xl sm:text-3xl` |
+| Judul halaman (H1) | `font-heading text-2xl sm:text-3xl font-bold tracking-tight` — satu varian untuk semua halaman publik (profil, pesanan, keranjang, faq, tentang, kontak, invoice, login, register) |
+| Judul entitas (H1 detail produk) | `font-heading text-3xl sm:text-4xl font-bold tracking-tight` — lebih besar karena nama produk adalah subjek halaman |
+| Judul bagian dalam halaman (H2) | `font-heading text-2xl sm:text-3xl`; homepage pakai `<h2>` untuk judul katalog supaya `<h1>` hero tetap satu-satunya |
 | Judul komponen (H3) | `font-display text-xl sm:text-2xl` |
 | Judul kecil (H4) | `font-sans text-lg font-semibold` |
 | Body | `font-sans text-base` |
@@ -168,14 +169,19 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 - Dalam komponen: `gap-2` (ikon+teks), `gap-3` (antar field), `gap-4` (isi kartu).
 - Antar elemen: `mb-2` / `mb-4` / `mb-6` / `mb-8`.
 - Bagian halaman: `py-12 sm:py-16 lg:py-20`; section hero lebih longgar.
-- Container: `px-4 sm:px-6 lg:px-8` (homepage memakai `px-6 sm:px-8 lg:px-16` untuk
-  ruang ekstra di desktop — boleh, asal konsisten satu halaman).
+- Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
+  `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. `className` di-merge pakai `cn()`, jadi
+  `max-w-*` bawaan pemakai benar-benar menimpa 7xl. Lebar yang jalan sekarang: FAQ `max-w-2xl`,
+  Profil `3xl`, Pesanan + Invoice + Kontak `4xl`, Tentang `5xl`, Keranjang `6xl`.
+  Detail produk pengecualian: `px-6 sm:px-8 lg:px-16` + `max-w-6xl` (sama dengan homepage).
+  Skeleton (`loading.tsx`) wajib pakai Container dengan `max-w` yang sama, kalau tidak
+  posisi konten melompat saat data masuk.
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.
 - Target sentuh: kontrol navigasi punya area sentuh ≥ 44px, **tanpa** membesarkan kotak
   visualnya. Dua cara yang dipakai:
   - Baris/nav link yang memang teks: `min-h-[44px]` (`NavLinkActive`, pil & rail
-    `AdminSidebar`).
+    `AdminSidebar`, pil filter status di `/pesanan`).
   - Kontrol kecil (ikon-saja, chip bahasa, tombol hamburger/tutup): tinggi visual tetap
     32–36px, area sentuh dilebarkan lewat `relative` +
     `after:absolute after:-inset-*:after:content-['']`. Karena itu jangan pasang

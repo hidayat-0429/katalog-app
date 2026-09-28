@@ -1,9 +1,10 @@
 import { Skeleton, SkeletonCard, SkeletonPageTitle } from "@/components/Skeleton";
 import SkeletonStatus from "@/components/SkeletonStatus";
+import Container from "@/components/Container";
 
 export default function Loading() {
   return (
-    <div className="max-w-3xl mx-auto py-8 sm:py-10 px-4 sm:px-6">
+    <Container className="py-8 max-w-3xl">
       <SkeletonStatus />
       <SkeletonPageTitle />
       <SkeletonCard className="p-6 space-y-5">
@@ -15,6 +16,6 @@ export default function Loading() {
         ))}
         <Skeleton className="h-11 w-36 rounded-lg" />
       </SkeletonCard>
-    </div>
+    </Container>
   );
 }

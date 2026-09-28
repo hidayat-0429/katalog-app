@@ -3,12 +3,13 @@
 import { Building2, Target, ShieldCheck, MapPin, CalendarDays, Users2, Package } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from '@/hooks/useTranslations';
+import Container from '@/components/Container';
 
 export default function TentangPageClient() {
   const t = useTranslations();
 
   return (
-    <div className="py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-5xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -309,6 +310,6 @@ export default function TentangPageClient() {
           </div>
         </div>
       </section>
-    </div>
+    </Container>
   );
 }

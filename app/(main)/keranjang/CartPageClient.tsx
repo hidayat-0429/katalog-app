@@ -6,6 +6,7 @@ import CartItemRow from './CartItemRow';
 import CheckoutForm from './CheckoutForm';
 import { formatRupiah } from '@/lib/format';
 import EmptyState from '@/components/EmptyState';
+import Container from '@/components/Container';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useLocale } from '@/components/LocaleProvider';
 import { localizeProduct } from '@/lib/productText';
@@ -36,10 +37,10 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
   const totalPrice = cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
 
   return (
-    <div className="py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-6xl">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-heading text-3xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
           {t.cart.title}
         </h1>
         <p className="font-sans text-sm text-charcoal-muted mt-1">
@@ -58,8 +59,6 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           {/* Daftar item */}
           <div className="lg:col-span-7 flex flex-col gap-3">
-            {/* Header kolom CartItemRow menggunakan flex bukan grid */}
-
             {cartItems.map((item) => (
               <CartItemRow
                 key={item.id}
@@ -115,6 +114,6 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
           </div>
         </div>
       )}
-    </div>
+    </Container>
   );
 }

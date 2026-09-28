@@ -4,7 +4,7 @@ import SkeletonStatus from "@/components/SkeletonStatus";
 
 export default function Loading() {
   return (
-    <Container className="py-8 sm:py-10">
+    <Container className="py-8 max-w-4xl">
       <SkeletonStatus />
       <div className="flex items-center justify-between gap-4 mb-6">
         <Skeleton className="h-8 w-40" />

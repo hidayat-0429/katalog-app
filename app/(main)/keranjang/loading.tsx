@@ -1,9 +1,10 @@
 import { Skeleton, SkeletonCard, SkeletonPageTitle } from "@/components/Skeleton";
 import SkeletonStatus from "@/components/SkeletonStatus";
+import Container from "@/components/Container";
 
 export default function Loading() {
   return (
-    <div className="py-8 px-4 sm:px-6 max-w-7xl mx-auto">
+    <Container className="py-8 max-w-6xl">
       <SkeletonStatus />
       <SkeletonPageTitle />
       <div className="grid lg:grid-cols-12 gap-8 items-start">
@@ -32,6 +33,6 @@ export default function Loading() {
           </SkeletonCard>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

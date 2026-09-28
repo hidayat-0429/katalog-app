@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyState from "@/components/EmptyState";
+import Container from "@/components/Container";
 import StatusBadge from "@/components/StatusBadge";
 import { formatRupiah } from "@/lib/format";
 import { ClipboardList, ArrowRight, Package } from "lucide-react";
@@ -39,7 +40,7 @@ export default function PesananPageClient({
   ] as const;
 
   return (
-    <div className="py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-4xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -51,14 +52,14 @@ export default function PesananPageClient({
       </div>
 
       {/* Filter Tab */}
-      <div className="flex gap-1 overflow-x-auto pb-1 mb-6 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-xl p-1">
+      <div className="flex flex-wrap gap-1 mb-6 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-xl p-1">
         {STATUS_TABS.map((tab) => {
           const isActive = tab.value === currentStatus;
           return (
             <Link
               key={tab.value}
               href={`/pesanan${tab.value === "SEMUA" ? "" : `?status=${tab.value}`}`}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors duration-150 ease-out ${
+              className={`flex items-center min-h-[44px] px-4 rounded-lg text-xs font-semibold transition-colors duration-150 ease-out ${
                 isActive
                   ? "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-200 dark:border-neutral-700"
                   : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
@@ -146,6 +147,6 @@ export default function PesananPageClient({
           <PaginationControls currentPage={currentPage} totalPages={totalPages} />
         </div>
       )}
-    </div>
+    </Container>
   );
 }

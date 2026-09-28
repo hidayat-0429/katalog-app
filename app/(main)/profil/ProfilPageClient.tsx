@@ -1,6 +1,7 @@
 'use client';
 
 import { UserCircle2 } from "lucide-react";
+import Container from "@/components/Container";
 import ProfilForm from "./ProfilForm";
 import PasswordForm from "./PasswordForm";
 import { useTranslations } from "@/hooks/useTranslations";
@@ -20,7 +21,7 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
   const t = useTranslations();
 
   return (
-    <div className="py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-3xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -54,6 +55,6 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
       <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 sm:p-6 mt-6">
         <PasswordForm />
       </div>
-    </div>
+    </Container>
   );
 }

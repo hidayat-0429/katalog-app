@@ -75,7 +75,7 @@ export default function RegisterPage() {
         {t.register.backToHome}
       </Link>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.register.title}</h1>
+        <h1 className="font-heading text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.register.title}</h1>
         <p className="text-sm text-charcoal-muted mt-1">
           {t.register.subtitle}
         </p>

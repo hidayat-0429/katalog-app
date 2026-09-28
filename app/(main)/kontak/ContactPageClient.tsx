@@ -3,6 +3,7 @@
 import { Phone, Mail, MapPin, MessageSquare, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { useTranslations } from "@/hooks/useTranslations";
+import Container from "@/components/Container";
 
 export default function ContactPageClient() {
   const t = useTranslations();
@@ -11,10 +12,10 @@ export default function ContactPageClient() {
   const waLink = `https://wa.me/${adminWa}`;
 
   return (
-    <div className="py-8 px-4 sm:px-6">
+    <Container className="py-8 max-w-4xl">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-heading text-3xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
           {t.contact.title}
         </h1>
         <p className="font-sans text-base text-charcoal-muted max-w-2xl">
@@ -134,6 +135,6 @@ export default function ContactPageClient() {
           <ContactForm />
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
