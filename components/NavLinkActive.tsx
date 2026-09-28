@@ -37,7 +37,7 @@ export default function NavLinkActive({ href, icon, label, badge, highlight }: N
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg font-sans text-sm transition-colors duration-150 relative ${
+      className={`flex items-center gap-3 px-3 py-3 min-h-[44px] rounded-lg font-sans text-sm transition-colors duration-150 relative ${
         highlight
           ? isActive
             ? "text-brand-forest-700 dark:text-brand-forest-300 bg-brand-forest-100/70 dark:bg-brand-forest-900/40 font-semibold"

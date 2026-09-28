@@ -40,11 +40,12 @@ function isActivePath(pathname: string | null, href: string, exact?: boolean) {
 
 const NAV_BADGE_META = {
   pending: {
-    tone: "bg-semantic-warning-DEFAULT text-white",
+    // DEFAULT + teks putih cuma 2.2:1; varian 700 naik ke 5.0:1 tanpa keluar dari palet status.
+    tone: "bg-semantic-warning-700 text-white",
     description: "pesanan perlu diproses",
   },
   unread: {
-    tone: "bg-semantic-info-DEFAULT text-white",
+    tone: "bg-semantic-info-700 text-white",
     description: "pesan belum dibaca",
   },
 } as const;
@@ -136,7 +137,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             </div>
           )}
           {onToggle && isCollapsed && (
-            <button onClick={onToggle} className="p-1.5 text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
+            <button onClick={onToggle} aria-label="Bentangkan Menu" className="p-1.5 text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
               <PanelLeft className="w-4 h-4" />
             </button>
           )}
@@ -150,7 +151,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
                 Menu
               </p>
               {onToggle && (
-                <button onClick={onToggle} className="text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors" title="Ciutkan Menu">
+                <button onClick={onToggle} aria-label="Ciutkan Menu" className="text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors" title="Ciutkan Menu">
                   <PanelLeftClose className="w-4 h-4" />
                 </button>
               )}
@@ -166,8 +167,10 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
                 key={href}
                 href={href}
                 title={isCollapsed ? label : undefined}
+                aria-label={isCollapsed ? label : undefined}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ease-out relative group",
+                  "flex items-center gap-3 py-3 min-h-[44px] rounded-lg text-sm font-medium transition-colors duration-150 ease-out relative group",
                   isCollapsed ? "px-0 justify-center" : "px-3",
                   isActive
                     ? "bg-brand-forest-100 dark:bg-brand-forest-900/50 text-brand-forest-700 dark:text-brand-forest-300 font-semibold"
@@ -203,8 +206,9 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
           <Link
             href="/"
             title={isCollapsed ? "Ke Beranda Utama" : undefined}
+            aria-label={isCollapsed ? "Ke Beranda Utama" : undefined}
             className={cn(
-              "flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
+              "flex items-center justify-center gap-1.5 py-2 min-h-[40px] rounded-lg text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
               isCollapsed ? "px-0 w-10 h-10" : "px-3"
             )}
           >
@@ -244,6 +248,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
               href="/"
               className="p-2 text-charcoal-muted hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
               title="Ke Beranda"
+              aria-label="Ke Beranda"
             >
               <ArrowLeft className="w-5 h-5" />
             </Link>
@@ -258,8 +263,9 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
               <Link
                 key={href}
                 href={href}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-150 ease-out",
+                  "flex items-center gap-2 px-4 py-3 min-h-[44px] rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-150 ease-out",
                   isActive
                     ? "bg-brand-forest-600 dark:bg-brand-forest-500 text-white"
                     : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-white dark:hover:bg-neutral-700/50"

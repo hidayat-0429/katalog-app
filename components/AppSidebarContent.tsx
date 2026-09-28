@@ -53,7 +53,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {user?.role === "BUYER" && (
         <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
           <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
-            {nav.orders}
+            {nav.sectionBuyer}
           </p>
           <NavLinkActive
             href="/keranjang"
@@ -106,14 +106,14 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
               <>
                 <Link
                   href="/login"
-                  className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 min-h-[40px] rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                 >
                   <LogIn className="w-3.5 h-3.5" />
                   {nav.login}
                 </Link>
                 <Link
                   href="/register"
-                  className="flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 min-h-[40px] rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors"
                 >
                   <UserPlus className="w-3.5 h-3.5" />
                   {nav.register}

@@ -138,11 +138,11 @@ export default function HeroCinematic({
           />
         </div>
 
-        {/* Simplified single gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/35 to-transparent" />
+        {/* Scrim horizontal: kolom teks ada di kiri, jadi sisi kanan yang boleh lebih terang */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
 
-        {/* Fade ke halaman di bawah */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-bg dark:from-bg to-transparent" />
+        {/* Fade ke halaman di bawah — setinggi padding bawah konten agar tidak menimpa statistik */}
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
       </div>
 
       {/* Content */}
@@ -164,7 +164,7 @@ export default function HeroCinematic({
               />
             </div>
             <div className="h-4 w-px bg-white/25" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">
               PT Eka Timur Raya
             </span>
           </div>
@@ -175,30 +175,35 @@ export default function HeroCinematic({
             style={{ transitionDelay: "80ms" }}
           >
             <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-forest-400 opacity-40" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-forest-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-forest-300 opacity-40" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-forest-300" />
             </span>
-            <span className="text-xs font-medium text-white/50 tracking-wide">
+            <span className="text-xs font-medium text-white/75 tracking-wide">
               {t.hero.statusBadge}
             </span>
           </div>
 
-          {/* Headline - Premium positioning */}
+          {/* Headline — hierarki dari ukuran & bobot, hijau berperan sebagai aksen grafis */}
           <h1
-            className={`font-heading font-bold leading-[1.1] tracking-tight mb-5 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "160ms" }}
           >
             <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-white">
               {title}
             </span>
-            <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-brand-forest-300">
+            <span className="block text-[1.7rem] sm:text-3xl lg:text-[2.1rem] font-semibold text-white">
               {subtitle}
             </span>
           </h1>
 
+          <div
+            className={`h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            style={{ transitionDelay: "210ms" }}
+          />
+
           {/* Deskripsi - Stronger value prop */}
           <p
-            className={`text-sm sm:text-base text-white/65 leading-relaxed max-w-lg mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`text-sm sm:text-base text-white/80 leading-relaxed max-w-lg mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "260ms" }}
           >
             {description}
@@ -232,7 +237,7 @@ export default function HeroCinematic({
           >
             {STATS.slice(0, 3).map((item, idx) => (
               <div key={item.label} className="group">
-                <item.icon className="w-4 h-4 text-white/50 mb-2 opacity-70 group-hover:opacity-100 transition-opacity duration-200" />
+                <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                 <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
                   <AnimatedCounter
                     target={item.numericValue}
@@ -240,7 +245,7 @@ export default function HeroCinematic({
                     isVisible={statsVisible}
                   />
                 </p>
-                <p className="text-[11px] text-white/40 mt-0.5 font-medium leading-snug">
+                <p className="text-[11px] text-white/75 mt-0.5 font-medium leading-snug">
                   {item.label}
                 </p>
               </div>

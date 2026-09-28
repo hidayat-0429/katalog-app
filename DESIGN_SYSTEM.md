@@ -40,8 +40,8 @@ ditimpa (`#f8f9fa` → `#212529`) dan merupakan bagian resmi sistem. Warna bawaa
 kode — jangan ditulis lagi; state form dan badge pakai tangga `semantic-*`. Skala merek
 lain (`brand-earth`, `brand-amber`, `brand-fresh`) sudah dihapus dari tema bersama
 varian `cta` di `Button` dan varian `earth` di `Badge` — satu-satunya warna di luar
-hijau/abu yang diizinkan adalah hijau WhatsApp (`#25D366`) dan scrim foto gelap
-(`#0d1a10`) di hero; lihat §8.
+hijau/abu yang diizinkan adalah hijau WhatsApp (`#25D366`); scrim foto di hero memakai
+hitam transparan (`black/*`), bukan warna hex — lihat §8.
 
 Teks sekunder **selalu** lewat satu token: `text-charcoal-muted` (5.2:1 di atas kartu
 putih, 4.9:1 di kartu gelap). Jangan menulis `text-neutral-400/500/600` untuk teks muted
@@ -142,7 +142,7 @@ kecuali untuk label uppercase.
 
 | Peran | Kelas |
 |---|---|
-| Judul hero | `font-display text-4xl sm:text-5xl` (hingga `text-6xl/7xl` di hero) |
+| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `text-[2.6rem] sm:text-5xl lg:text-[3.5rem] font-bold`, baris kedua `text-[1.7rem] sm:text-3xl lg:text-[2.1rem] font-semibold` — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
 | Judul bagian (H1) | `font-display text-3xl sm:text-4xl` |
 | Sub-bagian (H2) | `font-display text-2xl sm:text-3xl` |
 | Judul komponen (H3) | `font-display text-xl sm:text-2xl` |
@@ -172,6 +172,9 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   ruang ekstra di desktop — boleh, asal konsisten satu halaman).
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.
+- Target sentuh: baris navigasi sidebar (publik `NavLinkActive` dan rail admin, mode
+  desktop maupun pil mobile) `py-3 min-h-[44px]`; kontrol kecil di bagian bawah sidebar
+  (login/daftar, "Ke Beranda Utama", ikon only) `min-h-[40px]`.
 - Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
   (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 
@@ -211,6 +214,9 @@ dan `dark:bg-semantic-*-darkBg` + `dark:text-semantic-*-200`.
 
 Label datang dari `statusLabel()`. Untuk kesegaran/stok ada `FreshnessBadge`; badge
 harga/label pendek di kartu memakai latar `bg-white/90` agar terbaca di atas gambar.
+Badge angka di rail navigasi admin (`AdminSidebar`) memakai `bg-semantic-warning-700`
+dan `bg-semantic-info-700` dengan teks putih — varian `DEFAULT` + putih hanya 2.2:1 dan
+3.7:1, sedangkan `-700` naik ke 5.0:1 dan 6.7:1.
 
 ### Input / Card / Table / Modal / Toggle
 - `Input`: `rounded-md border-neutral-300 bg-white` + `focus:ring-2 ring-brand-forest-500`,
@@ -280,7 +286,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | overlay gradien di **atas foto** (`bg-gradient-to-r/-t` dengan warna gelap), parallax, bottom-fade ke `bg`, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue |
+| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (setinggi `pb-20` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |
