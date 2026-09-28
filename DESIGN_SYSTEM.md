@@ -175,6 +175,11 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat di mobile —
   bar atas `fixed` dengan `bg-white/95` menutupinya — jadi hero tidak boleh pakai `pt` besar
   untuk "menghindari bar"; kalau dibuat 64px ke atas, blok logo justru turun.
+- Kolom teks hero: `mx-auto max-w-2xl text-center` — rata tengah, bukan rata kiri. Semua
+  turunannya ikut: lockup logo `justify-center`, bar aksen `mx-auto`, deskripsi
+  `mx-auto max-w-xl` (baris judul 672px terlalu lebar untuk body text), CTA
+  `justify-center`, dan tiap sel statistik `flex flex-col items-center`. Anchor vertikal
+  tetap di atas (lihat bullet sebelumnya) — "rata tengah" berlaku horizontal saja.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
   500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
   Faktanya sekarang ada di empat statistik (`500+` · `50 ton` · `24 jam` · `HACCP`,
@@ -344,7 +349,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
+| `components/HeroCinematic.tsx` | scrim **vertical** `bg-gradient-to-b from-black/70 via-black/60 to-black/70` di atas foto (kolom teks rata tengah, jadi kiri dan kanan harus sama gelapnya — scrim horizontal bikin separuh teks jatuh kontras), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |

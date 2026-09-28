@@ -139,8 +139,8 @@ export default function HeroCinematic({
           />
         </div>
 
-        {/* Scrim horizontal: kolom teks ada di kiri, jadi sisi kanan yang boleh lebih terang */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
+        {/* Scrim vertical: kolom teks rata tengah, jadi kiri-kanan harus sama gelapnya */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
 
         {/* Fade ke halaman di bawah — setinggi padding bawah konten agar tidak menimpa statistik */}
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
@@ -148,11 +148,11 @@ export default function HeroCinematic({
 
       {/* Content — pt kecil karena spacer 56px di layout sudah menutup bar mobile (bar fixed, bg opaque) */}
       <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-6 sm:pt-10 lg:pt-12 pb-20 sm:pb-24">
-        <div className="max-w-xl">
+        <div className="mx-auto max-w-2xl text-center">
 
           {/* Logo + Nama brand */}
           <div
-            className={`flex items-center gap-3 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`flex items-center justify-center gap-3 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "0ms" }}
           >
             <div className="relative w-14 h-14">
@@ -184,13 +184,13 @@ export default function HeroCinematic({
           </h1>
 
           <div
-            className={`h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`mx-auto h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "130ms" }}
           />
 
           {/* Deskripsi - Stronger value prop */}
           <p
-            className={`text-sm sm:text-base text-white/80 leading-relaxed max-w-lg mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`mx-auto text-sm sm:text-base text-white/80 leading-relaxed max-w-xl mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "180ms" }}
           >
             {description}
@@ -198,7 +198,7 @@ export default function HeroCinematic({
 
           {/* CTA */}
           <div
-            className={`flex flex-wrap gap-3 mb-12 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`flex flex-wrap items-center justify-center gap-3 mb-12 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "260ms" }}
           >
             <Link
@@ -223,7 +223,7 @@ export default function HeroCinematic({
             style={{ transitionDelay: "380ms" }}
           >
             {STATS.map((item) => (
-              <div key={item.label} className="group">
+              <div key={item.label} className="group flex flex-col items-center">
                 <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                 <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
                   {typeof item.numericValue === "number" ? (
