@@ -142,7 +142,7 @@ kecuali untuk label uppercase.
 
 | Peran | Kelas |
 |---|---|
-| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `text-[2.6rem] sm:text-6xl lg:text-[4.5rem] font-bold`, baris kedua `text-[1.7rem] sm:text-4xl lg:text-[2.7rem] font-semibold` — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
+| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-bold`, baris kedua `text-[1.7rem] sm:text-4xl lg:text-[2.7rem] xl:text-[3.1rem] font-semibold` — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
 | Judul halaman (H1) | `font-heading text-2xl sm:text-3xl font-bold tracking-tight` — satu varian untuk semua halaman publik (profil, pesanan, keranjang, faq, tentang, kontak, invoice, login, register) |
 | Judul entitas (H1 detail produk) | `font-heading text-3xl sm:text-4xl font-bold tracking-tight` — lebih besar karena nama produk adalah subjek halaman |
 | Judul bagian dalam halaman (H2) | `font-heading text-2xl sm:text-3xl`; homepage pakai `<h2>` untuk judul katalog supaya `<h1>` hero tetap satu-satunya |
@@ -173,18 +173,20 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   (`py-10 sm:py-14` / `py-16 sm:py-24`).
 - Hero = tiga zona vertikal dalam satu section `min-h-[92vh] sm:min-h-screen flex flex-col`:
   lockup logo di atas (`pt-6 sm:pt-10 lg:pt-12`), blok judul + deskripsi + CTA di tengah
-  (`flex-1` + `justify-center`), pita statistik di dasar (`max-w-5xl` = 1024px, `border-t`).
-  Sisa tinggi viewport didistribusikan jadi dua celah antar zona, bukan dibiarkan mengendap
-  di bawah: sebelumnya konten nempel atas dengan `pb-24` dan hasilnya ±300px foto nganggur,
-  yang dibaca sebagai "hero tidak full". Jangan balik ke `items-center` di level section —
-  itu sumber pita ±290px di atas logo.
-- Poros teks: rata tengah. Zona tengah `max-w-4xl` (896px) dengan `items-center`, deskripsi
-  dipotong `max-w-2xl` (672px — di atas itu barisnya melewati ±85 karakter). Gutter hero
-  `px-4 sm:px-8 lg:px-12 xl:px-16`, jadi di layar 1920px masih ada ±450px foto di
-  kiri-kanan; itu memang batas yang tersisa sebelum teks mulai kebanjieran foto terang.
-  Tiap sel statistik `flex flex-col items-center`. Spacer `lg:hidden h-14` di
-  `app/(main)/layout.tsx` tidak menambah ruang terlihat — bar atas `fixed` dengan
-  `bg-white/95` menutupinya — jadi `pt` hero tetap kecil; di atas 64px blok logo justru turun.
+  (`flex-1` + `justify-center`), pita statistik di dasar (lebar penuh, `border-t` sampai
+  pinggir). Sisa tinggi viewport didistribusikan jadi dua celah antar zona, bukan dibiarkan
+  mengendap di bawah: sebelumnya konten nempel atas dengan `pb-24` dan hasilnya ±300px foto
+  nganggur, yang dibaca sebagai "hero tidak full". Jangan balik ke `items-center` di level
+  section — itu sumber pita ±290px di atas logo.
+- Poros teks: rata tengah, **tanpa cap lebar** pada zona tengah dan pita angka — dua-duanya
+  `w-full`; yang dibatasi cuma deskripsi (`max-w-2xl`, di atas 672px barisnya melewati
+  ±85 karakter). Gutter `px-4 sm:px-8 lg:px-12 xl:px-16`. Ukuran besar: judul
+  `lg:text-[4.5rem] xl:text-[5.25rem]`, baris kedua `lg:text-[2.7rem] xl:text-[3.1rem]`,
+  badan `text-base sm:text-lg`, CTA `text-base px-7 py-3.5`, angka `text-2xl sm:text-3xl
+  xl:text-4xl`, logo 64px. Tiap sel statistik `flex flex-col items-center`.
+  Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat — bar
+  atas `fixed` dengan `bg-white/95` menutupinya — jadi `pt` hero tetap kecil; di atas 64px
+  blok logo justru turun.
 - Scrim harus sama gelapnya kiri dan kanan (`bg-gradient-to-b from-black/70 via-black/60
   to-black/70`) karena teks di tengah; bottom-fade `h-16 sm:h-20` selalu disamakan dengan
   `pb-16 sm:pb-20` supaya tidak menimpa statistik.

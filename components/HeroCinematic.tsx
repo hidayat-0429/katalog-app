@@ -170,15 +170,15 @@ export default function HeroCinematic({
 
         {/* Zona tengah: flex-1 + justify-center supaya sisa tinggi viewport ketiban di atas-bawah
             blok ini, bukan mengendap jadi pita foto kosong di bawah statistik */}
-        <div className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center text-center">
+        <div className="flex w-full flex-1 flex-col items-center justify-center text-center">
           <h1
             className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "80ms" }}
           >
-            <span className="block text-[2.6rem] sm:text-6xl lg:text-[4.5rem] text-white">
+            <span className="block text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] text-white">
               {title}
             </span>
-            <span className="block text-[1.7rem] sm:text-4xl lg:text-[2.7rem] font-semibold text-white">
+            <span className="block text-[1.7rem] sm:text-4xl lg:text-[2.7rem] xl:text-[3.1rem] font-semibold text-white">
               {subtitle}
             </span>
           </h1>
@@ -217,13 +217,13 @@ export default function HeroCinematic({
 
         <div
           ref={statsRef}
-          className={`w-full max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-7 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+          className={`w-full grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-7 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
           style={{ transitionDelay: "380ms" }}
         >
           {STATS.map((item) => (
             <div key={item.label} className="group flex flex-col items-center">
               <item.icon className="w-5 h-5 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
-              <p className="font-mono text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              <p className="font-mono text-2xl sm:text-3xl xl:text-4xl font-bold text-white tracking-tight">
                 {typeof item.numericValue === "number" ? (
                   <AnimatedCounter
                     target={item.numericValue}
