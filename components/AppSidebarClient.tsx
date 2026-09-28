@@ -167,7 +167,7 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
         </button>
 
         <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-[env(safe-area-inset-bottom)]">
-          {/* Wordmark saja. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
+          {/* Wordmark + tema/bahasa. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
           <div className="nav-wordmark-row relative px-4 pr-12 lg:pr-4 pt-4 pb-3.5 lg:pb-2 border-b lg:border-b-0 border-neutral-200 dark:border-neutral-800 flex items-center gap-2 shrink-0">
             <Link href="/" className="nav-wordmark flex items-center gap-3 min-w-0 group">
               <div className="w-8 h-8 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
@@ -188,6 +188,10 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
                 </p>
               </div>
             </Link>
+            <div className="hidden lg:flex items-center gap-1.5 ml-auto">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
           </div>
 
           <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
