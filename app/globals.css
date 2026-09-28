@@ -74,9 +74,12 @@ body {
 @layer components {
 
   /* Primary Button: Forest green */
+  /* Hijau primary di dark mode terlalu terang untuk teks putih (3.2:1),
+     jadi tombolnya memakai teks gelap (4.8:1). */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            bg-primary hover:bg-primary-hover text-white
+           dark:text-neutral-900
            font-sans font-medium text-sm
            px-5 py-2.5 rounded-md
            transition-colors duration-150 ease-out

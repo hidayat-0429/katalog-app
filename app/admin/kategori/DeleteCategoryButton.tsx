@@ -33,7 +33,7 @@ export default function DeleteCategoryButton({ id, disabled }: { id: string, dis
     <button 
       onClick={handleDelete} 
       disabled={isPending || disabled}
-      className={`btn-icon ${disabled ? 'text-neutral-300 cursor-not-allowed' : 'text-neutral-400 hover:text-clay hover:bg-clay/10'}`}
+      className={`btn-icon ${disabled ? 'text-neutral-300 cursor-not-allowed' : 'text-neutral-400 hover:text-danger hover:bg-danger/10'}`}
       title={disabled ? 'Tidak dapat menghapus kategori yang memiliki produk' : 'Hapus Kategori'}
     >
       {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}

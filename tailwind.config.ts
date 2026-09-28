@@ -20,10 +20,6 @@ const config: Config = {
           hover: "rgb(var(--primary-hover) / <alpha-value>)",
           light: "rgb(var(--primary-light) / <alpha-value>)",
         },
-        cta: {
-          DEFAULT: "rgb(var(--cta) / <alpha-value>)",
-          hover: "rgb(var(--cta-hover) / <alpha-value>)",
-        },
         charcoal: {
           DEFAULT: "rgb(var(--charcoal) / <alpha-value>)",
           muted: "rgb(var(--charcoal-muted) / <alpha-value>)",
@@ -49,20 +45,6 @@ const config: Config = {
           bg: "rgb(var(--warning-bg) / <alpha-value>)",
         },
         
-        // Legacy aliases (maintain for backward compatibility)
-        sage: "rgb(var(--primary) / <alpha-value>)",
-        clay: "rgb(var(--danger) / <alpha-value>)",
-        forest: "rgb(var(--primary-hover) / <alpha-value>)",
-        "dark-text": "rgb(var(--charcoal) / <alpha-value>)",
-        "dark-muted": "rgb(var(--charcoal-muted) / <alpha-value>)",
-        "dark-surface": "rgb(var(--surface) / <alpha-value>)",
-        "dark-bg": "rgb(var(--bg) / <alpha-value>)",
-        "dark-bg-subtle": "rgb(var(--bg-subtle) / <alpha-value>)",
-        "dark-border": "rgb(var(--border) / <alpha-value>)",
-        "dark-sage": "rgb(var(--primary) / <alpha-value>)",
-        "dark-cta": "rgb(var(--cta) / <alpha-value>)",
-        "dark-cta-text": "rgb(var(--charcoal) / <alpha-value>)",
-
         // Duotone System: Primary Green + Neutral Gray
         // Simplified from multi-color palette for cleaner, more focused brand identity
         brand: {

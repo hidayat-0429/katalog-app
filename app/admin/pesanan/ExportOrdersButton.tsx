@@ -93,7 +93,7 @@ export default function ExportOrdersButton({ currentStatus }: ExportOrdersButton
       type="button"
       onClick={handleExport}
       disabled={isExporting}
-      className="btn-secondary text-xs py-1.5 px-3 inline-flex items-center gap-1.5 hover:border-sage dark:hover:border-dark-sage disabled:opacity-50 disabled:cursor-not-allowed"
+      className="btn-secondary text-xs py-1.5 px-3 inline-flex items-center gap-1.5 hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
       title="Unduh Rekap Laporan Format Excel / CSV (semua pesanan)"
     >
       {isExporting ? (
@@ -103,7 +103,7 @@ export default function ExportOrdersButton({ currentStatus }: ExportOrdersButton
         </>
       ) : (
         <>
-          <FileSpreadsheet className="w-3.5 h-3.5 text-sage dark:text-dark-sage" />
+          <FileSpreadsheet className="w-3.5 h-3.5 text-primary" />
           <span>Ekspor Laporan CSV/Excel</span>
         </>
       )}

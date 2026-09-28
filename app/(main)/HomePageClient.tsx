@@ -127,7 +127,7 @@ export default function HomePageClient({
 
                 <button
                   type="submit"
-                  className="bg-primary hover:bg-primary-hover text-white font-medium py-2.5 px-5 text-sm rounded-lg motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out shrink-0"
+                  className="bg-primary hover:bg-primary-hover text-white dark:text-neutral-900 font-medium py-2.5 px-5 text-sm rounded-lg motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out shrink-0"
                 >
                   {t.catalog.apply}
                 </button>
@@ -148,7 +148,7 @@ export default function HomePageClient({
                   href={q ? `/?katalog=semua&q=${encodeURIComponent(q)}` : '/?katalog=semua'}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out ${
                     !categoryId
-                      ? 'bg-primary text-white'
+                      ? 'bg-primary text-white dark:text-neutral-900'
                       : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-neutral-800'
                   }`}
                 >
@@ -166,7 +166,7 @@ export default function HomePageClient({
                       href={`/?${params.toString()}`}
                       className={`px-3 py-3 rounded-lg text-xs font-semibold whitespace-nowrap motion-safe:transition-colors motion-safe:duration-150 motion-safe:ease-out ${
                         isActive
-                          ? 'bg-primary text-white'
+                          ? 'bg-primary text-white dark:text-neutral-900'
                           : 'text-charcoal-muted hover:text-charcoal hover:bg-bg-subtle dark:hover:bg-neutral-800'
                       }`}
                     >

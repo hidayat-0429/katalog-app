@@ -4,8 +4,12 @@ Dokumen ini adalah **satu-satunya sumber kebenaran** untuk tampilan. Ia mendeskr
 sistem yang **benar-benar terpakai di kode**, bukan rencana lama. Kalau dokumen dan kode
 bertabrakan, kodenya yang benar dan dokumen inilah yang harus diperbaiki.
 
-Menggantikan: `DESIGN_SYSTEM.md` versi lama, `DESIGN_GUIDELINES.md`, dan
-`CONSISTENCY_REVIEW_SUMMARY.md` (keduanya sudah dihapus dari repo).
+Menggantikan: `DESIGN_SYSTEM.md` versi lama, `DESIGN_GUIDELINES.md`,
+`CONSISTENCY_REVIEW_SUMMARY.md`, dan `DUOTONE_MIGRATION.md` (ketiganya sudah dihapus
+dari repo — isinya sudah menyatu di dokumen ini).
+
+Sistemnya **duotone**: satu warna merek (hijau hutan) + satu tangga abu netral. Warna
+lain (`semantic-*`) hanya boleh muncul sebagai penanda status, tidak sebagai dekorasi.
 
 Referensi kode:
 - Token & tema: `app/globals.css`, `tailwind.config.ts`
@@ -20,75 +24,83 @@ Referensi kode:
 1. **Pakai primitif `components/ui/*`** kalau sudah ada bentuknya (tombol, badge, input,
    kartu, tabel, modal, toggle). Primitif ini sudah membawa varian light + dark.
 2. **Pakai token CSS-var** (`bg-bg`, `bg-bg-subtle`, `bg-surface`, `text-charcoal`,
-   `text-charcoal-muted`, `border-border`, `border-border-subtle`, `primary`, `cta`,
-   `danger`, `info`, `success`, `warning`) untuk permukaan dan teks halaman. Token ini
+   `text-charcoal-muted`, `border-border`, `border-border-subtle`, `primary`, `danger`,
+   `info`, `success`, `warning`) untuk permukaan dan teks halaman. Token ini
    **otomatis berubah di dark mode** karena nilainya di-override di blok `.dark` — jadi
    tidak perlu menulis `dark:` sama sekali.
-3. **Pakai skala literal** (`brand-forest-*`, `brand-earth-*`, `brand-amber-*`,
-   `brand-fresh-*`, `neutral-*`, `semantic-*`) hanya kalau butuh tone spesifik/aksen.
-   Skala ini **tidak** otomatis — setiap pemakaian wajib ditemani varian `dark:`.
+3. **Pakai skala literal** (`brand-forest-*`, `neutral-*`, `semantic-*`) hanya kalau butuh
+   tone spesifik/aksen. Skala ini **tidak** otomatis — setiap pemakaian wajib ditemani
+   varian `dark:`.
 4. **Jangan** hard-code hex di class (`bg-[#faf9f6]`). Kalau warna belum ada di tema,
    tambahkan token/varian baru di `tailwind.config.ts` atau `globals.css`.
 
 Catatan penting: `neutral` di proyek ini **bukan** abu bawaan Tailwind. Skalanya sudah
 ditimpa (`#f8f9fa` → `#212529`) dan merupakan bagian resmi sistem. Warna bawaan lain
 (`blue-*`, `green-*`, `emerald-*`, `red-*`, `amber-*`, `stone-*`) **sudah habis** dari
-kode — jangan ditulis lagi; state form dan badge pakai tangga `semantic-*`. Satu-satunya
-warna di luar palet yang diizinkan adalah hijau WhatsApp (`#25D366`) dan scrim foto
-gelap (`#0d1a10`) di hero — lihat §8.
+kode — jangan ditulis lagi; state form dan badge pakai tangga `semantic-*`. Skala merek
+lain (`brand-earth`, `brand-amber`, `brand-fresh`) sudah dihapus dari tema bersama
+varian `cta` di `Button` dan varian `earth` di `Badge` — satu-satunya warna di luar
+hijau/abu yang diizinkan adalah hijau WhatsApp (`#25D366`) dan scrim foto gelap
+(`#0d1a10`) di hero; lihat §8.
 
 ### Token CSS (nilai sebenarnya)
 
 | Token | Light | Dark | Dipakai untuk |
 |---|---|---|---|
 | `bg` | `#FAF9F6` | `#0F1110` | Latar halaman |
-| `bg-subtle` | `#F0EBE0` | `#1A1A16` | Panel, blok aksen, input, placeholder produk |
-| `surface` | `#FFFFFF` | `#141715` | Kartu, popover, modal, footer |
-| `primary` | `#2D5A27` | `#90B88A` | Aksi utama, tautan aktif, garis fokus |
-| `primary-hover` | `#1E4A1A` | `#A4CC9E` | Hover aksi utama |
-| `primary-light` | `#F0F7F0` | `#162A13` | Latar terpilih, `::selection` |
-| `cta` | `#D97706` | `#D97706` | Tombol ajakan (order, lanjut WhatsApp), highlight |
-| `cta-hover` | `#B8620A` | `#F29F3F` | Hover CTA |
-| `charcoal` | `#1F2421` | `#F5F5F0` | Teks utama |
-| `charcoal-muted` | `#646B66` | `#B4B4AA` | Teks sekunder, caption, ikon placeholder |
-| `border` | `#E1D7C7` | `#212529` | Garis pemisah 1px |
-| `border-subtle` | `#F0EBE0` | `#1A1A16` | Garis dalam panel |
-| `danger` | `#B94A48` | `#E06C6A` | Kesalahan, hapus, pembatalan |
-| `danger-bg` | `#FDF0EF` | `#3E1E1E` | Latar pesan error |
-| `fresh` | `#16A34A` | `#22C55E` | Segar / tersedia |
-| `earth` | `#8B7355` | `#8B7355` | Aksen sekunder (dikirim, kategori) |
+| `bg-subtle` | `#F1F3F5` | `#212529` | Panel, blok aksen, input, placeholder produk |
+| `surface` | `#FFFFFF` | `#343A40` | Kartu, popover, modal, footer |
+| `primary` | `#2D5A27` | `#6B9B6B` | Aksi utama, tautan aktif, garis fokus |
+| `primary-hover` | `#1E4A1A` | `#8FB88F` | Hover aksi utama |
+| `primary-light` | `#F0F7F0` | `#0F1A0D` | Latar terpilih, `::selection` |
+| `charcoal` | `#212529` | `#F8F9FA` | Teks utama |
+| `charcoal-muted` | `#868E96` | `#ADB5BD` | Teks sekunder, caption, ikon placeholder |
+| `border` | `#DEE2E6` | `#495057` | Garis pemisah 1px |
+| `border-subtle` | `#E9ECEF` | `#343A40` | Garis dalam panel |
+| `danger` | `#EF4444` | `#F87171` | Kesalahan, hapus, pembatalan |
+| `danger-bg` | `#FEE2E2` | `#7F1D1D` | Latar pesan error |
+| `success` | `#10B981` | `#22C55E` | Status tersedia / selesai |
+| `success-bg` | `#D1FAE5` | `#064E3B` | Latar pesan sukses |
+| `warning` | `#F59E0B` | `#FBBF24` | Stok menipis, peringatan |
+| `warning-bg` | `#FEF3C7` | `#78350F` | Latar pesan peringatan |
+| `info` | `#3B82F6` | `#60A5FA` | Status diproses, informasi |
+| `info-bg` | `#DBEAFE` | `#1E3A8A` | Latar pesan info |
 
 Mode gelap memakai tangga elevasi netral (bukan hijau): `bg` paling gelap untuk halaman,
-`bg-subtle` untuk panel yang tenggelam, `surface` untuk kartu melayang, `border` `#212529`
-untuk garis. Jangan menulis ulang nilai-nilai ini sebagai hex di class — sebut tokennya.
+`bg-subtle` untuk panel yang tenggelam, `surface` untuk kartu melayang. Jangan menulis
+ulang nilai-nilai ini sebagai hex di class — sebut tokennya.
+
+`--cta`, `--cta-hover`, `--fresh`, `--earth` sudah dihapus dari `globals.css` dan
+`tailwind.config.ts`. Jangan menghidupkan namanya kembali: aksi komersial sekarang
+memakai `primary` / `brand-forest-*`.
 
 ### Skala literal yang tersedia
 
-- `brand.forest` 50–900 — hijau hutan (500 `#2d5a27`, 600 `#1e4a1a`)
-- `brand.amber` 50–900 — amber premium (500 `#d97706`)
-- `brand.earth` 50–900 — cokelat/tanah hangat
-- `brand.fresh` 50–900 — hijau segar untuk indikator stok/kesegaran
+- `brand.forest` 50–900 — satu-satunya warna merek (50 `#f0f7f0`, 500 `#2d5a27`,
+  600 `#1e4a1a`, 700 `#163a13`)
 - `neutral` 50–900 — abu dingin (teks sekunder, border, latar kontrol)
 - `semantic.success|warning|danger|info` — masing-masing punya tangga **50–900** plus
-  alias lama `.light` `DEFAULT` `.dark` `.darkBg`. Tangga ini yang dipakai untuk state
+  alias `.light` `DEFAULT` `.dark` `.darkBg`. Tangga ini dipakai untuk state
   form (border error, teks sukses, badge info). Nama bawaan Tailwind (`red-*`,
-  `emerald-*`, `blue-*`, `green-*`, `amber-*`, `stone-*`) sudah tidak ada di kode dan
-  jangan ditulis lagi — sebut `semantic-*`.
+  `emerald-*`, `blue-*`, `green-*`, `amber-*`, `stone-*`) dan skala merek lama
+  (`brand-earth`, `brand-amber`, `brand-fresh`) tidak ada lagi di tema — jangan ditulis.
 
 ### Tangga elevasi (dua mode)
 
 | Peran | Light | Dark | Class |
 |---|---|---|---|
 | Latar halaman | `#FAF9F6` | `#0F1110` | `bg-bg` |
-| Panel tenggelam / inset | `#F0EBE0` | `#1A1A16` | `bg-bg-subtle` |
-| Kartu, popover, modal, footer, band | `#FFFFFF` | `#141715` | `bg-surface` |
-| Kontrol form (input, select, textarea, tombol sekunder, baris pilihan) | `#FFFFFF` | `#343a40` | `bg-white dark:bg-neutral-800` |
-| Kartu/status aktif | `#FFFFFF` | `#343a40` | `bg-white dark:bg-neutral-800` |
+| Panel tenggelam / inset | `#F1F3F5` | `#212529` | `bg-bg-subtle` |
+| Kartu, popover, modal, footer, band | `#FFFFFF` | `#343A40` | `bg-surface` |
+| Kontrol form (input, select, textarea, tombol sekunder, baris pilihan) | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
+| Kartu/status aktif | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
 
-Aturannya: **wadah** memakai `bg-surface` (satu warna kartu di seluruh aplikasi, dark-nya
-netral `#141715`), **kontrol** sengaja tetap `neutral-800` supaya field masih terbaca di
-atas kartu. Jangan pakai `bg-white` polos untuk wadah — di mode gelap warnanya tidak ikut
-berubah dan langsung jadi tapak putih menyala.
+Aturannya: **wadah** memakai `bg-surface` (satu warna kartu di seluruh aplikasi),
+**kontrol** tetap `bg-white dark:bg-neutral-800`. Di light mode keduanya beda
+(`#FFFFFF` vs `#F1F3F5` untuk panel), tapi di dark mode `--surface` sekarang bernilai
+sama dengan `neutral-800` (`#343A40`) — pemisah antara kontrol dan kartunya jadi border,
+bukan warna latar. Jangan pakai `bg-white` polos untuk wadah — di mode gelap warnanya
+tidak ikut berubah dan langsung jadi tapak putih menyala.
 
 Warna font yang dipakai: display/headline = **Bricolage Grotesque** (`font-display` /
 `font-heading`), body & UI = **Figtree** (`font-sans`, default), angka/harga/kode order =
@@ -165,25 +177,30 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 Impor dari `@/components/ui`. Semua primitif menerima `className` tambahan.
 
 ### Button
-`<Button variant size>` — variant: `primary | cta | secondary | danger | ghost | icon`,
+`<Button variant size>` — variant: `primary | secondary | danger | ghost | icon`,
 size: `sm | md | lg`.
 - `primary` = `brand-forest-600` → hover 700 → active 800, dark `brand-forest-500`.
-- `cta` = `brand-amber-500`, untuk aksi komersial (pesan, lanjut WhatsApp).
+  Ini satu-satunya tombol ajakan; varian `cta` (amber) sudah dihapus, aksi "pesan sekarang"
+  dan "lanjut WhatsApp" sama-sama pakai `primary`.
 - `secondary` = latar surface + `neutral-300` border; `danger` = `semantic-danger`.
 - Semua variant sudah membawa: `inline-flex items-center justify-center gap-2`,
   `active:scale-95`, `focus:ring-2 focus:ring-offset-2`, `disabled:opacity-50`.
 - Jangan menimpa warna tombol dengan `className` kecuali benar-benar perlu.
 
 ### Badge / StatusBadge
-`<Badge variant>` — `default | outline | info | success | warning | danger | earth`;
+`<Badge variant>` — `default | outline | info | success | warning | danger`;
 dasarnya `inline-flex items-center px-2 py-1 text-xs font-medium rounded-sm`.
+Varian `default` = `brand-forest-600` (dark 500) dengan teks putih; varian `outline`
+tidak berwarna dan dipakai untuk status netral seperti `DIKIRIM`. Varian semantic
+memakai pasangan `bg-semantic-*-light` + `text-semantic-*-dark` (gelap di atas terang)
+dan `dark:bg-semantic-*-darkBg` + `dark:text-semantic-*-200`.
 `<StatusBadge status label?>` memetakan status pesanan ke varian + ikon Lucide:
 
 | Status | Varian | Ikon |
 |---|---|---|
 | `PENDING` | `warning` | `Clock` |
 | `DIPROSES` | `info` | `Loader` (`animate-spin`) |
-| `DIKIRIM` | `earth` | `Truck` |
+| `DIKIRIM` | `outline` | `Truck` |
 | `SELESAI` | `success` | `CheckCircle` |
 | `DIBATALKAN` | `danger` | `XCircle` |
 
@@ -298,7 +315,11 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
   untuk latar, teks, dan border — pola standar: `bg-white dark:bg-neutral-800`,
   `text-neutral-900 dark:text-neutral-100`, `border-neutral-300 dark:border-neutral-600`.
 - Jangan memakai `bg-black`/`text-white` polos untuk permukaan; pakai `bg-bg`/`text-charcoal`.
-  Teks putih di atas tombol hijau/biru itu wajar dan tetap boleh.
+  Teks putih di atas hijau **gelap** (`brand-forest-600/700`, mis. `Button variant="primary"`)
+  tetap wajar dan boleh. Yang tidak: `bg-primary` di mode gelap bernilai `#6B9B6B` — cukup
+  terang untuk latar, terlalu terang untuk teks putih (3.2:1). Kelas `.btn-primary` dan
+  tombol/chip `bg-primary` di beranda karena itu menutup dengan `dark:text-neutral-900`
+  (4.8:1). Pola yang benar: `bg-primary text-white dark:text-neutral-900`.
 - Dark bukan tema sekunder: cek setiap perubahan UI di kedua mode.
 
 ---
@@ -307,7 +328,7 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 
 Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
 
-1. Sudah dibersihkan (2026-09-27), jangan kembalikan:
+1. Sudah dibersihkan (2026-09-27; migrasi duotone menyusul 2026-09-28), jangan kembalikan:
    - `stone-*` → `neutral-*`;
    - hex mentah di class (`dark:bg-[#141715]`, `bg-[#faf9f6]`, `#0f1110`, `#1a1a16`,
      `#222220`) → token `bg-surface` / `bg-bg` / `bg-bg-subtle`;
@@ -317,7 +338,14 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    - wadah (`Card`, `Modal` panel, kartu admin, `TrustBanner`, popover WhatsApp) dipaksa
      ke `bg-surface`. Yang sengaja **tidak** disatukan: kontrol (`Input`, `Button`
      secondary, `PaginationControls`, baris pilihan pembayaran, kartu aktif) tetap
-     `bg-white dark:bg-neutral-800` supaya masih bedaan dari kartunya.
+     `bg-white dark:bg-neutral-800` supaya masih bedaan dari kartunya;
+   - palet multi-warna: skala `brand-earth` / `brand-amber` / `brand-fresh`, token `cta`
+     (`--cta`, `--cta-hover`) dan `fresh` / `earth`, varian `Button cta`, varian `Badge
+     earth`, serta blok alias lama di `tailwind.config.ts` (`sage`, `clay`, `forest`,
+     `dark-sage`, `dark-cta`, `dark-text`, `dark-muted`, `dark-surface`, `dark-bg`,
+     `dark-border`). Pemakaiannya dipindah ke `primary` / `brand-forest-*` (hijau),
+     `danger` (merch status pembatalan), dan `semantic-warning` (stok menipis). Sisa
+     pemakaian `bg-primary` + teks harus mengikuti pola §10 supaya kontras tidak turun.
 2. Nilai `semantic-*` yang baru ditambahkan ke tema adalah salinan persis dari warna yang
    sudah tampil (mis. `semantic-danger-500` = `#ef4444`), jadi perpindahan nama tidak
    mengubah piksel — kecuali `green-200` → `semantic-success-200` (`#a7f3d0`) yang

@@ -33,7 +33,7 @@ export default function CancelOrderButton({ orderId }: { orderId: string }) {
     <button
       onClick={handleCancel}
       disabled={isPending}
-      className="btn-danger border border-clay/20 bg-clay/5 px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+      className="btn-danger border border-danger/20 bg-danger/5 px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
     >
       {isPending ? (
         <>

@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: ProductDetailPageProps) {
       type: "website",
       images: [
         {
-          url: product.imageUrl || "/og-image.jpg",
+          url: product.imageUrl || "/og-image.png",
           width: 1200,
           height: 630,
           alt: name,
