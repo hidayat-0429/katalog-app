@@ -136,6 +136,9 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
               </p>
             </div>
           )}
+          <div className={cn("shrink-0", !isCollapsed && "ml-auto")}>
+            <ThemeToggle />
+          </div>
           {onToggle && isCollapsed && (
             <button onClick={onToggle} aria-label="Bentangkan Menu" className="p-1.5 text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
               <PanelLeft className="w-4 h-4" />
@@ -191,14 +194,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
         {/* Bottom Actions */}
         <div className={cn("p-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-col gap-3 shrink-0", isCollapsed ? "items-center px-2" : "px-4")}>
           <NotificationToggle iconOnly={isCollapsed} />
-          {!isCollapsed && (
-            <div className="flex items-center justify-between px-2">
-              <span className="text-xs font-semibold text-charcoal-muted">Mode Tampilan</span>
-              <ThemeToggle />
-            </div>
-          )}
-          {isCollapsed && <ThemeToggle />}
-          
+
           <div title={isCollapsed ? "Keluar" : undefined}>
             <SignOutButton iconOnly={isCollapsed} />
           </div>

@@ -416,6 +416,10 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 - Toggle **wajib baca `resolvedTheme`**, bukan `theme`. Dalam mode system `theme` masih
   bernilai `"system"`, jadi tombol yang membacanya akan menampilkan ikon salah dan klik
   pertama kelihatan tidak terjadi apa-apa.
+- Posisinya **di atas di ketiga shell**: bar mobile situs publik, puncak rail publik
+  (`components/AppSidebarContent.tsx`), dan puncak rail admin
+  (`app/admin/AdminSidebar.tsx`, di baris logo). Label teks "Mode Tampilan" di rail admin
+  sudah dihapus — ikonnya sudah menjelaskan diri, dan rail ciut 72px tidak muat dua kolom.
 - Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri — tidak perlu
   varian `dark:` sama sekali. Ini jalur utama untuk permukaan dan teks.
 - **Hex mentah di class dilarang**, termasuk `dark:bg-[#141715]`. Nilainya sekarang sudah
