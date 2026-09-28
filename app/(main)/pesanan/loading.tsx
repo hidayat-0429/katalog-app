@@ -4,7 +4,7 @@ import SkeletonStatus from "@/components/SkeletonStatus";
 
 export default function Loading() {
   return (
-    <Container className="py-8 max-w-4xl">
+    <Container className="py-8">
       <SkeletonStatus />
       <SkeletonPageTitle />
       <SkeletonRows count={4} />

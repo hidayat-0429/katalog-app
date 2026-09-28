@@ -170,11 +170,11 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 - Antar elemen: `mb-2` / `mb-4` / `mb-6` / `mb-8`.
 - Bagian halaman: `py-12 sm:py-16 lg:py-20`; section hero lebih longgar.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
-  `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. `className` di-merge pakai `cn()`, jadi
-  `max-w-*` bawaan pemakai benar-benar menimpa 7xl. Lebar yang jalan sekarang: FAQ `max-w-2xl`,
-  Profil `3xl`, Pesanan + Invoice + Kontak `4xl`, Tentang `5xl`, Keranjang `6xl`.
-  Detail produk pengecualian: `px-6 sm:px-8 lg:px-16` + `max-w-6xl` (sama dengan homepage).
-  Skeleton (`loading.tsx`) wajib pakai Container dengan `max-w` yang sama, kalau tidak
+  `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
+  (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
+  aktif di layar >1600px. `className` di-merge pakai `cn()` kalau suatu saat memang perlu
+  override. Halaman beranda & detail produk例外: `px-6 sm:px-8 lg:px-16` untuk ruang ekstra.
+  Skeleton (`loading.tsx`) wajib memakai Container dengan kelas yang sama, kalau tidak
   posisi konten melompat saat data masuk.
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.

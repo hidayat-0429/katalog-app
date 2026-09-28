@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 
 export default function Loading() {
   return (
-    <Container className="py-8 max-w-3xl">
+    <Container className="py-8">
       <SkeletonStatus />
       <SkeletonPageTitle />
       <SkeletonCard className="p-6 space-y-5">

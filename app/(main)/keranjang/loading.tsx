@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 
 export default function Loading() {
   return (
-    <Container className="py-8 max-w-6xl">
+    <Container className="py-8">
       <SkeletonStatus />
       <SkeletonPageTitle />
       <div className="grid lg:grid-cols-12 gap-8 items-start">

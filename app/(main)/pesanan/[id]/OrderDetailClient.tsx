@@ -58,7 +58,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
   const fleetText = fk ? t.fleet[fk] : fleetValue;
 
   return (
-    <Container className="py-8 max-w-4xl">
+    <Container className="py-8">
 
       {/* Breadcrumb + aksi cetak */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8 print:hidden">

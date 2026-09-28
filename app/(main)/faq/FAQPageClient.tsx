@@ -16,8 +16,8 @@ export default function FAQPageClient() {
   const waLink = `https://wa.me/${adminWa}?text=${encodeURIComponent(t.faq.waMessage)}`;
 
   return (
-    <div className="py-12 sm:py-16 px-4 sm:px-6">
-      <Container className="max-w-2xl">
+    <div className="py-12 sm:py-16">
+      <Container>
         {/* Header */}
         <div className="mb-10">
           <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">

@@ -12,7 +12,7 @@ export default function ContactPageClient() {
   const waLink = `https://wa.me/${adminWa}`;
 
   return (
-    <Container className="py-8 max-w-4xl">
+    <Container className="py-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
