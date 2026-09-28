@@ -142,7 +142,7 @@ kecuali untuk label uppercase.
 
 | Peran | Kelas |
 |---|---|
-| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-bold`, baris kedua `text-[1.7rem] sm:text-4xl lg:text-[2.7rem] xl:text-[3.1rem] font-semibold` — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
+| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `.hero-title` (`clamp(2.6rem, 5.2vw + 1rem, 6rem)`), baris kedua `.hero-subtitle` (`clamp(1.7rem, 2.6vw + 0.6rem, 3.6rem)`, `font-semibold`) — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
 | Judul halaman (H1) | `font-heading text-2xl sm:text-3xl font-bold tracking-tight` — satu varian untuk semua halaman publik (profil, pesanan, keranjang, faq, tentang, kontak, invoice, login, register) |
 | Judul entitas (H1 detail produk) | `font-heading text-3xl sm:text-4xl font-bold tracking-tight` — lebih besar karena nama produk adalah subjek halaman |
 | Judul bagian dalam halaman (H2) | `font-heading text-2xl sm:text-3xl`; homepage pakai `<h2>` untuk judul katalog supaya `<h1>` hero tetap satu-satunya |
@@ -158,6 +158,12 @@ kecuali untuk label uppercase.
   `formatRupiah()`, jangan menulis angka manual.
 - Satuan ditulis setelah harga dengan gaya muted: `Rp 12.000<span class="text-charcoal-muted">/kg</span>`.
 - Heading pendek: maksimal 2 baris di desktop, `leading-tight`.
+- Skala fluidik khusus bagian atas homepage ada di `app/globals.css` sebagai enam kelas
+  `clamp()`: `.hero-title`, `.hero-subtitle`, `.hero-lead` (`clamp(1rem, 0.6vw + 0.85rem,
+  1.25rem)` + `max-width: 58ch`), `.hero-stat-value` (`clamp(1.5rem, 1.3vw + 1rem, 2.4rem)`),
+  `.hero-stat-label` (`clamp(0.75rem, 0.3vw + 0.65rem, 0.85rem)`), plus `.hero-gutter` untuk
+  padding kiri-kanan. Bawah clamp = ukuran HP, atas = monitor, jadi tidak ada breakpoint yang
+  perlu dikejar per layar. Kelas lain di seluruh aplikasi tetap pakai tangga `text-*`.
 
 ---
 
@@ -179,11 +185,15 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   nganggur, yang dibaca sebagai "hero tidak full". Jangan balik ke `items-center` di level
   section — itu sumber pita ±290px di atas logo.
 - Poros teks: rata tengah, **tanpa cap lebar** pada zona tengah dan pita angka — dua-duanya
-  `w-full`; yang dibatasi cuma deskripsi (`max-w-2xl`, di atas 672px barisnya melewati
-  ±85 karakter). Gutter `px-4 sm:px-8 lg:px-12 xl:px-16`. Ukuran besar: judul
-  `lg:text-[4.5rem] xl:text-[5.25rem]`, baris kedua `lg:text-[2.7rem] xl:text-[3.1rem]`,
-  badan `text-base sm:text-lg`, CTA `text-base px-7 py-3.5`, angka `text-2xl sm:text-3xl
-  xl:text-4xl`, logo 64px. Tiap sel statistik `flex flex-col items-center`.
+  `w-full`; yang dibatasi cuma deskripsi lewat `.hero-lead` (`max-width: 58ch` — panjang
+  baris diukur dalam karakter, bukan px, jadi tetap terbaca di monitor lebar). Semuanya
+  fluidik dari `clamp()` di `app/globals.css`, bukan breakpoint: `.hero-gutter`
+  (`clamp(1rem, 4.5vw, 4.5rem)`), `.hero-title`, `.hero-subtitle`, `.hero-lead`,
+  `.hero-stat-value` (`clamp(1.5rem, 1.3vw + 1rem, 2.4rem)`), `.hero-stat-label`. Batas
+  bawah clamp = ukuran HP, batas atas = ukuran monitor — jangan kembalikan ke daftar
+  `text-[..] sm:.. lg:..` karena itu yang bikin ukurannya "kurang besar" di layar tertentu.
+  CTA tetap `text-base px-7 py-3.5`, logo lockup 64px. Tiap sel statistik
+  `flex flex-col items-center`.
   Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat — bar
   atas `fixed` dengan `bg-white/95` menutupinya — jadi `pt` hero tetap kecil; di atas 64px
   blok logo justru turun.
@@ -201,7 +211,8 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
   aktif di layar >1600px. `className` di-merge pakai `cn()` kalau suatu saat memang perlu
   override. Halaman beranda & detail produk jadi pengecualian: `px-6 sm:px-8 lg:px-16`,
-  bagian atas homepage `px-4 sm:px-8 lg:px-12 xl:px-16` — keduanya untuk ruang ekstra.
+  sedangkan bagian atas homepage memakai `.hero-gutter` (`clamp(1rem, 4.5vw, 4.5rem)`) —
+  keduanya untuk ruang ekstra.
   Skeleton (`loading.tsx`) wajib memakai Container dengan kelas yang sama, kalau tidak
   posisi konten melompat saat data masuk.
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
@@ -442,8 +453,10 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    `components/ui/Card`, dan beranda). Jangan menambah kelas baru di layer ini —
    komponen baru menulis class Tailwind langsung atau lewat varian `components/ui`.
    Utilitas yang masih hidup dan dipakai: `.reveal-hidden*`, `.reveal-visible`,
-   `.hero-stagger*`, `.shimmer-line`, `.section-divider-wave`, `.feature-card-num`,
-   `.skeleton`, `.will-change-transform`, `.no-scrollbar`, `.animate-slideInUp`.
+   `.hero-stagger*`, `.hero-gutter`, `.hero-title`, `.hero-subtitle`, `.hero-lead`,
+   `.hero-stat-value`, `.hero-stat-label`, `.shimmer-line`, `.section-divider-wave`,
+   `.feature-card-num`, `.skeleton`, `.will-change-transform`, `.no-scrollbar`,
+   `.animate-slideInUp`.
 4. Teks muted di seluruh aplikasi (panel admin 91 tempat + situs publik 186 tempat,
    2026-09-28) sudah dinormalisasi dari `text-neutral-400/500/600` ke
    `text-charcoal-muted`. Yang sengaja **dibiarkan** pucat: `placeholder:`, `disabled:`,
