@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { getServerMessages } from "@/lib/serverMessages";
 import { formatText } from "@/lib/productText";
 import { SHIPPING_METHODS, fleetLabelKey } from "@/lib/orderNotes";
+import { getErrorMessage } from "@/lib/utils/errors";
 
 export async function addToCart(productId: string, quantity: number) {
   const user = await requireUser();
@@ -59,11 +60,16 @@ export async function updateCartItem(cartId: string, quantity: number) {
 
 export async function removeCartItem(cartId: string) {
   const user = await requireUser();
+  const t = await getServerMessages();
   const cart = await prisma.cart.findUnique({ where: { id: cartId } });
-  if (!cart || cart.userId !== user.id) return;
+  
+  if (!cart || cart.userId !== user.id) {
+    return { error: t.server.itemNotFound };
+  }
 
   await prisma.cart.delete({ where: { id: cartId } });
   revalidatePath("/keranjang");
+  return { success: true };
 }
 
 export async function checkout(formData: FormData) {
@@ -149,8 +155,8 @@ export async function checkout(formData: FormData) {
     });
 
     orderId = order.id;
-  } catch (err: any) {
-    return { error: err?.message || t.server.orderFailed };
+  } catch (err: unknown) {
+    return { error: getErrorMessage(err, t.server.orderFailed) };
   }
 
   revalidatePath("/keranjang");

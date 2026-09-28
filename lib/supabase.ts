@@ -2,6 +2,7 @@
 // Supabase storage client untuk upload gambar produk
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { logError } from "@/lib/utils/logger";
 
 export const STORAGE_BUCKET = "product-images";
 
@@ -64,11 +65,11 @@ export async function deleteImageFromSupabase(publicUrl: string | null | undefin
       if (filePath) {
         const { error } = await client.storage.from(STORAGE_BUCKET).remove([filePath]);
         if (error) {
-          console.error("Supabase GC Error:", error);
+          logError("Supabase GC Error:", error);
         }
       }
     }
   } catch (err) {
-    console.error("Failed to parse or delete image URL:", err);
+    logError("Failed to parse or delete image URL:", err);
   }
 }

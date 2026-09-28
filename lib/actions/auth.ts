@@ -1,11 +1,15 @@
 "use server";
 
+"use server";
+
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { getServerMessages } from "@/lib/serverMessages";
 import { clientIp, isRateLimited } from "@/lib/rateLimit";
+import { isPrismaError, getErrorMessage } from "@/lib/utils/errors";
+import { getFormDataString, getFormDataOptional } from "@/lib/utils/formData";
 
 type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
 
@@ -35,12 +39,12 @@ export async function registerUser(formData: FormData) {
   }
 
   const parsed = buildRegisterSchema(t).safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    password: formData.get("password"),
-    companyName: formData.get("companyName") || undefined,
-    phone: formData.get("phone") || undefined,
-    address: formData.get("address") || undefined,
+    name: getFormDataString(formData, "name"),
+    email: getFormDataString(formData, "email"),
+    password: getFormDataString(formData, "password"),
+    companyName: getFormDataOptional(formData, "companyName"),
+    phone: getFormDataOptional(formData, "phone"),
+    address: getFormDataOptional(formData, "address"),
   });
 
   if (!parsed.success) {
@@ -67,9 +71,9 @@ export async function registerUser(formData: FormData) {
         role: "BUYER",
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Dua pendaftaran bersamaan lolos cek findUnique di atas; index unik yang menghentikan yang kedua
-    if (err?.code === "P2002") {
+    if (isPrismaError(err, "P2002")) {
       return { error: t.server.emailTaken };
     }
     return { error: t.server.unexpected };

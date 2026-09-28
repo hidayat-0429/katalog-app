@@ -8,6 +8,9 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getServerMessages } from "@/lib/serverMessages";
 import { clientIp, isRateLimited } from "@/lib/rateLimit";
+import { getErrorMessage } from "@/lib/utils/errors";
+import { getFormDataString, getFormDataOptional } from "@/lib/utils/formData";
+import { logError } from "@/lib/utils/logger";
 
 type ServerMessages = Awaited<ReturnType<typeof getServerMessages>>;
 
@@ -31,10 +34,10 @@ export async function updateProfile(formData: FormData) {
   const t = await getServerMessages();
 
   const raw = {
-    name: (formData.get("name") as string | null)?.trim() || "",
-    companyName: (formData.get("companyName") as string | null)?.trim() || undefined,
-    phone: (formData.get("phone") as string | null)?.trim() || "",
-    address: (formData.get("address") as string | null)?.trim() || "",
+    name: getFormDataString(formData, "name"),
+    companyName: getFormDataOptional(formData, "companyName"),
+    phone: getFormDataString(formData, "phone"),
+    address: getFormDataString(formData, "address"),
   };
 
   const parsed = buildProfileSchema(t).safeParse(raw);
@@ -56,8 +59,8 @@ export async function updateProfile(formData: FormData) {
     revalidatePath("/profil");
     revalidatePath("/keranjang"); // Untuk update otomatis alamat di form checkout
     return { success: true };
-  } catch (error: any) {
-    console.error("Update profile error:", error);
+  } catch (error: unknown) {
+    logError("Update profile error:", error);
     return { error: t.server.profileSaveFailed };
   }
 }
@@ -88,9 +91,9 @@ export async function changePassword(formData: FormData) {
   }
 
   const parsed = buildChangePasswordSchema(t).safeParse({
-    currentPassword: String(formData.get("currentPassword") ?? ""),
-    newPassword: String(formData.get("newPassword") ?? ""),
-    confirmPassword: String(formData.get("confirmPassword") ?? ""),
+    currentPassword: getFormDataString(formData, "currentPassword"),
+    newPassword: getFormDataString(formData, "newPassword"),
+    confirmPassword: getFormDataString(formData, "confirmPassword"),
   });
   if (!parsed.success) {
     return { error: parsed.error.issues[0].message };
@@ -110,8 +113,8 @@ export async function changePassword(formData: FormData) {
       where: { id: user.id },
       data: { password: await bcrypt.hash(parsed.data.newPassword, 10) },
     });
-  } catch (error: any) {
-    console.error("Change password error:", error);
+  } catch (error: unknown) {
+    logError("Change password error:", error);
     return { error: t.server.passwordChangeFailed };
   }
 
@@ -127,8 +130,8 @@ export async function resetUserPassword(formData: FormData) {
       newPassword: z.string().min(6, "Sandi baru minimal 6 karakter."),
     })
     .safeParse({
-      userId: String(formData.get("userId") ?? ""),
-      newPassword: String(formData.get("newPassword") ?? ""),
+      userId: getFormDataString(formData, "userId"),
+      newPassword: getFormDataString(formData, "newPassword"),
     });
   if (!parsed.success) {
     return { error: "Pengguna tidak ditentukan." };

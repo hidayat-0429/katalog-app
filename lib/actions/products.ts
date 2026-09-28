@@ -5,6 +5,8 @@ import { requireAdmin } from "@/lib/session";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { isPrismaError } from "@/lib/utils/errors";
+import { getFormDataString, getFormDataOptional, getFormDataNumber, getFormDataBoolean } from "@/lib/utils/formData";
 
 const productSchema = z.object({
   name: z.string().min(2, "Nama produk minimal 2 karakter"),
@@ -21,24 +23,18 @@ const productSchema = z.object({
 });
 
 function parseProductForm(formData: FormData) {
-  const rawPrice = formData.get("price");
-  const rawStock = formData.get("stock");
-
-  const price = rawPrice !== null && rawPrice !== "" ? Number(rawPrice) : NaN;
-  const stock = rawStock !== null && rawStock !== "" ? Number(rawStock) : 0;
-
   return {
-    name: String(formData.get("name") || "").trim(),
-    nameEn: String(formData.get("nameEn") || "").trim() || null,
-    categoryId: String(formData.get("categoryId") || "").trim(),
-    description: String(formData.get("description") || "").trim() || null,
-    descriptionEn: String(formData.get("descriptionEn") || "").trim() || null,
-    price,
-    unit: String(formData.get("unit") || "").trim(),
-    stock,
-    imageUrl: String(formData.get("imageUrl") || "").trim() || null,
-    isActive: formData.get("isActive") === "on",
-    isFeatured: formData.get("isFeatured") === "on",
+    name: getFormDataString(formData, "name"),
+    nameEn: getFormDataOptional(formData, "nameEn"),
+    categoryId: getFormDataString(formData, "categoryId"),
+    description: getFormDataOptional(formData, "description"),
+    descriptionEn: getFormDataOptional(formData, "descriptionEn"),
+    price: getFormDataNumber(formData, "price", NaN),
+    unit: getFormDataString(formData, "unit"),
+    stock: getFormDataNumber(formData, "stock", 0),
+    imageUrl: getFormDataOptional(formData, "imageUrl"),
+    isActive: getFormDataBoolean(formData, "isActive"),
+    isFeatured: getFormDataBoolean(formData, "isFeatured"),
   };
 }
 
@@ -113,11 +109,11 @@ export async function deleteProduct(id: string) {
     if (product && product.imageUrl) {
       await deleteImageFromSupabase(product.imageUrl).catch(() => {});
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Jika gagal karena Foreign Key constraint (P2003 / P2014) artinya produk pernah dipesan.
     // Lakukan SOFT DELETE (Hanya mematikan isActive) dan JANGAN hapus gambarnya 
     // agar riwayat pesanan (invoice B2B) lama tetap bisa me-render foto aslinya.
-    if (err?.code === "P2003" || err?.code === "P2014") {
+    if (isPrismaError(err, "P2003") || isPrismaError(err, "P2014")) {
       await prisma.product.update({
         where: { id },
         data: { isActive: false, stock: 0 },

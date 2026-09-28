@@ -663,7 +663,14 @@
     "passwordCurrentWrong": "Your current password is incorrect.",
     "passwordChangeFailed": "Something went wrong while changing your password.",
     "fieldsRequired": "All fields are required",
-    "messageFailed": "Something went wrong while sending your message"
+    "messageFailed": "Something went wrong while sending your message",
+    "accessDenied": "Access denied: Admin only",
+    "uploadAccessDenied": "Access denied: Only admins can upload images",
+    "fileNotFound": "File not found",
+    "invalidImageFormat": "File format must be an image (JPG, PNG, WEBP, or GIF)",
+    "fileTooLarge": "Image size maximum 5MB",
+    "supabaseNotConfigured": "Supabase Storage configuration is not set. Add NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env file",
+    "uploadFailed": "Failed to upload to storage"
   },
   "floatingWa": {
     "tooltip": "Need help? Chat with us!",

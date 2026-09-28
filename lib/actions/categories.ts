@@ -3,12 +3,13 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/session";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { getFormDataString, getFormDataOptional } from "@/lib/utils/formData";
 
 export async function createCategory(formData: FormData) {
   await requireAdmin();
-  const name = String(formData.get("name") || "").trim();
-  const nameEn = String(formData.get("nameEn") || "").trim();
-  const description = String(formData.get("description") || "").trim();
+  const name = getFormDataString(formData, "name");
+  const nameEn = getFormDataOptional(formData, "nameEn");
+  const description = getFormDataOptional(formData, "description");
   if (!name) return { error: "Nama kategori wajib diisi" };
 
   await prisma.category.create({
@@ -22,9 +23,9 @@ export async function createCategory(formData: FormData) {
 
 export async function updateCategory(id: string, formData: FormData) {
   await requireAdmin();
-  const name = String(formData.get("name") || "").trim();
-  const nameEn = String(formData.get("nameEn") || "").trim();
-  const description = String(formData.get("description") || "").trim();
+  const name = getFormDataString(formData, "name");
+  const nameEn = getFormDataOptional(formData, "nameEn");
+  const description = getFormDataOptional(formData, "description");
   if (!name) return { error: "Nama kategori wajib diisi" };
 
   const exists = await prisma.category.findUnique({ where: { id } });

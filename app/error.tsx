@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui";
 import { useTranslations } from "@/hooks/useTranslations";
+import { logError } from "@/lib/utils/logger";
 
 export default function GlobalError({
   error,
@@ -16,7 +17,7 @@ export default function GlobalError({
 
   useEffect(() => {
     // Log the error to an error reporting service if available
-    console.error("Global Application Error Captured:", error);
+    logError("Global Application Error Captured:", error);
   }, [error]);
 
   return (

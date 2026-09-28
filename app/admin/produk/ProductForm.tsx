@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { Save, Tag, Upload, Link as LinkIcon, X, Loader2, Image as ImageIcon, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui'
+import { isNextRedirect } from '@/lib/utils/errors'
 
 interface ProductData {
   id?: string;
@@ -85,11 +86,11 @@ export default function ProductForm({ categories, product, action }: ProductForm
         setFormError(res.error)
         setIsSaving(false)
       }
-    } catch (err: any) {
-      if (err?.message?.includes('NEXT_REDIRECT')) {
+    } catch (err: unknown) {
+      if (isNextRedirect(err)) {
         throw err
       }
-      setFormError(err?.message || 'Gagal menyimpan data produk')
+      setFormError(err instanceof Error ? err.message : 'Gagal menyimpan data produk')
       setIsSaving(false)
     }
   }

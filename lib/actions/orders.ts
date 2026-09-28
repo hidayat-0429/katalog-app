@@ -7,6 +7,7 @@ import { OrderStatus } from "@prisma/client";
 import { statusLabel } from "@/lib/format";
 import { getServerMessages } from "@/lib/serverMessages";
 import { canTransition, shouldRestockOnCancel } from "@/lib/orderStatus";
+import { getErrorMessage } from "@/lib/utils/errors";
 
 export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   await requireAdmin();
@@ -89,7 +90,7 @@ export async function cancelOrder(orderId: string) {
     revalidatePath("/pesanan");
     revalidatePath(`/pesanan/${orderId}`);
     return { success: true };
-  } catch (err: any) {
-    return { error: err?.message || t.server.cancelFailed };
+  } catch (err: unknown) {
+    return { error: getErrorMessage(err, t.server.cancelFailed) };
   }
 }

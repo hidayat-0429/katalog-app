@@ -7,6 +7,7 @@ import { Button } from '@/components/ui';
 import { useTranslations } from '@/hooks/useTranslations';
 // Nilai option disimpan apa adanya ke kolom notes pesanan, jadi hanya labelnya yang diterjemahkan.
 import { SHIPPING_METHODS } from '@/lib/orderNotes';
+import { isNextRedirect } from '@/lib/utils/errors';
 
 interface CheckoutFormProps {
   defaultAddress?: string;
@@ -68,11 +69,11 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
           setError(res.error);
           setShowConfirmation(false);
         }
-      } catch (err: any) {
-        if (err?.message?.includes('NEXT_REDIRECT')) {
+      } catch (err: unknown) {
+        if (isNextRedirect(err)) {
           throw err;
         }
-        setError(err?.message || t.server.orderFailed);
+        setError(err instanceof Error ? err.message : t.server.orderFailed);
         setShowConfirmation(false);
       }
     });

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerMessages } from '@/lib/serverMessages';
 import { prisma } from '@/lib/prisma';
 import { clientIp, isRateLimited } from '@/lib/rateLimit';
+import { logError } from '@/lib/utils/logger';
+import { apiSuccess, ApiErrors } from '@/lib/utils/apiResponse';
 
 const MAX_LENGTHS = {
   name: 100,
@@ -25,11 +27,11 @@ export async function POST(request: NextRequest) {
 
     // Bot biasanya mengisi semua input termasuk umpan berikut; manusia tidak pernah melihatnya.
     if (typeof body?.website === 'string' && body.website.trim()) {
-      return NextResponse.json({ success: true });
+      return apiSuccess({});
     }
 
     if (isRateLimited('contact', clientIp(request.headers))) {
-      return NextResponse.json({ error: t.server.tooManyRequests }, { status: 429 });
+      return ApiErrors.badRequest(t.server.tooManyRequests);
     }
 
     const name = clean(body?.name, MAX_LENGTHS.name);
@@ -40,30 +42,21 @@ export async function POST(request: NextRequest) {
     const message = clean(body?.message, MAX_LENGTHS.message);
 
     if (!name || !email || !company || !phone || !subject || !message) {
-      return NextResponse.json(
-        { error: t.server.fieldsRequired },
-        { status: 400 }
-      );
+      return ApiErrors.badRequest(t.server.fieldsRequired);
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: t.server.emailInvalid },
-        { status: 400 }
-      );
+      return ApiErrors.badRequest(t.server.emailInvalid);
     }
 
     await prisma.contactMessage.create({
       data: { name, email, company, phone, subject, message },
     });
 
-    return NextResponse.json({ success: true });
+    return apiSuccess({});
   } catch (error) {
-    console.error('Contact API Error:', error);
-    return NextResponse.json(
-      { error: t.server.messageFailed },
-      { status: 500 }
-    );
+    logError('Contact API Error:', error);
+    return ApiErrors.internal(t.server.messageFailed);
   }
 }

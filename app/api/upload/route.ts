@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getAdmin, STORAGE_BUCKET } from "@/lib/supabase";
+import { getErrorMessage } from "@/lib/utils/errors";
+import { logError } from "@/lib/utils/logger";
+import { apiSuccess, apiError, ApiErrors } from "@/lib/utils/apiResponse";
+import { getServerMessages } from "@/lib/serverMessages";
 
 const MIME_TO_EXT: Record<string, string> = {
   "image/jpeg": ".jpg",
@@ -11,39 +15,32 @@ const MIME_TO_EXT: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  const t = await getServerMessages();
+  
   try {
     // Hanya admin yang bisa upload gambar produk
     const session = await getServerSession(authOptions);
     if (!session || session.user?.role !== "ADMIN") {
-      return NextResponse.json(
-        { error: "Akses ditolak: Hanya admin yang dapat mengunggah gambar" },
-        { status: 403 }
-      );
+      return ApiErrors.forbidden(t.server.uploadAccessDenied);
     }
 
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
 
     if (!file) {
-      return NextResponse.json({ error: "File tidak ditemukan" }, { status: 400 });
+      return ApiErrors.badRequest(t.server.fileNotFound);
     }
 
     // Validasi MIME type (SVG dikecualikan untuk mencegah Stored XSS)
     const ext = MIME_TO_EXT[file.type];
     if (!ext) {
-      return NextResponse.json(
-        { error: "Format file harus berupa gambar (JPG, PNG, WEBP, atau GIF)" },
-        { status: 400 }
-      );
+      return ApiErrors.badRequest(t.server.invalidImageFormat);
     }
 
     // Validasi ukuran (max 5MB)
     const maxSizeBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
-      return NextResponse.json(
-        { error: "Ukuran gambar maksimal 5MB" },
-        { status: 400 }
-      );
+      return ApiErrors.badRequest(t.server.fileTooLarge);
     }
 
     const bytes = await file.arrayBuffer();
@@ -60,10 +57,7 @@ export async function POST(req: NextRequest) {
 
     // Cek apakah env Supabase Storage sudah dikonfigurasi
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      return NextResponse.json(
-        { error: "Konfigurasi Supabase Storage belum diatur. Tambahkan NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY di file .env" },
-        { status: 500 }
-      );
+      return ApiErrors.internal(t.server.supabaseNotConfigured);
     }
 
     // Upload ke Supabase Storage
@@ -75,11 +69,8 @@ export async function POST(req: NextRequest) {
       });
 
     if (error) {
-      console.error("Supabase upload error:", error);
-      return NextResponse.json(
-        { error: `Gagal mengunggah ke storage: ${error.message}` },
-        { status: 500 }
-      );
+      logError("Supabase upload error:", error);
+      return ApiErrors.internal(`${t.server.uploadFailed}: ${error.message}`);
     }
 
     // Dapatkan URL publik gambar
@@ -87,12 +78,9 @@ export async function POST(req: NextRequest) {
       .from(STORAGE_BUCKET)
       .getPublicUrl(data.path);
 
-    return NextResponse.json({ success: true, url: publicUrlData.publicUrl });
-  } catch (error: any) {
-    console.error("Upload error:", error);
-    return NextResponse.json(
-      { error: error?.message || "Gagal mengunggah file" },
-      { status: 500 }
-    );
+    return apiSuccess({ url: publicUrlData.publicUrl });
+  } catch (error: unknown) {
+    logError("Upload error:", error);
+    return ApiErrors.internal(getErrorMessage(error, t.server.uploadFailed));
   }
 }

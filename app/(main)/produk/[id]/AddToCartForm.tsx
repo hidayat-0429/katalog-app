@@ -8,6 +8,7 @@ import { useToast } from '@/components/Providers';
 import { getCartonConversion } from '@/lib/productImage';
 import { formatText } from '@/lib/productText';
 import { useTranslations } from '@/hooks/useTranslations';
+import { isNextRedirect } from '@/lib/utils/errors';
 
 interface AddToCartFormProps {
   productId: string;
@@ -65,8 +66,8 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
             router.refresh();
           }
         }
-      } catch (err: any) {
-        if (err?.digest?.startsWith('NEXT_REDIRECT') || err?.message?.includes('NEXT_REDIRECT')) {
+      } catch (err: unknown) {
+        if (isNextRedirect(err)) {
           throw err;
         }
         toast(t.addToCart.unexpectedError, { type: 'error' });
