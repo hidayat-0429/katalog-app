@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { Home, Package, Info, Phone, ShoppingCart, ClipboardList, User, LayoutDashboard, LogIn, UserPlus, HelpCircle } from "lucide-react";
+import { Home, Package, Info, Phone, ShoppingCart, ClipboardList, User, LayoutDashboard, LogIn, UserPlus, HelpCircle, PanelLeftClose, PanelLeft } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
 import NavLinkActive from "@/components/NavLinkActive";
@@ -26,9 +26,25 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
     <>
       {/* Nav Publik */}
       <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
-        <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
-          {nav.sectionMenu}
-        </p>
+        <div className="nav-hide-collapsed flex items-center justify-between px-3 pb-1.5">
+          <p className="text-xs font-bold tracking-widest uppercase text-charcoal-muted">
+            {nav.sectionMenu}
+          </p>
+          <div className="flex items-center gap-1.5">
+            <LanguageSwitcher />
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              aria-label={isCollapsed ? nav.expandMenu : nav.collapseMenu}
+              aria-expanded={!isCollapsed}
+              className="text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+              title={isCollapsed ? nav.expandMenu : nav.collapseMenu}
+            >
+              {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+            </button>
+          </div>
+        </div>
         <NavLinkActive href="/" icon={<Home className="w-4 h-4" />} label={nav.home} />
         <NavLinkActive href="/?katalog=semua" icon={<Package className="w-4 h-4" />} label={nav.catalog} />
         <NavLinkActive href="/tentang" icon={<Info className="w-4 h-4" />} label={nav.about} />
