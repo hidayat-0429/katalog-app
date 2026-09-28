@@ -208,8 +208,8 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             title={isCollapsed ? "Ke Beranda Utama" : undefined}
             aria-label={isCollapsed ? "Ke Beranda Utama" : undefined}
             className={cn(
-              "flex items-center justify-center gap-1.5 py-2 min-h-[40px] rounded-lg text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
-              isCollapsed ? "px-0 w-10 h-10" : "px-3"
+              "flex items-center justify-center gap-1.5 py-2 min-h-[44px] rounded-lg text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
+              isCollapsed ? "px-0 w-11 h-11" : "px-3"
             )}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -246,7 +246,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             <ThemeToggle />
             <Link
               href="/"
-              className="p-2 text-charcoal-muted hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+              className="w-11 h-11 flex items-center justify-center text-charcoal-muted hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
               title="Ke Beranda"
               aria-label="Ke Beranda"
             >

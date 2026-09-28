@@ -73,7 +73,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
             aria-label={t.nav.openMenu}
             aria-expanded={isOpen}
             aria-controls="app-sidebar"
-            className="w-9 h-9 -ml-1 flex items-center justify-center rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className="w-11 h-11 -ml-1 flex items-center justify-center rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -103,7 +103,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
               key={code}
               onClick={() => setLocale(code)}
               aria-pressed={locale === code}
-              className={`px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out ${
+              className={`flex items-center px-3 py-2 min-h-[44px] text-[11px] font-semibold uppercase transition-colors duration-150 ease-out ${
                 locale === code
                   ? "bg-brand-forest-600 text-white"
                   : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
@@ -146,7 +146,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         <button
           onClick={() => setIsOpen(false)}
           aria-label={t.nav.closeMenu}
-          className="lg:hidden absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
+          className="lg:hidden absolute top-2.5 right-2.5 w-11 h-11 flex items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
         >
           <X className="w-4 h-4" />
         </button>

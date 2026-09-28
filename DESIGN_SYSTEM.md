@@ -172,9 +172,11 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   ruang ekstra di desktop — boleh, asal konsisten satu halaman).
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.
-- Target sentuh: baris navigasi sidebar (publik `NavLinkActive` dan rail admin, mode
-  desktop maupun pil mobile) `py-3 min-h-[44px]`; kontrol kecil di bagian bawah sidebar
-  (login/daftar, "Ke Beranda Utama", ikon only) `min-h-[40px]`.
+- Target sentuh: semua kontrol navigasi `min-h-[44px]` — baris sidebar publik
+  (`NavLinkActive`) dan rail admin mode desktop maupun pil mobile, tombol ikon-saja
+  (`SignOutButton`, `NotificationToggle`, "Ke Beranda Utama"), hamburger + tutup
+  drawer + pemilih bahasa di top bar mobile (`AppSidebarClient`). Tidak ada lagi
+  kontrol nav di 32/36/40px.
 - Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
   (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 
