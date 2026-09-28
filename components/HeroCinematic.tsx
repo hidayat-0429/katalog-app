@@ -145,8 +145,8 @@ export default function HeroCinematic({
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-28">
+      {/* Content — pt kecil karena spacer 56px di layout sudah menutup bar mobile (bar fixed, bg opaque) */}
+      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-6 sm:pt-10 lg:pt-12 pb-20 sm:pb-24">
         <div className="max-w-xl">
 
           {/* Logo + Nama brand */}

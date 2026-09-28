@@ -171,12 +171,16 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 - Bagian halaman: halaman publik dengan satu kolom isi (`/faq`, `/profil`, `/pesanan`,
   `/keranjang`, `/kontak`, `/tentang`, invoice) pakai `py-8`; section homepage lebih longgar
   (`py-10 sm:py-14` / `py-16 sm:py-24`). Hero anchor-nya di atas (`items-start` +
-  `pt-16 sm:pt-20 lg:pt-24`), bukan tengah, supaya tidak ada pita kosong di atas blok logo.
+  `pt-6 sm:pt-10 lg:pt-12`), bukan tengah, supaya tidak ada pita kosong di atas blok logo.
+  Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat di mobile —
+  bar atas `fixed` dengan `bg-white/95` menutupinya — jadi hero tidak boleh pakai `pt` besar
+  untuk "menghindari bar"; kalau dibuat 64px ke atas, blok logo justru turun.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
   aktif di layar >1600px. `className` di-merge pakai `cn()` kalau suatu saat memang perlu
-  override. Halaman beranda & detail produk例外: `px-6 sm:px-8 lg:px-16` untuk ruang ekstra.
+  override. Halaman beranda & detail produk jadi pengecualian: `px-6 sm:px-8 lg:px-16`
+  (baris hero `sm:px-10`) untuk ruang ekstra.
   Skeleton (`loading.tsx`) wajib memakai Container dengan kelas yang sama, kalau tidak
   posisi konten melompat saat data masuk.
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
@@ -334,7 +338,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (setinggi `pb-20` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
+| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |
