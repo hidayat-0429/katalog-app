@@ -5,9 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, PanelLeftClose, PanelLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useLocale, useSetLocale } from "@/components/LocaleProvider";
 import { useTranslations } from "@/hooks/useTranslations";
 import ThemeToggle from "@/components/ThemeToggle";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const COLLAPSE_STORAGE_KEY = "etira-nav-collapsed";
 
@@ -15,8 +15,6 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
-  const locale = useLocale();
-  const setLocale = useSetLocale();
   const t = useTranslations();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
@@ -115,22 +113,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700" role="group" aria-label="Bahasa / Language">
-            {(['id', 'en'] as const).map((code) => (
-              <button
-                key={code}
-                onClick={() => setLocale(code)}
-                aria-pressed={locale === code}
-                className={`relative px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out first:rounded-l-md last:rounded-r-md after:absolute after:-inset-x-1 after:-inset-y-2.5 after:content-[''] ${
-                  locale === code
-                    ? "bg-brand-forest-600 text-white"
-                    : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
-                }`}
-              >
-                {code}
-              </button>
-            ))}
-          </div>
+          <LanguageSwitcher />
         </div>
       </header>
 
@@ -172,7 +155,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
 
         <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-[env(safe-area-inset-bottom)]">
           {/* Wordmark + tombol ciut rail. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
-          <div className="nav-wordmark-row relative px-4 pr-12 lg:pr-4 pt-4 pb-3.5 border-b border-neutral-200 dark:border-neutral-800 flex items-center gap-2 shrink-0">
+          <div className="nav-wordmark-row relative px-4 pr-12 lg:pr-4 pt-4 pb-3.5 lg:pb-2 border-b lg:border-b-0 border-neutral-200 dark:border-neutral-800 flex items-center gap-2 shrink-0">
             <Link href="/" className="nav-wordmark flex items-center gap-3 min-w-0 group">
               <div className="w-8 h-8 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
                 <Image

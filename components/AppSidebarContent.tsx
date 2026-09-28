@@ -22,11 +22,11 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
   return (
     <>
-      {/* Preferensi di atas rail — posisi yang sama dengan bar atas mobile, jadi dua shell
-          tidak lagi menaruh kontrol yang sama di dua tempat berbeda. */}
-      <div className="hidden lg:flex nav-center-row items-center gap-2 px-3 pt-3">
+      {/* Preferensi di atas rail, rata kanan, langsung di bawah logo tanpa garis pemisah
+          di antaranya — blok logo + kontrol terbaca sebagai satu kepala, seperti di admin. */}
+      <div className="nav-center-row hidden lg:flex items-center justify-end gap-2 px-3 pt-1 pb-3 border-b border-neutral-200 dark:border-neutral-800">
         <ThemeToggle />
-        <div className="nav-hide-collapsed ml-auto flex" role="group" aria-label={nav.language}>
+        <div className="nav-hide-collapsed">
           <LanguageSwitcher />
         </div>
       </div>

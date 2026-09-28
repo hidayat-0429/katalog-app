@@ -420,6 +420,14 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
   (`components/AppSidebarContent.tsx`), dan puncak rail admin
   (`app/admin/AdminSidebar.tsx`, di baris logo). Label teks "Mode Tampilan" di rail admin
   sudah dihapus — ikonnya sudah menjelaskan diri, dan rail ciut 72px tidak muat dua kolom.
+- Rail publik: tema + bahasa **rata kanan satu blok dengan logo** — baris kata-ETIRA
+  `lg:pb-2 lg:border-b-0`, baris preferensi `pt-1 pb-3 border-b`, jadi satu garis pemisah
+  hanya di bawah bloknya. Satu baris penuh tidak muat: ruang dalam rail 256px − 32px =
+  224px, sementara logo + tulisan (112px) + tombol ciut + tema + pil bahasa (151px) = 263px.
+- Pemilih bahasa satu komponen untuk kedua shell (`components/LanguageSwitcher.tsx`):
+  pil ID/EN ±67px, `aria-label` dari `nav.language`. Versi lama pakai bendera emoji
+  (`🇮🇩 ID / 🇬🇧 EN`, ±120px) — emoji sebagai ikon dilarang §9 dan lebarnya yang bikin rail
+  tidak muat.
 - Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri — tidak perlu
   varian `dark:` sama sekali. Ini jalur utama untuk permukaan dan teks.
 - **Hex mentah di class dilarang**, termasuk `dark:bg-[#141715]`. Nilainya sekarang sudah

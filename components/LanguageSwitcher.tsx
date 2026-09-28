@@ -1,44 +1,38 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
 import { useLocale } from "@/components/LocaleProvider";
-import { useEffect, useState } from "react";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
-  const [mounted, setMounted] = useState(false);
+  const t = useTranslations();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handleLanguageChange = (newLocale: 'id' | 'en') => {
+  const handleChange = (newLocale: "id" | "en") => {
     if (locale === newLocale) return;
-    
-    localStorage.setItem('locale', newLocale);
-    window.dispatchEvent(new CustomEvent('localeChange', { detail: { locale: newLocale } }));
+    localStorage.setItem("locale", newLocale);
+    window.dispatchEvent(new CustomEvent("localeChange", { detail: { locale: newLocale } }));
   };
 
-  if (!mounted) return null;
-
   return (
-    <div className="flex gap-1">
-      <Button
-        onClick={() => handleLanguageChange('id')}
-        variant={locale === 'id' ? "primary" : "ghost"}
-        size="sm"
-        className="text-xs font-medium"
-      >
-        🇮🇩 ID
-      </Button>
-      <Button
-        onClick={() => handleLanguageChange('en')}
-        variant={locale === 'en' ? "primary" : "ghost"}
-        size="sm"
-        className="text-xs font-medium"
-      >
-        🇬🇧 EN
-      </Button>
+    <div
+      className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700"
+      role="group"
+      aria-label={t.nav.language}
+    >
+      {(["id", "en"] as const).map((code) => (
+        <button
+          key={code}
+          onClick={() => handleChange(code)}
+          aria-pressed={locale === code}
+          className={`relative px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out first:rounded-l-md last:rounded-r-md after:absolute after:-inset-x-1 after:-inset-y-2.5 after:content-[''] ${
+            locale === code
+              ? "bg-brand-forest-600 text-white"
+              : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
+          }`}
+        >
+          {code}
+        </button>
+      ))}
     </div>
   );
 }
