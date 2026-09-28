@@ -12,8 +12,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <AppSidebar />
         </Suspense>
 
-        {/* Content Area */}
-        <div className="flex-1 flex flex-col min-w-0 lg:ml-64 overflow-x-hidden">
+        {/* Content Area --nav-w ikut menyusut saat rail di-ciutkan (lihat AppSidebarClient) */}
+        <div className="flex-1 flex flex-col min-w-0 lg:ml-[var(--nav-w)] overflow-x-hidden transition-[margin] duration-300 ease-in-out">
           <main className="flex-1 w-full">
             {/* Mobile top spacer so content doesn't hide behind hamburger */}
             <div className="lg:hidden h-14" />

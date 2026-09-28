@@ -172,11 +172,41 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   ruang ekstra di desktop — boleh, asal konsisten satu halaman).
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.
-- Target sentuh: semua kontrol navigasi `min-h-[44px]` — baris sidebar publik
-  (`NavLinkActive`) dan rail admin mode desktop maupun pil mobile, tombol ikon-saja
-  (`SignOutButton`, `NotificationToggle`, "Ke Beranda Utama"), hamburger + tutup
-  drawer + pemilih bahasa di top bar mobile (`AppSidebarClient`). Tidak ada lagi
-  kontrol nav di 32/36/40px.
+- Target sentuh: kontrol navigasi punya area sentuh ≥ 44px, **tanpa** membesarkan kotak
+  visualnya. Dua cara yang dipakai:
+  - Baris/nav link yang memang teks: `min-h-[44px]` (`NavLinkActive`, pil & rail
+    `AdminSidebar`).
+  - Kontrol kecil (ikon-saja, chip bahasa, tombol hamburger/tutup): tinggi visual tetap
+    32–36px, area sentuh dilebarkan lewat `relative` +
+    `after:absolute after:-inset-*:after:content-['']`. Karena itu jangan pasang
+    `overflow-hidden` pada pembungkusnya — pseudo-elementnya akan terpotong.
+  Jangan balik ke `w-11 h-11` untuk tombol kecil; hasilnya terlihat gondok.
+
+### Rail navigasi (publik & admin)
+
+Sistemnya sama untuk dua sidebar: lebar penuh saat terbuka, rail ikon 72px saat di-ciutkan.
+
+| | Publik | Admin |
+|---|---|---|
+| Shell | `components/AppSidebarClient.tsx` | `app/admin/AdminLayoutClient.tsx` |
+| Mode ciut | kelas `nav-collapsed` di `<html>` + `--nav-w` | state `isCollapsed`, kelas inline |
+| Simpan preferensi | ya (`localStorage["etira-nav-collapsed"]`) | tidak (selalu terbuka saat reload) |
+| Lebar | `--nav-w`: `16rem` → `72px` | `260px` ↔ `72px` |
+
+Kelas yang dipakai (`app/globals.css`, dibungkus `@media (min-width: 1024px)` supaya drawer
+mobile tidak ikut ciut):
+
+| Kelas | Efek saat ciut |
+|---|---|
+| `nav-label` | disembunyikan (teks label nav, nama akun, kata "Masuk"/"Daftar") |
+| `nav-hide-collapsed` | blok dibuang: label grup, kartu akun, blok bahasa, label "Mode tampilan" |
+| `nav-link` | `justify-center`, padding-x 0, `gap-0` supaya badge keranjang menempel ke ikon |
+| `nav-wordmark` / `nav-wordmark-row` / `nav-collapse-toggle` | baris logo jadi kolom: logo di atas, tombol ciut di bawah |
+| `nav-center-row` / `nav-auth` / `nav-auth-btn` | baris tema jadi tengah, tombol masuk/daftar ditumpuk |
+
+Konten halaman digeser dengan `lg:ml-[var(--nav-w)]` + `transition-[margin]` di
+`app/(main)/layout.tsx`, jadi offset ikut saat rail berubah. Tombol ciut wajib
+`aria-label` (`nav.collapseMenu` / `nav.expandMenu`) dan `aria-expanded`.
 - Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
   (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 

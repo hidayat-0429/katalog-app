@@ -37,7 +37,8 @@ export default function NavLinkActive({ href, icon, label, badge, highlight }: N
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-3 py-3 min-h-[44px] rounded-lg font-sans text-sm transition-colors duration-150 relative ${
+      aria-label={label}
+      className={`nav-link flex items-center gap-3 px-3 py-3 min-h-[44px] rounded-lg font-sans text-sm transition-colors duration-150 relative ${
         highlight
           ? isActive
             ? "text-brand-forest-700 dark:text-brand-forest-300 bg-brand-forest-100/70 dark:bg-brand-forest-900/40 font-semibold"
@@ -51,7 +52,7 @@ export default function NavLinkActive({ href, icon, label, badge, highlight }: N
         <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-brand-forest-600 dark:bg-brand-forest-500 rounded-r-full" />
       )}
       <span className="shrink-0">{icon}</span>
-      <span className="flex-1">{label}</span>
+      <span className="nav-label flex-1">{label}</span>
       {badge && <span className="relative shrink-0">{badge}</span>}
     </Link>
   );

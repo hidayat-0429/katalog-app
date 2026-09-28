@@ -24,7 +24,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
     <>
       {/* Nav Publik */}
       <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
-        <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
+        <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
           {nav.sectionMenu}
         </p>
         <NavLinkActive href="/" icon={<Home className="w-4 h-4" />} label={nav.home} />
@@ -37,7 +37,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Nav Admin */}
       {user?.role === "ADMIN" && (
         <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
-          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
+          <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionAccess}
           </p>
           <NavLinkActive
@@ -52,7 +52,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Nav Mitra hanya BUYER */}
       {user?.role === "BUYER" && (
         <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
-          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
+          <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionBuyer}
           </p>
           <NavLinkActive
@@ -74,7 +74,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
         {/* User info - Compact */}
         {user && (
-          <div className="px-3 py-2.5 bg-neutral-50 dark:bg-neutral-900/30 rounded-lg">
+          <div className="nav-hide-collapsed px-3 py-2.5 bg-neutral-50 dark:bg-neutral-900/30 rounded-lg">
             <p className="text-xs text-charcoal-muted">
               {nav.activeAccount}
             </p>
@@ -86,37 +86,37 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
         {/* Theme + Language + Auth - Compact */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between px-3">
-            <span className="text-xs font-semibold text-charcoal-muted">
+          <div className="nav-center-row flex items-center justify-between px-3">
+            <span className="nav-hide-collapsed text-xs font-semibold text-charcoal-muted">
               {nav.displayMode}
             </span>
             <ThemeToggle />
           </div>
           {/* Bar atas mobile sudah punya pemilih bahasa, jadi blok ini hanya tampil di desktop */}
-          <div className="hidden lg:block px-3">
+          <div className="nav-hide-collapsed hidden lg:block px-3">
             <p className="text-xs font-semibold text-charcoal-muted mb-1.5">
               {nav.language}
             </p>
             <LanguageSwitcher />
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="nav-auth flex items-center gap-1.5">
             {user ? (
               <SignOutButton label={nav.logout} />
             ) : (
               <>
                 <Link
                   href="/login"
-                  className="relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
+                  className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
                 >
                   <LogIn className="w-3.5 h-3.5" />
-                  {nav.login}
+                  <span className="nav-label">{nav.login}</span>
                 </Link>
                 <Link
                   href="/register"
-                  className="relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
+                  className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
                 >
                   <UserPlus className="w-3.5 h-3.5" />
-                  {nav.register}
+                  <span className="nav-label">{nav.register}</span>
                 </Link>
               </>
             )}

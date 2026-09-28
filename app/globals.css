@@ -16,6 +16,10 @@
     --charcoal-muted: 100 107 102;  /* 5.2:1 di atas putih - teks sekunder */
     --border: 222 226 230;          /* Neutral 300 */
     --border-subtle: 222 226 230;   /* sama dengan border; panel aksen sudah lebih gelap */
+
+    /* Lebar rail navigasi publik; AppSidebarClient menimpanya saat di-ciutkan.
+       Dipakai oleh aside dan oleh margin konten di app/(main)/layout.tsx. */
+    --nav-w: 16rem;
     
     /* Semantic colors (functional only) */
     --success: 16 185 129;          /* Green for status */
@@ -68,6 +72,47 @@ body {
 ::selection {
   background-color: theme('colors.primary.light');
   color: theme('colors.charcoal.DEFAULT');
+}
+
+/* ─── Rail navigasi publik (mode ciut, desktop only) ───
+   AppSidebarClient menoggle .nav-collapsed pada <html>. Di bawah lg drawer selalu
+   penuh, jadi aturan ini sengaja dikurung media query yang sama dengan breakpoint rail. */
+@media (min-width: 1024px) {
+  html.nav-collapsed {
+    --nav-w: 72px;
+  }
+  html.nav-collapsed .nav-label,
+  html.nav-collapsed .nav-hide-collapsed {
+    display: none;
+  }
+  html.nav-collapsed .nav-link,
+  html.nav-collapsed .nav-wordmark,
+  html.nav-collapsed .nav-center-row,
+  html.nav-collapsed .nav-auth-btn {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Badge absolute menempel ke ikon, bukan ke kolom label yang sudah hilang */
+  html.nav-collapsed .nav-link {
+    gap: 0;
+  }
+  /* Baris wordmark jadi kolom: logo di atas, tombol ciut di bawahnya */
+  html.nav-collapsed .nav-wordmark-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  html.nav-collapsed .nav-collapse-toggle {
+    margin-left: 0;
+    align-self: center;
+  }
+  /* Tombol login/daftar ditumpuk supaya ikonnya tetap muat di rail 72px */
+  html.nav-collapsed .nav-auth {
+    flex-direction: column;
+  }
 }
 
 /* ─── Component Utilities ──────────────────────────────── */

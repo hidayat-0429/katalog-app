@@ -15,7 +15,7 @@ export default function SignOutButton({ iconOnly = false, label = "Keluar" }: { 
       aria-label={label}
     >
       <LogOut className="w-4 h-4 shrink-0" />
-      {!iconOnly && <span className="font-medium">{label}</span>}
+      {!iconOnly && <span className="nav-label font-medium">{label}</span>}
     </button>
   );
 }

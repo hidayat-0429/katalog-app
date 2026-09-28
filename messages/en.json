@@ -13,6 +13,8 @@
     "logout": "Logout",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
+    "collapseMenu": "Collapse menu",
+    "expandMenu": "Expand menu",
     "menuTitle": "Navigation menu",
     "sectionMenu": "Menu",
     "sectionAccess": "Access",

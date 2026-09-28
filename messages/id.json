@@ -13,6 +13,8 @@
     "logout": "Keluar",
     "openMenu": "Buka menu navigasi",
     "closeMenu": "Tutup menu navigasi",
+    "collapseMenu": "Ciutkan menu",
+    "expandMenu": "Bentangkan menu",
     "menuTitle": "Menu navigasi",
     "sectionMenu": "Menu",
     "sectionAccess": "Akses",

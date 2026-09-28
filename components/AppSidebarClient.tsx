@@ -1,15 +1,18 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, PanelLeftClose, PanelLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLocale, useSetLocale } from "@/components/LocaleProvider";
 import { useTranslations } from "@/hooks/useTranslations";
 
+const COLLAPSE_STORAGE_KEY = "etira-nav-collapsed";
+
 export default function AppSidebarClient({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
   const locale = useLocale();
   const setLocale = useSetLocale();
@@ -61,6 +64,18 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
     }
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
+
+  // Mode ciut rail desktop: preferensi disimpan, kelas di <html> yang mengubah --nav-w
+  useEffect(() => {
+    if (window.localStorage.getItem(COLLAPSE_STORAGE_KEY) === "1") setIsCollapsed(true);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("nav-collapsed", isCollapsed);
+    window.localStorage.setItem(COLLAPSE_STORAGE_KEY, isCollapsed ? "1" : "0");
+  }, [isCollapsed]);
+
+  const toggleCollapsed = useCallback(() => setIsCollapsed((prev) => !prev), []);
 
   return (
     <>
@@ -133,11 +148,11 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         aria-modal={isOpen ? true : undefined}
         aria-label={t.nav.menuTitle}
         className={`
-          fixed top-0 left-0 h-dvh z-50 w-64
+          fixed top-0 left-0 h-dvh z-50 w-64 lg:w-[var(--nav-w)]
           bg-bg dark:bg-surface
           border-r border-neutral-200 dark:border-neutral-800
           flex flex-col shadow-xl lg:shadow-none
-          transition-[transform,visibility] duration-300 ease-in-out
+          transition-[transform,visibility,width] duration-300 ease-in-out
           outline-none
           ${isOpen ? "translate-x-0 visible" : "-translate-x-full invisible"}
           lg:translate-x-0 lg:visible lg:z-40
@@ -152,6 +167,38 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         </button>
 
         <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-[env(safe-area-inset-bottom)]">
+          {/* Wordmark + tombol ciut rail. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
+          <div className="nav-wordmark-row relative px-4 pr-12 lg:pr-4 pt-4 pb-3.5 border-b border-neutral-200 dark:border-neutral-800 flex items-center gap-2 shrink-0">
+            <Link href="/" className="nav-wordmark flex items-center gap-3 min-w-0 group">
+              <div className="w-8 h-8 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
+                <Image
+                  src="/logos/etira-company-logo.png"
+                  alt="Etira Logo"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="nav-label min-w-0">
+                <p className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 leading-none">
+                  ETIRA
+                </p>
+                <p className="text-[10px] text-charcoal-muted leading-none mt-0.5">
+                  Eka Timur Raya
+                </p>
+              </div>
+            </Link>
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              aria-label={isCollapsed ? t.nav.expandMenu : t.nav.collapseMenu}
+              aria-expanded={!isCollapsed}
+              className="nav-collapse-toggle relative hidden lg:flex ml-auto w-8 h-8 shrink-0 items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-1 after:content-['']"
+            >
+              {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+            </button>
+          </div>
+
           {children}
         </div>
       </aside>
