@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { Home, Package, Info, Phone, ShoppingCart, ClipboardList, User, LayoutDashboard, LogIn, UserPlus, HelpCircle, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, Package, Info, Phone, ShoppingCart, ClipboardList, User, LayoutDashboard, LogIn, UserPlus, HelpCircle } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import SignOutButton from "@/components/SignOutButton";
 import NavLinkActive from "@/components/NavLinkActive";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocale } from "@/components/LocaleProvider";
 import { useSidebarCollapse } from "@/components/AppSidebarClient";
 import idMessages from "@/messages/id.json";
@@ -28,16 +30,10 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
           <p className="text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionMenu}
           </p>
-          <button
-            type="button"
-            onClick={toggleCollapsed}
-            aria-label={isCollapsed ? nav.expandMenu : nav.collapseMenu}
-            aria-expanded={!isCollapsed}
-            className="text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
-            title={isCollapsed ? nav.expandMenu : nav.collapseMenu}
-          >
-            {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
-          </button>
+          <div className="flex items-center gap-1.5">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
         <NavLinkActive href="/" icon={<Home className="w-4 h-4" />} label={nav.home} />
         <NavLinkActive href="/?katalog=semua" icon={<Package className="w-4 h-4" />} label={nav.catalog} />

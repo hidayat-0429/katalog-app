@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback, createContext, useContext, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, PanelLeftClose, PanelLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "@/hooks/useTranslations";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -167,7 +167,7 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
         </button>
 
         <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-[env(safe-area-inset-bottom)]">
-          {/* Wordmark + tema/bahasa. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
+          {/* Wordmark + collapse button. Kelas nav-* diatur lewat html.nav-collapsed di globals.css */}
           <div className="nav-wordmark-row relative px-4 pr-12 lg:pr-4 pt-4 pb-3.5 lg:pb-2 border-b lg:border-b-0 border-neutral-200 dark:border-neutral-800 flex items-center gap-2 shrink-0">
             <Link href="/" className="nav-wordmark flex items-center gap-3 min-w-0 group">
               <div className="w-8 h-8 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
@@ -188,10 +188,15 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
                 </p>
               </div>
             </Link>
-            <div className="hidden lg:flex items-center gap-1.5 ml-auto">
-              <LanguageSwitcher />
-              <ThemeToggle />
-            </div>
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              aria-label={isCollapsed ? t.nav.expandMenu : t.nav.collapseMenu}
+              aria-expanded={!isCollapsed}
+              className="nav-collapse-toggle relative hidden lg:flex w-8 h-8 shrink-0 items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-1 after:content-[''] ml-auto"
+            >
+              {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+            </button>
           </div>
 
           <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
