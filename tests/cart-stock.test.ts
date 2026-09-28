@@ -147,7 +147,7 @@ describe("checkout", () => {
   it("memeriksa panjang alamat sebelum membaca keranjang", async () => {
     const result = await checkout(formData({ shippingAddress: "Pendek" }));
     expect(result).toEqual({
-      error: "Alamat pengiriman terlalu singkat, harap isi dengan alamat lengkap (minimal 10 karakter)",
+      error: "Alamat terlalu pendek (minimal 10 karakter)",
     });
     expect(mocks.prisma.cart.findMany).not.toHaveBeenCalled();
   });
