@@ -192,6 +192,15 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
               <LanguageSwitcher />
               <ThemeToggle />
             </div>
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              aria-label={isCollapsed ? t.nav.expandMenu : t.nav.collapseMenu}
+              aria-expanded={!isCollapsed}
+              className="nav-collapse-toggle relative hidden lg:flex w-8 h-8 shrink-0 items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-1 after:content-['']"
+            >
+              {isCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+            </button>
           </div>
 
           <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
