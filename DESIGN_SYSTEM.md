@@ -344,7 +344,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
+| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |
