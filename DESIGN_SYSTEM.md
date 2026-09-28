@@ -199,7 +199,8 @@ mobile tidak ikut ciut):
 | Kelas | Efek saat ciut |
 |---|---|
 | `nav-label` | disembunyikan (teks label nav, nama akun, kata "Masuk"/"Daftar") |
-| `nav-hide-collapsed` | blok dibuang: label grup, kartu akun, blok bahasa, label "Mode tampilan" |
+| `nav-hide-collapsed` | blok dibuang: label grup, kartu akun, pemilih bahasa |
+| `nav-center-row` | satu baris preferensi (toggle tema + ID/EN) jadi tengah |
 | `nav-link` | `justify-center`, padding-x 0, `gap-0` supaya badge keranjang menempel ke ikon |
 | `nav-wordmark` / `nav-wordmark-row` / `nav-collapse-toggle` | baris logo jadi kolom: logo di atas, tombol ciut di bawah |
 | `nav-center-row` / `nav-auth` / `nav-auth-btn` | baris tema jadi tengah, tombol masuk/daftar ditumpuk |
@@ -209,9 +210,10 @@ Konten halaman digeser dengan `lg:ml-[var(--nav-w)]` + `transition-[margin]` di
 `aria-label` (`nav.collapseMenu` / `nav.expandMenu`) dan `aria-expanded`.
 
 Tinggi kolom sidebar buyer ±740px, sedangkan area pakai layar 768px hanya ±650px.
-Karena itu urutan blok bawah tetap: **kartu akun → aksi akun (Logout / Masuk·Daftar) →
-Mode tampilan → Bahasa**. Menaruh aksi akun paling bawah membuatnya baru terlihat
-setelah geser.
+Karena itu urutan blok bawah: **kartu akun → aksi akun (Logout / Masuk·Daftar) →
+satu baris preferensi (tema + ID/EN)**. Aksi akun yang ditaruh paling bawah baru
+terlihat setelah geser, dan dua label teks ("Mode tampilan", "Bahasa") dulu
+menambah ±60px tanpa informasi yang ikonnya tidak sudah sampaikan.
 - Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
   (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 

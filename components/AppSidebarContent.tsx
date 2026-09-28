@@ -109,18 +109,13 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
             )}
           </div>
 
-          <div className="nav-center-row flex items-center justify-between px-3">
-            <span className="nav-hide-collapsed text-xs font-semibold text-charcoal-muted">
-              {nav.displayMode}
-            </span>
+          {/* Satu baris untuk dua preferensi: dua label teks makan ±60px padahal ikonnya
+              sudah jelas. Pemilih bahasa tetap desktop-only, bar atas mobile sudah punya. */}
+          <div className="nav-center-row flex items-center justify-center gap-2 lg:justify-between px-3">
             <ThemeToggle />
-          </div>
-          {/* Bar atas mobile sudah punya pemilih bahasa, jadi blok ini hanya tampil di desktop */}
-          <div className="nav-hide-collapsed hidden lg:block px-3">
-            <p className="text-xs font-semibold text-charcoal-muted mb-1.5">
-              {nav.language}
-            </p>
-            <LanguageSwitcher />
+            <div className="nav-hide-collapsed hidden lg:flex" role="group" aria-label={nav.language}>
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </div>
