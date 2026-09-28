@@ -163,7 +163,7 @@ export default function HeroCinematic({
             />
           </div>
           <div className="h-5 w-px bg-white/25" />
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
+          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
             PT Eka Timur Raya
           </span>
         </div>
