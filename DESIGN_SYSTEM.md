@@ -175,6 +175,12 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat di mobile —
   bar atas `fixed` dengan `bg-white/95` menutupinya — jadi hero tidak boleh pakai `pt` besar
   untuk "menghindari bar"; kalau dibuat 64px ke atas, blok logo justru turun.
+- Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
+  500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
+  Faktanya sekarang ada di empat statistik (`500+` · `50 ton` · `24 jam` · `HACCP`,
+  `grid-cols-2 md:grid-cols-4`, semua item dipakai — tidak ada lagi `slice(0, 3)`).
+  Angka yang sama tidak boleh muncul dua kali dalam satu layar; `500+` di TrustBanner boleh
+  karena sudah di bawah fold hero.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
@@ -324,9 +330,9 @@ foto asli**.
   (`components/ProductSkeleton.tsx`), `.skeleton`, `.no-scrollbar`,
   `.section-divider-wave`, `.feature-card-num`, `.input` / `.input-with-icon`
   (form admin).
-- Animasi looping hanya untuk hal yang benar-benar menyatakan "hidup": dot status
-  (`animate-ping` di hero), indikator loading (`animate-spin` pada `Loader`), dan
-  `animate-bounce` kecil pada scroll cue. Maksimal dua elemen beranimasi loop per halaman.
+- Animasi looping hanya untuk hal yang benar-benar menyatakan "hidup": indikator loading
+  (`animate-spin` pada `Loader`) dan `animate-bounce` kecil pada scroll cue. Maksimal dua
+  elemen beranimasi loop per halaman.
 - Munculnya elemen: geser + fade pendek (150–300ms) atau stagger, bukan bounce/pop besar.
 
 ---
@@ -338,7 +344,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-ping` dot, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
+| `components/HeroCinematic.tsx` | scrim **horizontal** `bg-gradient-to-r from-black/80 via-black/55 to-black/25` di atas foto (kolom teks di kiri boleh paling gelap, tepi kanan boleh lebih terang), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `backdrop-blur-sm` pada CTA sekunder, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |

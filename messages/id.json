@@ -27,18 +27,16 @@
   "hero": {
     "title": "Jamur Premium",
     "subtitle": "untuk Dapur Profesional",
-    "description": "Partner 500+ restoran premium di Indonesia. Panen pagi, tiba same-day dengan cold chain standar internasional.",
+    "description": "Pasokan jamur segar dan olahan untuk hotel, restoran, dan katering. Panen pagi, tiba same-day dengan cold chain standar internasional.",
     "cta1": "Lihat Katalog Produk",
     "cta2": "Hubungi Kami",
     "imageAlt": "Jamur segar PT Eka Timur Raya",
-    "statusBadge": "Sejak 1999 · HACCP Certified · 500+ Clients",
-    "statPartners": "Mitra Horeka",
+    "statPartners": "Mitra HoReCa",
     "statCapacity": "Kapasitas/Bulan",
     "statFreshness": "Kesegaran Terjamin",
-    "statExperience": "Pengalaman",
+    "statCert": "Bersertifikat",
     "statTon": " ton",
-    "statHour": " jam",
-    "statYear": " tahun"
+    "statHour": " jam"
   },
   "trustBanner": {
     "eyebrow": "Dipercaya oleh 500+ Bisnis Kuliner",

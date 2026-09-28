@@ -27,18 +27,16 @@
   "hero": {
     "title": "Premium Mushrooms",
     "subtitle": "for Professional Kitchens",
-    "description": "Partner to 500+ premium restaurants in Indonesia. Harvested in the morning, delivered same-day with international standard cold chain.",
+    "description": "Fresh and processed mushroom supply for hotels, restaurants, and catering. Harvested in the morning, delivered same-day with international standard cold chain.",
     "cta1": "View Product Catalog",
     "cta2": "Contact Us",
     "imageAlt": "Fresh mushrooms from PT Eka Timur Raya",
-    "statusBadge": "Since 1999 · HACCP Certified · 500+ Clients",
     "statPartners": "HoReCa Partners",
     "statCapacity": "Capacity/Month",
     "statFreshness": "Freshness Guaranteed",
-    "statExperience": "Experience",
+    "statCert": "Certified",
     "statTon": " tons",
-    "statHour": " hrs",
-    "statYear": " yrs"
+    "statHour": " hrs"
   },
   "trustBanner": {
     "eyebrow": "Trusted by 500+ Culinary Businesses",

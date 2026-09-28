@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, PackageSearch, Clock, Medal } from "lucide-react";
+import { ArrowRight, Building2, PackageSearch, Clock, ShieldCheck } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 interface StatItem {
   value: string;
-  numericValue: number;
+  /** Diisi hanya untuk angka yang bisa dianimasikan; teks murni (mis. HACCP) lewat `value`. */
+  numericValue?: number;
   suffix: string;
   label: string;
   icon: React.ElementType;
@@ -54,27 +55,27 @@ function AnimatedCounter({
 }
 
 interface HeroCinematicProps {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  cta1Text?: string;
-  cta2Text?: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  cta1Text: string;
+  cta2Text: string;
 }
 
 export default function HeroCinematic({
-  title = "Jamur Premium",
-  subtitle = "untuk Dapur Profesional",
-  description = "Partner terpercaya 500+ restoran premium di Indonesia. Dari jamur segar grade A hingga olahan siap pakai dipanen pagi, tiba same-day dengan cold chain berstandar internasional.",
-  cta1Text = "Lihat Katalog Produk",
-  cta2Text = "Hubungi Kami"
-}: HeroCinematicProps = {}) {
+  title,
+  subtitle,
+  description,
+  cta1Text,
+  cta2Text,
+}: HeroCinematicProps) {
   const t = useTranslations();
 
   const STATS: StatItem[] = [
     { value: "500", numericValue: 500, suffix: "+", label: t.hero.statPartners, icon: Building2 },
     { value: "50", numericValue: 50, suffix: t.hero.statTon, label: t.hero.statCapacity, icon: PackageSearch },
     { value: "24", numericValue: 24, suffix: t.hero.statHour, label: t.hero.statFreshness, icon: Clock },
-    { value: "25", numericValue: 25, suffix: t.hero.statYear, label: t.hero.statExperience, icon: Medal },
+    { value: "HACCP", suffix: "", label: t.hero.statCert, icon: ShieldCheck },
   ];
 
   const heroRef = useRef<HTMLElement>(null);
@@ -151,7 +152,7 @@ export default function HeroCinematic({
 
           {/* Logo + Nama brand */}
           <div
-            className={`flex items-center gap-3 mb-3 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`flex items-center gap-3 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "0ms" }}
           >
             <div className="relative w-14 h-14">
@@ -169,24 +170,10 @@ export default function HeroCinematic({
             </span>
           </div>
 
-          {/* Status dengan certification badge */}
-          <div
-            className={`flex items-center gap-2 mb-4 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "80ms" }}
-          >
-            <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-forest-300 opacity-40" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-forest-300" />
-            </span>
-            <span className="text-xs font-medium text-white/75 tracking-wide">
-              {t.hero.statusBadge}
-            </span>
-          </div>
-
           {/* Headline — hierarki dari ukuran & bobot, hijau berperan sebagai aksen grafis */}
           <h1
             className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "160ms" }}
+            style={{ transitionDelay: "80ms" }}
           >
             <span className="block text-[2.6rem] sm:text-5xl lg:text-[3.5rem] text-white">
               {title}
@@ -198,13 +185,13 @@ export default function HeroCinematic({
 
           <div
             className={`h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "210ms" }}
+            style={{ transitionDelay: "130ms" }}
           />
 
           {/* Deskripsi - Stronger value prop */}
           <p
             className={`text-sm sm:text-base text-white/80 leading-relaxed max-w-lg mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "260ms" }}
+            style={{ transitionDelay: "180ms" }}
           >
             {description}
           </p>
@@ -212,7 +199,7 @@ export default function HeroCinematic({
           {/* CTA */}
           <div
             className={`flex flex-wrap gap-3 mb-12 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "360ms" }}
+            style={{ transitionDelay: "260ms" }}
           >
             <Link
               href="/?katalog=semua"
@@ -232,18 +219,22 @@ export default function HeroCinematic({
           {/* Stats */}
           <div
             ref={statsRef}
-            className={`grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "500ms" }}
+            className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            style={{ transitionDelay: "380ms" }}
           >
-            {STATS.slice(0, 3).map((item, idx) => (
+            {STATS.map((item) => (
               <div key={item.label} className="group">
                 <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                 <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  <AnimatedCounter
-                    target={item.numericValue}
-                    suffix={item.suffix}
-                    isVisible={statsVisible}
-                  />
+                  {typeof item.numericValue === "number" ? (
+                    <AnimatedCounter
+                      target={item.numericValue}
+                      suffix={item.suffix}
+                      isVisible={statsVisible}
+                    />
+                  ) : (
+                    item.value
+                  )}
                 </p>
                 <p className="text-[11px] text-white/75 mt-0.5 font-medium leading-snug">
                   {item.label}
