@@ -170,16 +170,22 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
 - Antar elemen: `mb-2` / `mb-4` / `mb-6` / `mb-8`.
 - Bagian halaman: halaman publik dengan satu kolom isi (`/faq`, `/profil`, `/pesanan`,
   `/keranjang`, `/kontak`, `/tentang`, invoice) pakai `py-8`; section homepage lebih longgar
-  (`py-10 sm:py-14` / `py-16 sm:py-24`). Hero anchor-nya di atas (`items-start` +
-  `pt-6 sm:pt-10 lg:pt-12`), bukan tengah, supaya tidak ada pita kosong di atas blok logo.
-  Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat di mobile —
-  bar atas `fixed` dengan `bg-white/95` menutupinya — jadi hero tidak boleh pakai `pt` besar
-  untuk "menghindari bar"; kalau dibuat 64px ke atas, blok logo justru turun.
-- Kolom teks hero: `mx-auto max-w-2xl text-center` — rata tengah, bukan rata kiri. Semua
-  turunannya ikut: lockup logo `justify-center`, bar aksen `mx-auto`, deskripsi
-  `mx-auto max-w-xl` (baris judul 672px terlalu lebar untuk body text), CTA
-  `justify-center`, dan tiap sel statistik `flex flex-col items-center`. Anchor vertikal
-  tetap di atas (lihat bullet sebelumnya) — "rata tengah" berlaku horizontal saja.
+  (`py-10 sm:py-14` / `py-16 sm:py-24`).
+- Hero = tiga zona vertikal dalam satu section `min-h-[92vh] sm:min-h-screen flex flex-col`:
+  lockup logo di atas (`pt-6 sm:pt-10 lg:pt-12`), blok judul + deskripsi + CTA di tengah
+  (`flex-1` + `justify-center`), pita statistik di dasar (`max-w-3xl`, `border-t`). Sisa
+  tinggi viewport didistribusikan jadi dua celah antar zona, bukan dibiarkan mengendap di
+  bawah: sebelumnya konten nempel atas dengan `pb-24` dan hasilnya ±300px foto nganggur,
+  yang dibaca sebagai "hero tidak full". Jangan balik ke `items-center` di level section —
+  itu sumber pita ±290px di atas logo.
+- Poros teks: rata tengah. Zona tengah `max-w-2xl` dengan `items-center`, deskripsi
+  diortong `max-w-xl` (672px itu ±85 karakter per baris, kepanjangan untuk body text),
+  tiap sel statistik `flex flex-col items-center`. Spacer `lg:hidden h-14` di
+  `app/(main)/layout.tsx` tidak menambah ruang terlihat — bar atas `fixed` dengan
+  `bg-white/95` menutupinya — jadi `pt` hero tetap kecil; di atas 64px blok logo justru turun.
+- Scrim harus sama gelapnya kiri dan kanan (`bg-gradient-to-b from-black/70 via-black/60
+  to-black/70`) karena teks di tengah; bottom-fade `h-16 sm:h-20` selalu disamakan dengan
+  `pb-16 sm:pb-20` supaya tidak menimpa statistik.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
   500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
   Faktanya sekarang ada di empat statistik (`500+` · `50 ton` · `24 jam` · `HACCP`,
@@ -336,8 +342,9 @@ foto asli**.
   `.section-divider-wave`, `.feature-card-num`, `.input` / `.input-with-icon`
   (form admin).
 - Animasi looping hanya untuk hal yang benar-benar menyatakan "hidup": indikator loading
-  (`animate-spin` pada `Loader`) dan `animate-bounce` kecil pada scroll cue. Maksimal dua
-  elemen beranimasi loop per halaman.
+  (`animate-spin` pada `Loader`). Scroll cue `animate-bounce` di hero sudah dihapus — pita
+  statistik sekarang menempati dasar hero, jadi tidak ada tempat kosong untuk cue itu.
+  Maksimal dua elemen beranimasi loop per halaman.
 - Munculnya elemen: geser + fade pendek (150–300ms) atau stagger, bukan bounce/pop besar.
 
 ---
@@ -349,7 +356,7 @@ yang shipped membatasi efek sinematik ke beberapa permukaan saja, dan itu diseng
 
 | Lokasi | Efek yang diizinkan |
 |---|---|
-| `components/HeroCinematic.tsx` | scrim **vertical** `bg-gradient-to-b from-black/70 via-black/60 to-black/70` di atas foto (kolom teks rata tengah, jadi kiri dan kanan harus sama gelapnya — scrim horizontal bikin separuh teks jatuh kontras), bottom-fade `h-20` ke `bg` (selalu ≤ `pb-20 sm:pb-24` konten supaya tidak menimpa statistik), parallax, `animate-bounce` scroll cue. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
+| `components/HeroCinematic.tsx` | scrim **vertical** `bg-gradient-to-b from-black/70 via-black/60 to-black/70` di atas foto (kolom teks rata tengah, jadi kiri dan kanan harus sama gelapnya — scrim horizontal bikin separuh teks jatuh kontras), bottom-fade `h-16 sm:h-20` ke `bg` (selalu disamakan dengan `pb-16 sm:pb-20` konten supaya tidak menimpa statistik), parallax. Teks di atas foto **minimal `text-white/75`** (`/80` untuk body) — di bawah itu kontrasnya jatuh di bawah 4.5:1 |
 | Overlay di atas gambar produk (`ProductCard`) | scrim `bg-neutral-900/60` + `backdrop-blur-xs`, chip `bg-white/90` |
 | `components/ui/Modal.tsx` | overlay `bg-black/50 backdrop-blur-sm` |
 | `components/AppSidebarClient.tsx` (header + drawer mobile) | bar `bg-white/95 backdrop-blur`, scrim `bg-black/60 backdrop-blur-xs` |

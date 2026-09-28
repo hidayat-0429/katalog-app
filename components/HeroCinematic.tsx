@@ -119,7 +119,7 @@ export default function HeroCinematic({
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[92vh] sm:min-h-screen flex items-start overflow-hidden"
+      className="relative min-h-[92vh] sm:min-h-screen flex flex-col overflow-hidden"
     >
       {/* Background image with parallax */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -142,35 +142,35 @@ export default function HeroCinematic({
         {/* Scrim vertical: kolom teks rata tengah, jadi kiri-kanan harus sama gelapnya */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
 
-        {/* Fade ke halaman di bawah — setinggi padding bawah konten agar tidak menimpa statistik */}
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg to-transparent" />
+        {/* Fade ke halaman di bawah — samakan dengan pb konten (h-16/20 = pb-16/20) biar tidak menimpa statistik */}
+        <div className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-bg to-transparent" />
       </div>
 
-      {/* Content — pt kecil karena spacer 56px di layout sudah menutup bar mobile (bar fixed, bg opaque) */}
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 pt-6 sm:pt-10 lg:pt-12 pb-20 sm:pb-24">
-        <div className="mx-auto max-w-2xl text-center">
-
-          {/* Logo + Nama brand */}
-          <div
-            className={`flex items-center justify-center gap-3 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "0ms" }}
-          >
-            <div className="relative w-14 h-14">
-              <Image
-                src="/logos/etira-product-logo.png"
-                alt="Etira Logo"
-                fill
-                className="object-contain drop-shadow-md"
-                sizes="56px"
-              />
-            </div>
-            <div className="h-4 w-px bg-white/25" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">
-              PT Eka Timur Raya
-            </span>
+      {/* Content — tiga zona vertikal: lockup di atas, cerita di tengah, angka di dasar hero */}
+      <div className="relative z-10 flex flex-1 w-full flex-col items-center px-6 sm:px-10 lg:px-16 pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-20">
+        {/* Logo + Nama brand */}
+        <div
+          className={`flex items-center justify-center gap-3 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+          style={{ transitionDelay: "0ms" }}
+        >
+          <div className="relative w-14 h-14">
+            <Image
+              src="/logos/etira-product-logo.png"
+              alt="Etira Logo"
+              fill
+              className="object-contain drop-shadow-md"
+              sizes="56px"
+            />
           </div>
+          <div className="h-4 w-px bg-white/25" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">
+            PT Eka Timur Raya
+          </span>
+        </div>
 
-          {/* Headline — hierarki dari ukuran & bobot, hijau berperan sebagai aksen grafis */}
+        {/* Zona tengah: flex-1 + justify-center supaya sisa tinggi viewport ketiban di atas-bawah
+            blok ini, bukan mengendap jadi pita foto kosong di bawah statistik */}
+        <div className="flex w-full max-w-2xl flex-1 flex-col items-center justify-center text-center">
           <h1
             className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "80ms" }}
@@ -184,21 +184,19 @@ export default function HeroCinematic({
           </h1>
 
           <div
-            className={`mx-auto h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`h-1 w-14 rounded-full bg-brand-forest-300 mt-5 mb-6 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "130ms" }}
           />
 
-          {/* Deskripsi - Stronger value prop */}
           <p
-            className={`mx-auto text-sm sm:text-base text-white/80 leading-relaxed max-w-xl mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`text-sm sm:text-base text-white/80 leading-relaxed max-w-xl mb-8 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "180ms" }}
           >
             {description}
           </p>
 
-          {/* CTA */}
           <div
-            className={`flex flex-wrap items-center justify-center gap-3 mb-12 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`flex flex-wrap items-center justify-center gap-3 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "260ms" }}
           >
             <Link
@@ -215,43 +213,32 @@ export default function HeroCinematic({
               {cta2Text}
             </Link>
           </div>
-
-          {/* Stats */}
-          <div
-            ref={statsRef}
-            className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "380ms" }}
-          >
-            {STATS.map((item) => (
-              <div key={item.label} className="group flex flex-col items-center">
-                <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
-                <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  {typeof item.numericValue === "number" ? (
-                    <AnimatedCounter
-                      target={item.numericValue}
-                      suffix={item.suffix}
-                      isVisible={statsVisible}
-                    />
-                  ) : (
-                    item.value
-                  )}
-                </p>
-                <p className="text-[11px] text-white/75 mt-0.5 font-medium leading-snug">
-                  {item.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div
-        className={`absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-        style={{ transitionDelay: "900ms" }}
-      >
-        <div className="w-5 h-8 rounded-full border border-white/10 flex justify-center pt-2">
-          <div className="w-1 h-2 rounded-full bg-white/20 animate-bounce" />
+        <div
+          ref={statsRef}
+          className={`w-full max-w-3xl grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 border-t border-white/10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+          style={{ transitionDelay: "380ms" }}
+        >
+          {STATS.map((item) => (
+            <div key={item.label} className="group flex flex-col items-center">
+              <item.icon className="w-4 h-4 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+              <p className="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">
+                {typeof item.numericValue === "number" ? (
+                  <AnimatedCounter
+                    target={item.numericValue}
+                    suffix={item.suffix}
+                    isVisible={statsVisible}
+                  />
+                ) : (
+                  item.value
+                )}
+              </p>
+              <p className="text-[11px] text-white/75 mt-0.5 font-medium leading-snug">
+                {item.label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
