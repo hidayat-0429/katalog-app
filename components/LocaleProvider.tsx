@@ -21,13 +21,13 @@ interface LocaleContextType {
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('id');
+  const [locale, setLocaleState] = useState<Locale>('en');
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Get locale from localStorage on mount
-    const saved = (localStorage.getItem('locale') as Locale) || 'id';
+    // Get locale from localStorage on mount; pengunjung baru ikut default Inggris situs
+    const saved = (localStorage.getItem('locale') as Locale) || 'en';
     setLocaleState(saved);
     writeLocaleCookie(saved);
 
@@ -103,7 +103,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 export function useLocale() {
   const context = useContext(LocaleContext);
   if (!context) {
-    return 'id';
+    return 'en';
   }
   return context.locale;
 }

@@ -11,11 +11,12 @@ export type ServerLocale = 'id' | 'en';
 
 /**
  * Locale aktif dibaca dari cookie yang ditulis LocaleProvider, karena server
- * tidak punya akses localStorage.
+ * tidak punya akses localStorage. Pengunjung baru (belum ada cookie) dapat Inggris;
+ * pilihan manual selalu menang karena di-cookie.
  */
 export async function getServerLocale(): Promise<ServerLocale> {
   const store = await cookies();
-  return store.get('locale')?.value === 'en' ? 'en' : 'id';
+  return store.get('locale')?.value === 'id' ? 'id' : 'en';
 }
 
 export async function getServerMessages() {

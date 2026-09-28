@@ -391,8 +391,13 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 - **Situs publik: dua bahasa, Indonesia dan Inggris.** Semua string lewat
   `messages/id.json` / `messages/en.json`, diakses dengan `useTranslations()`
   (klien) atau `getServerMessages()` (server action, route handler, metadata).
-  Locale disimpan di localStorage dan dicermin ke cookie `locale` lewat
+  Locale disimpan di localStorage dan dicerminkan ke cookie `locale` lewat
   `components/LocaleProvider.tsx`.
+  **Default pengunjung baru: Inggris** — `'en'` di `useState`/fallback localStorage
+  `components/LocaleProvider.tsx` dan fallback cookie `lib/serverMessages.ts`, supaya
+  render pertama (server) dan paint pertama (klien) tidak berbeda bahasa. Pilihan manual
+  selalu menang karena tersimpan. Jangan balik ke `'id'` sebagian: kalau klien dan server
+  beda default, halaman kedip ganti bahasa.
   Kunci kedua file harus **selalu sama jumlahnya** (saat ini 567/567).
 - **Panel admin: hanya bahasa Indonesia.** Ini keputusan lingkup, bukan kelalaian —
   jangan diterjemahkan.
@@ -405,7 +410,12 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 ## 10. Dark mode
 
 - Mekanisme: `darkMode: "class"` + `.dark` di `globals.css`; toggle di
-  `components/ThemeToggle.tsx`.
+  `components/ThemeToggle.tsx`; `ThemeProvider` di `components/Providers.tsx` memakai
+  `defaultTheme="system"` — pengunjung baru ikut perangkat HP/laptop-nya, dan begitu
+  menekan toggle nilainya jadi eksplisit (`light`/`dark`) dan tersimpan.
+- Toggle **wajib baca `resolvedTheme`**, bukan `theme`. Dalam mode system `theme` masih
+  bernilai `"system"`, jadi tombol yang membacanya akan menampilkan ikon salah dan klik
+  pertama kelihatan tidak terjadi apa-apa.
 - Kalau kamu menulis dengan token §1 butir 2, dark mode sudah beres sendiri — tidak perlu
   varian `dark:` sama sekali. Ini jalur utama untuk permukaan dan teks.
 - **Hex mentah di class dilarang**, termasuk `dark:bg-[#141715]`. Nilainya sekarang sudah

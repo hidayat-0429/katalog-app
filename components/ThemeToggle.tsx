@@ -6,7 +6,7 @@ import { Sun, Moon } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const t = useTranslations();
   // Hindari hydration mismatch: render setelah mount
   const [mounted, setMounted] = useState(false);
@@ -18,7 +18,9 @@ export default function ThemeToggle() {
     );
   }
 
-  const isDark = theme === "dark";
+  // resolvedTheme, bukan theme: dalam mode "system" nilai theme masih "system"
+  // sehingga klik pertama tidak mengubah apa pun yang terlihat.
+  const isDark = resolvedTheme === "dark";
 
   return (
     <button

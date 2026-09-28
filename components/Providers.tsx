@@ -73,7 +73,7 @@ export function useToast() {
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <ToastProvider>{children}</ToastProvider>
       </ThemeProvider>
     </SessionProvider>
