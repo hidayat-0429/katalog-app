@@ -250,6 +250,35 @@ button:not(:disabled):active {
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Skala fluidik bagian atas homepage — satu aturan untuk semua resolusi, tidak
+   ada breakpoint yang harus ditebak. Batas bawah = ukuran HP, batas atas = monitor. */
+.hero-gutter {
+  padding-left: clamp(1rem, 4.5vw, 4.5rem);
+  padding-right: clamp(1rem, 4.5vw, 4.5rem);
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5.2vw + 1rem, 6rem);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.7rem, 2.6vw + 0.6rem, 3.6rem);
+}
+
+/* Panjang baris diukur dalam karakter, bukan px: tetap terbaca di layar lebar */
+.hero-lead {
+  font-size: clamp(1rem, 0.6vw + 0.85rem, 1.25rem);
+  max-width: 58ch;
+}
+
+.hero-stat-value {
+  font-size: clamp(1.5rem, 1.3vw + 1rem, 2.4rem);
+}
+
+.hero-stat-label {
+  font-size: clamp(0.75rem, 0.3vw + 0.65rem, 0.85rem);
+}
+
 .hero-stagger-visible {
   opacity: 1;
   transform: translateY(0);

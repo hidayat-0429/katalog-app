@@ -147,7 +147,7 @@ export default function HeroCinematic({
       </div>
 
       {/* Content — tiga zona vertikal: lockup di atas, cerita di tengah, angka di dasar hero */}
-      <div className="relative z-10 flex flex-1 w-full flex-col items-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-20">
+      <div className="hero-gutter relative z-10 flex flex-1 w-full flex-col items-center pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-20">
         {/* Logo + Nama brand */}
         <div
           className={`flex items-center justify-center gap-4 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
@@ -175,10 +175,10 @@ export default function HeroCinematic({
             className={`font-heading font-bold leading-[1.1] tracking-tight hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "80ms" }}
           >
-            <span className="block text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] text-white">
+            <span className="hero-title block text-white">
               {title}
             </span>
-            <span className="block text-[1.7rem] sm:text-4xl lg:text-[2.7rem] xl:text-[3.1rem] font-semibold text-white">
+            <span className="hero-subtitle block font-semibold text-white">
               {subtitle}
             </span>
           </h1>
@@ -189,7 +189,7 @@ export default function HeroCinematic({
           />
 
           <p
-            className={`text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            className={`hero-lead mx-auto text-white/80 leading-relaxed mb-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
             style={{ transitionDelay: "180ms" }}
           >
             {description}
@@ -223,7 +223,7 @@ export default function HeroCinematic({
           {STATS.map((item) => (
             <div key={item.label} className="group flex flex-col items-center">
               <item.icon className="w-5 h-5 text-brand-forest-300 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
-              <p className="font-mono text-2xl sm:text-3xl xl:text-4xl font-bold text-white tracking-tight">
+              <p className="font-mono hero-stat-value font-bold text-white tracking-tight">
                 {typeof item.numericValue === "number" ? (
                   <AnimatedCounter
                     target={item.numericValue}
@@ -234,7 +234,7 @@ export default function HeroCinematic({
                   item.value
                 )}
               </p>
-              <p className="text-xs text-white/75 mt-1 font-medium leading-snug">
+              <p className="hero-stat-label text-white/75 mt-1 font-medium leading-snug">
                 {item.label}
               </p>
             </div>
