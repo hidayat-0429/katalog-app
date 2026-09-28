@@ -22,6 +22,15 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
   return (
     <>
+      {/* Preferensi di atas rail — posisi yang sama dengan bar atas mobile, jadi dua shell
+          tidak lagi menaruh kontrol yang sama di dua tempat berbeda. */}
+      <div className="hidden lg:flex nav-center-row items-center gap-2 px-3 pt-3">
+        <ThemeToggle />
+        <div className="nav-hide-collapsed ml-auto flex" role="group" aria-label={nav.language}>
+          <LanguageSwitcher />
+        </div>
+      </div>
+
       {/* Nav Publik */}
       <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
         <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
@@ -69,7 +78,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Bottom section: akun + aksi akun di atas, preferensi di dasar */}
+      {/* Bottom section: akun + aksi akun (preferensi sudah pindah ke atas rail) */}
       <div className="px-3 pb-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/60 flex flex-col gap-2.5">
 
         {/* User info - Compact */}
@@ -85,38 +94,27 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
         )}
 
         {/* Auth dulu: kalau paling bawah, Logout kalah oleh tinggi kolom dan butuh scroll */}
-        <div className="space-y-2">
-          <div className="nav-auth flex items-center gap-1.5">
-            {user ? (
-              <SignOutButton label={nav.logout} />
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
-                >
-                  <LogIn className="w-3.5 h-3.5" />
-                  <span className="nav-label">{nav.login}</span>
-                </Link>
-                <Link
-                  href="/register"
-                  className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
-                >
-                  <UserPlus className="w-3.5 h-3.5" />
-                  <span className="nav-label">{nav.register}</span>
-                </Link>
-              </>
-            )}
-          </div>
-
-          {/* Satu baris untuk dua preferensi: dua label teks makan ±60px padahal ikonnya
-              sudah jelas. Pemilih bahasa tetap desktop-only, bar atas mobile sudah punya. */}
-          <div className="nav-center-row flex items-center justify-center gap-2 lg:justify-between px-3">
-            <ThemeToggle />
-            <div className="nav-hide-collapsed hidden lg:flex" role="group" aria-label={nav.language}>
-              <LanguageSwitcher />
-            </div>
-          </div>
+        <div className="nav-auth flex items-center gap-1.5">
+          {user ? (
+            <SignOutButton label={nav.logout} />
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-neutral-100 dark:hover:bg-neutral-800 transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span className="nav-label">{nav.login}</span>
+              </Link>
+              <Link
+                href="/register"
+                className="nav-auth-btn relative flex-1 flex items-center justify-center gap-1 px-3 py-2 rounded text-xs font-semibold bg-brand-forest-600 hover:bg-brand-forest-700 text-white transition-colors after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"
+              >
+                <UserPlus className="w-3.5 h-3.5" />
+                <span className="nav-label">{nav.register}</span>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ import { Menu, X, PanelLeftClose, PanelLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLocale, useSetLocale } from "@/components/LocaleProvider";
 import { useTranslations } from "@/hooks/useTranslations";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const COLLAPSE_STORAGE_KEY = "etira-nav-collapsed";
 
@@ -112,21 +113,24 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
             </div>
           </Link>
         </div>
-        <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700" role="group" aria-label="Bahasa / Language">
-          {(['id', 'en'] as const).map((code) => (
-            <button
-              key={code}
-              onClick={() => setLocale(code)}
-              aria-pressed={locale === code}
-              className={`relative px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out first:rounded-l-md last:rounded-r-md after:absolute after:-inset-x-1 after:-inset-y-2.5 after:content-[''] ${
-                locale === code
-                  ? "bg-brand-forest-600 text-white"
-                  : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
-              }`}
-            >
-              {code}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div className="flex items-center rounded-lg border border-neutral-200 dark:border-neutral-700" role="group" aria-label="Bahasa / Language">
+            {(['id', 'en'] as const).map((code) => (
+              <button
+                key={code}
+                onClick={() => setLocale(code)}
+                aria-pressed={locale === code}
+                className={`relative px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out first:rounded-l-md last:rounded-r-md after:absolute after:-inset-x-1 after:-inset-y-2.5 after:content-[''] ${
+                  locale === code
+                    ? "bg-brand-forest-600 text-white"
+                    : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
+                }`}
+              >
+                {code}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 

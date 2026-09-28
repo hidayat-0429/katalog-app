@@ -254,11 +254,14 @@ Konten halaman digeser dengan `lg:ml-[var(--nav-w)]` + `transition-[margin]` di
 `app/(main)/layout.tsx`, jadi offset ikut saat rail berubah. Tombol ciut wajib
 `aria-label` (`nav.collapseMenu` / `nav.expandMenu`) dan `aria-expanded`.
 
-Tinggi kolom sidebar buyer ±740px, sedangkan area pakai layar 768px hanya ±650px.
-Karena itu urutan blok bawah: **kartu akun → aksi akun (Logout / Masuk·Daftar) →
-satu baris preferensi (tema + ID/EN)**. Aksi akun yang ditaruh paling bawah baru
-terlihat setelah geser, dan dua label teks ("Mode tampilan", "Bahasa") dulu
-menambah ±60px tanpa informasi yang ikonnya tidak sudah sampaikan.
+Preferensi tampilan **selalu di atas**, di kedua shell — dulu tema di dasar rail sementara
+bahasa di bar atas mobile, dan di desktop dua-duanya mengendap di dasar. Sekarang:
+`components/AppSidebarClient.tsx` menaruh `ThemeToggle` + pil ID/EN di bar `h-14` mobile,
+`components/AppSidebarContent.tsx` menaruh baris tema + bahasa di **puncak rail**
+(`hidden lg:flex`, jadi drawer mobile tidak duplikasi). Bawah rail tinggal **kartu akun →
+aksi akun (Logout / Masuk·Daftar)**. ThemeToggle 36px visual dengan `after:-inset-1`
+sehingga area sentuh 44px; rail ciut menyembunyikan pemilih bahasa (`nav-hide-collapsed`)
+dan memusatkan ikon tema (`nav-center-row`).
 - Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
   (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 
