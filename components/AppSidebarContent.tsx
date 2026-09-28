@@ -69,7 +69,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Bottom section */}
+      {/* Bottom section: akun + aksi akun di atas, preferensi di dasar */}
       <div className="px-3 pb-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/60 flex flex-col gap-2.5">
 
         {/* User info - Compact */}
@@ -84,21 +84,8 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
           </div>
         )}
 
-        {/* Theme + Language + Auth - Compact */}
+        {/* Auth dulu: kalau paling bawah, Logout kalah oleh tinggi kolom dan butuh scroll */}
         <div className="space-y-2">
-          <div className="nav-center-row flex items-center justify-between px-3">
-            <span className="nav-hide-collapsed text-xs font-semibold text-charcoal-muted">
-              {nav.displayMode}
-            </span>
-            <ThemeToggle />
-          </div>
-          {/* Bar atas mobile sudah punya pemilih bahasa, jadi blok ini hanya tampil di desktop */}
-          <div className="nav-hide-collapsed hidden lg:block px-3">
-            <p className="text-xs font-semibold text-charcoal-muted mb-1.5">
-              {nav.language}
-            </p>
-            <LanguageSwitcher />
-          </div>
           <div className="nav-auth flex items-center gap-1.5">
             {user ? (
               <SignOutButton label={nav.logout} />
@@ -120,6 +107,20 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
                 </Link>
               </>
             )}
+          </div>
+
+          <div className="nav-center-row flex items-center justify-between px-3">
+            <span className="nav-hide-collapsed text-xs font-semibold text-charcoal-muted">
+              {nav.displayMode}
+            </span>
+            <ThemeToggle />
+          </div>
+          {/* Bar atas mobile sudah punya pemilih bahasa, jadi blok ini hanya tampil di desktop */}
+          <div className="nav-hide-collapsed hidden lg:block px-3">
+            <p className="text-xs font-semibold text-charcoal-muted mb-1.5">
+              {nav.language}
+            </p>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
