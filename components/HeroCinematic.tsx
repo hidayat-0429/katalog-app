@@ -183,21 +183,16 @@ export default function HeroCinematic({
             </span>
           </h1>
 
-          <div
-            className={`h-1 w-20 rounded-full bg-brand-forest-300 mt-6 mb-7 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "130ms" }}
-          />
-
           <p
-            className={`hero-lead mx-auto text-white/80 leading-relaxed mb-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "180ms" }}
+            className={`hero-lead mx-auto mt-7 text-white/80 leading-relaxed mb-10 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
+            style={{ transitionDelay: "140ms" }}
           >
             {description}
           </p>
 
           <div
             className={`flex flex-wrap items-center justify-center gap-3 hero-stagger ${heroLoaded ? "hero-stagger-visible" : ""}`}
-            style={{ transitionDelay: "260ms" }}
+            style={{ transitionDelay: "210ms" }}
           >
             <Link
               href="/?katalog=semua"
