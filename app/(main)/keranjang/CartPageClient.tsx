@@ -42,7 +42,7 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
         <h1 className="font-heading text-3xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
           {t.cart.title}
         </h1>
-        <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="font-sans text-sm text-charcoal-muted mt-1">
           {t.cart.subtitle}
         </p>
       </div>
@@ -88,21 +88,21 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
             <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
               {/* Header */}
               <div className="px-5 py-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center gap-2">
-                <Receipt className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Receipt className="w-4 h-4 text-charcoal-muted" />
                 <span className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">{t.cart.summary}</span>
               </div>
 
               {/* Rincian */}
               <div className="px-5 py-4 space-y-3 border-b border-neutral-200 dark:border-neutral-700">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-neutral-500 dark:text-neutral-400">{t.cart.totalItems}</span>
+                  <span className="text-charcoal-muted">{t.cart.totalItems}</span>
                   <span className="font-semibold text-neutral-900 dark:text-neutral-100">{totalItems} {t.cart.unit}</span>
                 </div>
                 <div className="flex justify-between items-baseline">
                   <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{t.cart.totalPrice}</span>
                   <span className="font-mono text-xl font-bold text-neutral-900 dark:text-neutral-100">{formatRupiah(totalPrice)}</span>
                 </div>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-3 leading-relaxed">
+                <p className="text-xs text-charcoal-muted bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-3 leading-relaxed">
                   {t.cart.shippingNote}
                 </p>
               </div>

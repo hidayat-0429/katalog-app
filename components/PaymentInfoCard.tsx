@@ -30,7 +30,7 @@ export default function PaymentInfoCard() {
   return (
     <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-5">
       <div className="flex items-center gap-2 font-bold text-sm text-neutral-900 dark:text-neutral-100 border-b border-neutral-200 dark:border-neutral-700 pb-3">
-        <Landmark className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+        <Landmark className="w-4 h-4 text-charcoal-muted" />
         <span>{t.payment.title}</span>
       </div>
 
@@ -41,13 +41,13 @@ export default function PaymentInfoCard() {
             className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded border border-neutral-200 dark:border-neutral-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
           >
             <div>
-              <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs font-semibold text-charcoal-muted">
                 {acc.bank}
               </p>
               <p className="text-base font-bold text-neutral-900 dark:text-neutral-100 mt-0.5 tracking-wide">
                 {acc.accNumber}
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">{t.payment.onBehalfOf} {acc.holder}</p>
+              <p className="text-xs text-charcoal-muted">{t.payment.onBehalfOf} {acc.holder}</p>
             </div>
 
             <button
@@ -71,7 +71,7 @@ export default function PaymentInfoCard() {
         ))}
       </div>
 
-      <div className="mt-3 flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400 pt-2 border-t border-neutral-200 dark:border-neutral-700">
+      <div className="mt-3 flex items-start gap-2 text-xs text-charcoal-muted pt-2 border-t border-neutral-200 dark:border-neutral-700">
         <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400 shrink-0 mt-0.5" />
         <p>
           {t.payment.afterTransfer}

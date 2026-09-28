@@ -232,13 +232,13 @@ export default function HomePageClient({
               <Container>
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-charcoal-muted mb-2">
                       {t.homepage.selectedProducts}
                     </p>
                     <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
                       {t.homepage.selectedProductsSubtitle}
                     </h2>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5">
+                    <p className="text-sm text-charcoal-muted mt-1.5">
                       {t.homepage.selectedProductsDescription}
                     </p>
                   </div>
@@ -287,7 +287,7 @@ export default function HomePageClient({
                   <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
                     {t.homepage.b2bOrderProcessTitle}
                   </h2>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 leading-relaxed">
+                  <p className="text-sm text-charcoal-muted mt-2 leading-relaxed">
                     {t.homepage.b2bOrderProcessDescription}
                   </p>
                 </div>
@@ -326,7 +326,7 @@ export default function HomePageClient({
                         <h3 className="font-heading text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">
                           {title}
                         </h3>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed flex-1">
+                        <p className="text-sm text-charcoal-muted leading-relaxed flex-1">
                           {desc}
                         </p>
                       </div>
@@ -344,13 +344,13 @@ export default function HomePageClient({
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
                   {/* Section Header */}
                   <ScrollReveal direction="left" className="lg:col-span-4">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-charcoal-muted mb-3">
                       {t.homepage.qualityStandards}
                     </p>
                     <h2 className="font-display text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight mb-4">
                       {t.homepage.qualityStandardsTitle}
                     </h2>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p className="text-sm text-charcoal-muted leading-relaxed">
                       {t.homepage.qualityStandardsDescription}
                     </p>
                     <Link
@@ -407,7 +407,7 @@ export default function HomePageClient({
                             <h3 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
                               {title}
                             </h3>
-                            <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                            <p className="font-sans text-sm text-charcoal-muted leading-relaxed">
                               {desc}
                             </p>
                           </div>
@@ -435,7 +435,7 @@ export default function HomePageClient({
                     <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
                       {t.homepage.fleetAndLogistics}
                     </h2>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 max-w-xl">
+                    <p className="text-sm text-charcoal-muted mt-1.5 max-w-xl">
                       {t.homepage.fleetAndLogisticsDescription}
                     </p>
                   </div>
@@ -488,7 +488,7 @@ export default function HomePageClient({
                       <h3 className="font-heading text-base font-bold text-neutral-900 dark:text-neutral-100 mb-2">
                         {title}
                       </h3>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed flex-1">
+                      <p className="text-sm text-charcoal-muted leading-relaxed flex-1">
                         {desc}
                       </p>
                     </div>
@@ -516,19 +516,19 @@ export default function HomePageClient({
                     </div>
                   </ScrollReveal>
                   <ScrollReveal direction="right" delay={150} className="lg:col-span-7">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-charcoal-muted mb-3">
                       {t.homepage.about}
                     </p>
                     <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight mb-3">
                       {t.about.companyName}
                     </h2>
-                    <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 italic mb-5 border-l-2 border-brand-forest-300 dark:border-brand-forest-700 pl-4">
+                    <p className="text-sm font-medium text-charcoal-muted italic mb-5 border-l-2 border-brand-forest-300 dark:border-brand-forest-700 pl-4">
                       &ldquo;To Be One Stop Point for All Mushrooms Needs of The Customers.&rdquo;
                     </p>
-                    <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-3">
+                    <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed mb-3">
                       {t.homepage.aboutDescription}
                     </p>
-                    <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-8">
+                    <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed mb-8">
                       {t.homepage.aboutFacility}
                     </p>
                     <Link

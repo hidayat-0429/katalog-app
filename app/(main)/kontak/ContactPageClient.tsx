@@ -17,7 +17,7 @@ export default function ContactPageClient() {
         <h1 className="font-heading text-3xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
           {t.contact.title}
         </h1>
-        <p className="font-sans text-base text-neutral-500 dark:text-neutral-400 max-w-2xl">
+        <p className="font-sans text-base text-charcoal-muted max-w-2xl">
           {t.contact.description}
         </p>
       </div>
@@ -60,10 +60,10 @@ export default function ContactPageClient() {
                 <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
                   {t.contact.address}
                 </h3>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.contact.addressLabel}</p>
+                <p className="text-[11px] text-charcoal-muted">{t.contact.addressLabel}</p>
               </div>
             </div>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
               PT Eka Timur Raya<br />
               {t.common.addressLine1},<br />
               {t.common.addressLine2}, {t.common.addressLine3}
@@ -80,7 +80,7 @@ export default function ContactPageClient() {
                 <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
                   {t.contact.email}
                 </h3>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.contact.emailLabel}</p>
+                <p className="text-[11px] text-charcoal-muted">{t.contact.emailLabel}</p>
               </div>
             </div>
             <a
@@ -103,19 +103,19 @@ export default function ContactPageClient() {
             </div>
             <ul className="space-y-2 text-xs">
               <li className="flex justify-between items-center border-b border-neutral-100 dark:border-neutral-700 pb-2">
-                <span className="text-neutral-600 dark:text-neutral-400">{t.contact.operating.monFri}</span>
+                <span className="text-charcoal-muted">{t.contact.operating.monFri}</span>
                 <span className="font-mono font-medium text-neutral-900 dark:text-neutral-100">{t.contact.operating.workingHours}</span>
               </li>
               <li className="flex justify-between items-center border-b border-neutral-100 dark:border-neutral-700 pb-2">
-                <span className="text-neutral-600 dark:text-neutral-400">{t.contact.operating.saturday}</span>
+                <span className="text-charcoal-muted">{t.contact.operating.saturday}</span>
                 <span className="font-mono font-medium text-neutral-900 dark:text-neutral-100">{t.contact.operating.saturdayHours}</span>
               </li>
               <li className="flex justify-between items-center pt-1">
-                <span className="text-neutral-600 dark:text-neutral-400">{t.contact.operating.sunAndHoliday}</span>
-                <span className="font-medium text-neutral-500 dark:text-neutral-500">{t.contact.operating.closed}</span>
+                <span className="text-charcoal-muted">{t.contact.operating.sunAndHoliday}</span>
+                <span className="font-medium text-charcoal-muted">{t.contact.operating.closed}</span>
               </li>
             </ul>
-            <div className="mt-4 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            <div className="mt-4 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 text-[11px] text-charcoal-muted leading-relaxed">
               {t.contact.operating.ordersOutsideHours}
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function ContactPageClient() {
             <h2 className="font-heading text-xl md:text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
               {t.contact.sendMessage}
             </h2>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="text-sm text-charcoal-muted">
               {t.contact.form.respawnWithin24Hours}
             </p>
           </div>

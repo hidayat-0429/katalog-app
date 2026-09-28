@@ -55,7 +55,7 @@ const variantClasses: Record<ButtonVariant, string> = {
     'focus:ring-neutral-500/20'
   ),
   icon: cn(
-    'bg-transparent text-neutral-600 border-0 p-2',
+    'bg-transparent text-charcoal-muted border-0 p-2',
     'hover:bg-neutral-100 hover:text-neutral-900',
     'dark:text-neutral-300 dark:hover:bg-neutral-800',
     'focus:ring-neutral-500/20'

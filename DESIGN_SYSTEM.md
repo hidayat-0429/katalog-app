@@ -364,11 +364,11 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    Utilitas yang masih hidup dan dipakai: `.reveal-hidden*`, `.reveal-visible`,
    `.hero-stagger*`, `.shimmer-line`, `.section-divider-wave`, `.feature-card-num`,
    `.skeleton`, `.will-change-transform`, `.no-scrollbar`, `.animate-slideInUp`.
-4. Teks muted di **situs publik** masih ditulis literal (`text-neutral-400/500/600`,
-   ±189 tempat di `app/(main)/**` dan `components/**`) sehingga di light mode lebih pucat
-   daripada token `text-charcoal-muted`. Panel admin sudah dinormalisasi (91 tempat,
-   2026-09-28); halaman publik menyusul kalau ada kesempatannya — ganti pasangan
-   `text-neutral-500 dark:text-neutral-400` menjadi `text-charcoal-muted`.
+4. Teks muted di seluruh aplikasi (panel admin 91 tempat + situs publik 186 tempat,
+   2026-09-28) sudah dinormalisasi dari `text-neutral-400/500/600` ke
+   `text-charcoal-muted`. Yang sengaja **dibiarkan** pucat: `placeholder:`, `disabled:`,
+   dan dua angka watermark dekoratif di beranda (`font-mono` di blok langkah & kartu
+   fitur) yang memang harus jadi latar belakang.
 5. Ikon `w-3.5 h-3.5` sering muncul di dalam badge/tombol kecil — ini acceptable, tetapi
    kalau membuat komponen baru pilih `size` dari skala (`w-4`, `w-5`, `w-6`).
 

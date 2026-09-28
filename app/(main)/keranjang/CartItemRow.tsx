@@ -50,7 +50,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
         {imageUrl ? (
           <Image src={imageUrl} alt={name} fill sizes="64px" className="object-cover" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-neutral-400 dark:text-neutral-500">
+          <div className="w-full h-full flex items-center justify-center text-charcoal-muted">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
@@ -61,7 +61,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
       {/* Info produk */}
       <div className="flex-1 min-w-0">
         <h3 className="font-sans font-semibold text-sm text-neutral-900 dark:text-neutral-100 truncate">{name}</h3>
-        <p className="font-sans text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+        <p className="font-sans text-xs text-charcoal-muted mt-0.5">
           <span className="font-mono">{formatRupiah(price)}</span>
           <span className="font-sans"> /{unit}</span>
         </p>
@@ -105,7 +105,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
           onClick={handleRemove}
           disabled={isPending}
           aria-label={formatText(t.cartRow.removeAria, { name })}
-          className="p-1.5 text-neutral-400 dark:text-neutral-500 hover:text-semantic-danger-500 dark:hover:text-semantic-danger-400 rounded-md transition-colors"
+          className="p-1.5 text-charcoal-muted hover:text-semantic-danger-500 dark:hover:text-semantic-danger-400 rounded-md transition-colors"
         >
           <Trash2 className="w-4 h-4" />
         </button>

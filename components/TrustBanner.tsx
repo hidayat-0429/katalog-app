@@ -29,7 +29,7 @@ export default function TrustBanner() {
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 mb-3">
             <Users className="w-5 h-5 text-brand-forest-600 dark:text-brand-forest-400" />
-            <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-charcoal-muted">
               {t.trustBanner.eyebrow}
             </span>
           </div>
@@ -52,7 +52,7 @@ export default function TrustBanner() {
                 <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100 text-center">
                   {client.name}
                 </p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-0.5">
+                <p className="text-xs text-charcoal-muted text-center mt-0.5">
                   {client.category}
                 </p>
               </div>
@@ -64,7 +64,7 @@ export default function TrustBanner() {
         <div className="flex flex-col items-center">
           <div className="inline-flex items-center gap-2 mb-4">
             <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-charcoal-muted">
               {t.trustBanner.certLabel}
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function TrustBanner() {
               </div>
             ))}
           </div>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-4 text-center max-w-2xl">
+          <p className="text-xs text-charcoal-muted mt-4 text-center max-w-2xl">
             {t.trustBanner.certText}
           </p>
         </div>

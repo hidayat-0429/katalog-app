@@ -24,7 +24,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
     <>
       {/* Nav Publik */}
       <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
-        <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-neutral-400 dark:text-neutral-600">
+        <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
           {nav.sectionMenu}
         </p>
         <NavLinkActive href="/" icon={<Home className="w-4 h-4" />} label={nav.home} />
@@ -37,7 +37,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Nav Admin */}
       {user?.role === "ADMIN" && (
         <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
-          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-neutral-400 dark:text-neutral-600">
+          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionAccess}
           </p>
           <NavLinkActive
@@ -52,7 +52,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Nav Mitra hanya BUYER */}
       {user?.role === "BUYER" && (
         <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
-          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-neutral-400 dark:text-neutral-600">
+          <p className="px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.orders}
           </p>
           <NavLinkActive
@@ -75,7 +75,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
         {/* User info - Compact */}
         {user && (
           <div className="px-3 py-2.5 bg-neutral-50 dark:bg-neutral-900/30 rounded-lg">
-            <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            <p className="text-xs text-charcoal-muted">
               {nav.activeAccount}
             </p>
             <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
@@ -87,14 +87,14 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
         {/* Theme + Language + Auth - Compact */}
         <div className="space-y-2">
           <div className="flex items-center justify-between px-3">
-            <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">
+            <span className="text-xs font-semibold text-charcoal-muted">
               {nav.displayMode}
             </span>
             <ThemeToggle />
           </div>
           {/* Bar atas mobile sudah punya pemilih bahasa, jadi blok ini hanya tampil di desktop */}
           <div className="hidden lg:block px-3">
-            <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5">
+            <p className="text-xs font-semibold text-charcoal-muted mb-1.5">
               {nav.language}
             </p>
             <LanguageSwitcher />

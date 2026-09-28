@@ -45,7 +45,7 @@ export default function PesananPageClient({
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
           {t.orders.title}
         </h1>
-        <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="font-sans text-sm text-charcoal-muted mt-1">
           {t.orders.description}
         </p>
       </div>
@@ -61,7 +61,7 @@ export default function PesananPageClient({
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors duration-150 ease-out ${
                 isActive
                   ? "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-200 dark:border-neutral-700"
-                  : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                  : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
               }`}
             >
               {tab.label}
@@ -97,14 +97,14 @@ export default function PesananPageClient({
                 {/* Baris atas: nomor pesanan + status + total */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-charcoal-muted shrink-0">
                       <Package className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="font-mono font-bold text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-brand-forest-600 dark:group-hover:text-brand-forest-400 transition-colors">
                         {order.orderNumber}
                       </p>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                      <p className="text-xs text-charcoal-muted mt-0.5">
                         {new Date(order.createdAt).toLocaleDateString(dateLocale, {
                           day: "numeric",
                           month: "long",
@@ -125,7 +125,7 @@ export default function PesananPageClient({
                 {/* Preview item */}
                 {order.items.length > 0 && (
                   <div className="flex items-start justify-between gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-700/60">
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed flex-1">
+                    <p className="text-xs text-charcoal-muted leading-relaxed flex-1">
                       <span className="font-semibold text-neutral-900 dark:text-neutral-100">{order._count.items} {t.orders.products}: </span>
                       {itemPreview}{hasMore && " …"}
                     </p>

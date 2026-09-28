@@ -23,7 +23,7 @@ export default function FAQPageClient() {
           <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             {t.faq.title}
           </h1>
-          <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 mt-1.5">
+          <p className="font-sans text-sm text-charcoal-muted mt-1.5">
             {t.faq.description}
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function FAQPageClient() {
 
             return (
               <section key={group}>
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-charcoal-muted mb-3">
                   {t.faq.groups[group]}
                 </h2>
                 <Card className="p-0 overflow-hidden">
@@ -59,7 +59,7 @@ export default function FAQPageClient() {
                           >
                             {item.q}
                             <ChevronDown
-                              className={`w-4 h-4 shrink-0 text-neutral-400 motion-safe:transition-transform motion-safe:duration-200 ${
+                              className={`w-4 h-4 shrink-0 text-charcoal-muted motion-safe:transition-transform motion-safe:duration-200 ${
                                 isOpen ? 'rotate-180' : ''
                               }`}
                               aria-hidden="true"
@@ -74,7 +74,7 @@ export default function FAQPageClient() {
                           }`}
                         >
                           <div className="overflow-hidden">
-                            <p className="px-5 pb-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                            <p className="px-5 pb-4 text-sm leading-relaxed text-charcoal-muted">
                               {item.a}
                             </p>
                           </div>
@@ -94,7 +94,7 @@ export default function FAQPageClient() {
             <h3 className="text-xl font-semibold mb-2 text-neutral-900 dark:text-neutral-100">
               {t.faq.stillHaveQuestions}
             </h3>
-            <p className="text-neutral-600 dark:text-neutral-400 mb-6 text-sm">
+            <p className="text-charcoal-muted mb-6 text-sm">
               {t.faq.contactDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

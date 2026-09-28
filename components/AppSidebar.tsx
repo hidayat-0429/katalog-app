@@ -27,7 +27,7 @@ export default async function AppSidebar() {
           <p className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 leading-none">
             ETIRA
           </p>
-          <p className="text-[10px] text-neutral-500 dark:text-neutral-500 leading-none mt-0.5">
+          <p className="text-[10px] text-charcoal-muted leading-none mt-0.5">
             Eka Timur Raya
           </p>
         </div>

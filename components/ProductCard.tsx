@@ -106,7 +106,7 @@ export default function ProductCard({
               {`${t.productCard.remainingPrefix} ${stock} ${unit} ${t.productCard.remainingSuffix}`.trim()}
             </span>
           ) : (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 shadow-xs">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-neutral-100 dark:bg-neutral-800 text-charcoal-muted border border-neutral-200 dark:border-neutral-700 shadow-xs">
               {t.productCard.available}
             </span>
           )}
@@ -132,29 +132,29 @@ export default function ProductCard({
         {usageContext && (
           <div className="flex items-center gap-1.5 text-xs">
             <ChefHat className="w-3.5 h-3.5 text-brand-forest-600 dark:text-brand-forest-400 flex-shrink-0" />
-            <span className="text-neutral-600 dark:text-neutral-400 italic">{usageContext}</span>
+            <span className="text-charcoal-muted italic">{usageContext}</span>
           </div>
         )}
 
-        <p className="font-sans text-xs text-neutral-500 dark:text-neutral-400">
+        <p className="font-sans text-xs text-charcoal-muted">
           {minOrder}
         </p>
 
         {/* Pricing + Action */}
         <div className="mt-auto pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between gap-2">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 block">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-charcoal-muted block">
               {t.productCard.supplyPrice}
             </span>
             <div className="flex items-baseline gap-1 mt-0.5">
               <span className="font-mono text-lg font-bold text-neutral-900 dark:text-neutral-100">
                 {formatRupiah(price)}
               </span>
-              <span className="text-xs text-neutral-500 dark:text-neutral-400">/{unit}</span>
+              <span className="text-xs text-charcoal-muted">/{unit}</span>
             </div>
           </div>
 
-          <span className="px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-xs font-semibold text-neutral-600 dark:text-neutral-300 group-hover:bg-brand-forest-600 group-hover:text-white group-hover:border-brand-forest-600 transition-colors shrink-0">
+          <span className="px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-xs font-semibold text-charcoal-muted group-hover:bg-brand-forest-600 group-hover:text-white group-hover:border-brand-forest-600 transition-colors shrink-0">
             {t.productCard.order}
           </span>
         </div>

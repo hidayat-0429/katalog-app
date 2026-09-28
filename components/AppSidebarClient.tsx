@@ -91,7 +91,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
               <p className="font-heading font-bold text-xs text-neutral-900 dark:text-neutral-100 leading-none">
                 ETIRA
               </p>
-              <p className="text-[9px] text-neutral-500 dark:text-neutral-400 leading-none mt-0.5">
+              <p className="text-[9px] text-charcoal-muted leading-none mt-0.5">
                 Eka Timur Raya
               </p>
             </div>
@@ -106,7 +106,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
               className={`px-2.5 py-1 text-[11px] font-semibold uppercase transition-colors duration-150 ease-out ${
                 locale === code
                   ? "bg-brand-forest-600 text-white"
-                  : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                  : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100"
               }`}
             >
               {code}
@@ -146,7 +146,7 @@ export default function AppSidebarClient({ children }: { children: React.ReactNo
         <button
           onClick={() => setIsOpen(false)}
           aria-label={t.nav.closeMenu}
-          className="lg:hidden absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
+          className="lg:hidden absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors z-10"
         >
           <X className="w-4 h-4" />
         </button>

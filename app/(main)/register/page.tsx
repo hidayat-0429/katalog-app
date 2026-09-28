@@ -69,14 +69,14 @@ export default function RegisterPage() {
     <div className="max-w-md mx-auto py-10 px-4">
       <Link
         href="/"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
         {t.register.backToHome}
       </Link>
       <div className="mb-6 text-center">
         <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.register.title}</h1>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="text-sm text-charcoal-muted mt-1">
           {t.register.subtitle}
         </p>
       </div>
@@ -95,7 +95,7 @@ export default function RegisterPage() {
               {t.register.fullName}
             </label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
                               <Input
                   id="name"
                   name="name"
@@ -112,10 +112,10 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1" htmlFor="company">
-              {t.register.companyName} <span className="text-neutral-500 dark:text-neutral-400 font-normal">{t.register.companyNameOptional}</span>
+              {t.register.companyName} <span className="text-charcoal-muted font-normal">{t.register.companyNameOptional}</span>
             </label>
             <div className="relative">
-              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <Input
                 id="company"
                 name="companyName"
@@ -134,7 +134,7 @@ export default function RegisterPage() {
               {t.register.phone}
             </label>
             <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <input
                 id="phone"
                 name="phone"
@@ -153,7 +153,7 @@ export default function RegisterPage() {
               {t.register.address}
             </label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <MapPin className="absolute left-3 top-3 w-4 h-4 text-charcoal-muted" />
               <textarea
                 id="address"
                 name="address"
@@ -171,7 +171,7 @@ export default function RegisterPage() {
               {t.register.email}
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <input
                 id="email"
                 name="email"
@@ -191,7 +191,7 @@ export default function RegisterPage() {
               {t.register.password}
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <input
                 id="password"
                 name="password"
@@ -212,7 +212,7 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
+        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-charcoal-muted">
           {t.register.haveAccount}{' '}
           <Link href="/login" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-forest-600 dark:hover:text-brand-forest-400">
             {t.register.login}

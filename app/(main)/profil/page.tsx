@@ -19,7 +19,7 @@ export default async function ProfilPage() {
   if (!user) {
     const t = await getServerMessages();
     return (
-      <div className="max-w-3xl mx-auto py-10 px-4 text-center text-sm text-neutral-500 dark:text-neutral-400">
+      <div className="max-w-3xl mx-auto py-10 px-4 text-center text-sm text-charcoal-muted">
         {t.profile.userNotFound}
       </div>
     );

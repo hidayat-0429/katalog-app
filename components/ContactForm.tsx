@@ -252,7 +252,7 @@ export default function ContactForm() {
           maxLength={1000}
           className={`${fieldClass} resize-none`}
         />
-        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="text-xs text-charcoal-muted mt-1">
           {formData.message.length} / 1000 {tf.characters}
         </p>
       </div>
@@ -277,7 +277,7 @@ export default function ContactForm() {
         )}
       </Button>
 
-      <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center">{tf.responseNote}</p>
+      <p className="text-xs text-charcoal-muted text-center">{tf.responseNote}</p>
     </form>
   );
 }

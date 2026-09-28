@@ -102,7 +102,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
               onClick={handleDecrease}
               aria-label={t.addToCart.decrease}
               disabled={quantity <= 1 || isPending}
-              className="w-12 h-12 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
+              className="w-12 h-12 flex items-center justify-center text-charcoal-muted hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
             >
               <Minus className="w-4 h-4" />
             </button>
@@ -125,7 +125,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
               onClick={handleIncrease}
               aria-label={t.addToCart.increase}
               disabled={quantity >= maxStock || isPending}
-              className="w-12 h-12 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
+              className="w-12 h-12 flex items-center justify-center text-charcoal-muted hover:bg-neutral-50 dark:hover:bg-neutral-800/50 disabled:opacity-40 transition-colors"
             >
               <Plus className="w-4 h-4" />
             </button>
@@ -133,7 +133,7 @@ export default function AddToCartForm({ productId, maxStock, unit = 'unit' }: Ad
 
           {/* Carton Conversion Hint */}
           <div className="mt-2.5 p-2 rounded-md bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200/80 dark:border-neutral-700/80 flex items-center justify-between text-xs">
-            <span className="text-neutral-500 dark:text-neutral-400">{t.addToCart.wholesaleCalc}</span>
+            <span className="text-charcoal-muted">{t.addToCart.wholesaleCalc}</span>
             <span className="font-semibold text-neutral-900 dark:text-neutral-100">{conversion.text}</span>
           </div>
         </div>

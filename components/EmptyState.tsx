@@ -25,7 +25,7 @@ export default function EmptyState({
       <div className="max-w-sm">
         <h3 className="font-heading font-bold text-lg text-neutral-900 dark:text-neutral-100 mb-2">{title}</h3>
         {description && (
-          <p className="font-sans text-neutral-500 dark:text-neutral-400 text-sm">{description}</p>
+          <p className="font-sans text-charcoal-muted text-sm">{description}</p>
         )}
       </div>
       {action && (

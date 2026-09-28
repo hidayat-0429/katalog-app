@@ -33,7 +33,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
     <div className="w-full px-6 sm:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto py-4 sm:py-6">
         {/* Clean Sentence Case Breadcrumbs */}
-        <nav className="flex items-center gap-1.5 font-sans text-xs text-neutral-500 dark:text-neutral-400 mb-6 overflow-x-auto pb-1">
+        <nav className="flex items-center gap-1.5 font-sans text-xs text-charcoal-muted mb-6 overflow-x-auto pb-1">
           <Link href="/" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out">
             {t.productDetail.breadcrumb.home}
           </Link>
@@ -84,22 +84,22 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   <span className="font-mono text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     {formatRupiah(product.price)}
                   </span>
-                  <span className="font-sans text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                  <span className="font-sans text-sm text-charcoal-muted font-normal">
                     /{product.unit}
                   </span>
                 </div>
-                <p className="font-sans text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                <p className="font-sans text-xs text-charcoal-muted mt-1">
                   {minOrder}
                 </p>
               </div>
 
               {/* Short Description */}
-              <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              <p className="font-sans text-sm text-charcoal-muted leading-relaxed mb-4">
                 {displayDescription || t.productDetail.descriptionFallback}
               </p>
 
               {/* Stock Status */}
-              <div className="flex items-center gap-2 font-sans text-xs text-neutral-500 dark:text-neutral-400 mb-4">
+              <div className="flex items-center gap-2 font-sans text-xs text-charcoal-muted mb-4">
                 <Package className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
                 <span>
                   {t.product.stock}: <strong className="text-neutral-900 dark:text-neutral-100">{product.stock > 0 ? `${t.productCard.available}: ${product.stock} ${product.unit}` : t.productCard.outOfStock}</strong>
@@ -125,7 +125,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-forest-50 dark:bg-brand-forest-900/30 border border-brand-forest-200 dark:border-brand-forest-800 rounded-full text-[11px] font-semibold text-brand-forest-700 dark:text-brand-forest-300">
                     {t.productDetail.certHalal}
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-full text-[11px] font-semibold text-neutral-600 dark:text-neutral-400">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-full text-[11px] font-semibold text-charcoal-muted">
                     {t.productDetail.certOem}
                   </span>
                 </div>
@@ -136,7 +136,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             <div className="space-y-4">
               {!user ? (
                 <div className="bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 text-center font-sans text-xs sm:text-sm">
-                  <p className="text-neutral-500 dark:text-neutral-400 mb-3">
+                  <p className="text-charcoal-muted mb-3">
                     {t.productDetail.login}
                   </p>
                   <Link href="/login" className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-brand-forest-600 hover:bg-brand-forest-700 text-white text-sm font-semibold transition-colors duration-150">
@@ -144,12 +144,12 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   </Link>
                 </div>
               ) : user.role === 'ADMIN' ? (
-                <div className="flex items-center gap-2.5 bg-neutral-50 dark:bg-neutral-800/50 text-neutral-500 dark:text-neutral-400 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 font-sans text-xs">
+                <div className="flex items-center gap-2.5 bg-neutral-50 dark:bg-neutral-800/50 text-charcoal-muted p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 font-sans text-xs">
                   <Info className="w-4 h-4 shrink-0 text-neutral-700 dark:text-neutral-300" />
                   <span>{t.productDetail.adminNote}</span>
                 </div>
               ) : product.stock === 0 ? (
-                <button disabled className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 text-sm font-semibold opacity-50 cursor-not-allowed">
+                <button disabled className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-charcoal-muted text-sm font-semibold opacity-50 cursor-not-allowed">
                   {t.productDetail.outOfStock}
                 </button>
               ) : (
@@ -167,7 +167,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             {/* Penyimpanan */}
             <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-3">{t.productDetail.storage}</h3>
-              <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <ul className="space-y-2 text-xs text-charcoal-muted leading-relaxed">
                 <li>• {t.productDetail.storageItems.temp}</li>
                 <li>• {t.productDetail.storageItems.shelf}</li>
                 <li>• {t.productDetail.storageItems.avoid}</li>
@@ -178,7 +178,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             {/* Kegunaan */}
             <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-3">{t.productDetail.suitable}</h3>
-              <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <ul className="space-y-2 text-xs text-charcoal-muted leading-relaxed">
                 <li>• {t.productDetail.suitableItems.cooking}</li>
                 <li>• {t.productDetail.suitableItems.pizza}</li>
                 <li>• {t.productDetail.suitableItems.oriental}</li>
@@ -189,7 +189,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
             {/* Keuntungan Bulk */}
             <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-3">{t.productDetail.bulkAdvantage}</h3>
-              <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <ul className="space-y-2 text-xs text-charcoal-muted leading-relaxed">
                 <li>{t.productDetail.bulkItems.price}</li>
                 <li>{t.productDetail.bulkItems.shipping}</li>
                 <li>{t.productDetail.bulkItems.support}</li>

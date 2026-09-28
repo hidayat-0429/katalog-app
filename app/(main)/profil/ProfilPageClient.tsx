@@ -19,7 +19,7 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
           {t.profile.title}
         </h1>
-        <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="font-sans text-sm text-charcoal-muted mt-1">
           {t.profile.subtitle}
         </p>
       </div>
@@ -31,9 +31,9 @@ export default function ProfilPageClient({ user }: ProfilPageClientProps) {
         </div>
         <div className="min-w-0">
           <p className="font-semibold text-sm text-neutral-900 dark:text-neutral-100 truncate">{user.name}</p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{user.email}</p>
+          <p className="text-xs text-charcoal-muted truncate">{user.email}</p>
           {user.companyName && (
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{user.companyName}</p>
+            <p className="text-xs text-charcoal-muted mt-0.5">{user.companyName}</p>
           )}
         </div>
       </div>

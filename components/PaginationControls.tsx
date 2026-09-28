@@ -45,7 +45,7 @@ export default function PaginationControls({ currentPage, totalPages }: Paginati
   const btnBase = "inline-flex items-center justify-center h-11 min-w-[44px] px-3 rounded-md text-sm font-medium transition-colors duration-150 ease-out";
   const btnActive = `${btnBase} bg-brand-forest-600 dark:bg-brand-forest-700 text-white font-semibold`;
   const btnNormal = `${btnBase} bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:bg-neutral-800/50`;
-  const btnDisabled = `${btnBase} bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 opacity-40 cursor-not-allowed pointer-events-none`;
+  const btnDisabled = `${btnBase} bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-charcoal-muted opacity-40 cursor-not-allowed pointer-events-none`;
   const btnNav = `${btnBase} bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:bg-neutral-800/50 gap-2 px-4`;
 
   return (
@@ -64,7 +64,7 @@ export default function PaginationControls({ currentPage, totalPages }: Paginati
 
       {getPageRange().map((page, i) =>
         page === "..." ? (
-          <span key={`ellipsis-${i}`} className="px-2 text-neutral-500 dark:text-neutral-400 text-sm select-none">…</span>
+          <span key={`ellipsis-${i}`} className="px-2 text-charcoal-muted text-sm select-none">…</span>
         ) : (
           <Link
             key={page}

@@ -44,7 +44,7 @@ export default function NavLinkActive({ href, icon, label, badge, highlight }: N
             : "text-brand-forest-700 dark:text-brand-forest-400 hover:bg-brand-forest-50 dark:hover:bg-brand-forest-900/30 font-medium"
           : isActive
             ? "bg-brand-forest-100 dark:bg-brand-forest-900/50 text-brand-forest-700 dark:text-brand-forest-300 font-semibold"
-            : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 font-medium"
+            : "text-charcoal-muted hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 font-medium"
       }`}
     >
       {isActive && (

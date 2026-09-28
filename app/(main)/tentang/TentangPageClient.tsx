@@ -14,7 +14,7 @@ export default function TentangPageClient() {
         <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
           {t.tentang.title}
         </h1>
-        <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="font-sans text-sm text-charcoal-muted mt-1">
           {t.tentang.subtitle}
         </p>
       </div>
@@ -32,7 +32,7 @@ export default function TentangPageClient() {
               <Icon className="w-4 h-4" />
             </div>
             <p className="font-mono text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100">{value}</p>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400">{label}</p>
+            <p className="text-xs text-charcoal-muted">{label}</p>
           </div>
         ))}
       </div>
@@ -70,14 +70,14 @@ export default function TentangPageClient() {
               <h2 className="font-heading font-bold text-xl sm:text-2xl text-neutral-900 dark:text-neutral-100 mb-3">
                 {t.tentang.producerTitle}
               </h2>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-3">
+              <p className="text-sm text-charcoal-muted leading-relaxed mb-3">
                 {t.tentang.historyDescription1}
               </p>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+              <p className="text-sm text-charcoal-muted leading-relaxed">
                 {t.tentang.historyDescription2}
               </p>
             </div>
-            <div className="mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
+            <div className="mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-4 text-xs text-charcoal-muted">
               <span className="inline-flex items-center gap-1.5 font-medium text-brand-forest-700 dark:text-brand-forest-400">
                 <ShieldCheck className="w-4 h-4" /> {t.tentang.standardized}
               </span>
@@ -94,7 +94,7 @@ export default function TentangPageClient() {
           <h2 className="font-heading font-bold text-xl sm:text-2xl text-neutral-900 dark:text-neutral-100">
             {t.tentang.visionMission}
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {t.tentang.visionMissionSubtitle}
           </p>
         </div>
@@ -114,11 +114,11 @@ export default function TentangPageClient() {
               <blockquote className="font-heading text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100 leading-snug mb-4">
                 &ldquo;{t.tentang.visionText}&rdquo;
               </blockquote>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              <p className="text-xs text-charcoal-muted leading-relaxed mb-4">
                 {t.tentang.visionDescription}
               </p>
             </div>
-            <ul className="space-y-2 pt-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-600 dark:text-neutral-300">
+            <ul className="space-y-2 pt-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-charcoal-muted">
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-brand-forest-600 dark:bg-brand-forest-400 mt-1.5 shrink-0" />
                 <span>{t.tentang.visionBullet1}</span>
@@ -144,11 +144,11 @@ export default function TentangPageClient() {
               <blockquote className="font-heading text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100 leading-snug mb-4">
                 &ldquo;{t.tentang.missionText}&rdquo;
               </blockquote>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              <p className="text-xs text-charcoal-muted leading-relaxed mb-4">
                 {t.tentang.missionDescription}
               </p>
             </div>
-            <ul className="space-y-2 pt-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-600 dark:text-neutral-300">
+            <ul className="space-y-2 pt-4 border-t border-neutral-100 dark:border-neutral-800 text-xs text-charcoal-muted">
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-brand-forest-600 dark:bg-brand-forest-400 mt-1.5 shrink-0" />
                 <span>{t.tentang.missionBullet1}</span>
@@ -168,7 +168,7 @@ export default function TentangPageClient() {
           <h2 className="font-heading font-bold text-xl sm:text-2xl text-neutral-900 dark:text-neutral-100">
             {t.tentang.advantages}
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {t.tentang.advantagesSubtitle}
           </p>
         </div>
@@ -181,7 +181,7 @@ export default function TentangPageClient() {
             <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-1.5">
               {t.tentang.advantage1}
             </h3>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
               {t.tentang.advantage1Desc}
             </p>
           </div>
@@ -193,7 +193,7 @@ export default function TentangPageClient() {
             <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-1.5">
               {t.tentang.advantage2}
             </h3>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
               {t.tentang.advantage2Desc}
             </p>
           </div>
@@ -205,7 +205,7 @@ export default function TentangPageClient() {
             <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-1.5">
               {t.tentang.advantage3}
             </h3>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
               {t.tentang.advantage3Desc}
             </p>
           </div>
@@ -217,7 +217,7 @@ export default function TentangPageClient() {
             <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 mb-1.5">
               {t.tentang.advantage4}
             </h3>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
               {t.tentang.advantage4Desc}
             </p>
           </div>
@@ -230,7 +230,7 @@ export default function TentangPageClient() {
           <h2 className="font-heading font-bold text-xl sm:text-2xl text-neutral-900 dark:text-neutral-100">
             {t.tentang.facilities}
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {t.tentang.facilitiesSubtitle}
           </p>
         </div>
@@ -241,7 +241,7 @@ export default function TentangPageClient() {
             <h3 className="font-heading font-bold text-base text-neutral-900 dark:text-neutral-100 mb-3">
               {t.tentang.facilitiesTitle}
             </h3>
-            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-5">
+            <p className="text-xs sm:text-sm text-charcoal-muted leading-relaxed mb-5">
               {t.tentang.facilitiesIntro}
             </p>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -249,7 +249,7 @@ export default function TentangPageClient() {
                 <p className="font-semibold text-xs text-neutral-900 dark:text-neutral-100 mb-1">
                   {t.tentang.facilityBudidaya}
                 </p>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-charcoal-muted leading-relaxed">
                   {t.tentang.facilityBudidayaDesc}
                 </p>
               </div>
@@ -257,7 +257,7 @@ export default function TentangPageClient() {
                 <p className="font-semibold text-xs text-neutral-900 dark:text-neutral-100 mb-1">
                   {t.tentang.facilityKaleng}
                 </p>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-charcoal-muted leading-relaxed">
                   {t.tentang.facilityKalengDesc}
                 </p>
               </div>
@@ -265,7 +265,7 @@ export default function TentangPageClient() {
                 <p className="font-semibold text-xs text-neutral-900 dark:text-neutral-100 mb-1">
                   {t.tentang.facilityColdStorage}
                 </p>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-charcoal-muted leading-relaxed">
                   {t.tentang.facilityColdStorageDesc}
                 </p>
               </div>
@@ -273,7 +273,7 @@ export default function TentangPageClient() {
                 <p className="font-semibold text-xs text-neutral-900 dark:text-neutral-100 mb-1">
                   {t.tentang.facilityOlahan}
                 </p>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-charcoal-muted leading-relaxed">
                   {t.tentang.facilityOlahanDesc}
                 </p>
               </div>
@@ -292,17 +292,17 @@ export default function TentangPageClient() {
               <h3 className="font-heading font-bold text-base text-neutral-900 dark:text-neutral-100 mt-1 mb-2">
                 {t.tentang.locationTitle}
               </h3>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              <p className="text-xs text-charcoal-muted leading-relaxed mb-4">
                 {t.tentang.locationAddress}
               </p>
             </div>
             <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-neutral-500 dark:text-neutral-400">{t.tentang.distanceSurabaya}</span>
+                <span className="text-charcoal-muted">{t.tentang.distanceSurabaya}</span>
                 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{t.tentang.distanceSurabayaValue}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-500 dark:text-neutral-400">{t.tentang.coverage}</span>
+                <span className="text-charcoal-muted">{t.tentang.coverage}</span>
                 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{t.tentang.coverageValue}</span>
               </div>
             </div>

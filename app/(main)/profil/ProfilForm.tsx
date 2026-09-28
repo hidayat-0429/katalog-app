@@ -72,7 +72,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                 {tf.name}
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
                 <Input
                   id="name"
                   name="name"
@@ -87,10 +87,10 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
 
             <div>
               <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2" htmlFor="company">
-                {tf.company} <span className="text-neutral-500 dark:text-neutral-400 font-normal normal-case">({tf.optional})</span>
+                {tf.company} <span className="text-charcoal-muted font-normal normal-case">({tf.optional})</span>
               </label>
               <div className="relative">
-                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
                 <Input
                   id="company"
                   name="companyName"
@@ -107,7 +107,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                 {tf.emailLabel}
               </label>
               <div className="relative opacity-60">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
                 <Input
                   type="email"
                   value={user.email}
@@ -116,7 +116,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                   className="pl-10 bg-neutral-50 dark:bg-neutral-900"
                 />
               </div>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">{tf.emailLocked}</p>
+              <p className="text-xs text-charcoal-muted mt-2">{tf.emailLocked}</p>
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                 {tf.phone}
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
                 <input
                   id="phone"
                   name="phone"
@@ -150,7 +150,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                 {tf.address}
               </label>
               <div className="relative">
-                <MapPin className="absolute left-3 top-3 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                <MapPin className="absolute left-3 top-3 w-4 h-4 text-charcoal-muted" />
                 <textarea
                   id="address"
                   name="address"
@@ -162,7 +162,7 @@ export default function ProfilForm({ user }: { user: ProfileData }) {
                   placeholder={tf.addressPlaceholder}
                 />
               </div>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">{tf.addressHint}</p>
+              <p className="text-xs text-charcoal-muted mt-2">{tf.addressHint}</p>
             </div>
           </div>
         </div>

@@ -51,14 +51,14 @@ export default function LoginPage() {
     <div className="max-w-sm mx-auto py-10 px-4">
       <Link
         href="/"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-150 ease-out mb-6"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
         {t.login.backToHome}
       </Link>
       <div className="mb-6 text-center">
         <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{t.login.title}</h1>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+        <p className="text-sm text-charcoal-muted mt-1">
           {t.login.subtitle}
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function LoginPage() {
               {t.login.email}
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <Input
                 id="email"
                 type="email"
@@ -96,7 +96,7 @@ export default function LoginPage() {
               {t.login.password}
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
               <Input
                 id="password"
                 type="password"
@@ -116,7 +116,7 @@ export default function LoginPage() {
             
         </form>
 
-        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-neutral-500 dark:text-neutral-400">
+        <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-center text-xs text-charcoal-muted">
           {t.login.noAccount}{' '}
           <Link href="/register" className="font-medium text-neutral-900 dark:text-neutral-100 underline underline-offset-2 hover:text-brand-forest-600 dark:hover:text-brand-forest-400">
             {t.login.register}
@@ -138,7 +138,7 @@ export default function LoginPage() {
               className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
               <span>{t.login.adminEmail}</span>
-              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.login.adminPassword}</span>
+              <span className="text-[11px] text-charcoal-muted">{t.login.adminPassword}</span>
             </button>
 
             <button
@@ -150,7 +150,7 @@ export default function LoginPage() {
               className="w-full flex items-center justify-between p-2 rounded bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-100 text-left transition-colors"
             >
               <span>{t.login.buyerEmail}</span>
-              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{t.login.buyerPassword}</span>
+              <span className="text-[11px] text-charcoal-muted">{t.login.buyerPassword}</span>
             </button>
           </div>
         </div>

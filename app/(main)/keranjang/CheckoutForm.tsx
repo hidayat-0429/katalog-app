@@ -90,7 +90,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="shippingMethod">
-            <Truck className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+            <Truck className="w-4 h-4 text-charcoal-muted" />
             <span>{tc.methodLabel}</span>
           </label>
           <select
@@ -110,7 +110,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="shippingAddress">
-            <MapPin className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+            <MapPin className="w-4 h-4 text-charcoal-muted" />
             <span>{tc.addressLabel}</span>
           </label>
           <textarea
@@ -127,7 +127,7 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="notes">
-            <MessageSquare className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+            <MessageSquare className="w-4 h-4 text-charcoal-muted" />
             <span>{tc.notesLabel}</span>
           </label>
           <textarea
@@ -177,23 +177,23 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
                 <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-3 font-semibold">{tc.summaryLabel}</p>
                 <div className="space-y-2.5 text-sm">
                   <div>
-                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.method}</p>
+                    <p className="text-xs font-semibold uppercase text-charcoal-muted mb-1">{tc.method}</p>
                     <p className="text-neutral-900 dark:text-neutral-100 font-medium">{methodLabel(orderSummary.shippingMethod)}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.address}</p>
+                    <p className="text-xs font-semibold uppercase text-charcoal-muted mb-1">{tc.address}</p>
                     <p className="text-neutral-900 dark:text-neutral-100 whitespace-pre-wrap">{orderSummary.shippingAddress}</p>
                   </div>
                   {orderSummary.notes && (
                     <div>
-                      <p className="text-xs font-semibold uppercase text-neutral-600 dark:text-neutral-400 mb-1">{tc.notes}</p>
+                      <p className="text-xs font-semibold uppercase text-charcoal-muted mb-1">{tc.notes}</p>
                       <p className="text-neutral-900 dark:text-neutral-100 italic">{orderSummary.notes}</p>
                     </div>
                   )}
                 </div>
               </div>
 
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="text-xs text-charcoal-muted leading-relaxed">
                 {tc.afterConfirmNote}
               </p>
             </div>

@@ -53,7 +53,7 @@ export const TableCell: React.FC<TableCellProps> = ({ header, numeric, className
     ? cn(
         'px-4 py-3',
         'text-xs font-semibold uppercase tracking-wide',
-        'text-neutral-600 bg-neutral-50',
+        'text-charcoal-muted bg-neutral-50',
         'dark:text-neutral-400 dark:bg-neutral-800/50'
       )
     : cn(

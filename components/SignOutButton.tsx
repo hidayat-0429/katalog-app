@@ -9,8 +9,8 @@ export default function SignOutButton({ iconOnly = false, label = "Keluar" }: { 
       onClick={() => signOut({ callbackUrl: '/' })}
       className={
         iconOnly
-          ? "flex items-center justify-center w-10 h-10 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-150 ease-out"
-          : "w-full flex items-center justify-center gap-1.5 text-sm px-3 py-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-150 ease-out"
+          ? "flex items-center justify-center w-10 h-10 rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-150 ease-out"
+          : "w-full flex items-center justify-center gap-1.5 text-sm px-3 py-2 rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-150 ease-out"
       }
       aria-label={label}
     >

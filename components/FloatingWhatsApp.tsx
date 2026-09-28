@@ -49,13 +49,13 @@ export default function FloatingWhatsApp() {
             {/* Body */}
             <div className="p-4">
               <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-3 mb-4">
-                <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
+                <p className="text-xs text-charcoal-muted mb-2">
                   {tw.greeting}
                 </p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-500">
+                <p className="text-xs text-charcoal-muted">
                   {tw.readyTo}
                 </p>
-                <ul className="text-xs text-neutral-600 dark:text-neutral-400 mt-2 space-y-1">
+                <ul className="text-xs text-charcoal-muted mt-2 space-y-1">
                   <li>&bull; {tw.itemPricing}</li>
                   <li>&bull; {tw.itemBulk}</li>
                   <li>&bull; {tw.itemSample}</li>
@@ -74,7 +74,7 @@ export default function FloatingWhatsApp() {
                 {tw.cta}
               </a>
 
-              <p className="text-center text-xs text-neutral-500 dark:text-neutral-400 mt-3">
+              <p className="text-center text-xs text-charcoal-muted mt-3">
                 {tw.replyTime}
               </p>
             </div>
