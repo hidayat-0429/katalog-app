@@ -43,20 +43,26 @@ varian `cta` di `Button` dan varian `earth` di `Badge` — satu-satunya warna di
 hijau/abu yang diizinkan adalah hijau WhatsApp (`#25D366`) dan scrim foto gelap
 (`#0d1a10`) di hero; lihat §8.
 
+Teks sekunder **selalu** lewat satu token: `text-charcoal-muted` (5.2:1 di atas kartu
+putih, 4.9:1 di kartu gelap). Jangan menulis `text-neutral-400/500/600` untuk teks muted
+— di light mode angka itu cuma 1.5–3.3:1 dan bacanya pegal, di dark mode kamu harus
+menambah varian `dark:` lagi. `placeholder:text-neutral-400` dan state `disabled:` tetap
+boleh pucat karena memang bukan isi.
+
 ### Token CSS (nilai sebenarnya)
 
 | Token | Light | Dark | Dipakai untuk |
 |---|---|---|---|
-| `bg` | `#FAF9F6` | `#0F1110` | Latar halaman |
-| `bg-subtle` | `#F1F3F5` | `#212529` | Panel, blok aksen, input, placeholder produk |
-| `surface` | `#FFFFFF` | `#343A40` | Kartu, popover, modal, footer |
+| `bg` | `#F8F9FA` | `#0F1110` | Latar halaman |
+| `bg-subtle` | `#E9ECEF` | `#212529` | Panel, blok aksen, input, placeholder produk |
+| `surface` | `#FFFFFF` | `#3A424A` | Kartu, popover, modal, footer |
 | `primary` | `#2D5A27` | `#6B9B6B` | Aksi utama, tautan aktif, garis fokus |
 | `primary-hover` | `#1E4A1A` | `#8FB88F` | Hover aksi utama |
-| `primary-light` | `#F0F7F0` | `#0F1A0D` | Latar terpilih, `::selection` |
+| `primary-light` | `#F0F7F0` | `#1E3218` | Latar terpilih, `::selection` |
 | `charcoal` | `#212529` | `#F8F9FA` | Teks utama |
-| `charcoal-muted` | `#868E96` | `#ADB5BD` | Teks sekunder, caption, ikon placeholder |
+| `charcoal-muted` | `#646B66` | `#ADB5BD` | Teks sekunder, caption, ikon placeholder |
 | `border` | `#DEE2E6` | `#495057` | Garis pemisah 1px |
-| `border-subtle` | `#E9ECEF` | `#343A40` | Garis dalam panel |
+| `border-subtle` | `#DEE2E6` | `#343A40` | Garis dalam panel |
 | `danger` | `#EF4444` | `#F87171` | Kesalahan, hapus, pembatalan |
 | `danger-bg` | `#FEE2E2` | `#7F1D1D` | Latar pesan error |
 | `success` | `#10B981` | `#22C55E` | Status tersedia / selesai |
@@ -89,18 +95,17 @@ memakai `primary` / `brand-forest-*`.
 
 | Peran | Light | Dark | Class |
 |---|---|---|---|
-| Latar halaman | `#FAF9F6` | `#0F1110` | `bg-bg` |
-| Panel tenggelam / inset | `#F1F3F5` | `#212529` | `bg-bg-subtle` |
-| Kartu, popover, modal, footer, band | `#FFFFFF` | `#343A40` | `bg-surface` |
+| Latar halaman | `#F8F9FA` | `#0F1110` | `bg-bg` |
+| Panel tenggelam / inset | `#E9ECEF` | `#212529` | `bg-bg-subtle` |
+| Kartu, popover, modal, footer, band | `#FFFFFF` | `#3A424A` | `bg-surface` |
 | Kontrol form (input, select, textarea, tombol sekunder, baris pilihan) | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
 | Kartu/status aktif | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
 
-Aturannya: **wadah** memakai `bg-surface` (satu warna kartu di seluruh aplikasi),
-**kontrol** tetap `bg-white dark:bg-neutral-800`. Di light mode keduanya beda
-(`#FFFFFF` vs `#F1F3F5` untuk panel), tapi di dark mode `--surface` sekarang bernilai
-sama dengan `neutral-800` (`#343A40`) — pemisah antara kontrol dan kartunya jadi border,
-bukan warna latar. Jangan pakai `bg-white` polos untuk wadah — di mode gelap warnanya
-tidak ikut berubah dan langsung jadi tapak putih menyala.
+Aturannya: **wadah** memakai `bg-surface`, **kontrol** `bg-white dark:bg-neutral-800`.
+Di dark mode sengaja dibuat bertingkat: halaman `#0F1110` < panel `#212529` < kontrol
+`#343A40` < kartu `#3A424A`, jadi field masih terbaca di atas kartunya. Jangan pakai
+`bg-white` polos untuk wadah — di mode gelap warnanya tidak ikut berubah dan langsung
+jadi tapak putih menyala.
 
 Warna font yang dipakai: display/headline = **Bricolage Grotesque** (`font-display` /
 `font-heading`), body & UI = **Figtree** (`font-sans`, default), angka/harga/kode order =
@@ -359,6 +364,11 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    Utilitas yang masih hidup dan dipakai: `.reveal-hidden*`, `.reveal-visible`,
    `.hero-stagger*`, `.shimmer-line`, `.section-divider-wave`, `.feature-card-num`,
    `.skeleton`, `.will-change-transform`, `.no-scrollbar`, `.animate-slideInUp`.
+4. Teks muted di **situs publik** masih ditulis literal (`text-neutral-400/500/600`,
+   ±189 tempat di `app/(main)/**` dan `components/**`) sehingga di light mode lebih pucat
+   daripada token `text-charcoal-muted`. Panel admin sudah dinormalisasi (91 tempat,
+   2026-09-28); halaman publik menyusul kalau ada kesempatannya — ganti pasangan
+   `text-neutral-500 dark:text-neutral-400` menjadi `text-charcoal-muted`.
 5. Ikon `w-3.5 h-3.5` sering muncul di dalam badge/tombol kecil — ini acceptable, tetapi
    kalau membuat komponen baru pilih `size` dari skala (`w-4`, `w-5`, `w-6`).
 

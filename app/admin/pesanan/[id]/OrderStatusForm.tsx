@@ -39,7 +39,7 @@ export default function OrderStatusForm({ orderId, currentStatus }: { orderId: s
   return (
     <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-6">
       <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-6 pb-3 border-b border-neutral-200 dark:border-neutral-700">
-        <RefreshCw className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+        <RefreshCw className="w-5 h-5 text-charcoal-muted" />
         <span>Perbarui Status Pesanan</span>
       </h2>
 

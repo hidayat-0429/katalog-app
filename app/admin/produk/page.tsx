@@ -56,7 +56,7 @@ export default async function AdminProductsPage({
           <h1 className="font-display text-xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             Kelola Produk
           </h1>
-          <p className="font-sans text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {totalCount} produk terdaftar
           </p>
         </div>
@@ -114,7 +114,7 @@ export default async function AdminProductsPage({
                   <TableRow key={product.id}>
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md flex items-center justify-center shrink-0 overflow-hidden relative text-neutral-400 dark:text-neutral-500">
+                        <div className="w-10 h-10 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md flex items-center justify-center shrink-0 overflow-hidden relative text-charcoal-muted">
                           {product.imageUrl ? (
                             <Image
                               src={product.imageUrl}
@@ -139,12 +139,12 @@ export default async function AdminProductsPage({
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-neutral-600 dark:text-neutral-400">
+                    <TableCell className="text-charcoal-muted">
                       {product.category?.name || "-"}
                     </TableCell>
                     <TableCell numeric>
                       {formatRupiah(product.price)}
-                      <span className="font-sans text-neutral-500 dark:text-neutral-400 font-normal text-xs ml-1">
+                      <span className="font-sans text-charcoal-muted font-normal text-xs ml-1">
                         /{product.unit}
                       </span>
                     </TableCell>
@@ -176,7 +176,7 @@ export default async function AdminProductsPage({
             </Table>
           </div>
         ) : (
-          <div className="p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs">
+          <div className="p-8 text-center text-charcoal-muted text-xs">
             {search
               ? `Tidak ada produk yang cocok dengan pencarian "${search}".`
               : "Belum ada produk terdaftar. Klik tombol Tambah Produk untuk membuat."}
@@ -187,7 +187,7 @@ export default async function AdminProductsPage({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between font-sans text-sm">
-          <span className="text-xs text-neutral-600 dark:text-neutral-400">
+          <span className="text-xs text-charcoal-muted">
             Halaman {currentPage} dari {totalPages} ({totalCount} produk)
           </span>
           <div className="flex gap-2">

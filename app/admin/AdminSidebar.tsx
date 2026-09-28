@@ -129,13 +129,13 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
               <p className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 leading-none">
                 ETIRA
               </p>
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-500 leading-none mt-0.5">
+              <p className="text-[10px] text-charcoal-muted leading-none mt-0.5">
                 Admin Panel
               </p>
             </div>
           )}
           {onToggle && isCollapsed && (
-            <button onClick={onToggle} className="p-1.5 text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
+            <button onClick={onToggle} className="p-1.5 text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
               <PanelLeft className="w-4 h-4" />
             </button>
           )}
@@ -145,11 +145,11 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
         <nav className="flex-1 px-3 space-y-1 overflow-y-auto no-scrollbar overflow-x-hidden">
           {!isCollapsed ? (
             <div className="flex items-center justify-between px-3 py-2">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-600 dark:text-neutral-400">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-charcoal-muted">
                 Menu
               </p>
               {onToggle && (
-                <button onClick={onToggle} className="text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors" title="Ciutkan Menu">
+                <button onClick={onToggle} className="text-charcoal-muted hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors" title="Ciutkan Menu">
                   <PanelLeftClose className="w-4 h-4" />
                 </button>
               )}
@@ -170,7 +170,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
                   isCollapsed ? "px-0 justify-center" : "px-3",
                   isActive
                     ? "bg-brand-forest-100 dark:bg-brand-forest-900/50 text-brand-forest-700 dark:text-brand-forest-300 font-semibold"
-                    : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    : "text-charcoal-muted hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100"
                 )}
               >
                 {isActive && (
@@ -189,7 +189,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
           <NotificationToggle iconOnly={isCollapsed} />
           {!isCollapsed && (
             <div className="flex items-center justify-between px-2">
-              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Mode Tampilan</span>
+              <span className="text-xs font-semibold text-charcoal-muted">Mode Tampilan</span>
               <ThemeToggle />
             </div>
           )}
@@ -203,7 +203,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             href="/"
             title={isCollapsed ? "Ke Beranda Utama" : undefined}
             className={cn(
-              "flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
+              "flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors",
               isCollapsed ? "px-0 w-10 h-10" : "px-3"
             )}
           >
@@ -231,7 +231,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
               <p className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100 leading-none">
                 ETIRA
               </p>
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-500 leading-none mt-0.5">
+              <p className="text-[10px] text-charcoal-muted leading-none mt-0.5">
                 Admin Panel
               </p>
             </div>
@@ -241,7 +241,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
             <ThemeToggle />
             <Link
               href="/"
-              className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+              className="p-2 text-charcoal-muted hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
               title="Ke Beranda"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -261,7 +261,7 @@ export default function AdminSidebar({ isCollapsed = false, onToggle }: AdminSid
                   "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-150 ease-out",
                   isActive
                     ? "bg-brand-forest-600 dark:bg-brand-forest-500 text-white"
-                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-white dark:hover:bg-neutral-700/50"
+                    : "text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-white dark:hover:bg-neutral-700/50"
                 )}
               >
                 {label}

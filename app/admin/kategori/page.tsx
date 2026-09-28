@@ -24,7 +24,7 @@ export default async function AdminCategoriesPage() {
     <div className="space-y-6 text-neutral-900 dark:text-neutral-100">
       <div>
         <h1 className="font-display text-xl sm:text-3xl font-bold tracking-tight">Kelola Kategori</h1>
-        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+        <p className="text-xs sm:text-sm text-charcoal-muted mt-1">
           Kelompokkan produk berdasarkan jenis komoditas dan kemasan
         </p>
       </div>
@@ -44,7 +44,7 @@ export default async function AdminCategoriesPage() {
             <div className="space-y-1">
               <label htmlFor="nameEn" className="font-medium text-neutral-900 dark:text-neutral-100">Nama Kategori (Bahasa Inggris) - opsional</label>
               <Input type="text" id="nameEn" name="nameEn" className="w-full text-xs" placeholder="Contoh: Fresh Mushrooms" />
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-400">Dipakai saat pengunjung memakai situs bahasa Inggris. Kosongkan bila tidak perlu.</p>
+              <p className="text-[10px] text-charcoal-muted">Dipakai saat pengunjung memakai situs bahasa Inggris. Kosongkan bila tidak perlu.</p>
             </div>
             <div className="space-y-1">
               <label htmlFor="description" className="font-medium text-neutral-900 dark:text-neutral-100">Keterangan (Opsional)</label>
@@ -62,12 +62,12 @@ export default async function AdminCategoriesPage() {
           {categories.map(category => (
             <div key={category.id} className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-4 flex items-center justify-between group hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors duration-200">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded flex items-center justify-center shrink-0 text-neutral-500 dark:text-neutral-400">
+                <div className="w-8 h-8 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded flex items-center justify-center shrink-0 text-charcoal-muted">
                   <Tag className="w-4 h-4" />
                 </div>
                 <div>
                   <div className="font-semibold text-sm text-neutral-900 dark:text-neutral-100">{category.name}</div>
-                  <div className="text-xs text-neutral-600 dark:text-neutral-400">
+                  <div className="text-xs text-charcoal-muted">
                     <span className="font-mono tabular-nums">{category._count.products}</span> produk terdaftar
                     {category.description && (
                       <span className="ml-2 italic"> {category.description}</span>
@@ -87,7 +87,7 @@ export default async function AdminCategoriesPage() {
             </div>
           ))}
           {categories.length === 0 && (
-            <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs">
+            <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-charcoal-muted text-xs">
               Belum ada kategori yang dibuat.
             </div>
           )}

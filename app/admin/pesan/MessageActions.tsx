@@ -47,7 +47,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
           }
           disabled={isPending}
           title={isRead ? "Tandai belum dibaca" : "Tandai sudah dibaca"}
-          className="p-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-brand-forest-700 dark:hover:text-brand-forest-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
+          className="p-2 rounded-lg text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
         >
           {isPending ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -61,7 +61,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
           onClick={() => setIsModalOpen(true)}
           disabled={isPending}
           title="Hapus Pesan"
-          className="p-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:text-semantic-danger-600 dark:hover:text-semantic-danger-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
+          className="p-2 rounded-lg text-charcoal-muted hover:text-semantic-danger-600 dark:hover:text-semantic-danger-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
         >
           <Trash2 className="w-4 h-4" />
         </button>
@@ -79,7 +79,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
           <h3 className="font-heading text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
             Hapus Pesan?
           </h3>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
+          <p className="text-sm text-charcoal-muted leading-relaxed mb-6">
             Pesan ini akan dihapus permanen dari database dan tidak bisa dikembalikan.
           </p>
           <div className="flex gap-3 justify-center">

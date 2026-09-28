@@ -6,16 +6,16 @@
 @layer base {
   :root {
     /* Duotone System: Primary Green + Neutral Gray */
-    --bg: 250 249 246;              /* Warm cream base */
-    --bg-subtle: 241 243 245;       /* Light neutral - neutral.100 */
+    --bg: 248 249 250;              /* Neutral 50 - satu keluarga dingin dengan panel */
+    --bg-subtle: 233 236 239;       /* Neutral 200 - panel, blok aksen */
     --surface: 255 255 255;         /* Pure white for cards */
     --primary: 45 90 39;            /* Forest green 500 */
     --primary-hover: 30 74 26;      /* Forest green 600 */
     --primary-light: 240 247 240;   /* Forest green 50 */
     --charcoal: 33 37 41;           /* Neutral 900 for text */
-    --charcoal-muted: 134 142 150;  /* Neutral 600 for secondary text */
+    --charcoal-muted: 100 107 102;  /* 5.2:1 di atas putih - teks sekunder */
     --border: 222 226 230;          /* Neutral 300 */
-    --border-subtle: 233 236 239;   /* Neutral 200 */
+    --border-subtle: 222 226 230;   /* sama dengan border; panel aksen sudah lebih gelap */
     
     /* Semantic colors (functional only) */
     --success: 16 185 129;          /* Green for status */
@@ -32,10 +32,10 @@
     /* Dark mode: Clean neutral elevation */
     --bg: 15 17 16;                 /* Darkest base */
     --bg-subtle: 33 37 41;          /* Neutral 900 - panels */
-    --surface: 52 58 64;            /* Neutral 800 - cards */
+    --surface: 58 66 74;            /* Kartu melayang - sengaja di atas neutral-800 milik kontrol */
     --primary: 107 155 107;         /* Forest 400 - lighter for dark */
     --primary-hover: 143 184 143;   /* Forest 300 - hover */
-    --primary-light: 15 26 13;      /* Forest 800 - dark accent */
+    --primary-light: 30 50 24;      /* Terpilih & ::selection harus terbaca di atas bg maupun kartu */
     --charcoal: 248 249 250;        /* Neutral 50 - light text */
     --charcoal-muted: 173 181 189;  /* Neutral 500 - muted text */
     --border: 73 80 87;             /* Neutral 700 */

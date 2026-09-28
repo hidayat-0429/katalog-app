@@ -45,7 +45,7 @@ export default async function AdminOrdersPage({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Kelola Pesanan</h1>
-          <p className="font-sans text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
+          <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {totalCount} pesanan ditemukan
           </p>
         </div>
@@ -64,7 +64,7 @@ export default async function AdminOrdersPage({
               className={`px-4 py-2 rounded-md font-medium whitespace-nowrap transition-colors duration-150 ease-out border ${
                 isActive 
                   ? 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 border-neutral-900 dark:border-neutral-100 font-semibold' 
-                  : 'bg-transparent border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                  : 'bg-transparent border-transparent text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800'
               }`}
             >
               {label}
@@ -84,7 +84,7 @@ export default async function AdminOrdersPage({
                   <div className="text-xs text-neutral-700 dark:text-neutral-300">
                     {order.buyerName || order.user.name} {(order.companyName || order.user.companyName) ? `(${order.companyName || order.user.companyName})` : ''}
                   </div>
-                  <div className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                  <div className="text-[11px] text-charcoal-muted">
                     {new Date(order.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default async function AdminOrdersPage({
             </Link>
           ))
         ) : (
-          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-neutral-500 dark:text-neutral-400 font-sans text-xs">
+          <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-8 text-center text-charcoal-muted font-sans text-xs">
             Belum ada pesanan{currentStatus !== 'SEMUA' ? ` dengan status ${statusLabel(currentStatus as OrderStatus)}` : ''}.
           </div>
         )}
@@ -107,7 +107,7 @@ export default async function AdminOrdersPage({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between font-sans text-sm mt-4">
-          <span className="text-xs text-neutral-600 dark:text-neutral-400">
+          <span className="text-xs text-charcoal-muted">
             Halaman {currentPage} dari {totalPages} ({totalCount} pesanan)
           </span>
           <div className="flex gap-2">

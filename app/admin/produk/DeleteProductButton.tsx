@@ -61,7 +61,7 @@ export default function DeleteProductButton({ id, name }: DeleteProductButtonPro
           <h3 className="font-heading text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
             Hapus Produk?
           </h3>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
+          <p className="text-sm text-charcoal-muted leading-relaxed mb-6">
             Apakah Anda yakin ingin menghapus produk <br />
             {name ? <strong className="text-neutral-900 dark:text-neutral-100 block mt-1">{name}</strong> : "ini"}{" "}
             dari katalog?

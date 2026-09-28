@@ -135,10 +135,10 @@ export default function ProductForm({ categories, product, action }: ProductForm
           <div>
             <label htmlFor="nameEn" className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Nama Produk (Bahasa Inggris)
-              <span className="normal-case font-normal text-neutral-400 dark:text-neutral-500"> — opsional</span>
+              <span className="normal-case font-normal text-charcoal-muted"> — opsional</span>
             </label>
             <input type="text" id="nameEn" name="nameEn" defaultValue={product?.nameEn || ''} className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500" placeholder="Contoh: Canned White Mushrooms 425g" />
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1.5">Kosongkan jika nama Inggris mengikuti nama Indonesia.</p>
+            <p className="text-[11px] text-charcoal-muted mt-1.5">Kosongkan jika nama Inggris mengikuti nama Indonesia.</p>
           </div>
 
           <div>
@@ -149,10 +149,10 @@ export default function ProductForm({ categories, product, action }: ProductForm
           <div>
             <label htmlFor="descriptionEn" className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Deskripsi (Bahasa Inggris)
-              <span className="normal-case font-normal text-neutral-400 dark:text-neutral-500"> — opsional</span>
+              <span className="normal-case font-normal text-charcoal-muted"> — opsional</span>
             </label>
             <textarea id="descriptionEn" name="descriptionEn" defaultValue={product?.descriptionEn || ''} rows={4} className="w-full px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base focus:outline-none focus:ring-2 focus:ring-brand-forest-500 focus:border-brand-forest-500 transition-colors duration-150 ease-out placeholder:text-neutral-400 dark:placeholder:text-neutral-500 resize-none" placeholder="Specifications, quality, and packaging details..." />
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1.5">Hanya tampil saat pengunjung memakai bahasa Inggris. Kosongkan untuk memakai deskripsi Indonesia.</p>
+            <p className="text-[11px] text-charcoal-muted mt-1.5">Hanya tampil saat pengunjung memakai bahasa Inggris. Kosongkan untuk memakai deskripsi Indonesia.</p>
           </div>
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
               type="button"
               onClick={() => setUploadMode('upload')}
               className={`px-3 py-1.5 rounded text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 ${
-                uploadMode === 'upload' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-300 dark:border-neutral-600' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+                uploadMode === 'upload' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-300 dark:border-neutral-600' : 'text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-200'
               }`}
             >
               <Upload className="w-3.5 h-3.5" /> Unggah Berkas
@@ -201,7 +201,7 @@ export default function ProductForm({ categories, product, action }: ProductForm
               type="button"
               onClick={() => setUploadMode('url')}
               className={`px-3 py-1.5 rounded text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 ${
-                uploadMode === 'url' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-300 dark:border-neutral-600' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
+                uploadMode === 'url' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm border border-neutral-300 dark:border-neutral-600' : 'text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-200'
               }`}
             >
               <LinkIcon className="w-3.5 h-3.5" /> Tautan URL
@@ -236,19 +236,19 @@ export default function ProductForm({ categories, product, action }: ProductForm
             />
             {isUploading ? (
               <div className="flex flex-col items-center gap-3 py-4">
-                <Loader2 className="w-8 h-8 animate-spin text-neutral-600 dark:text-neutral-400" />
+                <Loader2 className="w-8 h-8 animate-spin text-charcoal-muted" />
                 <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Sedang mengunggah foto...</p>
               </div>
             ) : (
               <div className="flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-surface border border-neutral-300 dark:border-neutral-600 flex items-center justify-center text-neutral-500 dark:text-neutral-400">
+                <div className="w-12 h-12 rounded-lg bg-surface border border-neutral-300 dark:border-neutral-600 flex items-center justify-center text-charcoal-muted">
                   <Upload className="w-6 h-6" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
                     Klik untuk pilih berkas foto atau tarik ke sini
                   </p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                  <p className="text-xs text-charcoal-muted mt-1">
                     Mendukung JPG, PNG, WEBP (Maksimal 5MB)
                   </p>
                 </div>
@@ -285,12 +285,12 @@ export default function ProductForm({ categories, product, action }: ProductForm
               <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
                 <ImageIcon className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400" /> Foto terpasang
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate mt-1">{imageUrl}</p>
+              <p className="text-xs text-charcoal-muted truncate mt-1">{imageUrl}</p>
             </div>
             <button
               type="button"
               onClick={() => setImageUrl('')}
-              className="p-2 text-neutral-500 dark:text-neutral-400 hover:text-semantic-danger-DEFAULT hover:bg-semantic-danger-light dark:hover:bg-semantic-danger-darkBg rounded-md transition-colors duration-150"
+              className="p-2 text-charcoal-muted hover:text-semantic-danger-DEFAULT hover:bg-semantic-danger-light dark:hover:bg-semantic-danger-darkBg rounded-md transition-colors duration-150"
               title="Hapus Gambar"
             >
               <X className="w-5 h-5" />

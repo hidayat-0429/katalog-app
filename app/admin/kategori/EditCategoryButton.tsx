@@ -43,7 +43,7 @@ export default function EditCategoryButton({ id, currentName, currentNameEn, cur
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 w-9 h-9 rounded-md flex items-center justify-center transition-colors duration-150 ease-out"
+        className="text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 w-9 h-9 rounded-md flex items-center justify-center transition-colors duration-150 ease-out"
         title="Edit Kategori"
       >
         <Pencil className="w-4 h-4" />
