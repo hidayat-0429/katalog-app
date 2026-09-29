@@ -1,7 +1,5 @@
 "use server";
 
-"use server";
-
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";

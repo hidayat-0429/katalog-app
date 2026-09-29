@@ -1,71 +1,13 @@
 /**
- * Conditional logging utility
- * Only logs in development or when ENABLE_LOGGING is true
+ * Log server-side. Di produksi sunyi kecuali ENABLE_LOGGING=true, supaya error
+ * mentah tidak berakhir di log publik.
  */
+const isLoggingEnabled = (): boolean => {
+  if (typeof window !== "undefined") return false;
+  return process.env.NODE_ENV !== "production" || process.env.ENABLE_LOGGING === "true";
+};
 
-import { config } from '@/lib/config';
-
-type LogLevel = 'info' | 'warn' | 'error' | 'debug';
-
-/**
- * Check if logging is enabled
- */
-function isLoggingEnabled(): boolean {
-  return config.features.enableLogging;
-}
-
-/**
- * Log a message to console (conditional on environment)
- */
-export function log(level: LogLevel, message: string, ...args: unknown[]): void {
-  if (!isLoggingEnabled()) return;
-
-  const timestamp = new Date().toISOString();
-  const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
-
-  switch (level) {
-    case 'error':
-      console.error(prefix, message, ...args);
-      break;
-    case 'warn':
-      console.warn(prefix, message, ...args);
-      break;
-    case 'debug':
-      console.debug(prefix, message, ...args);
-      break;
-    case 'info':
-    default:
-      console.log(prefix, message, ...args);
-      break;
-  }
-}
-
-/**
- * Log an error (only in development or when ENABLE_LOGGING=true)
- */
 export function logError(message: string, error?: unknown): void {
-  log('error', message, error);
-}
-
-/**
- * Log a warning
- */
-export function logWarn(message: string, ...args: unknown[]): void {
-  log('warn', message, ...args);
-}
-
-/**
- * Log info
- */
-export function logInfo(message: string, ...args: unknown[]): void {
-  log('info', message, ...args);
-}
-
-/**
- * Log debug (only in development)
- */
-export function logDebug(message: string, ...args: unknown[]): void {
-  if (config.features.isDevelopment) {
-    log('debug', message, ...args);
-  }
+  if (!isLoggingEnabled()) return;
+  console.error(`[${new Date().toISOString()}] [ERROR]`, message, error);
 }

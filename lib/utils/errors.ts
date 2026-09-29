@@ -51,10 +51,3 @@ export function isNextRedirect(error: unknown): boolean {
   }
   return false;
 }
-
-/**
- * Type guard for Error objects
- */
-export function isError(error: unknown): error is Error {
-  return error instanceof Error;
-}
