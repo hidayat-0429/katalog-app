@@ -66,6 +66,9 @@ export const ApiErrors = {
   
   notFound: (message: string = 'Not found', headers?: Record<string, string>) =>
     apiError(message, 404, 'NOT_FOUND', headers),
+
+  rateLimited: (message: string, headers?: Record<string, string>) =>
+    apiError(message, 429, 'RATE_LIMITED', headers),
   
   badRequest: (message: string = 'Bad request', headers?: Record<string, string>) =>
     apiError(message, 400, 'BAD_REQUEST', headers),

@@ -50,14 +50,15 @@ export default function ProductForm({ categories, product, action }: ProductForm
         body: formData,
       })
 
-      const data = await res.json()
-      if (!res.ok || data.error) {
-        setUploadError(data.error || 'Gagal mengunggah gambar')
+      const body: { error?: string; data?: { url?: string } } = await res.json()
+      const url = body.data?.url
+      if (!res.ok || body.error || !url) {
+        setUploadError(body.error || 'Gagal mengunggah gambar')
       } else {
-        setImageUrl(data.url)
+        setImageUrl(url)
       }
-    } catch (err: any) {
-      setUploadError(err.message || 'Terjadi kesalahan saat upload')
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : 'Terjadi kesalahan saat upload')
     } finally {
       setIsUploading(false)
     }

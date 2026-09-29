@@ -72,7 +72,10 @@ export default function AdminInboxProvider({
         credentials: "same-origin",
       });
       if (!res.ok) return;
-      const data: Inbox = await res.json();
+      // Route membungkus hasilnya dalam sampul { success, data } (lib/utils/apiResponse).
+      const body: { data?: Inbox } = await res.json();
+      if (!body.data) return;
+      const data = body.data;
 
       // Pesanan dihitung "baru" kalau waktunya maju setelah data sebelumnya
       // terbaca — jadi tab yang baru dibuka tidak tiba-tiba membunyit notifikasi.

@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (isRateLimited('contact', clientIp(request.headers))) {
-      return ApiErrors.badRequest(t.server.tooManyRequests);
+      return ApiErrors.rateLimited(t.server.tooManyRequests);
     }
 
     const name = clean(body?.name, MAX_LENGTHS.name);

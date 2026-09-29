@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { getAdmin, STORAGE_BUCKET } from "@/lib/supabase";
 import { getErrorMessage } from "@/lib/utils/errors";
 import { logError } from "@/lib/utils/logger";
-import { apiSuccess, apiError, ApiErrors } from "@/lib/utils/apiResponse";
+import { apiSuccess, ApiErrors } from "@/lib/utils/apiResponse";
 import { getServerMessages } from "@/lib/serverMessages";
 
 const MIME_TO_EXT: Record<string, string> = {
