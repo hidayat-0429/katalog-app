@@ -1,30 +1,30 @@
 "use client";
 
-import { ShieldCheck, Award, Users } from "lucide-react";
+import { ShieldCheck, Users, Hotel, Utensils, ChefHat, Factory, Store, Truck } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function TrustBanner() {
   const t = useTranslations();
 
-  const clients = [
-    { name: "Premium Restaurant Co.", category: "Fine Dining" },
-    { name: "Culinary Group Asia", category: "Multi-concept" },
-    { name: "Hotel & Catering Service", category: "Hospitality" },
-    { name: "Food Distribution Hub", category: "Wholesale" },
-    { name: "Restaurant Chain Network", category: "F&B Retail" },
-    { name: "Culinary Innovation Lab", category: "R&D Kitchen" },
+  const segments: { name: string; note: string; icon: LucideIcon }[] = [
+    { name: t.trustBanner.segments.hotel, note: t.trustBanner.segments.hotelNote, icon: Hotel },
+    { name: t.trustBanner.segments.restaurant, note: t.trustBanner.segments.restaurantNote, icon: Utensils },
+    { name: t.trustBanner.segments.catering, note: t.trustBanner.segments.cateringNote, icon: ChefHat },
+    { name: t.trustBanner.segments.industry, note: t.trustBanner.segments.industryNote, icon: Factory },
+    { name: t.trustBanner.segments.retail, note: t.trustBanner.segments.retailNote, icon: Store },
+    { name: t.trustBanner.segments.distributor, note: t.trustBanner.segments.distributorNote, icon: Truck },
   ];
 
-  const certifications = [
-    { name: "HACCP", color: "bg-brand-forest-100 dark:bg-brand-forest-900/30 text-brand-forest-700 dark:text-brand-forest-300 border-brand-forest-200 dark:border-brand-forest-800" },
-    { name: "Halal MUI", color: "bg-semantic-success-100 dark:bg-semantic-success-900/30 text-semantic-success-700 dark:text-semantic-success-300 border-semantic-success-200 dark:border-semantic-success-800" },
-    { name: "ISO 22000", color: "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700" },
+  const commitments = [
+    { name: t.trustBanner.chipHalal, color: "bg-brand-forest-100 dark:bg-brand-forest-900/30 text-brand-forest-700 dark:text-brand-forest-300 border-brand-forest-200 dark:border-brand-forest-800" },
+    { name: t.trustBanner.chipSafe, color: "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700" },
   ];
 
   return (
     <section className="w-full px-6 sm:px-8 lg:px-16 py-12 sm:py-16 bg-surface border-y border-neutral-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -38,29 +38,29 @@ export default function TrustBanner() {
           </h2>
         </div>
 
-        {/* Client Logos Grid */}
+        {/* Customer Segments Grid */}
         <div className="mb-10">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {clients.map((client) => (
+            {segments.map(({ name, note, icon: Icon }) => (
               <div
-                key={client.name}
+                key={name}
                 className="flex flex-col items-center justify-center p-5 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-brand-forest-300 dark:hover:border-brand-forest-600 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-full bg-brand-forest-100 dark:bg-brand-forest-900/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <Award className="w-6 h-6 text-brand-forest-600 dark:text-brand-forest-400" />
+                  <Icon className="w-6 h-6 text-brand-forest-600 dark:text-brand-forest-400" />
                 </div>
                 <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100 text-center">
-                  {client.name}
+                  {name}
                 </p>
                 <p className="text-xs text-charcoal-muted text-center mt-0.5">
-                  {client.category}
+                  {note}
                 </p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Certifications */}
+        {/* Quality Commitment */}
         <div className="flex flex-col items-center">
           <div className="inline-flex items-center gap-2 mb-4">
             <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400" />
@@ -69,13 +69,13 @@ export default function TrustBanner() {
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {certifications.map((cert) => (
+            {commitments.map((chip) => (
               <div
-                key={cert.name}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-bold ${cert.color}`}
+                key={chip.name}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-bold ${chip.color}`}
               >
                 <ShieldCheck className="w-4 h-4" />
-                {cert.name}
+                {chip.name}
               </div>
             ))}
           </div>

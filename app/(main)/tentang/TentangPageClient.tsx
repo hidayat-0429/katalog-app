@@ -24,9 +24,9 @@ export default function TentangPageClient() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl mb-8">
         {[
           { value: "1999", label: t.tentang.founded, icon: CalendarDays },
-          { value: "500+", label: t.tentang.partners, icon: Users2 },
+          { value: "HoReCa", label: t.tentang.partners, icon: Users2 },
           { value: "50+ Ton", label: t.tentang.capacity, icon: Package },
-          { value: "HACCP & Halal", label: t.tentang.standards, icon: ShieldCheck },
+          { value: "Halal & Aman", label: t.tentang.standards, icon: ShieldCheck },
         ].map(({ value, label, icon: Icon }) => (
           <div key={label} className="flex flex-col items-center text-center gap-1">
             <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400 mb-1">

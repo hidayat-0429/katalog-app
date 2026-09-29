@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, PackageSearch, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, Building2, PackageSearch, Clock, CalendarDays } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 interface StatItem {
   value: string;
-  /** Diisi hanya untuk angka yang bisa dianimasikan; teks murni (mis. HACCP) lewat `value`. */
+  /** Diisi hanya untuk angka yang bisa dianimasikan; teks murni (mis. tahun berdiri) lewat `value`. */
   numericValue?: number;
   suffix: string;
   label: string;
@@ -72,10 +72,10 @@ export default function HeroCinematic({
   const t = useTranslations();
 
   const STATS: StatItem[] = [
-    { value: "500", numericValue: 500, suffix: "+", label: t.hero.statPartners, icon: Building2 },
+    { value: "1999", suffix: "", label: t.hero.statFounded, icon: CalendarDays },
     { value: "50", numericValue: 50, suffix: t.hero.statTon, label: t.hero.statCapacity, icon: PackageSearch },
     { value: "24", numericValue: 24, suffix: t.hero.statHour, label: t.hero.statFreshness, icon: Clock },
-    { value: "HACCP", suffix: "", label: t.hero.statCert, icon: ShieldCheck },
+    { value: "HoReCa", suffix: "", label: t.hero.statSegment, icon: Building2 },
   ];
 
   const heroRef = useRef<HTMLElement>(null);

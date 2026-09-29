@@ -117,10 +117,10 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   <span className="font-sans text-xs font-semibold text-brand-forest-700 dark:text-brand-forest-300">{t.productDetail.freshHarvest}</span>
                 </div>
 
-                {/* Certifications Row */}
+                {/* Processing & Segment Row */}
                 <div className="flex flex-wrap gap-2">
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-forest-50 dark:bg-brand-forest-900/30 border border-brand-forest-200 dark:border-brand-forest-800 rounded-full text-[11px] font-semibold text-brand-forest-700 dark:text-brand-forest-300">
-                    {t.productDetail.certHaccp}
+                    {t.productDetail.certSterile}
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-forest-50 dark:bg-brand-forest-900/30 border border-brand-forest-200 dark:border-brand-forest-800 rounded-full text-[11px] font-semibold text-brand-forest-700 dark:text-brand-forest-300">
                     {t.productDetail.certHalal}

@@ -204,10 +204,18 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   `pb-16 sm:pb-20` supaya tidak menimpa statistik.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
   500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
-  Faktanya sekarang ada di empat statistik (`500+` · `50 ton` · `24 jam` · `HACCP`,
+  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `24 jam` · `HoReCa`,
   `grid-cols-2 md:grid-cols-4`, semua item dipakai — tidak ada lagi `slice(0, 3)`).
-  Angka yang sama tidak boleh muncul dua kali dalam satu layar; `500+` di TrustBanner boleh
-  karena sudah di bawah fold hero.
+  `1999` dan `HoReCa` lewat `value` teks (labelnya `hero.statFounded`/`statSegment`), hanya
+  `50` dan `24` yang punya `numericValue` dan dianimasikan.
+  Angka yang sama tidak boleh muncul dua kali dalam satu layar.
+- **Aturan klaim:** tiap angka, nama klien, atau sertifikat di situs publik harus ada buktinya
+  di situs resmi perusahaan (`etira.co.id` / `etiramushrooms.com`). Yang terbukti: 1999,
+  "lebih dari 25 tahun", alamat Nongkojajar KM 1.4, dan kata *halal*. Yang sudah dibuang karena
+  tidak terbukti: angka `500+`, enam nama klien karangan, dan chip HACCP / ISO 22000.
+  TrustBanner sekarang menampilkan enam **segmen** pelanggan (`trustBanner.segments.*`) di bawah
+  label `Komitmen Mutu`; kartu produk memakai `productDetail.certSterile`, bukan HACCP.
+  Masih menunggu konfirmasi PT: `50 ton/bulan` dan `24 jam`.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru

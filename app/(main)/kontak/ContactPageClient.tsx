@@ -7,8 +7,8 @@ import Container from "@/components/Container";
 
 export default function ContactPageClient() {
   const t = useTranslations();
-  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
-  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "info@ekatimurraya.com";
+  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
+  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com";
   const waLink = `https://wa.me/${adminWa}`;
 
   return (
