@@ -160,7 +160,7 @@ kecuali untuk label uppercase.
 - Heading pendek: maksimal 2 baris di desktop, `leading-tight`.
 - Skala fluidik khusus bagian atas homepage ada di `app/globals.css` sebagai enam kelas
   `clamp()`: `.hero-title`, `.hero-subtitle`, `.hero-lead` (`clamp(1rem, 0.6vw + 0.85rem,
-  1.25rem)` + `max-width: 58ch`), `.hero-stat-value` (`clamp(1.5rem, 1.3vw + 1rem, 2.4rem)`),
+  1.25rem)` + `max-width: 58ch`), `.hero-stat-value` (`clamp(1.25rem, 0.8vw + 0.9rem, 1.75rem)`),
   `.hero-stat-label` (`clamp(0.75rem, 0.3vw + 0.65rem, 0.85rem)`), plus `.hero-gutter` untuk
   padding kiri-kanan. Bawah clamp = ukuran HP, atas = monitor, jadi tidak ada breakpoint yang
   perlu dikejar per layar. Kelas lain di seluruh aplikasi tetap pakai tangga `text-*`.
@@ -189,11 +189,13 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   baris diukur dalam karakter, bukan px, jadi tetap terbaca di monitor lebar). Semuanya
   fluidik dari `clamp()` di `app/globals.css`, bukan breakpoint: `.hero-gutter`
   (`clamp(1rem, 4.5vw, 4.5rem)`), `.hero-title`, `.hero-subtitle`, `.hero-lead`,
-  `.hero-stat-value` (`clamp(1.5rem, 1.3vw + 1rem, 2.4rem)`), `.hero-stat-label`. Batas
+  `.hero-stat-value` (`clamp(1.25rem, 0.8vw + 0.9rem, 1.75rem)`), `.hero-stat-label`. Batas
   bawah clamp = ukuran HP, batas atas = ukuran monitor — jangan kembalikan ke daftar
   `text-[..] sm:.. lg:..` karena itu yang bikin ukurannya "kurang besar" di layar tertentu.
-  CTA tetap `text-base px-7 py-3.5`, logo lockup 64px. Tiap sel statistik
-  `flex flex-col items-center`.
+  CTA tetap `text-base px-7 py-3.5`, logo lockup 64px dengan nama perusahaan
+  `text-sm tracking-[0.2em] text-white/80`. Yang di atas sengaja paling terbaca; sel statistik
+  justru diikat kecil (`hero-stat-value` mentok di 1.75rem) supaya pita bawah tidak bersaing
+  dengan judul. Tiap sel statistik `flex flex-col items-center`.
   Spacer `lg:hidden h-14` di `app/(main)/layout.tsx` tidak menambah ruang terlihat — bar
   atas `fixed` dengan `bg-white/95` menutupinya — jadi `pt` hero tetap kecil; di atas 64px
   blok logo justru turun.
@@ -217,6 +219,8 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   posisi konten melompat saat data masuk.
 - Komponen: badge `px-2 py-1`, tombol kecil `px-3 py-1.5`, tombol standar `px-4 py-2`,
   CTA `px-6 py-3`, input `px-3 py-2`.
+- Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
+  (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
 - Target sentuh: kontrol navigasi punya area sentuh ≥ 44px, **tanpa** membesarkan kotak
   visualnya. Dua cara yang dipakai:
   - Baris/nav link yang memang teks: `min-h-[44px]` (`NavLinkActive`, pil & rail
@@ -245,10 +249,10 @@ mobile tidak ikut ciut):
 |---|---|
 | `nav-label` | disembunyikan (teks label nav, nama akun, kata "Masuk"/"Daftar") |
 | `nav-hide-collapsed` | blok dibuang: label grup, kartu akun, pemilih bahasa |
-| `nav-center-row` | satu baris preferensi (toggle tema + ID/EN) jadi tengah |
+| `nav-center-row` | baris judul grup "Menu" (label + tema/bahasa) dipusatkan |
 | `nav-link` | `justify-center`, padding-x 0, `gap-0` supaya badge keranjang menempel ke ikon |
 | `nav-wordmark` / `nav-wordmark-row` / `nav-collapse-toggle` | baris logo jadi kolom: logo di atas, tombol ciut di bawah |
-| `nav-center-row` / `nav-auth` / `nav-auth-btn` | baris tema jadi tengah, tombol masuk/daftar ditumpuk |
+| `nav-auth` / `nav-auth-btn` | blok masuk/daftar jadi kolom dan tombolnya ikon-saja |
 
 Konten halaman digeser dengan `lg:ml-[var(--nav-w)]` + `transition-[margin]` di
 `app/(main)/layout.tsx`, jadi offset ikut saat rail berubah. Tombol ciut wajib
@@ -257,13 +261,15 @@ Konten halaman digeser dengan `lg:ml-[var(--nav-w)]` + `transition-[margin]` di
 Preferensi tampilan **selalu di atas**, di kedua shell — dulu tema di dasar rail sementara
 bahasa di bar atas mobile, dan di desktop dua-duanya mengendap di dasar. Sekarang:
 `components/AppSidebarClient.tsx` menaruh `ThemeToggle` + pil ID/EN di bar `h-14` mobile,
-`components/AppSidebarContent.tsx` menaruh baris tema + bahasa di **puncak rail**
-(`hidden lg:flex`, jadi drawer mobile tidak duplikasi). Bawah rail tinggal **kartu akun →
-aksi akun (Logout / Masuk·Daftar)**. ThemeToggle 36px visual dengan `after:-inset-1`
-sehingga area sentuh 44px; rail ciut menyembunyikan pemilih bahasa (`nav-hide-collapsed`)
-dan memusatkan ikon tema (`nav-center-row`).
-- Hindari nilai di luar skala ini (`p-5`, `gap-7`, `mt-9`). Nilai pecahan kecil
-  (`py-0.5`, `h-3.5` untuk ikon) boleh untuk penyesuaian ikon/density.
+`components/AppSidebarContent.tsx` menaruh keduanya di **kanan baris judul grup "Menu"**
+(`hidden lg:flex` pada klusternya, jadi drawer mobile tidak duplikasi). Bawah rail tinggal
+**kartu akun → aksi akun (Logout / Masuk·Daftar)**. ThemeToggle 36px visual dengan
+`after:-inset-1` sehingga area sentuh 44px; rail ciut menyembunyikan label grup + pemilih
+bahasa (`nav-hide-collapsed`) dan memusatkan ikon tema (`nav-center-row`) — ikon tema
+**jangan** ikut dibungkus `nav-hide-collapsed`, karena itulah satu-satunya kontrol yang
+tersisa saat rail 72px.
+- Panel admin menaruh `ThemeToggle` di baris logo (`app/admin/AdminSidebar.tsx`), sejajar
+  kata "ETIRA", dan tetap terlihat saat rail admin di-ciutkan.
 
 ---
 
@@ -416,14 +422,17 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
 - Toggle **wajib baca `resolvedTheme`**, bukan `theme`. Dalam mode system `theme` masih
   bernilai `"system"`, jadi tombol yang membacanya akan menampilkan ikon salah dan klik
   pertama kelihatan tidak terjadi apa-apa.
-- Posisinya **di atas di ketiga shell**: bar mobile situs publik, puncak rail publik
-  (`components/AppSidebarContent.tsx`), dan puncak rail admin
-  (`app/admin/AdminSidebar.tsx`, di baris logo). Label teks "Mode Tampilan" di rail admin
-  sudah dihapus — ikonnya sudah menjelaskan diri, dan rail ciut 72px tidak muat dua kolom.
-- Rail publik: tema + bahasa **rata kanan satu blok dengan logo** — baris kata-ETIRA
-  `lg:pb-2 lg:border-b-0`, baris preferensi `pt-1 pb-3 border-b`, jadi satu garis pemisah
-  hanya di bawah bloknya. Satu baris penuh tidak muat: ruang dalam rail 256px − 32px =
-  224px, sementara logo + tulisan (112px) + tombol ciut + tema + pil bahasa (151px) = 263px.
+- Posisinya **di atas di ketiga shell**: bar `h-14` mobile situs publik, baris judul grup
+  "Menu" di rail publik (`components/AppSidebarContent.tsx`), dan baris logo rail admin
+  (`app/admin/AdminSidebar.tsx`). Label teks "Mode Tampilan" di rail admin sudah dihapus —
+  ikonnya sudah menjelaskan diri, dan rail ciut 72px tidak muat dua kolom.
+- Rail publik: kontrol **tidak** ikut naik ke baris logo. Ruang dalam rail 256px − 32px =
+  224px, sementara logo + tulisan (112px) + tombol ciut + tema + pil bahasa (151px) = 263px —
+  tidak muat satu baris. Baris wordmark tetap logo + tombol ciut (`lg:pb-2 lg:border-b-0`;
+  garis pemisahnya hanya muncul di drawer mobile), tema + bahasa baru muncul di baris "Menu".
+- Saat rail di-ciutkan, label grup dan pemilih bahasa hilang tapi **ikon tema tetap ada** dan
+  dipusatkan (`nav-center-row`). Jadi satu-satunya jalan ganti tampilan di rail 72px tidak
+  pernah ikut tersembunyi.
 - Pemilih bahasa satu komponen untuk kedua shell (`components/LanguageSwitcher.tsx`):
   pil ID/EN ±67px, `aria-label` dari `nav.language`. Versi lama pakai bendera emoji
   (`🇮🇩 ID / 🇬🇧 EN`, ±120px) — emoji sebagai ikon dilarang §9 dan lebarnya yang bikin rail
