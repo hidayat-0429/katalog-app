@@ -368,8 +368,11 @@ foto asli**.
   `Badge`, `Card`, `ProductCard`). Ini syarat, bukan saran.
 - Durasi hanya `150ms` (klik, fokus), `200ms` (hover kartu/badge), `300ms` (modal,
   perubahan besar). Easing: `ease-out` (`cubic-bezier(0,0,.2,1)`).
-- `globals.css` punya blok `prefers-reduced-motion` yang mematikan shimmer, float, pulse,
-  badge-glow, divider wave, stagger dan hover-lift.
+- `globals.css` cuma mendefinisikan empat `@keyframes`: `buttonPress`, `shimmer`,
+  `skeleton-loading`, `slideInUp`. Blok `prefers-reduced-motion` di ujung file mematikan
+  semuanya lewat durasi (`animation-duration`/`transition-duration` `0.01ms`,
+  `animation-iteration-count: 1`) lalu mematikan total `.shimmer-line` dan `.skeleton`
+  dengan `animation: none` — kerangka muat tidak boleh berkedip terus.
 - Kosakata kelas yang **hidup** dan boleh dipakai: `.hero-stagger` +
   `.hero-stagger-visible`, `.reveal-hidden` / `.reveal-hidden-left|right` +
   `.reveal-visible` (lewat `components/ScrollReveal.tsx`), `.shimmer-line`
@@ -415,7 +418,7 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
   render pertama (server) dan paint pertama (klien) tidak berbeda bahasa. Pilihan manual
   selalu menang karena tersimpan. Jangan balik ke `'id'` sebagian: kalau klien dan server
   beda default, halaman kedip ganti bahasa.
-  Kunci kedua file harus **selalu sama jumlahnya** (saat ini 567/567).
+  Kunci kedua file harus **selalu sama jumlahnya** (saat ini 604/604).
 - **Panel admin: hanya bahasa Indonesia.** Ini keputusan lingkup, bukan kelalaian —
   jangan diterjemahkan.
 - Semua label, tombol, placeholder, dan pesan error publik mengikuti locale aktif;
@@ -491,7 +494,7 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    sudah tampil (mis. `semantic-danger-500` = `#ef4444`), jadi perpindahan nama tidak
    mengubah piksel — kecuali `green-200` → `semantic-success-200` (`#a7f3d0`) yang
    sedikit lebih ke-arah emerald.
-3. Semua kelas mati di `app/globals.css` sudah dibuang — 75 aturan, 881 jadi 382 baris.
+3. Semua kelas mati di `app/globals.css` sudah dibuang — 75 aturan, 881 jadi 443 baris.
    Yang tersisa di `@layer components` cuma yang benar-benar dipakai kode:
    `.btn-primary`, `.btn-secondary`, `.btn-danger`, `.btn-icon`, `.input`,
    `.input-with-icon`, `.card`, `.badge`, `.divider` (dipakai form & tombol admin,
