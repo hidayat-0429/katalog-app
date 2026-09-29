@@ -46,23 +46,38 @@ const getCategories = unstable_cache(
 );
 
 // Mode katalog punya hasil berbeda per kombinasi filter + halaman, jadi tidak di-cache.
-async function loadCatalogPage(where: Prisma.ProductWhereInput, rawPage?: string) {
-  const totalCount = await prisma.product.count({ where });
-  const totalPages = Math.max(Math.ceil(totalCount / LIMIT), 1);
-
-  const parsed = Number(rawPage);
-  const requestedPage = Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
-  const safePage = Math.min(requestedPage, totalPages);
-
-  const products = await prisma.product.findMany({
+function fetchCatalogPage(where: Prisma.ProductWhereInput, page: number) {
+  return prisma.product.findMany({
     where,
     include: { category: true },
     orderBy: { createdAt: "desc" },
-    skip: (safePage - 1) * LIMIT,
+    skip: (page - 1) * LIMIT,
     take: LIMIT,
   });
+}
 
-  return { totalCount, totalPages, safePage, products };
+async function loadCatalogPage(where: Prisma.ProductWhereInput, rawPage?: string) {
+  const parsed = Number(rawPage);
+  const requestedPage = Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
+
+  // Jumlah dan isi halaman diambil bersamaan supaya hanya sekali perjalanan ke
+  // database. Halaman minta yang ternyata di luar jangkauan diambil ulang —
+  // itu cuma terjadi kalau angka halaman diketik manual terlalu besar.
+  const [totalCount, products] = await Promise.all([
+    prisma.product.count({ where }),
+    fetchCatalogPage(where, requestedPage),
+  ]);
+
+  const totalPages = Math.max(Math.ceil(totalCount / LIMIT), 1);
+  const safePage = Math.min(requestedPage, totalPages);
+
+  return {
+    totalCount,
+    totalPages,
+    safePage,
+    products:
+      safePage === requestedPage ? products : await fetchCatalogPage(where, safePage),
+  };
 }
 
 export default async function HomePage({
