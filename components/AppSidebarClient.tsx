@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback, createContext, useContext, type ReactNode } from "react";
+import { useRef, useState, useEffect, useCallback, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, PanelLeftClose, PanelLeft } from "lucide-react";
@@ -10,19 +10,6 @@ import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const COLLAPSE_STORAGE_KEY = "etira-nav-collapsed";
-
-interface SidebarContextValue {
-  isCollapsed: boolean;
-  toggleCollapsed: () => void;
-}
-
-const SidebarContext = createContext<SidebarContextValue | null>(null);
-
-export function useSidebarCollapse() {
-  const ctx = useContext(SidebarContext);
-  if (!ctx) throw new Error("useSidebarCollapse must be used within AppSidebarClient");
-  return ctx;
-}
 
 export default function AppSidebarClient({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -199,9 +186,7 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
             </button>
           </div>
 
-          <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
-            {children}
-          </SidebarContext.Provider>
+          {children}
         </div>
       </aside>
     </>

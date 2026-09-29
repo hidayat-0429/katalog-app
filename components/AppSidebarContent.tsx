@@ -8,7 +8,6 @@ import SignOutButton from "@/components/SignOutButton";
 import NavLinkActive from "@/components/NavLinkActive";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocale } from "@/components/LocaleProvider";
-import { useSidebarCollapse } from "@/components/AppSidebarClient";
 import idMessages from "@/messages/id.json";
 import enMessages from "@/messages/en.json";
 
@@ -20,18 +19,23 @@ export interface AppSidebarContentProps {
 export default function AppSidebarContent({ user, cartBadge }: AppSidebarContentProps) {
   const locale = useLocale();
   const nav = (locale === "en" ? enMessages : idMessages).nav;
-  const { isCollapsed, toggleCollapsed } = useSidebarCollapse();
 
   return (
     <>
       {/* Nav Publik */}
       <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
-        <div className="nav-hide-collapsed flex items-center justify-between px-3 pb-1.5">
-          <p className="text-xs font-bold tracking-widest uppercase text-charcoal-muted">
+        {/* Baris judul MENU + preferensi tampilan. Cluster kontrol sengaja lg-only:
+            di mobile header drawer sudah memuat keduanya. Saat rail di-ciutkan label
+            dan pemilih bahasa ikut hilang, ikon tema tetap ada dan dipusatkan oleh
+            .nav-center-row. */}
+        <div className="nav-center-row flex items-center justify-between px-3 pb-1.5">
+          <p className="nav-hide-collapsed text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionMenu}
           </p>
-          <div className="flex items-center gap-1.5">
-            <LanguageSwitcher />
+          <div className="hidden lg:flex items-center gap-1.5">
+            <div className="nav-hide-collapsed">
+              <LanguageSwitcher />
+            </div>
             <ThemeToggle />
           </div>
         </div>
