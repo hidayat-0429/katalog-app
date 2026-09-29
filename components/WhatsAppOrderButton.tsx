@@ -17,7 +17,7 @@ export default function WhatsAppOrderButton({
   totalPrice,
   customerName,
   items,
-  adminPhone = process.env.NEXT_PUBLIC_ADMIN_PHONE || '628113503650',
+  adminPhone = process.env.NEXT_PUBLIC_ADMIN_PHONE || '6285816172367',
 }: WhatsAppOrderButtonProps) {
   const t = useTranslations();
 

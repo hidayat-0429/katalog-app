@@ -67,8 +67,8 @@ export default function Footer() {
             <div className="space-y-3">
               <div>
                 <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">WhatsApp</p>
-                <a href={`https://wa.me/${process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650"}`} className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors break-all">
-                  +{process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650"}
+                <a href={`https://wa.me/${process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367"}`} className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors break-all">
+                  +{process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367"}
                 </a>
               </div>
               <div>
