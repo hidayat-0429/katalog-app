@@ -14,7 +14,7 @@ export default function Footer() {
 
           {/* Brand Info */}
           <div className="md:col-span-2 lg:col-span-1">
-            <h5 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">Etira Mushrooms</h5>
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">Etira Mushrooms</h3>
             <p className="text-xs text-charcoal-muted font-medium mb-3">
               PT Eka Timur Raya
             </p>
@@ -25,9 +25,9 @@ export default function Footer() {
 
           {/* Navigasi */}
           <div>
-            <h5 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
               {t.footer.navigation}
-            </h5>
+            </h3>
             <div className="flex flex-col gap-3">
               <Link href="/?katalog=semua" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
                 {t.footer.catalogProduct}
@@ -49,9 +49,9 @@ export default function Footer() {
 
           {/* Kantor & Fasilitas */}
           <div>
-            <h5 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
               {t.footer.officeTitle}
-            </h5>
+            </h3>
             <div className="space-y-3">
               <p className="text-xs text-charcoal-muted leading-relaxed">
                 {t.common.addressLine1}<br />{t.common.addressLine2}<br />{t.common.addressLine3}
@@ -61,9 +61,9 @@ export default function Footer() {
 
           {/* Kontak */}
           <div>
-            <h5 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wide">
               {t.footer.contactTitle}
-            </h5>
+            </h3>
             <div className="space-y-3">
               <div>
                 <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">WhatsApp</p>
