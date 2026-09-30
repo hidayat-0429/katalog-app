@@ -131,7 +131,7 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
         id="app-sidebar"
         ref={panelRef}
         tabIndex={-1}
-        role={isOpen ? "dialog" : "navigation"}
+        role={isOpen ? "dialog" : undefined}
         aria-modal={isOpen ? true : undefined}
         aria-label={t.nav.menuTitle}
         className={`

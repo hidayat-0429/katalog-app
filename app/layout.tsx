@@ -23,11 +23,50 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+// Kontak dan alamat diambil dari env + nilai yang sama dengan yang ditampilkan Footer,
+// supaya JSON-LD tidak memuat klaim yang tidak terlihat di halaman.
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com";
+
+function organizationSchema() {
+  const email = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com";
+  const phone = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${baseUrl}/#organization`,
+    name: "PT Eka Timur Raya",
+    alternateName: "Etira Mushrooms",
+    url: baseUrl,
+    logo: `${baseUrl}/logos/etira-company-logo.png`,
+    email,
+    telephone: `+${phone}`,
+    foundingDate: "1999",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Jl. Raya Nongkojajar KM 1.4",
+      addressLocality: "Purwodadi",
+      addressRegion: "Jawa Timur",
+      postalCode: "67163",
+      addressCountry: "ID",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email,
+        telephone: `+${phone}`,
+        availableLanguage: ["id", "en"],
+      },
+    ],
+  };
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const [t, locale] = await Promise.all([getServerMessages(), getServerLocale()]);
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com"),
+    metadataBase: new URL(baseUrl),
     title: t.metadata.default,
     description: t.metadata.homeDescription,
     keywords: t.metadata.keywords,
@@ -64,6 +103,10 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
         <LocaleProvider>
           <Providers>
             {children}

@@ -23,7 +23,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
   return (
     <>
       {/* Nav Publik */}
-      <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
+      <nav aria-label={nav.sectionMenu} className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
         {/* Baris judul MENU + preferensi tampilan. Cluster kontrol sengaja lg-only:
             di mobile header drawer sudah memuat keduanya. Saat rail di-ciutkan label
             dan pemilih bahasa ikut hilang, ikon tema tetap ada dan dipusatkan oleh
@@ -48,7 +48,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
       {/* Nav Admin */}
       {user?.role === "ADMIN" && (
-        <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
+        <nav aria-label={nav.sectionAccess} className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
           <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionAccess}
           </p>
@@ -63,7 +63,7 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
 
       {/* Nav Mitra hanya BUYER */}
       {user?.role === "BUYER" && (
-        <nav className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
+        <nav aria-label={nav.sectionBuyer} className="px-3 pt-3 pb-2 flex flex-col gap-0.5 border-t border-neutral-100 dark:border-neutral-800/60 mt-1.5">
           <p className="nav-hide-collapsed px-3 pb-1.5 text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionBuyer}
           </p>
