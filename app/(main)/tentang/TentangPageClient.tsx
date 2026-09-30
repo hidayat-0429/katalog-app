@@ -44,7 +44,7 @@ export default function TentangPageClient() {
           {/* Left: Image */}
           <div className="relative aspect-[16/10] md:aspect-auto w-full min-h-[260px] md:min-h-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700">
             <Image 
-              src="/etira.png" 
+              src="/etira.webp" 
               alt={t.tentang.facilityAlt}
               fill
               className="object-cover"

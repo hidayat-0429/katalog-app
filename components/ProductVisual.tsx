@@ -19,7 +19,7 @@ const FALLBACK_ICON = Sprout;
 // Banyak baris produk masih menyimpan gambar contoh di kolom imageUrl. Selama belum
 // diganti foto asli lewat admin, lebih baik ditampilkan panel komoditas yang jelas
 // disengaja daripada satu foto yang sama di semua kartu.
-const PLACEHOLDER_ASSETS = ['/hero-branding.jpg', '/og-image.png', '/etira.png'];
+const PLACEHOLDER_ASSETS = ['/hero-branding.jpg', '/og-image.png', '/etira.webp'];
 
 function hasRealPhoto(imageUrl: string | null) {
   if (!imageUrl) return false;

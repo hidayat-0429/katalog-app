@@ -349,7 +349,7 @@ foto asli**.
 
 - Kalau `imageUrl` benar-benar foto → `<Image fill sizes … className="object-cover object-center" />`.
 - Kalau `imageUrl` kosong **atau** menunjuk ke salah satu `PLACEHOLDER_ASSETS`
-  (`/hero-branding.jpg`, `/og-image.png`, `/etira.png`) → panel placeholder:
+  (`/hero-branding.jpg`, `/og-image.png`, `/etira.webp`) → panel placeholder:
   `bg-bg-subtle border border-border-subtle` + ikon Lucide besar (`w-1/3 max-w-24`,
   `strokeWidth 1.25`, `text-charcoal-muted`), `aria-hidden`.
 - Ikon dipilih dari nama/kategori: `beku|frozen|iqf` → `Snowflake`, `kaleng|canned` →
