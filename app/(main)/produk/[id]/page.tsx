@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: ProductDetailPageProps) {
         {
           url: product.imageUrl || "/og-image.png",
           width: 1200,
-          height: 630,
+          height: 675,
           alt: name,
         },
       ],
