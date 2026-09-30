@@ -50,6 +50,28 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('localeChange', handleLocaleChange);
   }, []);
 
+  // Untuk route yang dirakit saat pengunjung datang, Next menulis <meta> hasil metadata di ujung
+  // <body>. Audit Lighthouse membaca <head>, jadi tag-nya dinaikkan setelah hydration. Tag bisa
+  // menyusul (mis. /produk/[id] yang metadata-nya baru siap belakangan), jadi pakai observer.
+  // HTML mentah tidak berubah — lihat catatan proyek soal rute statis.
+  useEffect(() => {
+    const penanda = (el: Element) =>
+      `meta[${el.getAttribute('name') ? 'name' : 'property'}="${el.getAttribute('name') ?? el.getAttribute('property')}"]`;
+    const hoist = () => {
+      document.body
+        .querySelectorAll('meta[name="description"], meta[name="keywords"], meta[property^="og:"], meta[name^="twitter:"]')
+        .forEach((el) => {
+          // Ganti versi lama di head, kalau tidak deskripsi menumpuk tiap pindah route.
+          document.head.querySelector(penanda(el))?.remove();
+          document.head.appendChild(el);
+        });
+    };
+    hoist();
+    const observer = new MutationObserver(hoist);
+    observer.observe(document.body, { childList: true });
+    return () => observer.disconnect();
+  }, [pathname]);
+
   // Sinkronkan judul tab browser dengan locale aktif (route tanpa map, mis. /produk/[id], pakai judul server)
   useEffect(() => {
     if (!mounted || !pathname) return;
