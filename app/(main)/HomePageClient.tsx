@@ -319,7 +319,7 @@ export default function HomePageClient({
                           <div className="w-12 h-12 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-900/30 flex items-center justify-center text-brand-forest-600 dark:text-brand-forest-400">
                             <Icon className="w-6 h-6 stroke-[2px]" />
                           </div>
-                          <span className="font-mono text-xl sm:text-2xl font-bold text-neutral-300 dark:text-neutral-700">
+                          <span className="font-mono text-xl sm:text-2xl font-bold text-neutral-600 dark:text-neutral-400">
                             {step}
                           </span>
                         </div>
@@ -398,7 +398,7 @@ export default function HomePageClient({
                             <div className="w-16 h-16 rounded-lg bg-brand-forest-100 dark:bg-brand-forest-900/30 flex items-center justify-center">
                               <Icon className="w-8 h-8 text-brand-forest-600 dark:text-brand-forest-400 stroke-[2px]" />
                             </div>
-                            <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-600">
+                            <span className="font-mono text-xs font-bold text-neutral-700 dark:text-neutral-300">
                               {num}
                             </span>
                           </div>
@@ -463,7 +463,7 @@ export default function HomePageClient({
                     title: t.fleet.dryFleet,
                     badge: t.fleet.dryFleetBadge,
                     badgeColor:
-                      'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400 border-neutral-200 dark:border-neutral-700',
+                      'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700',
                     desc: t.fleet.dryFleetDesc,
                   },
                   {
