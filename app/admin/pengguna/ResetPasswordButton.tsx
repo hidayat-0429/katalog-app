@@ -97,7 +97,7 @@ export default function ResetPasswordButton({ userId, userName, userEmail }: Res
             </div>
 
             <p className="text-xs text-charcoal-muted mb-4">
-              {userName} — <span className="font-medium text-neutral-900 dark:text-neutral-100">{userEmail}</span>
+              {userName} - <span className="font-medium text-neutral-900 dark:text-neutral-100">{userEmail}</span>
             </p>
 
             {error && (

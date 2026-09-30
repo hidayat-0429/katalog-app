@@ -59,7 +59,7 @@ export default async function AdminUsersPage() {
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-sm">{user.companyName || "—"}</TableCell>
+                    <TableCell className="text-sm">{user.companyName || "-"}</TableCell>
                     <TableCell>
                       <Badge variant={user.role === "ADMIN" ? "default" : "outline"}>
                         {user.role === "ADMIN" ? "Admin" : "Pembeli"}

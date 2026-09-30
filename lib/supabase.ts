@@ -50,7 +50,7 @@ export async function deleteImageFromSupabase(publicUrl: string | null | undefin
 
   // Jika env Supabase belum dikonfigurasi, skip saja (jangan crash)
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn("Supabase env tidak dikonfigurasi — skip hapus gambar.");
+    console.warn("Supabase env tidak dikonfigurasi - skip hapus gambar.");
     return;
   }
 
