@@ -2,6 +2,14 @@
   "name": "katalog-pemesanan",
   "version": "0.1.0",
   "private": true,
+  "allowScripts": {
+    "@prisma/client@5.22.0": true,
+    "@prisma/engines@5.22.0": true,
+    "prisma@5.22.0": true,
+    "esbuild@0.28.2": true,
+    "esbuild@0.21.5": true,
+    "unrs-resolver@1.12.2": true
+  },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
