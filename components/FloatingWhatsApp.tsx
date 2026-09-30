@@ -8,7 +8,7 @@ export default function FloatingWhatsApp() {
   const t = useTranslations();
   const tw = t.floatingWa;
   const [isOpen, setIsOpen] = useState(false);
-  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
+  const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
   const waLink = `https://wa.me/${adminWa}?text=${encodeURIComponent(tw.prefill)}`;
 
   return (

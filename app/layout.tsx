@@ -29,7 +29,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com"
 
 function organizationSchema() {
   const email = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com";
-  const phone = process.env.NEXT_PUBLIC_ADMIN_PHONE || "6285816172367";
+  const phone = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
 
   return {
     "@context": "https://schema.org",

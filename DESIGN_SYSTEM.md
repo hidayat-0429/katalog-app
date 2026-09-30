@@ -215,9 +215,9 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   tidak terbukti: angka `500+`, enam nama klien karangan, dan chip HACCP / ISO 22000.
   TrustBanner sekarang menampilkan enam **segmen** pelanggan (`trustBanner.segments.*`) dengan label
   "Komitmen Mutu"; kartu produk memakai `productDetail.certSterile`, bukan HACCP.
-  Fallback email sudah alamat resmi (`marketing@etiramushrooms.com`), tapi fallback nomor
-  WhatsApp **masih nomor test** — nomor resmi (`628113503650`) baru dipasang lewat
-  `NEXT_PUBLIC_ADMIN_PHONE` begitu PT setuju didatangi pesanan.
+  Fallback email dan nomor WhatsApp keduanya data resmi (`marketing@etiramushrooms.com` dan
+  `628113503650`), jadi localhost maupun deployment tanpa env tetap menunjuk kontak perusahaan.
+  Nomor itu bisa ditimpa lewat `NEXT_PUBLIC_ADMIN_PHONE` kalau PT memasang nomor baru.
   Masih menunggu konfirmasi PT: `50 ton/bulan` dan `24 jam`.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
