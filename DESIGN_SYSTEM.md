@@ -347,7 +347,7 @@ dan `bg-semantic-info-700` dengan teks putih — varian `DEFAULT` + putih hanya 
 `components/ProductVisual.tsx` menangani realita bahwa sebagian besar produk **belum punya
 foto asli**.
 
-- Kalau `imageUrl` benar-benar foto → `<Image fill sizes … className="object-cover object-center" />`.
+- Kalau `imageUrl` benar-benar foto → `<Image fill sizes … className="object-contain p-[8%]" />`.
 - Kalau `imageUrl` kosong **atau** menunjuk ke salah satu `PLACEHOLDER_ASSETS`
   (`/hero-branding.jpg`, `/og-image.png`, `/etira.webp`) → panel placeholder:
   `bg-bg-subtle border border-border-subtle` + ikon Lucide besar (`w-1/3 max-w-24`,
@@ -355,8 +355,12 @@ foto asli**.
 - Ikon dipilih dari nama/kategori: `beku|frozen|iqf` → `Snowflake`, `kaleng|canned` →
   `Package`, `pouch|retort|sachet` → `Boxes`, `nugget|bakso|olahan` → `ChefHat`,
   `segar|fresh` → `Leaf`, sisanya `Sprout`.
-- Rasio foto kartu produk **4:3** (`aspect-[4/3]`); halaman detail pakai wadah kotak
-  sticky. Zoom hover: `group-hover:scale-105` dengan `motion-safe:transition-transform`.
+- Wadah foto kartu produk **kotak** (`aspect-square`), sama seperti halaman detail dan
+  skeletonnya (`ProductSkeleton`), supaya tidak ada layout shift saat kartu muncul.
+  Foto potongan potret (rasio 0,69–0,92) ditampilkan `object-contain` dengan jarak
+  `p-[8%]` sehingga kemasan utuh dan tidak menempel tepi; `object-cover` di wadah
+  memotong 31–48% tinggi foto. Thumbnail keranjang ikut `object-contain p-1`.
+  Zoom hover: `group-hover:scale-105` dengan `motion-safe:transition-transform`.
 - Jangan memakai satu foto yang sama untuk semua produk sebagai "filler"; placeholder ikon
   lebih jujur dan langsung tergantikan saat admin mengunggah foto.
 

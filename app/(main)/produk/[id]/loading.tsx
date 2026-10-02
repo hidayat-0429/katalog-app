@@ -7,7 +7,7 @@ export default function Loading() {
       <SkeletonStatus />
       <Skeleton className="h-4 w-28 mb-6" />
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
-        <Skeleton className="aspect-[4/3] w-full rounded-lg" />
+        <Skeleton className="aspect-square w-full rounded-lg" />
         <div className="space-y-4">
           <Skeleton className="h-5 w-28 rounded-full" />
           <Skeleton className="h-9 w-2/3" />

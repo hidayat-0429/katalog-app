@@ -43,6 +43,9 @@ export default function ProductVisual({
   priority,
 }: ProductVisualProps) {
   if (hasRealPhoto(imageUrl)) {
+    // Foto produk resmi berbentuk potongan potret (rasio 0,69–0,92) dengan latar
+    // transparan. object-cover di wadah kotak memotong 31–48% tingginya dan membuat
+    // kemasan menempel tepi, jadi pakai contain + jarak agar produk utuh dan bernapas.
     return (
       <Image
         src={imageUrl as string}
@@ -50,7 +53,7 @@ export default function ProductVisual({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover object-center"
+        className="object-contain p-[8%]"
       />
     );
   }

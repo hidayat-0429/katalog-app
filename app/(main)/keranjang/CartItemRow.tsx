@@ -48,7 +48,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
       {/* Thumbnail gambar produk */}
       <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-md overflow-hidden bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 shrink-0">
         {imageUrl ? (
-          <Image src={imageUrl} alt={name} fill sizes="64px" className="object-cover" />
+          <Image src={imageUrl} alt={name} fill sizes="64px" className="object-contain p-1" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-charcoal-muted">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

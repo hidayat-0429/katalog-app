@@ -78,7 +78,7 @@ export default function ProductCard({
       className="group flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden motion-safe:transition-all motion-safe:duration-200 hover:border-brand-forest-500 dark:hover:border-brand-forest-500 hover:shadow-md"
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
+      <div className="relative aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
         <div className="motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-105 absolute inset-0">
           <ProductVisual
             imageUrl={imageUrl}
