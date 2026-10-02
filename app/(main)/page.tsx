@@ -39,8 +39,14 @@ const getHomeHighlights = unstable_cache(
   { revalidate: 120, tags: ["beranda"] }
 );
 
+// Kategori hanya dipakai sebagai chip filter, jadi yang tidak punya produk aktif
+// disingkirkan — kalau tidak, pengujung bisa masuk ke halaman katalog kosong.
 const getCategories = unstable_cache(
-  () => prisma.category.findMany({ orderBy: { name: "asc" } }),
+  () =>
+    prisma.category.findMany({
+      where: { products: { some: { isActive: true } } },
+      orderBy: { name: "asc" },
+    }),
   ["product-categories"],
   { revalidate: 600, tags: ["beranda"] }
 );
