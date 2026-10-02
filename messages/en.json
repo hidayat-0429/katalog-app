@@ -124,6 +124,11 @@
     "waSubtitle": "Fast response for order and specification consultation.",
     "addressLabel": "Processing Center",
     "emailLabel": "Tenders & Partnerships",
+    "retailTitle": "Retail / Single Pack",
+    "retailNote": "ETIRA products are already sold loose in modern retail and in our official marketplace stores. This catalog is for wholesale and HoReCa supply only.",
+    "retailShopee": "Official Shopee Store",
+    "retailTiktok": "Official TikTok Account",
+    "retailAllChannels": "See all official channels",
     "form": {
       "messageFor": "Message for",
       "stillHaveQuestions": "Still have questions?",
@@ -260,6 +265,11 @@
         "group": "ordering",
         "q": "Do you supply culinary businesses?",
         "a": "Yes. We run a dedicated service for restaurants, hotels, catering, and other food businesses, with wholesale pricing, scheduled recurring deliveries, and product consultation tailored to your menu needs."
+      },
+      {
+        "group": "ordering",
+        "q": "I only need a single pack for home use — where can I buy it?",
+        "a": "This catalog is for wholesale and HoReCa orders with a one-carton minimum. For household use, ETIRA products are sold loose in modern retail and in our official marketplace stores. Links to those retail channels are listed on the Contact page."
       }
     ]
   },
@@ -640,6 +650,10 @@
     "locationTitle": "Purwodadi, Pasuruan",
     "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, East Java 67163.",
     "facilityAlt": "PT Eka Timur Raya factory facilities",
+    "photoSortir": "Manual sorting and handling in the production room",
+    "photoSortirAlt": "Workers in hygienic uniforms sorting button mushrooms on a conveyor",
+    "photoQC": "Routine sample testing: salinity and pH",
+    "photoQCAlt": "Salt and pH measurement on canned mushroom samples in the quality control room",
     "distanceSurabaya": "Distance to Surabaya:",
     "distanceSurabayaValue": "±65 km (Toll)",
     "coverage": "Fleet Coverage:",

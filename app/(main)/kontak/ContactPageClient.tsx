@@ -1,9 +1,17 @@
 'use client';
 
-import { Phone, Mail, MapPin, MessageSquare, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, MessageSquare, Clock, ShoppingBag, ExternalLink } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { useTranslations } from "@/hooks/useTranslations";
 import Container from "@/components/Container";
+
+// Kanal ritel resmi ETIRA, diambil dari link-in-bio @etira.indonesia. Katalog ini
+// sendiri khusus grosir/HoReCa, jadi pembeli eceran diarahkan ke kanal ini.
+const RETAIL_CHANNELS = {
+  shopee: "https://id.shp.ee/2j5Rys1",
+  tiktok: "https://www.tiktok.com/@etira.indonesia",
+  all: "https://linktr.ee/etira",
+};
 
 export default function ContactPageClient() {
   const t = useTranslations();
@@ -89,6 +97,48 @@ export default function ContactPageClient() {
               className="text-xs font-semibold text-brand-forest-600 dark:text-brand-forest-400 hover:underline break-all"
             >
               {companyEmail}
+            </a>
+          </div>
+
+          {/* Kanal ritel resmi */}
+          <div className="bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl p-5">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-brand-forest-50 dark:bg-brand-forest-950/40 border border-brand-forest-200 dark:border-brand-forest-800 flex items-center justify-center shrink-0 text-brand-forest-600 dark:text-brand-forest-400">
+                <ShoppingBag className="w-4 h-4" />
+              </div>
+              <h3 className="font-heading font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                {t.contact.retailTitle}
+              </h3>
+            </div>
+            <p className="text-xs text-charcoal-muted leading-relaxed mb-4">{t.contact.retailNote}</p>
+            <div className="flex flex-col gap-2">
+              <a
+                href={RETAIL_CHANNELS.shopee}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold border border-brand-forest-200 dark:border-brand-forest-800 text-brand-forest-700 dark:text-brand-forest-300 hover:bg-brand-forest-50 dark:hover:bg-brand-forest-950/40 transition-colors"
+              >
+                {t.contact.retailShopee}
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+              <a
+                href={RETAIL_CHANNELS.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold border border-brand-forest-200 dark:border-brand-forest-800 text-brand-forest-700 dark:text-brand-forest-300 hover:bg-brand-forest-50 dark:hover:bg-brand-forest-950/40 transition-colors"
+              >
+                {t.contact.retailTiktok}
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+            </div>
+            <a
+              href={RETAIL_CHANNELS.all}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-center gap-1.5 py-2 text-[11px] font-semibold text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors"
+            >
+              {t.contact.retailAllChannels}
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
             </a>
           </div>
 

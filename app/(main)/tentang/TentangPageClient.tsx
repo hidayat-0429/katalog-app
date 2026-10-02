@@ -44,7 +44,7 @@ export default function TentangPageClient() {
           {/* Left: Image */}
           <div className="relative aspect-[16/10] md:aspect-auto w-full min-h-[260px] md:min-h-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700">
             <Image 
-              src="/etira.webp" 
+              src="/tentang/budidaya.webp" 
               alt={t.tentang.facilityAlt}
               fill
               className="object-cover"
@@ -234,6 +234,26 @@ export default function TentangPageClient() {
           <p className="font-sans text-xs sm:text-sm text-charcoal-muted mt-0.5">
             {t.tentang.facilitiesSubtitle}
           </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-6">
+          {[
+            { src: "/tentang/sortir.webp", alt: t.tentang.photoSortirAlt, caption: t.tentang.photoSortir },
+            { src: "/tentang/kontrol-mutu.webp", alt: t.tentang.photoQCAlt, caption: t.tentang.photoQC },
+          ].map((p) => (
+            <figure key={p.src} className="relative aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <figcaption className="absolute bottom-2 left-2 right-2 bg-neutral-900/80 backdrop-blur-xs text-white px-3 py-2 rounded-lg border border-white/10 text-[11px] leading-snug">
+                {p.caption}
+              </figcaption>
+            </figure>
+          ))}
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 items-stretch">

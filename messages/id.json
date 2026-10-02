@@ -124,6 +124,11 @@
     "waSubtitle": "Respons cepat untuk konsultasi pesanan & spesifikasi.",
     "addressLabel": "Sentra Pengolahan",
     "emailLabel": "Tender & Kerja Sama",
+    "retailTitle": "Beli Satuan / Ritel",
+    "retailNote": "Produk ETIRA sudah dijual eceran di ritel modern dan toko resmi kami di marketplace. Katalog ini khusus pasokan grosir dan HoReCa.",
+    "retailShopee": "Toko Shopee Resmi",
+    "retailTiktok": "Akun TikTok Resmi",
+    "retailAllChannels": "Lihat semua kanal resmi",
     "form": {
       "messageFor": "Pesan untuk",
       "stillHaveQuestions": "Masih ada pertanyaan?",
@@ -260,6 +265,11 @@
         "group": "ordering",
         "q": "Apakah ada layanan pembelian untuk bisnis kuliner?",
         "a": "Ya, kami menawarkan layanan khusus untuk restoran, hotel, katering, dan industri pangan lainnya. Tersedia opsi pembelian grosir dengan harga spesial, jadwal pengiriman rutin, dan konsultasi penggunaan produk sesuai kebutuhan menu Anda."
+      },
+      {
+        "group": "ordering",
+        "q": "Saya hanya butuh satuan untuk keperluan rumah tangga, beli di mana?",
+        "a": "Katalog ini khusus pemesanan grosir dan HoReCa dengan minimal satu karton. Untuk kebutuhan rumah tangga, produk ETIRA dijual eceran di ritel modern dan di toko resmi kami pada marketplace. Tautan kanal ritel tersebut tersedia di halaman Kontak."
       }
     ]
   },
@@ -640,6 +650,10 @@
     "locationTitle": "Purwodadi, Pasuruan",
     "locationAddress": "Jl. Raya Nongkojajar KM 1.4, Purwodadi, Pasuruan, Jawa Timur 67163.",
     "facilityAlt": "Fasilitas Pabrik PT Eka Timur Raya",
+    "photoSortir": "Sortir dan penanganan manual di ruang produksi",
+    "photoSortirAlt": "Pekerja berseragam higienis menyortir jamur kancing di atas conveyor",
+    "photoQC": "Uji sampel rutin: kadar garam dan pH",
+    "photoQCAlt": "Pengukuran kadar garam dan pH pada sampel jamur kaleng di ruang kontrol mutu",
     "distanceSurabaya": "Jarak ke Surabaya:",
     "distanceSurabayaValue": "±65 km (Tol)",
     "coverage": "Jangkauan Armada:",

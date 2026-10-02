@@ -61,6 +61,7 @@ const config: Config = {
             700: '#163a13',  // Pressed states
             800: '#0f2a0c',  // Deep accent
             900: '#081a05',  // Darkest
+            950: '#041003',  // Latar chip/panel di dark mode (dipakai dark:bg-brand-forest-950/40)
           },
         },
 

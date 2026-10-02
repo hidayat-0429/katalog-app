@@ -30,7 +30,9 @@ Referensi kode:
    tidak perlu menulis `dark:` sama sekali.
 3. **Pakai skala literal** (`brand-forest-*`, `neutral-*`, `semantic-*`) hanya kalau butuh
    tone spesifik/aksen. Skala ini **tidak** otomatis — setiap pemakaian wajib ditemani
-   varian `dark:`.
+   varian `dark:`. Pastikan shade-nya benar-benar ada di `tailwind.config.ts`: class yang
+   menunjuk shade kosong (mis. `brand-forest-950` sebelum tangga itu dibuat) tidak
+   menghasilkan CSS sama sekali, jadi chip tetap terang di dark mode tanpa peringatan apa pun.
 4. **Jangan** hard-code hex di class (`bg-[#faf9f6]`). Kalau warna belum ada di tema,
    tambahkan token/varian baru di `tailwind.config.ts` atau `globals.css`.
 
@@ -342,7 +344,7 @@ dan `bg-semantic-info-700` dengan teks putih — varian `DEFAULT` + putih hanya 
 
 ---
 
-## 6. Gambar produk: `ProductVisual`
+## 6. Gambar: `ProductVisual` & foto dokumentasi
 
 `components/ProductVisual.tsx` menangani realita bahwa sebagian besar produk **belum punya
 foto asli**.
@@ -363,6 +365,19 @@ foto asli**.
   Zoom hover: `group-hover:scale-105` dengan `motion-safe:transition-transform`.
 - Jangan memakai satu foto yang sama untuk semua produk sebagai "filler"; placeholder ikon
   lebih jujur dan langsung tergantikan saat admin mengunggah foto.
+
+Foto dokumentasi perusahaan (`public/tentang/`) diperlakukan berbeda dari foto produk:
+ini foto asli, rasio bebas, jadi wajar dipotong.
+
+- Wadah `aspect-[16/10]`/`aspect-[4/3]` + `object-cover`; `object-contain` dilarang di sini
+  karena akan meninggalkan bar latar.
+- `budidaya.webp` dipakai di blok "Profil Perusahaan" dan `sortir.webp` +
+  `kontrol-mutu.webp` jadi strip dua foto di bagian Fasilitas.
+- Caption foto memakai pola overlay yang sama: `bg-neutral-900/80 backdrop-blur-xs` +
+  `text-white` + `border-white/10`, `text-[11px]`, di `figcaption`.
+- Teks caption dan alt teks datang dari `messages/*.json` (`tentang.photo*`), tidak ada
+  string pabrikan di komponen. Caption hanya menyebut yang terlihat di foto — jangan
+  menyelipkan klaim sertifikasi.
 
 ---
 
