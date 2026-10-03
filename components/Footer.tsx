@@ -81,15 +81,23 @@ export default function Footer() {
               <div>
                 <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">{t.footer.retailTitle}</p>
                 <div className="flex flex-col gap-2">
-                  <a href={RETAIL_CHANNELS.shopee} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
-                    {t.contact.retailShopee}
-                  </a>
-                  <a href={RETAIL_CHANNELS.tiktok} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
-                    {t.contact.retailTiktok}
-                  </a>
-                  <a href={RETAIL_CHANNELS.all} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
-                    {t.contact.retailAllChannels}
-                  </a>
+                  {[
+                    { href: RETAIL_CHANNELS.shopee, label: t.contact.retailShopee },
+                    { href: RETAIL_CHANNELS.tiktok, label: t.contact.retailTiktok },
+                    { href: RETAIL_CHANNELS.youtube, label: t.contact.retailYoutube },
+                    { href: RETAIL_CHANNELS.facebook, label: t.contact.retailFacebook },
+                    { href: RETAIL_CHANNELS.all, label: t.contact.retailAllChannels },
+                  ].map((c) => (
+                    <a
+                      key={c.href}
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors"
+                    >
+                      {c.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

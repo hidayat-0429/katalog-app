@@ -5,5 +5,7 @@
 export const RETAIL_CHANNELS = {
   shopee: "https://id.shp.ee/2j5Rys1",
   tiktok: "https://www.tiktok.com/@etira.indonesia",
+  youtube: "https://www.youtube.com/@etiramushrooms",
+  facebook: "https://www.facebook.com/profile.php?id=61550842574396",
   all: "https://linktr.ee/etira",
 } as const;
