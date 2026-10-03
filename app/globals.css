@@ -259,6 +259,11 @@ button:not(:disabled):active {
 
 .hero-title {
   font-size: clamp(2.6rem, 5.2vw + 1rem, 6rem);
+  /* Echo satu lapis. Offset dalam `em` supaya ikut skala fluidik clamp di atas
+     (±1,9 px di HP, ±4,3 px di monitor) dan tidak pernah jadi blok bayangan tebal.
+     Rona forest-300: judul ini selalu di atas scrim foto gelap, jadi warna abu
+     atau hijau tua tidak akan terlihat. */
+  text-shadow: 0.045em 0.045em 0 rgb(143 184 143 / 0.32);
 }
 
 .hero-subtitle {

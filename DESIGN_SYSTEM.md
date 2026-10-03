@@ -144,7 +144,7 @@ kecuali untuk label uppercase.
 
 | Peran | Kelas |
 |---|---|
-| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `.hero-title` (`clamp(2.6rem, 5.2vw + 1rem, 6rem)`), baris kedua `.hero-subtitle` (`clamp(1.7rem, 2.6vw + 0.6rem, 3.6rem)`, `font-semibold`) — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna |
+| Judul hero | `font-heading` (alias `font-display`, sama-sama Bricolage); baris utama `.hero-title` (`clamp(2.6rem, 5.2vw + 1rem, 6rem)` + echo satu lapis `text-shadow: 0.045em 0.045em 0 rgb(143 184 143 / 0.32)`), baris kedua `.hero-subtitle` (`clamp(1.7rem, 2.6vw + 0.6rem, 3.6rem)`, `font-semibold`) — dua-duanya `text-white`, penekanan dari ukuran/bobot bukan warna. Echo dipakai **hanya** di `.hero-title`: offset dalam `em` membuatnya ikut besar-kecilnya clamp (1,9 px di HP → 4,3 px di monitor), dan rona `forest-300` dipilih karena judul ini selalu duduk di atas scrim foto gelap, tempat abu/hijau tua tidak terlihat. Judul halaman lain tetap datar — efek teks di atas latar terang langsung terbaca norak |
 | Judul halaman (H1) | `font-heading text-2xl sm:text-3xl font-bold tracking-tight` — satu varian untuk semua halaman publik (profil, pesanan, keranjang, faq, tentang, kontak, invoice, login, register) |
 | Judul entitas (H1 detail produk) | `font-heading text-3xl sm:text-4xl font-bold tracking-tight` — lebih besar karena nama produk adalah subjek halaman |
 | Judul bagian dalam halaman (H2) | `font-heading text-2xl sm:text-3xl`; homepage pakai `<h2>` untuk judul katalog supaya `<h1>` hero tetap satu-satunya |
