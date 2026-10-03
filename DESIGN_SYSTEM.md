@@ -214,21 +214,28 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   `pb-16 sm:pb-20` supaya tidak menimpa statistik.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
   500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
-  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `24 jam` · `HoReCa`,
+  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `65 km` · `HoReCa`,
   `grid-cols-2 md:grid-cols-4`, semua item dipakai — tidak ada lagi `slice(0, 3)`).
   `1999` dan `HoReCa` lewat `value` teks (labelnya `hero.statFounded`/`statSegment`), hanya
-  `50` dan `24` yang punya `numericValue` dan dianimasikan.
-  Angka yang sama tidak boleh muncul dua kali dalam satu layar.
+  `50` dan `65` yang punya `numericValue` dan dianimasikan.
+  Angka yang sama tidak boleh muncul dua kali dalam satu layar — karena itu `.hero-lead`
+  menyebut dataran tinggi Jawa Timur **tanpa** angka 65 km yang sudah jadi statistik.
 - **Aturan klaim:** tiap angka, nama klien, atau sertifikat di situs publik harus ada buktinya
-  di situs resmi perusahaan (`etira.co.id` / `etiramushrooms.com`). Yang terbukti: 1999,
-  "lebih dari 25 tahun", alamat Nongkojajar KM 1.4, dan kata *halal*. Yang sudah dibuang karena
-  tidak terbukti: angka `500+`, enam nama klien karangan, dan chip HACCP / ISO 22000.
-  TrustBanner sekarang menampilkan enam **segmen** pelanggan (`trustBanner.segments.*`) dengan label
-  "Komitmen Mutu"; kartu produk memakai `productDetail.certSterile`, bukan HACCP.
-  Fallback email dan nomor WhatsApp keduanya data resmi (`marketing@etiramushrooms.com` dan
-  `628113503650`), jadi localhost maupun deployment tanpa env tetap menunjuk kontak perusahaan.
-  Nomor itu bisa ditimpa lewat `NEXT_PUBLIC_ADMIN_PHONE` kalau PT memasang nomor baru.
-  Masih menunggu konfirmasi PT: `50 ton/bulan` dan `24 jam`.
+  di situs resmi perusahaan (`etira.co.id` / `etiramushrooms.com`). Yang terbukti di sana:
+  1999, "lebih dari 25 tahun", alamat Nongkojajar KM 1.4, "daerah pegunungan Jawa Timur",
+  "sekitar 65 km dari kota pelabuhan Surabaya", empat lini produk (segar / kaleng / kantong /
+  beku), dan kata *halal*. Yang sudah dibuang karena tidak terbukti: angka `500+`, enam nama
+  klien karangan, chip HACCP / ISO 22000, dan klaim kecepatan `24 jam` / "tiba same-day"
+  (2026-10-03 — situs resmi tidak menyebut waktu panen-atau-kirim sama sekali; badge detail
+  sekarang cuma "Dipanen segar", dan slot statistik hero yang ketiga diisi `65 km` yang
+  terbukti). TrustBanner menampilkan enam **segmen** pelanggan (`trustBanner.segments.*`)
+  dengan label "Komitmen Mutu". Fallback email dan nomor WhatsApp keduanya data resmi
+  (`marketing@etiramushrooms.com` dan `628113503650`), jadi localhost maupun deployment tanpa
+  env tetap menunjuk kontak perusahaan. Nomor itu bisa ditimpa lewat `NEXT_PUBLIC_ADMIN_PHONE`
+  kalau PT memasang nomor baru.
+  Masih menunggu konfirmasi PT: `50 ton/bulan` — angka ini juga **tidak** disebut di situs
+  resmi, jadi statusnya sama dengan `24 jam` yang sudah diturunkan; belum dibuang hanya karena
+  belum ada keputusan.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
@@ -543,6 +550,24 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    fitur) yang memang harus jadi latar belakang.
 5. Ikon `w-3.5 h-3.5` sering muncul di dalam badge/tombol kecil — ini acceptable, tetapi
    kalau membuat komponen baru pilih `size` dari skala (`w-4`, `w-5`, `w-6`).
+6. Sudah dibersihkan (2026-10-03), jangan kembalikan: chip `certSterile` dan `certOem` di
+   halaman detail produk. Ketujuh SKU aktif di katalog ini semuanya **jamur segar** (deskripsi
+   DB-nya berbunyi "jamur kancing … dalam kemasan pouch, isi bersih 250 g" — "Jamur Pouch" itu
+   jamur segar berkemasan pouch, bukan retort), jadi "Proses Steril" — yang adalah proses
+   pengalengan — saling menyangkal dengan badge "Dipanen segar", dan "OEM Ready" itu
+   kapabilitas pabrik, bukan sifat satu SKU. Kapabilitas tetap tercantum di `/tentang`
+   (`advantage2` "Proses Steril & Halal", `advantage3` "OEM & Private Label", `facilityKaleng`),
+   jadi tidak ada informasi yang hilang — hanya dipindah ke tempat ia benar. Yang tersisa di
+   kartu produk cuma `certHalal`. `storageItems.*` (`2-4°C`, 3-5 hari, cuci sebelum dipakai)
+   terbukti cocok untuk semua SKU aktif, jadi tidak perlu per-kategori.
+   MOQ satuan yang belum ada ketentuan resminya sekarang mengarah ke `moqConsult`, dijaga
+   `tests/minOrder.test.ts` supaya angka karangan tidak kembali muncul.
+7. **Durasi simpan jamur segar disebut dua kali dengan angka berbeda**: FAQ
+   (`faqItems` jawaban penyimpanan) bilang "5-7 hari dalam kulkas, direkomendasikan
+   penggunaan dalam 3 hari",
+   sedangkan panduan di halaman detail bilang "Tahan hingga 3-5 hari". Salah satu pasti salah;
+   keduanya ada di situs publik. Perlu satu angka dari PT, lalu kunci yang lain dihapus —
+   jangan disamakan dengan mengambil rata-rata.
 
 ---
 

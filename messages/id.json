@@ -27,16 +27,16 @@
   "hero": {
     "title": "Jamur Premium",
     "subtitle": "untuk Dapur Profesional",
-    "description": "Pasokan jamur segar dan olahan untuk hotel, restoran, dan katering. Panen pagi, tiba same-day dengan cold chain standar internasional.",
+    "description": "Pasokan jamur segar dan olahan untuk hotel, restoran, dan katering — dari kebun di dataran tinggi Jawa Timur.",
     "cta1": "Lihat Katalog Produk",
     "cta2": "Hubungi Kami",
     "imageAlt": "Jamur segar PT Eka Timur Raya",
     "statFounded": "Berdiri Sejak",
     "statCapacity": "Kapasitas/Bulan",
-    "statFreshness": "Kesegaran Terjamin",
+    "statDistance": "Dari Pelabuhan Surabaya",
     "statSegment": "Segmen Layanan",
     "statTon": " ton",
-    "statHour": " jam"
+    "statKm": " km"
   },
   "trustBanner": {
     "eyebrow": "Siapa yang Kami Layani",
@@ -73,7 +73,7 @@
     "moqPouches": "Min. order 20 pouch (1 dus)",
     "moqPacks": "Min. order 10 pack (1 karton)",
     "moqKg": "Min. order 10 kg",
-    "moqPrefix": "Min. order",
+    "moqConsult": "Min. order: konsultasikan dengan tim kami",
     "usageChampignon": "Ideal untuk Pizza & Pasta",
     "usageProcessed": "Siap Goreng & Sajikan",
     "usageShiitake": "Cocok untuk Ramen & Masakan Asia",
@@ -480,7 +480,7 @@
     "adminNote": "Akun Admin sedang aktif. Gunakan akun Pembeli untuk memesan.",
     "outOfStock": "Persediaan Habis",
     "retailNote": "Butuh satuan untuk rumah tangga? Produk ETIRA juga dijual di:",
-    "freshHarvest": "Dipanen segar, jamin 24 jam",
+    "freshHarvest": "Dipanen segar",
     "storage": "Panduan Penyimpanan",
     "storageItems": {
       "temp": "Suhu optimal: 2-4°C (lemari pendingin)",
@@ -503,9 +503,7 @@
       "quality": "✓ Jaminan kualitas konsisten"
     },
     "standardQuality": "Standar Mutu",
-    "certSterile": "✓ Proses Steril",
-    "certHalal": "✓ Halal",
-    "certOem": "✓ OEM Ready"
+    "certHalal": "✓ Halal"
   },
   "cart": {
     "title": "Keranjang Belanja",

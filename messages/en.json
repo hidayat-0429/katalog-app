@@ -27,16 +27,16 @@
   "hero": {
     "title": "Premium Mushrooms",
     "subtitle": "for Professional Kitchens",
-    "description": "Fresh and processed mushroom supply for hotels, restaurants, and catering. Harvested in the morning, delivered same-day with international standard cold chain.",
+    "description": "Fresh and processed mushroom supply for hotels, restaurants, and catering — grown on our highland farms in East Java.",
     "cta1": "View Product Catalog",
     "cta2": "Contact Us",
     "imageAlt": "Fresh mushrooms from PT Eka Timur Raya",
     "statFounded": "Founded",
     "statCapacity": "Capacity/Month",
-    "statFreshness": "Freshness Guaranteed",
+    "statDistance": "From Surabaya Port",
     "statSegment": "Service Segment",
     "statTon": " tons",
-    "statHour": " hrs"
+    "statKm": " km"
   },
   "trustBanner": {
     "eyebrow": "Who We Serve",
@@ -73,7 +73,7 @@
     "moqPouches": "Min. order 20 pouches (1 box)",
     "moqPacks": "Min. order 10 packs (1 carton)",
     "moqKg": "Min. order 10 kg",
-    "moqPrefix": "Min. order",
+    "moqConsult": "Min. order: please check with our team",
     "usageChampignon": "Ideal for Pizza & Pasta",
     "usageProcessed": "Ready to Fry & Serve",
     "usageShiitake": "Perfect for Ramen & Asian Cuisine",
@@ -480,7 +480,7 @@
     "adminNote": "Admin account is currently active. Use a Buyer account to place orders.",
     "outOfStock": "Out of Stock",
     "retailNote": "Need a single pack for home use? ETIRA products are also sold at:",
-    "freshHarvest": "Freshly harvested, guaranteed 24 hours",
+    "freshHarvest": "Freshly harvested",
     "storage": "Storage Guide",
     "storageItems": {
       "temp": "Optimal temperature: 2-4°C (refrigerator)",
@@ -503,9 +503,7 @@
       "quality": "✓ Consistent quality guarantee"
     },
     "standardQuality": "Quality Standards",
-    "certSterile": "✓ Sterile Processing",
-    "certHalal": "✓ Halal",
-    "certOem": "✓ OEM Ready"
+    "certHalal": "✓ Halal"
   },
   "cart": {
     "title": "Shopping Cart",

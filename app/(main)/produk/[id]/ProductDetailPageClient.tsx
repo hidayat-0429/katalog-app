@@ -118,16 +118,12 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   <span className="font-sans text-xs font-semibold text-brand-forest-700 dark:text-brand-forest-300">{t.productDetail.freshHarvest}</span>
                 </div>
 
-                {/* Processing & Segment Row */}
+                {/* Chip "Proses Steril" dan "OEM Ready" sudah dilepas: keduanya klaim
+                    pabrik (pengalengan/retort & kontrak produksi) sementara seluruh SKU aktif
+                    di katalog ini jamur segar. Kapabilitas perusahaan tetap tampil di /tentang. */}
                 <div className="flex flex-wrap gap-2">
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-forest-50 dark:bg-brand-forest-900/30 border border-brand-forest-200 dark:border-brand-forest-800 rounded-full text-[11px] font-semibold text-brand-forest-700 dark:text-brand-forest-300">
-                    {t.productDetail.certSterile}
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-forest-50 dark:bg-brand-forest-900/30 border border-brand-forest-200 dark:border-brand-forest-800 rounded-full text-[11px] font-semibold text-brand-forest-700 dark:text-brand-forest-300">
                     {t.productDetail.certHalal}
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-full text-[11px] font-semibold text-charcoal-muted">
-                    {t.productDetail.certOem}
                   </span>
                 </div>
               </div>

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, PackageSearch, Clock, CalendarDays } from "lucide-react";
+import { ArrowRight, Building2, PackageSearch, MapPin, CalendarDays } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 interface StatItem {
@@ -74,7 +74,7 @@ export default function HeroCinematic({
   const STATS: StatItem[] = [
     { value: "1999", suffix: "", label: t.hero.statFounded, icon: CalendarDays },
     { value: "50", numericValue: 50, suffix: t.hero.statTon, label: t.hero.statCapacity, icon: PackageSearch },
-    { value: "24", numericValue: 24, suffix: t.hero.statHour, label: t.hero.statFreshness, icon: Clock },
+    { value: "65", numericValue: 65, suffix: t.hero.statKm, label: t.hero.statDistance, icon: MapPin },
     { value: "HoReCa", suffix: "", label: t.hero.statSegment, icon: Building2 },
   ];
 
