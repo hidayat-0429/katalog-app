@@ -75,10 +75,13 @@ export default function ProductCard({
     <Link
       href={`/produk/${id}`}
       aria-label={`${t.productCard.detailLabel} ${name}`}
-      className="group flex flex-col bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden motion-safe:transition-all motion-safe:duration-200 hover:border-brand-forest-500 dark:hover:border-brand-forest-500 hover:shadow-md"
+      className="group flex flex-col bg-surface border border-neutral-300 dark:border-neutral-700 rounded-xl overflow-hidden motion-safe:transition-all motion-safe:duration-200 hover:border-brand-forest-500 dark:hover:border-brand-forest-500 hover:shadow-md"
     >
       {/* Image Container */}
-      <div className="relative aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
+      {/* Bingkai foto sengaja lebih gelap dari kartu (dan dari `bg` halaman): foto produk
+          resmi berbentuk potongan dengan latar transparan, jadi warna inilah yang mengisi
+          ruang kosong di sekitar kemasan. Samakan dengan kotak foto di ProductSkeleton. */}
+      <div className="relative aspect-square w-full overflow-hidden bg-neutral-200 dark:bg-neutral-900">
         <div className="motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-105 absolute inset-0">
           <ProductVisual
             imageUrl={imageUrl}

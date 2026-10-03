@@ -339,7 +339,7 @@ export default function HomePageClient({
 
           {/* 7. KEUNGGULAN */}
           <ScrollReveal>
-            <section className="section-divider-wave py-16 sm:py-24 bg-neutral-50 dark:bg-neutral-900">
+            <section className="section-divider-wave py-16 sm:py-24 bg-bg-subtle">
               <Container>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
                   {/* Section Header */}

@@ -57,7 +57,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left: Product Image - Sticky */}
           <div>
-            <div className="relative aspect-square bg-neutral-50 dark:bg-neutral-800/50 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 sticky top-20">
+            <div className="relative aspect-square bg-neutral-200 dark:bg-neutral-800/50 rounded-xl overflow-hidden border border-neutral-300 dark:border-neutral-700 sticky top-20">
               <ProductVisual
                 imageUrl={product.imageUrl}
                 name={displayName}

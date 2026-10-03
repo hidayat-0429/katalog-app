@@ -55,7 +55,7 @@ boleh pucat karena memang bukan isi.
 
 | Token | Light | Dark | Dipakai untuk |
 |---|---|---|---|
-| `bg` | `#F8F9FA` | `#0F1110` | Latar halaman |
+| `bg` | `#F1F3F5` | `#0F1110` | Latar halaman |
 | `bg-subtle` | `#E9ECEF` | `#212529` | Panel, blok aksen, input, placeholder produk |
 | `surface` | `#FFFFFF` | `#3A424A` | Kartu, popover, modal, footer |
 | `primary` | `#2D5A27` | `#6B9B6B` | Aksi utama, tautan aktif, garis fokus |
@@ -97,11 +97,19 @@ memakai `primary` / `brand-forest-*`.
 
 | Peran | Light | Dark | Class |
 |---|---|---|---|
-| Latar halaman | `#F8F9FA` | `#0F1110` | `bg-bg` |
+| Latar halaman | `#F1F3F5` | `#0F1110` | `bg-bg` |
 | Panel tenggelam / inset | `#E9ECEF` | `#212529` | `bg-bg-subtle` |
 | Kartu, popover, modal, footer, band | `#FFFFFF` | `#3A424A` | `bg-surface` |
 | Kontrol form (input, select, textarea, tombol sekunder, baris pilihan) | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
 | Kartu/status aktif | `#FFFFFF` | `#343A40` | `bg-white dark:bg-neutral-800` |
+
+Kanvas light sengaja **neutral-100, bukan neutral-50**: dengan `#F8F9FA` kartu putih
+hanya beda 1,05:1 dan bingkai foto produk 1,00:1 (warna persis sama dengan halaman), jadi
+daftar produk terbaca sebagai lembaran putih tanpa kotak. Sekarang 1,11:1 (isi) + 1,17:1
+(garis tepi `neutral-300`) dan bingkai foto `neutral-200` 1,19:1 terhadap kartu. Dark mode
+tidak disentuh — di sana kartunya sudah 1,86:1. Kalau suatu saat menambah section band
+baru, pakai `bg-bg-subtle`; jangan `bg-neutral-50` lagi karena tone itu sekarang **lebih
+terang** dari kanvas.
 
 Aturannya: **wadah** memakai `bg-surface`, **kontrol** `bg-white dark:bg-neutral-800`.
 Di dark mode sengaja dibuat bertingkat: halaman `#0F1110` < panel `#212529` < kontrol
@@ -357,8 +365,12 @@ foto asli**.
 - Ikon dipilih dari nama/kategori: `beku|frozen|iqf` → `Snowflake`, `kaleng|canned` →
   `Package`, `pouch|retort|sachet` → `Boxes`, `nugget|bakso|olahan` → `ChefHat`,
   `segar|fresh` → `Leaf`, sisanya `Sprout`.
-- Wadah foto kartu produk **kotak** (`aspect-square`), sama seperti halaman detail dan
-  skeletonnya (`ProductSkeleton`), supaya tidak ada layout shift saat kartu muncul.
+- Wadah foto kartu produk **kotak** (`aspect-square`) dengan latar `bg-neutral-200`
+  (dark: `bg-neutral-900`), sama seperti halaman detail dan skeletonnya
+  (`ProductSkeleton`), supaya tidak ada layout shift saat kartu muncul. Latar bingkai ini
+  bukan hiasan: foto resmi berbentuk potongan punya latar transparan, jadi warna bingkai
+  yang mengisi ruang di sekitar kemasan — kalau disamakan dengan `bg` halaman, kartu
+  hilang ke latar. Tepi kartu `border-neutral-300` (dark: `neutral-700`).
   Foto potongan potret (rasio 0,69–0,92) ditampilkan `object-contain` dengan jarak
   `p-[8%]` sehingga kemasan utuh dan tidak menempel tepi; `object-cover` di wadah
   memotong 31–48% tinggi foto. Thumbnail keranjang ikut `object-contain p-1`.
