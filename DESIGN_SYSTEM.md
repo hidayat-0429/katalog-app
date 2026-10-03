@@ -233,7 +233,10 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   (`marketing@etiramushrooms.com` dan `628113503650`), jadi localhost maupun deployment tanpa
   env tetap menunjuk kontak perusahaan. Nomor itu bisa ditimpa lewat `NEXT_PUBLIC_ADMIN_PHONE`
   kalau PT memasang nomor baru.
-  Masih menunggu konfirmasi PT: `50 ton/bulan` — angka ini juga **tidak** disebut di situs
+  Kartu pembayaran (`components/PaymentInfoCard.tsx`) juga tidak mencetak nomor rekening: PT belum
+  memublikasikan rekening di situs resminya, dan nomor yang salah di kartu itu berarti uang pembeli
+  dikirim ke orang lain — jadi kartu hanya mengarahkan pembeli meminta nomornya lewat WhatsApp.
+- Masih menunggu konfirmasi PT: `50 ton/bulan` — angka ini juga **tidak** disebut di situs
   resmi, jadi statusnya sama dengan `24 jam` yang sudah diturunkan; belum dibuang hanya karena
   belum ada keputusan.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =

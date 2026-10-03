@@ -596,9 +596,7 @@
   },
   "payment": {
     "title": "Bank Transfer Payment Instructions",
-    "onBehalfOf": "Account holder:",
-    "copy": "Copy Account Number",
-    "copied": "Copied",
+    "accountNote": "Our official account number is sent through WhatsApp once the order is created. Just ask our operations team using the WhatsApp button below.",
     "afterTransfer": "After transferring, please send confirmation using the WhatsApp button below so our operations team can start preparing your order."
   },
   "tentang": {

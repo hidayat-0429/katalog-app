@@ -596,9 +596,7 @@
   },
   "payment": {
     "title": "Instruksi Pembayaran Transfer Bank",
-    "onBehalfOf": "a.n.",
-    "copy": "Salin Rekening",
-    "copied": "Tersalin",
+    "accountNote": "Nomor rekening resmi kami kirimkan lewat WhatsApp begitu pesanan dibuat. Silakan minta ke tim operasional lewat tombol WhatsApp di bawah ini.",
     "afterTransfer": "Setelah melakukan transfer, mohon kirimkan konfirmasi melalui tombol WhatsApp di bawah ini agar pesanan Anda dapat langsung dipersiapkan oleh tim operasional."
   },
   "tentang": {

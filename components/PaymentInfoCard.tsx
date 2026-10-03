@@ -1,31 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Landmark, Copy, Check, ShieldCheck } from 'lucide-react'
+import { Landmark, ShieldCheck } from 'lucide-react'
 import { useTranslations } from '@/hooks/useTranslations'
 
+// Nomor rekening PT tidak pernah dipublikasikan di mana pun, jadi kartu ini sengaja tidak
+// menampilkan angka: nomor yang salah di sini berarti uang pembeli dikirim ke orang lain.
 export default function PaymentInfoCard() {
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
   const t = useTranslations()
-
-  const bankAccounts = [
-    {
-      bank: 'BCA (Bank Central Asia)',
-      accNumber: '0887350123',
-      holder: 'PT Eka Timur Raya',
-    },
-    {
-      bank: 'Bank Mandiri',
-      accNumber: '1410098765432',
-      holder: 'PT Eka Timur Raya',
-    },
-  ]
-
-  const handleCopy = (num: string, idx: number) => {
-    navigator.clipboard.writeText(num)
-    setCopiedIndex(idx)
-    setTimeout(() => setCopiedIndex(null), 2000)
-  }
 
   return (
     <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-surface p-5">
@@ -34,48 +15,11 @@ export default function PaymentInfoCard() {
         <span>{t.payment.title}</span>
       </div>
 
-      <div className="mt-3 space-y-2.5">
-        {bankAccounts.map((acc, idx) => (
-          <div
-            key={acc.bank}
-            className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded border border-neutral-200 dark:border-neutral-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
-          >
-            <div>
-              <p className="text-xs font-semibold text-charcoal-muted">
-                {acc.bank}
-              </p>
-              <p className="text-base font-bold text-neutral-900 dark:text-neutral-100 mt-0.5 tracking-wide">
-                {acc.accNumber}
-              </p>
-              <p className="text-xs text-charcoal-muted">{t.payment.onBehalfOf} {acc.holder}</p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => handleCopy(acc.accNumber, idx)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors duration-150 ease-out self-start sm:self-center print:hidden"
-            >
-              {copiedIndex === idx ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-brand-forest-600 dark:text-brand-forest-400" />
-                  <span className="text-brand-forest-600 dark:text-brand-forest-400 font-semibold">{t.payment.copied}</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>{t.payment.copy}</span>
-                </>
-              )}
-            </button>
-          </div>
-        ))}
-      </div>
+      <p className="mt-3 text-xs leading-relaxed text-charcoal-muted">{t.payment.accountNote}</p>
 
       <div className="mt-3 flex items-start gap-2 text-xs text-charcoal-muted pt-2 border-t border-neutral-200 dark:border-neutral-700">
         <ShieldCheck className="w-4 h-4 text-brand-forest-600 dark:text-brand-forest-400 shrink-0 mt-0.5" />
-        <p>
-          {t.payment.afterTransfer}
-        </p>
+        <p>{t.payment.afterTransfer}</p>
       </div>
     </div>
   )
