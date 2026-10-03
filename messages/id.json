@@ -422,6 +422,7 @@
     "partnerPortal": "Portal Masuk Mitra",
     "officeTitle": "Kantor & Fasilitas",
     "contactTitle": "Kontak",
+    "retailTitle": "Beli Eceran",
     "copyright": "Seluruh hak cipta dilindungi.",
     "tagline": "Pasokan Langsung Pabrik & Perkebunan Jamur"
   },
@@ -478,6 +479,7 @@
     "loginButton": "Masuk ke Akun",
     "adminNote": "Akun Admin sedang aktif. Gunakan akun Pembeli untuk memesan.",
     "outOfStock": "Persediaan Habis",
+    "retailNote": "Butuh satuan untuk rumah tangga? Produk ETIRA juga dijual di:",
     "freshHarvest": "Dipanen segar, jamin 24 jam",
     "storage": "Panduan Penyimpanan",
     "storageItems": {

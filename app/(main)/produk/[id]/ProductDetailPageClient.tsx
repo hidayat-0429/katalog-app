@@ -10,6 +10,7 @@ import ProductVisual from '@/components/ProductVisual';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useLocale } from '@/components/LocaleProvider';
 import { localizeProduct, localizeName } from '@/lib/productText';
+import { RETAIL_CHANNELS } from '@/lib/channels';
 import { Product, Category } from '@prisma/client';
 
 interface ProductDetailPageClientProps {
@@ -157,6 +158,29 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   <AddToCartForm productId={product.id} maxStock={product.stock} unit={product.unit} />
                 </div>
               )}
+
+              {/* Pembeli eceran mendarat di halaman ini dari Google tapi tidak bisa pakai
+                  katalog (minimum 1 karton) — tunjukkan pintunya, bukan cuma menolaknya. */}
+              <p className="font-sans text-xs leading-relaxed text-charcoal-muted">
+                {t.productDetail.retailNote}{' '}
+                <a
+                  href={RETAIL_CHANNELS.shopee}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand-forest-700 dark:text-brand-forest-300 hover:underline"
+                >
+                  {t.contact.retailShopee}
+                </a>
+                {' · '}
+                <a
+                  href={RETAIL_CHANNELS.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand-forest-700 dark:text-brand-forest-300 hover:underline"
+                >
+                  {t.contact.retailTiktok}
+                </a>
+              </p>
             </div>
           </div>
         </div>

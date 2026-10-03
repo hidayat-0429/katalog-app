@@ -3,6 +3,7 @@
 import Container from "@/components/Container";
 import Link from "next/link";
 import { useTranslations } from "@/hooks/useTranslations";
+import { RETAIL_CHANNELS } from "@/lib/channels";
 
 export default function Footer() {
   const t = useTranslations();
@@ -76,6 +77,20 @@ export default function Footer() {
                 <a href={`mailto:${process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com"}`} className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors break-all">
                   {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com"}
                 </a>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">{t.footer.retailTitle}</p>
+                <div className="flex flex-col gap-2">
+                  <a href={RETAIL_CHANNELS.shopee} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
+                    {t.contact.retailShopee}
+                  </a>
+                  <a href={RETAIL_CHANNELS.tiktok} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
+                    {t.contact.retailTiktok}
+                  </a>
+                  <a href={RETAIL_CHANNELS.all} target="_blank" rel="noopener noreferrer" className="text-xs text-charcoal-muted hover:text-brand-forest-700 dark:hover:text-brand-forest-400 transition-colors">
+                    {t.contact.retailAllChannels}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

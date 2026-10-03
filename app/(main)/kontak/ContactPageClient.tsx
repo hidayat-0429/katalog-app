@@ -4,14 +4,7 @@ import { Phone, Mail, MapPin, MessageSquare, Clock, ShoppingBag, ExternalLink } 
 import ContactForm from "@/components/ContactForm";
 import { useTranslations } from "@/hooks/useTranslations";
 import Container from "@/components/Container";
-
-// Kanal ritel resmi ETIRA, diambil dari link-in-bio @etira.indonesia. Katalog ini
-// sendiri khusus grosir/HoReCa, jadi pembeli eceran diarahkan ke kanal ini.
-const RETAIL_CHANNELS = {
-  shopee: "https://id.shp.ee/2j5Rys1",
-  tiktok: "https://www.tiktok.com/@etira.indonesia",
-  all: "https://linktr.ee/etira",
-};
+import { RETAIL_CHANNELS } from "@/lib/channels";
 
 export default function ContactPageClient() {
   const t = useTranslations();

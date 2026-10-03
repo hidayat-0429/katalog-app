@@ -422,6 +422,7 @@
     "partnerPortal": "Partner Login Portal",
     "officeTitle": "Office & Facilities",
     "contactTitle": "Contact",
+    "retailTitle": "Retail Purchase",
     "copyright": "All rights reserved.",
     "tagline": "Direct Supply from Factory & Mushroom Farms"
   },
@@ -478,6 +479,7 @@
     "loginButton": "Sign In to Account",
     "adminNote": "Admin account is currently active. Use a Buyer account to place orders.",
     "outOfStock": "Out of Stock",
+    "retailNote": "Need a single pack for home use? ETIRA products are also sold at:",
     "freshHarvest": "Freshly harvested, guaranteed 24 hours",
     "storage": "Storage Guide",
     "storageItems": {
