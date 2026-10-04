@@ -83,7 +83,7 @@ async function main() {
     await prisma.category.upsert({ where: { id: category.id }, update: {}, create: category });
   }
 
-  console.log("Seed selesai: 2 akun + 5 kategori. Produk tidak dibuat — isi lewat panel Admin.");
+  console.log("Seed selesai: 2 akun + 5 kategori. Produk tidak dibuat - isi lewat panel Admin.");
   console.log("Admin: admin@etiramushrooms.com (sandi dari ADMIN_SEED_PASSWORD, kecuali akunnya sudah ada)");
   console.log("Buyer: buyer@katalog.test (sandi dari BUYER_SEED_PASSWORD, kecuali akunnya sudah ada)");
 }
