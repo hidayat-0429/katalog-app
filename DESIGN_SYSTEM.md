@@ -213,13 +213,15 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   to-black/70`) karena teks di tengah; bottom-fade `h-16 sm:h-20` selalu disamakan dengan
   `pb-16 sm:pb-20` supaya tidak menimpa statistik.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
-  500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
-  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `65 km` · jumlah kanal resmi,
+  500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statYear`.
+  Faktanya sekarang ada di empat statistik (`1999` · `25+ tahun` · `65 km` · jumlah kanal resmi,
   `grid-cols-2 md:grid-cols-4`, semua item dipakai — tidak ada lagi `slice(0, 3)`).
-  `1999` lewat `value` teks (labelnya `hero.statFounded`), `50` dan `65` punya `numericValue`
+  `1999` lewat `value` teks (labelnya `hero.statFounded`), `25` dan `65` punya `numericValue`
   dan dianimasikan, dan kartu keempat membaca `Object.keys(RETAIL_CHANNELS).length` dari
-  `lib/channels.ts` (label `hero.statChannels`) supaya tidak bisa berbeda sendiri dari footer —
-  label "HoReCa" dibuang 2026-10-04 karena segmen itu tidak disebut di situs resmi.
+  `lib/channels.ts` (label `hero.statChannels`) supaya tidak bisa berbeda sendiri dari footer.
+  Dua label lama dibuang 2026-10-04 karena tidak disebut di situs resmi: `HoReCa`
+  (`hero.statSegment`) dan `50 ton/bulan` (`hero.statCapacity` + `hero.statTon`); kunci
+  `hero.statExperience` dipakai lagi untuk kartu kedua.
   Angka yang sama tidak boleh muncul dua kali dalam satu layar — karena itu `.hero-lead`
   menyebut dataran tinggi Jawa Timur **tanpa** angka 65 km yang sudah jadi statistik.
 - **Aturan klaim:** tiap angka, nama klien, atau sertifikat di situs publik harus ada buktinya
@@ -238,9 +240,11 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   Kartu pembayaran (`components/PaymentInfoCard.tsx`) juga tidak mencetak nomor rekening: PT belum
   memublikasikan rekening di situs resminya, dan nomor yang salah di kartu itu berarti uang pembeli
   dikirim ke orang lain — jadi kartu hanya mengarahkan pembeli meminta nomornya lewat WhatsApp.
-- Masih menunggu konfirmasi PT: `50 ton/bulan` — angka ini juga **tidak** disebut di situs
-  resmi, jadi statusnya sama dengan `24 jam` yang sudah diturunkan; belum dibuang hanya karena
-  belum ada keputusan.
+- Tidak ada lagi angka kapasitas di situs publik. `50 ton/bulan` dulunya berstatus
+  "menunggu konfirmasi PT"; karena sampai 2026-10-04 angka itu tetap tidak disebut di situs
+  resmi, kartunya diganti `25+ tahun` dan kartu keunggulan pertama di `/tentang`
+  (`tentang.advantage1`) diganti "Empat Lini Produk". Kalau PT mengirim angka kapasitas
+  resmi, kuncinya tinggal dibuat lagi — datanya ada di commit sebelum perubahan ini.
 - Container: **selalu lewat `<Container>`** (`components/Container.tsx`) =
   `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`. Semua halaman publik pakai lebar penuhnya
   (tanpa `max-w-*` per halaman) supaya tidak ada gutter kosong di kiri-kanan; 7xl baru
