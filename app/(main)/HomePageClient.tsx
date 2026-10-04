@@ -181,7 +181,7 @@ export default function HomePageClient({
             {products.length > 0 ? (
               <Suspense fallback={<ProductSkeletonGrid count={12} />}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                  {products.map((product) => (
+                  {products.map((product, idx) => (
                     <ProductCard
                       key={product.id}
                       id={product.id}
@@ -193,6 +193,7 @@ export default function HomePageClient({
                       categoryName={product.category.name} categoryNameEn={product.category.nameEn}
                       createdAt={product.createdAt}
                       updatedAt={product.updatedAt}
+                      priority={idx < 4}
                     />
                   ))}
                 </div>

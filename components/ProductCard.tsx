@@ -51,6 +51,7 @@ interface ProductCardProps {
   categoryNameEn?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  priority?: boolean;
 }
 
 export default function ProductCard({
@@ -62,6 +63,7 @@ export default function ProductCard({
   imageUrl,
   categoryName,
   categoryNameEn,
+  priority,
 }: ProductCardProps) {
   const t = useTranslations();
   const locale = useLocale();
@@ -88,6 +90,7 @@ export default function ProductCard({
             name={name}
             categoryName={categoryName}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority={priority}
           />
         </div>
 
