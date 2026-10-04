@@ -57,10 +57,12 @@ npm run prisma:migrate
 ```
 
 **4. Pengisian Data Awal (Seeding)**
-Jalankan perintah berikut untuk mengisi database dengan kategori resmi, 12 produk Etira, dan dua akun uji:
+Jalankan perintah berikut untuk mengisi database dengan lima kategori resmi dan dua akun uji:
 ```bash
 npm run seed
 ```
+
+Produk **tidak** di-seed. Katalog diisi lewat **Admin → Produk** memakai data resmi PT, supaya tidak ada angka karangan yang ikut tersimpan di database.
 
 **5. Jalankan Server Development**
 ```bash
@@ -72,7 +74,7 @@ Buka [http://localhost:3000](http://localhost:3000) di browser Anda. Cukup **sat
 - **Admin:** `admin@etiramushrooms.com`
 - **Buyer (Klien):** `buyer@katalog.test`
 
-Password keduanya dibaca dari `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` di `.env`. Keduanya **wajib** terisi: kalau kosong, `npm run seed` langsung gagal alih-alih jatuh ke sandi bawaan yang bisa ditebak. Untuk akun yang sudah ada di database, seeder tidak mengubah sandi maupun datanya (`update: {}`), jadi menjalankan seed pada database yang sudah terisi aman.
+Password keduanya dibaca dari `ADMIN_SEED_PASSWORD` dan `BUYER_SEED_PASSWORD` di `.env`. Keduanya **wajib** terisi: kalau kosong, `npm run seed` langsung gagal alih-alih jatuh ke sandi bawaan yang bisa ditebak. Untuk akun dan kategori yang sudah ada di database, seeder tidak mengubah sandi maupun datanya (`update: {}`), jadi menjalankan seed pada database yang sudah terisi aman.
 
 ## 🧪 Perintah Lainnya
 ```bash
