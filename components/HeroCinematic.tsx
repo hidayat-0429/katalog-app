@@ -3,8 +3,13 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, PackageSearch, MapPin, CalendarDays } from "lucide-react";
+import { ArrowRight, Share2, PackageSearch, MapPin, CalendarDays } from "lucide-react";
 import { useTranslations } from "@/hooks/useTranslations";
+import { RETAIL_CHANNELS } from "@/lib/channels";
+
+// Diambil dari sumber tautan resmi yang sama dengan footer, jadi angkanya tidak
+// bisa berbeda sendiri kalau kanalnya bertambah.
+const CHANNEL_COUNT = Object.keys(RETAIL_CHANNELS).length;
 
 interface StatItem {
   value: string;
@@ -75,7 +80,7 @@ export default function HeroCinematic({
     { value: "1999", suffix: "", label: t.hero.statFounded, icon: CalendarDays },
     { value: "50", numericValue: 50, suffix: t.hero.statTon, label: t.hero.statCapacity, icon: PackageSearch },
     { value: "65", numericValue: 65, suffix: t.hero.statKm, label: t.hero.statDistance, icon: MapPin },
-    { value: "HoReCa", suffix: "", label: t.hero.statSegment, icon: Building2 },
+    { value: String(CHANNEL_COUNT), numericValue: CHANNEL_COUNT, suffix: "", label: t.hero.statChannels, icon: Share2 },
   ];
 
   const heroRef = useRef<HTMLElement>(null);

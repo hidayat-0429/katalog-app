@@ -34,7 +34,7 @@
     "statFounded": "Berdiri Sejak",
     "statCapacity": "Kapasitas/Bulan",
     "statDistance": "Dari Pelabuhan Surabaya",
-    "statSegment": "Segmen Layanan",
+    "statChannels": "Kanal Resmi",
     "statTon": " ton",
     "statKm": " km"
   },
@@ -603,7 +603,7 @@
     "title": "Tentang Perusahaan",
     "subtitle": "Profil, dedikasi mutu, dan fasilitas produksi PT Eka Timur Raya (Etira Mushrooms)",
     "founded": "Tahun Berdiri",
-    "partners": "Segmen Pelanggan",
+    "channels": "Kanal Resmi",
     "capacity": "Kapasitas per Bulan",
     "standards": "Komitmen Mutu",
     "history": "Sejarah & Perjalanan",

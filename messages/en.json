@@ -34,7 +34,7 @@
     "statFounded": "Founded",
     "statCapacity": "Capacity/Month",
     "statDistance": "From Surabaya Port",
-    "statSegment": "Service Segment",
+    "statChannels": "Official Channels",
     "statTon": " tons",
     "statKm": " km"
   },
@@ -603,7 +603,7 @@
     "title": "About Company",
     "subtitle": "Profile, quality dedication, and production facilities of PT Eka Timur Raya (Etira Mushrooms)",
     "founded": "Year Founded",
-    "partners": "Customer Segments",
+    "channels": "Official Channels",
     "capacity": "Monthly Capacity",
     "standards": "Quality Commitment",
     "history": "History & Journey",

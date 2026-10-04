@@ -214,10 +214,12 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   `pb-16 sm:pb-20` supaya tidak menimpa statistik.
 - Hero cuma punya satu tempat untuk klaim: baris status `Sejak 1999 · HACCP Certified ·
   500+ Clients` sudah dihapus beserta kunci `hero.statusBadge`/`statExperience`/`statYear`.
-  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `65 km` · `HoReCa`,
+  Faktanya sekarang ada di empat statistik (`1999` · `50 ton` · `65 km` · jumlah kanal resmi,
   `grid-cols-2 md:grid-cols-4`, semua item dipakai — tidak ada lagi `slice(0, 3)`).
-  `1999` dan `HoReCa` lewat `value` teks (labelnya `hero.statFounded`/`statSegment`), hanya
-  `50` dan `65` yang punya `numericValue` dan dianimasikan.
+  `1999` lewat `value` teks (labelnya `hero.statFounded`), `50` dan `65` punya `numericValue`
+  dan dianimasikan, dan kartu keempat membaca `Object.keys(RETAIL_CHANNELS).length` dari
+  `lib/channels.ts` (label `hero.statChannels`) supaya tidak bisa berbeda sendiri dari footer —
+  label "HoReCa" dibuang 2026-10-04 karena segmen itu tidak disebut di situs resmi.
   Angka yang sama tidak boleh muncul dua kali dalam satu layar — karena itu `.hero-lead`
   menyebut dataran tinggi Jawa Timur **tanpa** angka 65 km yang sudah jadi statistik.
 - **Aturan klaim:** tiap angka, nama klien, atau sertifikat di situs publik harus ada buktinya

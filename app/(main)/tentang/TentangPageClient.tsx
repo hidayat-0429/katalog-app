@@ -1,9 +1,13 @@
 'use client';
 
-import { Building2, Target, ShieldCheck, MapPin, CalendarDays, Users2, Package } from "lucide-react";
+import { Building2, Target, ShieldCheck, MapPin, CalendarDays, Share2, Package } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from '@/hooks/useTranslations';
 import Container from '@/components/Container';
+import { RETAIL_CHANNELS } from "@/lib/channels";
+
+// Sama seperti kartu di hero: angkanya dibaca dari sumber tautan resmi, bukan ditulis ulang.
+const CHANNEL_COUNT = String(Object.keys(RETAIL_CHANNELS).length);
 
 export default function TentangPageClient() {
   const t = useTranslations();
@@ -24,7 +28,7 @@ export default function TentangPageClient() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 bg-surface border border-neutral-200 dark:border-neutral-700 rounded-xl mb-8">
         {[
           { value: "1999", label: t.tentang.founded, icon: CalendarDays },
-          { value: "HoReCa", label: t.tentang.partners, icon: Users2 },
+          { value: CHANNEL_COUNT, label: t.tentang.channels, icon: Share2 },
           { value: "50+ Ton", label: t.tentang.capacity, icon: Package },
           { value: "Halal & Aman", label: t.tentang.standards, icon: ShieldCheck },
         ].map(({ value, label, icon: Icon }) => (
