@@ -32,4 +32,14 @@ describe("kebijakan khusus grosir", () => {
       expect(catalog.server.wholesaleAckRequired.length).toBeGreaterThan(0);
     }
   });
+
+  it("harga tidak dipajang: semua tempat harga publik memakai teks 'atas permintaan'", () => {
+    for (const catalog of [id, en]) {
+      expect(catalog.productCard.priceOnRequest).toMatch(/permintaan|request/i);
+      expect(catalog.cart.priceOnRequest).toMatch(/dikonfirmasi|confirmed/i);
+      expect(catalog.cart.totalOnRequest).toMatch(/dikonfirmasi|confirmed/i);
+      expect(catalog.invoice.onRequest).toMatch(/dikonfirmasi|confirmed/i);
+      expect(catalog.orders.onRequest).toMatch(/dikonfirmasi|confirmed/i);
+    }
+  });
 });

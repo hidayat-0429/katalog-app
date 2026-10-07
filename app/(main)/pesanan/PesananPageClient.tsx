@@ -3,7 +3,6 @@
 import EmptyState from "@/components/EmptyState";
 import Container from "@/components/Container";
 import StatusBadge from "@/components/StatusBadge";
-import { formatRupiah } from "@/lib/format";
 import { ClipboardList, ArrowRight, Package } from "lucide-react";
 import Link from "next/link";
 import PaginationControls from "@/components/PaginationControls";
@@ -117,8 +116,8 @@ export default function PesananPageClient({
 
                   <div className="flex items-center gap-3 sm:flex-col sm:items-end">
                     <StatusBadge status={order.status} label={t.status[order.status]} />
-                    <span className="font-mono font-bold text-sm text-neutral-900 dark:text-neutral-100">
-                      {formatRupiah(order.totalPrice)}
+                    <span className="font-sans font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                      {t.orders.onRequest}
                     </span>
                   </div>
                 </div>

@@ -66,6 +66,7 @@
     "remainingPrefix": "Sisa",
     "remainingSuffix": "",
     "supplyPrice": "Harga Pasokan",
+    "priceOnRequest": "Harga grosir atas permintaan",
     "order": "Pesan",
     "detailLabel": "Detail produk",
     "wholesaleNote": "Khusus grosir & HoReCa · min. order konsultasikan dengan tim kami",
@@ -307,6 +308,7 @@
   "orders": {
     "title": "Riwayat Pesanan",
     "description": "Daftar pesanan grosir dan status pemrosesan pasokan Anda",
+    "onRequest": "Dikonfirmasi admin",
     "noOrders": "Belum ada pesanan",
     "noOrdersDescription": "Pesanan dan faktur Anda akan tercatat di sini.",
     "noOrdersStatus": "Tidak ada pesanan dengan status",
@@ -512,6 +514,9 @@
     "totalItems": "Jumlah Item",
     "unit": "unit",
     "totalPrice": "Total Harga",
+    "priceOnRequest": "Harga dikonfirmasi admin",
+    "totalOnRequest": "Dikonfirmasi admin",
+    "priceNote": "Total final ditetapkan admin setelah pesanan masuk; konfirmasi harga dan pembayaran dilakukan via WhatsApp.",
     "shippingNote": "Harga belum termasuk biaya pengiriman. Estimasi ongkos kirim akan dikonfirmasi oleh tim operasional."
   },
   "checkout": {
@@ -581,6 +586,7 @@
     "colPrice": "Harga",
     "colSubtotal": "Subtotal",
     "total": "Total Pembayaran",
+    "onRequest": "Dikonfirmasi admin",
     "print": "Cetak Invoice",
     "printTooltip": "Cetak Faktur / Invoice",
     "canceled": "Pesanan Dibatalkan",

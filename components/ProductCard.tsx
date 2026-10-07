@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { ChefHat } from "lucide-react";
-import { formatRupiah } from "@/lib/format";
 import ProductVisual from "@/components/ProductVisual";
 import { localizeName } from "@/lib/productText";
 import { useLocale } from "@/components/LocaleProvider";
@@ -42,7 +41,6 @@ function getUsageContext(
 interface ProductCardProps {
   id: string;
   name: string;
-  price: number;
   unit: string;
   stock: number;
   imageUrl: string | null;
@@ -56,7 +54,6 @@ interface ProductCardProps {
 export default function ProductCard({
   id,
   name,
-  price,
   unit,
   stock,
   imageUrl,
@@ -150,12 +147,11 @@ export default function ProductCard({
             <span className="text-[10px] font-bold uppercase tracking-wider text-charcoal-muted block">
               {t.productCard.supplyPrice}
             </span>
-            <div className="flex items-baseline gap-1 mt-0.5">
-              <span className="font-mono text-lg font-bold text-neutral-900 dark:text-neutral-100">
-                {formatRupiah(price)}
-              </span>
-              <span className="text-xs text-charcoal-muted">/{unit}</span>
-            </div>
+            {/* Harga sengaja tidak dipajang: PT belum memberi angka grosir resmi dan katalog
+                ini khusus penawaran via tim — angka karangan dilarang jadi janji publik. */}
+            <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mt-0.5 block">
+              {t.productCard.priceOnRequest}
+            </span>
           </div>
 
           <span className="px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-xs font-semibold text-charcoal-muted group-hover:bg-brand-forest-600 group-hover:text-white group-hover:border-brand-forest-600 transition-colors shrink-0">

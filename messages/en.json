@@ -66,6 +66,7 @@
     "remainingPrefix": "Only",
     "remainingSuffix": "left",
     "supplyPrice": "Supply Price",
+    "priceOnRequest": "Wholesale price on request",
     "order": "Order",
     "detailLabel": "Product detail",
     "wholesaleNote": "Wholesale & HoReCa only · min. order: please check with our team",
@@ -307,6 +308,7 @@
   "orders": {
     "title": "Order History",
     "description": "List of bulk orders and processing status of your supply",
+    "onRequest": "Confirmed by admin",
     "noOrders": "No orders yet",
     "noOrdersDescription": "Your orders and invoices will be recorded here.",
     "noOrdersStatus": "No orders with status",
@@ -512,6 +514,9 @@
     "totalItems": "Total Items",
     "unit": "units",
     "totalPrice": "Total Price",
+    "priceOnRequest": "Price confirmed by admin",
+    "totalOnRequest": "Confirmed by admin",
+    "priceNote": "The final total is set by our admin after the order is placed; price confirmation and payment are handled via WhatsApp.",
     "shippingNote": "Price does not include shipping costs. Shipping estimate will be confirmed by our operations team."
   },
   "checkout": {
@@ -581,6 +586,7 @@
     "colPrice": "Price",
     "colSubtotal": "Subtotal",
     "total": "Total Payment",
+    "onRequest": "Confirmed by admin",
     "print": "Print Invoice",
     "printTooltip": "Print Invoice",
     "canceled": "Order Cancelled",

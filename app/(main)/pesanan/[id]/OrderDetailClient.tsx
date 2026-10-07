@@ -10,7 +10,6 @@ import {
   Building2,
   ClipboardCheck,
 } from 'lucide-react';
-import { formatRupiah } from '@/lib/format';
 import StatusBadge from '@/components/StatusBadge';
 import Container from '@/components/Container';
 import CancelOrderButton from './CancelOrderButton';
@@ -194,13 +193,13 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
                 <div className="md:col-span-6">
                   <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">{item.productName}</p>
                   <p className="text-xs text-charcoal-muted md:hidden mt-0.5 font-mono">
-                    {item.quantity} &times; {formatRupiah(item.price)}
+                    {t.invoice.colQty}: {item.quantity}
                   </p>
                 </div>
                 <div className="hidden md:block md:col-span-2 text-center font-mono text-charcoal-muted text-xs">{item.quantity}</div>
-                <div className="hidden md:block md:col-span-2 text-right font-mono text-charcoal-muted text-xs">{formatRupiah(item.price)}</div>
+                <div className="hidden md:block md:col-span-2 text-right font-mono text-charcoal-muted text-xs">{t.invoice.onRequest}</div>
                 <div className="md:col-span-2 text-right md:text-right font-mono font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                  {formatRupiah(item.subtotal)}
+                  &mdash;
                 </div>
               </div>
             ))}
@@ -208,7 +207,7 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
 
           <div className="px-5 py-4 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 flex justify-between items-center">
             <span className="font-semibold text-sm text-neutral-900 dark:text-neutral-100">{t.invoice.total}</span>
-            <span className="font-mono text-xl font-bold text-neutral-900 dark:text-neutral-100">{formatRupiah(order.totalPrice)}</span>
+            <span className="font-sans text-sm font-bold text-neutral-900 dark:text-neutral-100">{t.invoice.onRequest}</span>
           </div>
         </div>
       </div>
@@ -225,7 +224,6 @@ export default function OrderDetailClient({ order }: { order: OrderData }) {
         {!isCanceled ? (
           <WhatsAppOrderButton
             orderNumber={order.orderNumber}
-            totalPrice={order.totalPrice}
             customerName={order.buyerName}
             items={order.items.map((i) => ({ productName: i.productName, quantity: i.quantity }))}
           />

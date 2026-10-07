@@ -3,7 +3,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Package, ChevronRight, Info } from 'lucide-react';
-import { formatRupiah } from '@/lib/format';
 import AddToCartForm from './AddToCartForm';
 import ProductVisual from '@/components/ProductVisual';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -78,10 +77,12 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                 {displayName}
               </h1>
               
+              {/* Harga tidak dipajang: PT belum memberi angka grosir resmi; penawaran
+                  final dikonfirmasi admin via WhatsApp setelah pesanan masuk. */}
               <div className="pt-2 mb-6">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="font-mono text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    {formatRupiah(product.price)}
+                  <span className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                    {t.productCard.priceOnRequest}
                   </span>
                   <span className="font-sans text-sm text-charcoal-muted font-normal">
                     /{product.unit}

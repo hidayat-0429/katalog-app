@@ -165,7 +165,9 @@ kecuali untuk label uppercase.
 | Harga, nomor order, angka | `font-mono` + `font-semibold` |
 
 - Format harga: `Rp 150.000` tanpa desimal, titik sebagai pemisah ribuan → selalu lewat
-  `formatRupiah()`, jangan menulis angka manual.
+  `formatRupiah()`, jangan menulis angka manual. Berlaku hanya di panel Admin — sisi publik
+  tidak memajang angka harga sama sekali ("harga atas permintaan", lihat butir kebijakan
+  grosir di bagian klaim).
 - Satuan ditulis setelah harga dengan gaya muted: `Rp 12.000<span class="text-charcoal-muted">/kg</span>`.
 - Heading pendek: maksimal 2 baris di desktop, `leading-tight`.
 - Skala fluidik khusus bagian atas homepage ada di `app/globals.css` sebagai enam kelas
@@ -575,6 +577,11 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    dengan tim kami"), dan checkout punya notice + checkbox konfirmasi grosir yang divalidasi
    server action (`server.wholesaleAckRequired`). Blok numerik keras menunggu angka resmi PT.
    Dijaga `tests/wholesalePolicy.test.ts` supaya angka karangan tidak kembali muncul.
+   Harga juga TIDAK dipajang di sisi publik (2026-10-07): kartu, detail, keranjang, riwayat
+   pesanan, dan invoice memakai teks "atas permintaan / dikonfirmasi admin"
+   (`productCard.priceOnRequest`, `cart.totalOnRequest`, `invoice.onRequest`, `orders.onRequest`);
+   pesan WhatsApp bawaan tanpa baris Total. Kolom `price` di DB dan panel Admin tetap ada
+   sebagai placeholder sampai PT mengirim angka grosir resmi.
 7. **Durasi simpan jamur segar disebut dua kali dengan angka berbeda**: FAQ
    (`faqItems` jawaban penyimpanan) bilang "5-7 hari dalam kulkas, direkomendasikan
    penggunaan dalam 3 hari",

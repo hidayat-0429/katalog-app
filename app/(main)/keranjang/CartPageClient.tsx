@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ShoppingCart, Receipt } from 'lucide-react';
 import CartItemRow from './CartItemRow';
 import CheckoutForm from './CheckoutForm';
-import { formatRupiah } from '@/lib/format';
 import EmptyState from '@/components/EmptyState';
 import Container from '@/components/Container';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -34,7 +33,6 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
   const locale = useLocale();
 
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
 
   return (
     <Container className="py-8">
@@ -64,7 +62,6 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
                 key={item.id}
                 cartId={item.id}
                 name={localizeProduct(item.product, locale).name}
-                price={item.product.price}
                 unit={item.product.unit}
                 quantity={item.quantity}
                 stock={item.product.stock}
@@ -99,8 +96,11 @@ export default function CartPageClient({ cartItems, defaultAddress }: CartPageCl
                 </div>
                 <div className="flex justify-between items-baseline">
                   <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{t.cart.totalPrice}</span>
-                  <span className="font-mono text-xl font-bold text-neutral-900 dark:text-neutral-100">{formatRupiah(totalPrice)}</span>
+                  <span className="font-sans text-sm font-bold text-neutral-900 dark:text-neutral-100">{t.cart.totalOnRequest}</span>
                 </div>
+                <p className="text-xs text-charcoal-muted bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-3 leading-relaxed">
+                  {t.cart.priceNote}
+                </p>
                 <p className="text-xs text-charcoal-muted bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-3 leading-relaxed">
                   {t.cart.shippingNote}
                 </p>

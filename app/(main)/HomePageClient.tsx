@@ -186,7 +186,6 @@ export default function HomePageClient({
                       key={product.id}
                       id={product.id}
                       name={localizeProduct(product, locale).name}
-                      price={product.price}
                       unit={product.unit}
                       stock={product.stock}
                       imageUrl={product.imageUrl}
@@ -258,7 +257,6 @@ export default function HomePageClient({
                         <ProductCard
                           id={product.id}
                           name={localizeProduct(product, locale).name}
-                          price={product.price}
                           unit={product.unit}
                           stock={product.stock}
                           imageUrl={product.imageUrl}

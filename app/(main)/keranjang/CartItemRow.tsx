@@ -3,7 +3,6 @@
 import { useTransition } from 'react';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import { formatRupiah } from '@/lib/format';
 import { updateCartItem, removeCartItem } from '@/lib/actions/cart';
 import { useRouter } from 'next/navigation';
 import { getCartonConversion } from '@/lib/productImage';
@@ -14,14 +13,13 @@ import { Card } from '@/components/ui';
 interface CartItemRowProps {
   cartId: string;
   name: string;
-  price: number;
   unit: string;
   quantity: number;
   stock: number;
   imageUrl?: string | null;
 }
 
-export default function CartItemRow({ cartId, name, price, unit, quantity, stock, imageUrl }: CartItemRowProps) {
+export default function CartItemRow({ cartId, name, unit, quantity, stock, imageUrl }: CartItemRowProps) {
   const router = useRouter();
   const t = useTranslations();
   const [isPending, startTransition] = useTransition();
@@ -62,8 +60,7 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
       <div className="flex-1 min-w-0">
         <h3 className="font-sans font-semibold text-sm text-neutral-900 dark:text-neutral-100 truncate">{name}</h3>
         <p className="font-sans text-xs text-charcoal-muted mt-0.5">
-          <span className="font-mono">{formatRupiah(price)}</span>
-          <span className="font-sans"> /{unit}</span>
+          {t.cart.priceOnRequest} <span className="font-sans">/{unit}</span>
         </p>
         <p className="font-sans text-xs text-brand-forest-600 dark:text-brand-forest-400 font-medium mt-0.5">{conversion.text}</p>
       </div>
@@ -95,9 +92,9 @@ export default function CartItemRow({ cartId, name, price, unit, quantity, stock
           </button>
         </div>
 
-        {/* Subtotal - desktop only */}
-        <span className="font-mono text-xs sm:text-sm font-bold text-neutral-900 dark:text-neutral-100 min-w-[72px] text-right hidden sm:block">
-          {formatRupiah(price * quantity)}
+        {/* Subtotal - desktop only; angka sengaja tidak ditampilkan (harga dikonfirmasi admin) */}
+        <span className="font-mono text-sm font-bold text-neutral-900 dark:text-neutral-100 min-w-[72px] text-right hidden sm:block">
+          &mdash;
         </span>
 
         {/* Hapus */}
