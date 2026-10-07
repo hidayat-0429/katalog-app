@@ -105,7 +105,6 @@
     "stock": "Stock",
     "price": "Price",
     "unit": "Unit",
-    "rp": "Rp",
     "perUnit": "per"
   },
   "contact": {
@@ -496,9 +495,9 @@
     },
     "bulkAdvantage": "Bulk Purchase Benefits",
     "bulkItems": {
-      "price": "✓ Lower per-unit price",
-      "shipping": "✓ Free shipping available",
-      "support": "✓ Dedicated account manager support",
+      "price": "✓ Final wholesale price confirmed by admin",
+      "shipping": "✓ Shipping schedule and area coordinated with admin",
+      "support": "✓ Order coordination directly via WhatsApp",
       "quality": "✓ Consistent quality guarantee"
     },
     "standardQuality": "Quality Standards",

@@ -105,7 +105,6 @@
     "stock": "Stok",
     "price": "Harga",
     "unit": "Satuan",
-    "rp": "Rp",
     "perUnit": "per"
   },
   "contact": {
@@ -496,9 +495,9 @@
     },
     "bulkAdvantage": "Keuntungan Pembelian Bulk",
     "bulkItems": {
-      "price": "✓ Harga per unit lebih murah",
-      "shipping": "✓ Tersedia pengiriman gratis",
-      "support": "✓ Dukungan dedicated account manager",
+      "price": "✓ Harga grosir final dikonfirmasi admin",
+      "shipping": "✓ Jadwal dan area pengiriman dikonsultasikan dengan admin",
+      "support": "✓ Koordinasi pesanan langsung via WhatsApp",
       "quality": "✓ Jaminan kualitas konsisten"
     },
     "standardQuality": "Standar Mutu",

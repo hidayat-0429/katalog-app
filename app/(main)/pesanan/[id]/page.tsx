@@ -25,13 +25,10 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
         companyName: order.companyName || order.user.companyName || null,
         shippingAddress: order.shippingAddress,
         notes: order.notes,
-        totalPrice: order.totalPrice,
         items: order.items.map((item) => ({
           id: item.id,
           productName: item.productName || "Produk",
           quantity: item.quantity,
-          price: item.price,
-          subtotal: item.subtotal ?? item.price * item.quantity,
         })),
       }}
     />

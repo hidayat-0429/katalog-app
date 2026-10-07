@@ -31,13 +31,10 @@ export interface OrderData {
   companyName: string | null;
   shippingAddress: string;
   notes: string | null;
-  totalPrice: number;
   items: {
     id: string;
     productName: string;
     quantity: number;
-    price: number;
-    subtotal: number;
   }[];
 }
 
