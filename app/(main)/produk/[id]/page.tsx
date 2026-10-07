@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { getServerLocale, getServerMessages } from '@/lib/serverMessages';
 import { localizeProduct, formatText } from '@/lib/productText';
 import ProductDetailPageClient from './ProductDetailPageClient';
+import { omitKey } from '@/lib/publicData';
 
 interface ProductDetailPageProps {
   params: Promise<{
@@ -64,5 +65,5 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     notFound();
   }
 
-  return <ProductDetailPageClient product={product} user={user} />;
+  return <ProductDetailPageClient product={omitKey(product, "price")} user={user} />;
 }

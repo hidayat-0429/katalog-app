@@ -14,7 +14,11 @@ export default async function CartPage() {
   const [cartItems, dbUser] = await Promise.all([
     prisma.cart.findMany({
       where: { userId: user.id },
-      include: { product: true },
+      include: {
+        product: {
+          select: { name: true, nameEn: true, unit: true, stock: true, imageUrl: true },
+        },
+      },
       orderBy: { createdAt: 'desc' },
     }),
     prisma.user.findUnique({

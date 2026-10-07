@@ -167,7 +167,8 @@ kecuali untuk label uppercase.
 - Format harga: `Rp 150.000` tanpa desimal, titik sebagai pemisah ribuan → selalu lewat
   `formatRupiah()`, jangan menulis angka manual. Berlaku hanya di panel Admin — sisi publik
   tidak memajang angka harga sama sekali ("harga atas permintaan", lihat butir kebijakan
-  grosir di bagian klaim).
+  grosir di bagian klaim), dan halaman server publik membuang `price`/`totalPrice` dari
+  data yang dikirim ke klien (`lib/publicData.ts`, `omitKey()`).
 - Satuan ditulis setelah harga dengan gaya muted: `Rp 12.000<span class="text-charcoal-muted">/kg</span>`.
 - Heading pendek: maksimal 2 baris di desktop, `leading-tight`.
 - Skala fluidik khusus bagian atas homepage ada di `app/globals.css` sebagai enam kelas

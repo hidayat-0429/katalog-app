@@ -251,7 +251,7 @@
       {
         "group": "ordering",
         "q": "How is pricing structured?",
-        "a": "Prices shown in the catalog are B2B supply prices per unit with a stated minimum order. Tiered pricing is available for larger volumes; contact our team for a quote based on your commodities and supply schedule."
+        "a": "Wholesale prices are not shown in the catalog because they depend on order volume and supply schedule. Place your order through the system, and our admin will confirm the final price and payment via WhatsApp."
       },
       {
         "group": "ordering",
@@ -467,7 +467,7 @@
   },
   "productDetail": {
     "descriptionFallback": "Premium-quality food products ready for business kitchens and the culinary industry.",
-    "metaDescription": "Buy {name} at the best supply price from Etira Mushrooms.",
+    "metaDescription": "Buy {name} from Etira Mushrooms — wholesale price on request, confirmed directly by our team.",
     "breadcrumb": {
       "home": "Home",
       "catalog": "Catalog",

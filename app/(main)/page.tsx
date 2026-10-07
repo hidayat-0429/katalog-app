@@ -4,8 +4,12 @@ import { Prisma } from "@prisma/client";
 import { unstable_cache } from "next/cache";
 import { getServerMessages } from "@/lib/serverMessages";
 import HomePageClient from "./HomePageClient";
+import { omitKey } from "@/lib/publicData";
 
-type ProductWithCategory = Prisma.ProductGetPayload<{ include: { category: true } }>;
+type ProductWithCategory = Omit<
+  Prisma.ProductGetPayload<{ include: { category: true } }>,
+  "price"
+>;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerMessages();
@@ -33,7 +37,11 @@ const getHomeHighlights = unstable_cache(
         take: 4,
       }),
     ]);
-    return { totalCount, products, featuredProducts };
+    return {
+      totalCount,
+      products: products.map((product) => omitKey(product, "price")),
+      featuredProducts: featuredProducts.map((product) => omitKey(product, "price")),
+    };
   },
   ["home-highlights"],
   { revalidate: 120, tags: ["beranda"] }
@@ -53,13 +61,15 @@ const getCategories = unstable_cache(
 
 // Mode katalog punya hasil berbeda per kombinasi filter + halaman, jadi tidak di-cache.
 function fetchCatalogPage(where: Prisma.ProductWhereInput, page: number) {
-  return prisma.product.findMany({
-    where,
-    include: { category: true },
-    orderBy: { createdAt: "desc" },
-    skip: (page - 1) * LIMIT,
-    take: LIMIT,
-  });
+  return prisma.product
+    .findMany({
+      where,
+      include: { category: true },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * LIMIT,
+      take: LIMIT,
+    })
+    .then((rows) => rows.map((row) => omitKey(row, "price")));
 }
 
 async function loadCatalogPage(where: Prisma.ProductWhereInput, rawPage?: string) {

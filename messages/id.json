@@ -251,7 +251,7 @@
       {
         "group": "ordering",
         "q": "Bagaimana struktur harganya?",
-        "a": "Semua harga yang tampil di katalog adalah harga pasok B2B per satuan dengan minimum order tertentu. Penawaran bertingkat tersedia untuk volume besar; hubungi tim kami untuk estimasi sesuai komoditas dan jadwal pasok Anda."
+        "a": "Harga grosir tidak ditampilkan di katalog karena disesuaikan dengan volume pesanan dan jadwal pasok. Buat pesanan melalui sistem, lalu admin akan mengonfirmasi harga final dan pembayarannya via WhatsApp."
       },
       {
         "group": "ordering",
@@ -467,7 +467,7 @@
   },
   "productDetail": {
     "descriptionFallback": "Produk pangan bermutu tinggi siap untuk kebutuhan dapur usaha dan industri kuliner.",
-    "metaDescription": "Beli {name} dengan harga pasokan terbaik dari Etira Mushrooms.",
+    "metaDescription": "Beli {name} dari Etira Mushrooms — harga grosir atas permintaan, dikonfirmasi langsung oleh tim kami.",
     "breadcrumb": {
       "home": "Beranda",
       "catalog": "Katalog",

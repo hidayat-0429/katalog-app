@@ -11,7 +11,7 @@ import { useTranslations } from "@/hooks/useTranslations";
 import { useLocale } from "@/components/LocaleProvider";
 
 interface PesananPageClientProps {
-  orders: Array<Order & { items: Array<{ productName: string; quantity: number }>; _count: { items: number } }>;
+  orders: Array<Omit<Order, "totalPrice"> & { items: Array<{ productName: string; quantity: number }>; _count: { items: number } }>;
   totalCount: number;
   currentPage: number;
   currentStatus: string;

@@ -12,7 +12,7 @@ import { RETAIL_CHANNELS } from '@/lib/channels';
 import { Product, Category } from '@prisma/client';
 
 interface ProductDetailPageClientProps {
-  product: Product & { category: Category | null };
+  product: Omit<Product, "price"> & { category: Category | null };
   user: any;
 }
 

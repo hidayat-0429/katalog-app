@@ -3,6 +3,7 @@ import { requireUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { getServerMessages } from "@/lib/serverMessages";
 import PesananPageClient from "./PesananPageClient";
+import { omitKey } from "@/lib/publicData";
 import { OrderStatus } from "@prisma/client";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,7 +51,7 @@ export default async function PesananPage({
 
   return (
     <PesananPageClient
-      orders={orders}
+      orders={orders.map((order) => omitKey(order, "totalPrice"))}
       totalCount={totalCount}
       currentPage={currentPage}
       currentStatus={currentStatus}

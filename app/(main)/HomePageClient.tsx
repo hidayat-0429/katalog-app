@@ -38,7 +38,6 @@ interface Product {
   id: string;
   name: string;
   nameEn?: string | null;
-  price: number;
   unit: string;
   stock: number;
   imageUrl: string | null;
