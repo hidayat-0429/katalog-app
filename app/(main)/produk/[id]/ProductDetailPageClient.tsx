@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Package, ChevronRight, Info } from 'lucide-react';
 import { formatRupiah } from '@/lib/format';
 import AddToCartForm from './AddToCartForm';
-import { getMinOrderText } from '@/lib/productImage';
 import ProductVisual from '@/components/ProductVisual';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useLocale } from '@/components/LocaleProvider';
@@ -28,7 +27,6 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
 
   const { name: displayName, description: displayDescription } = localizeProduct(product, locale);
   const displayCategory = product.category ? localizeName(product.category, locale) : null;
-  const minOrder = getMinOrderText(product.unit, t.productCard);
 
   return (
     <div className="w-full px-6 sm:px-8 lg:px-16">
@@ -90,7 +88,7 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                   </span>
                 </div>
                 <p className="font-sans text-xs text-charcoal-muted mt-1">
-                  {minOrder}
+                  {t.productCard.wholesaleNote}
                 </p>
               </div>
 
@@ -155,8 +153,8 @@ export default function ProductDetailPageClient({ product, user }: ProductDetail
                 </div>
               )}
 
-              {/* Pembeli eceran mendarat di halaman ini dari Google tapi tidak bisa pakai
-                  katalog (minimum 1 karton) — tunjukkan pintunya, bukan cuma menolaknya. */}
+              {/* Pembeli eceran mendarat di halaman ini dari Google padahal katalog ini
+                  khusus grosir & HoReCa — tunjukkan pintunya, bukan cuma menolaknya. */}
               <p className="font-sans text-xs leading-relaxed text-charcoal-muted">
                 {t.productDetail.retailNote}{' '}
                 <a

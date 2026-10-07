@@ -1,21 +1,3 @@
-/**
- * Returns Minimum Order Quantity (MOQ) text based on product unit
- */
-export function getMinOrderText(
-  unit: string,
-  t?: { moqCans: string; moqPouches: string; moqPacks: string; moqKg: string; moqConsult: string }
-): string {
-  const u = (unit || '').toLowerCase();
-  if (u.includes('kaleng')) return t?.moqCans ?? 'Min. order 24 kaleng (1 karton)';
-  if (u.includes('pouch')) return t?.moqPouches ?? 'Min. order 20 pouch (1 dus)';
-  if (u.includes('pack')) return t?.moqPacks ?? 'Min. order 10 pack (1 karton)';
-  if (u.includes('kg')) return t?.moqKg ?? 'Min. order 10 kg';
-  // Satuan yang belum ada ketentuan MOQ resminya (mis. `ember` untuk 2 SKU 4 kg) jangan
-  // sampai mengarang angka: dulu fallback-nya "Min. order 12 ember" = 48 kg, dan itu
-  // tampil sebagai janji ke pembeli. Sekarang arahkan ke tim.
-  return t?.moqConsult ?? 'Min. order: konsultasikan dengan tim kami';
-}
-
 import { formatText } from '@/lib/productText';
 
 /**

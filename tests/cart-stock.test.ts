@@ -152,11 +152,19 @@ describe("checkout", () => {
     expect(mocks.prisma.cart.findMany).not.toHaveBeenCalled();
   });
 
+  it("menolak pesanan tanpa konfirmasi grosir sebelum membaca keranjang", async () => {
+    const result = await checkout(formData({ shippingAddress: alamatSah }));
+    expect(result).toEqual({
+      error: "Konfirmasi pesanan grosir wajib dicentang",
+    });
+    expect(mocks.prisma.cart.findMany).not.toHaveBeenCalled();
+  });
+
   it("berhenti sebelum transaksi saat salah satu item melewati stok", async () => {
     mocks.prisma.cart.findMany.mockResolvedValue([
       { productId: "p1", quantity: 50, product: { ...produk, stock: 10 } },
     ]);
-    const result = await checkout(formData({ shippingAddress: alamatSah }));
+    const result = await checkout(formData({ shippingAddress: alamatSah, wholesaleAck: "on" }));
     expect(result?.error).toContain("Jamur Beku 1kg");
     expect(mocks.prisma.$transaction).not.toHaveBeenCalled();
   });
@@ -167,7 +175,7 @@ describe("checkout", () => {
     // Stok sudah keburu dipakai pembeli lain di perjalanan.
     mocks.tx.product.updateMany.mockResolvedValue({ count: 0 });
 
-    const result = await checkout(formData({ shippingAddress: alamatSah }));
+    const result = await checkout(formData({ shippingAddress: alamatSah, wholesaleAck: "on" }));
     expect(result?.error).toContain("Jamur Beku 1kg");
     expect(mocks.tx.order.create).not.toHaveBeenCalled();
     expect(mocks.redirect).not.toHaveBeenCalled();
@@ -178,7 +186,7 @@ describe("checkout", () => {
     ]);
 
     await checkout(
-      formData({ shippingAddress: alamatSah, shippingMethod: "Kirim pakai ojek", notes: "" })
+      formData({ shippingAddress: alamatSah, shippingMethod: "Kirim pakai ojek", notes: "", wholesaleAck: "on" })
     );
 
     const payload = mocks.tx.order.create.mock.calls[0][0].data;

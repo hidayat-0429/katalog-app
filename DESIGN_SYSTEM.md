@@ -569,8 +569,12 @@ Ini **bukan** bagian dari sistem — ini penyimpangan yang masih tersisa:
    jadi tidak ada informasi yang hilang — hanya dipindah ke tempat ia benar. Yang tersisa di
    kartu produk cuma `certHalal`. `storageItems.*` (`2-4°C`, 3-5 hari, cuci sebelum dipakai)
    terbukti cocok untuk semua SKU aktif, jadi tidak perlu per-kategori.
-   MOQ satuan yang belum ada ketentuan resminya sekarang mengarah ke `moqConsult`, dijaga
-   `tests/minOrder.test.ts` supaya angka karangan tidak kembali muncul.
+   Kebijakan PT: katalog ini khusus grosir & HoReCa, tidak melayani eceran. Semua angka MOQ
+   karangan (24 kaleng, 20 pouch, 10 pack, 10 kg) sudah dihapus (2026-10-04); kartu produk dan
+   halaman detail memakai satu kunci `productCard.wholesaleNote` ("min. order konsultasikan
+   dengan tim kami"), dan checkout punya notice + checkbox konfirmasi grosir yang divalidasi
+   server action (`server.wholesaleAckRequired`). Blok numerik keras menunggu angka resmi PT.
+   Dijaga `tests/wholesalePolicy.test.ts` supaya angka karangan tidak kembali muncul.
 7. **Durasi simpan jamur segar disebut dua kali dengan angka berbeda**: FAQ
    (`faqItems` jawaban penyimpanan) bilang "5-7 hari dalam kulkas, direkomendasikan
    penggunaan dalam 3 hari",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { ShoppingBag, MapPin, MessageSquare, AlertCircle, Loader2, Truck, Check, X } from 'lucide-react';
+import { ShoppingBag, MapPin, MessageSquare, AlertCircle, Loader2, Truck, Check, X, Info } from 'lucide-react';
 import { checkout } from '@/lib/actions/cart';
 import { Button } from '@/components/ui';
 import { useTranslations } from '@/hooks/useTranslations';
@@ -46,6 +46,11 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
       return;
     }
 
+    if (formData.get('wholesaleAck') !== 'on') {
+      setError(tc.ackRequired);
+      return;
+    }
+
     setOrderSummary({
       shippingMethod,
       shippingAddress,
@@ -61,6 +66,8 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
     formData.append('shippingMethod', orderSummary.shippingMethod);
     formData.append('shippingAddress', orderSummary.shippingAddress);
     formData.append('notes', orderSummary.notes);
+    // Server action menolak tanpa tanda ini: konfirmasi grosir tidak boleh dilewat di klien saja.
+    formData.append('wholesaleAck', 'on');
 
     startTransition(async () => {
       try {
@@ -88,6 +95,13 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
             <span>{error}</span>
           </div>
         )}
+
+        <div className="flex items-start gap-2.5 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4">
+          <Info className="w-4 h-4 shrink-0 mt-0.5 text-neutral-700 dark:text-neutral-300" />
+          <p className="font-sans text-xs leading-relaxed text-charcoal-muted">
+            {tc.wholesaleNotice}
+          </p>
+        </div>
 
         <div>
           <label className="block text-xs uppercase tracking-wide font-medium text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2" htmlFor="shippingMethod">
@@ -141,7 +155,21 @@ export default function CheckoutForm({ defaultAddress = '' }: CheckoutFormProps)
           />
         </div>
         
-        <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700 space-y-4">
+          <label htmlFor="wholesaleAck" className="flex items-start gap-2.5 cursor-pointer">
+            <input
+              id="wholesaleAck"
+              name="wholesaleAck"
+              type="checkbox"
+              required
+              disabled={isPending || showConfirmation}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-neutral-300 dark:border-neutral-600 accent-brand-forest-600 focus:ring-2 focus:ring-brand-forest-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            />
+            <span className="font-sans text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
+              {tc.wholesaleAck}
+            </span>
+          </label>
+
           <Button type="submit" variant="primary" disabled={isPending || showConfirmation} className="w-full">
             {isPending ? (
               <>

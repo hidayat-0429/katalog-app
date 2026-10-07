@@ -68,11 +68,7 @@
     "supplyPrice": "Supply Price",
     "order": "Order",
     "detailLabel": "Product detail",
-    "moqCans": "Min. order 24 cans (1 carton)",
-    "moqPouches": "Min. order 20 pouches (1 box)",
-    "moqPacks": "Min. order 10 packs (1 carton)",
-    "moqKg": "Min. order 10 kg",
-    "moqConsult": "Min. order: please check with our team",
+    "wholesaleNote": "Wholesale & HoReCa only · min. order: please check with our team",
     "usageChampignon": "Ideal for Pizza & Pasta",
     "usageProcessed": "Ready to Fry & Serve",
     "usageShiitake": "Perfect for Ramen & Asian Cuisine",
@@ -535,7 +531,10 @@
     "editButton": "Edit",
     "processingShort": "Processing...",
     "confirmButton": "Confirm",
-    "addressRequired": "Shipping address is required"
+    "addressRequired": "Shipping address is required",
+    "wholesaleNotice": "This catalog is for wholesale and HoReCa supply only. We do not serve retail purchases; for household needs please buy through our official retail channels.",
+    "wholesaleAck": "I understand this order is wholesale/business only, not household retail",
+    "ackRequired": "Tick the wholesale order confirmation to continue"
   },
   "addToCart": {
     "quantityLabel": "Order Quantity",
@@ -669,6 +668,7 @@
     "userNotFound": "Account not found",
     "addressRequired": "Shipping address is required",
     "addressTooShort": "Shipping address must be at least 10 characters",
+    "wholesaleAckRequired": "The wholesale order confirmation must be ticked",
     "cartEmpty": "Your cart is still empty",
     "insufficientStock": "\"{name}\" only has {stock} left in stock",
     "insufficientStockDuringOrder": "\"{name}\" ran out of stock while your order was being processed",

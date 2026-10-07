@@ -88,6 +88,11 @@ export async function checkout(formData: FormData) {
 
   if (!shippingAddress) return { error: t.server.addressRequired };
   if (shippingAddress.length < 10) return { error: t.server.addressTooShort };
+  // Katalog ini khusus grosir & HoReCa; pembeli harus menegaskan bahwa ini bukan pesanan
+  // eceran. Angka minimum resmi dari PT belum ada, jadi penjaganya konfirmasi eksplisit.
+  if (String(formData.get("wholesaleAck") || "") !== "on") {
+    return { error: t.server.wholesaleAckRequired };
+  }
 
   const cartItems = await prisma.cart.findMany({
     where: { userId: user.id },

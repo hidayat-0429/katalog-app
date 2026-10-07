@@ -68,11 +68,7 @@
     "supplyPrice": "Harga Pasokan",
     "order": "Pesan",
     "detailLabel": "Detail produk",
-    "moqCans": "Min. order 24 kaleng (1 karton)",
-    "moqPouches": "Min. order 20 pouch (1 dus)",
-    "moqPacks": "Min. order 10 pack (1 karton)",
-    "moqKg": "Min. order 10 kg",
-    "moqConsult": "Min. order: konsultasikan dengan tim kami",
+    "wholesaleNote": "Khusus grosir & HoReCa · min. order konsultasikan dengan tim kami",
     "usageChampignon": "Ideal untuk Pizza & Pasta",
     "usageProcessed": "Siap Goreng & Sajikan",
     "usageShiitake": "Cocok untuk Ramen & Masakan Asia",
@@ -535,7 +531,10 @@
     "editButton": "Ubah",
     "processingShort": "Memproses...",
     "confirmButton": "Konfirmasi",
-    "addressRequired": "Alamat pengiriman wajib diisi"
+    "addressRequired": "Alamat pengiriman wajib diisi",
+    "wholesaleNotice": "Katalog ini khusus pasokan grosir dan HoReCa. Kami tidak melayani pembelian eceran; untuk kebutuhan rumah tangga silakan beli lewat kanal ritel resmi kami.",
+    "wholesaleAck": "Saya memahami pesanan ini khusus grosir/bisnis, bukan eceran rumah tangga",
+    "ackRequired": "Centang konfirmasi pesanan grosir untuk melanjutkan"
   },
   "addToCart": {
     "quantityLabel": "Jumlah Pesanan",
@@ -669,6 +668,7 @@
     "userNotFound": "Akun tidak ditemukan",
     "addressRequired": "Alamat pengiriman wajib diisi",
     "addressTooShort": "Alamat pengiriman minimal 10 karakter",
+    "wholesaleAckRequired": "Konfirmasi pesanan grosir wajib dicentang",
     "cartEmpty": "Keranjang masih kosong",
     "insufficientStock": "Stok \"{name}\" tinggal {stock}",
     "insufficientStockDuringOrder": "Stok \"{name}\" tidak mencukupi saat pesanan diproses",

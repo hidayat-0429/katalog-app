@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ChefHat } from "lucide-react";
 import { formatRupiah } from "@/lib/format";
-import { getMinOrderText } from "@/lib/productImage";
 import ProductVisual from "@/components/ProductVisual";
 import { localizeName } from "@/lib/productText";
 import { useLocale } from "@/components/LocaleProvider";
@@ -69,7 +68,6 @@ export default function ProductCard({
   const locale = useLocale();
   const isOutOfStock = stock === 0;
   const isLowStock = stock > 0 && stock <= 10;
-  const minOrder = getMinOrderText(unit, t.productCard);
   const usageContext = getUsageContext(name, categoryName, t);
   const displayCategory = localizeName({ name: categoryName, nameEn: categoryNameEn }, locale);
 
@@ -143,7 +141,7 @@ export default function ProductCard({
         )}
 
         <p className="font-sans text-xs text-charcoal-muted">
-          {minOrder}
+          {t.productCard.wholesaleNote}
         </p>
 
         {/* Pricing + Action */}
