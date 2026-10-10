@@ -38,6 +38,7 @@ export default function NavLinkActive({ href, icon, label, badge, highlight }: N
     <Link
       href={href}
       aria-label={label}
+      title={label}
       className={`nav-link flex items-center gap-3 px-3 py-3 min-h-[44px] rounded-lg font-sans text-sm transition-colors duration-150 relative ${
         highlight
           ? isActive

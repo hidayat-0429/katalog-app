@@ -13,6 +13,7 @@ export default function SignOutButton({ iconOnly = false, label = "Keluar" }: { 
           : "relative w-full flex items-center justify-center gap-1.5 text-sm px-3 py-2 rounded-lg text-charcoal-muted hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-150 ease-out after:absolute after:-inset-y-1 after:inset-x-0 after:content-['']"
       }
       aria-label={label}
+      title={label}
     >
       <LogOut className="w-4 h-4 shrink-0" />
       {!iconOnly && <span className="nav-label font-medium">{label}</span>}

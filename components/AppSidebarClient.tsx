@@ -13,7 +13,7 @@ const COLLAPSE_STORAGE_KEY = "etira-nav-collapsed";
 
 export default function AppSidebarClient({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const pathname = usePathname();
   const t = useTranslations();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -64,17 +64,19 @@ export default function AppSidebarClient({ children }: { children: ReactNode }) 
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Mode ciut rail desktop: preferensi disimpan, kelas di <html> yang mengubah --nav-w
+  // Mode ciut rail desktop. Kelas nav-collapsed sudah dipasang skrip blocking di root layout
+  // sebelum halaman dilukis, jadi efek ini hanya menyamakan state dengan preferensi tersimpan
+  // dan tidak pernah menyentuh kelas — tidak ada kedip lebar saat muat.
   useEffect(() => {
-    if (window.localStorage.getItem(COLLAPSE_STORAGE_KEY) === "1") setIsCollapsed(true);
+    setIsCollapsed(window.localStorage.getItem(COLLAPSE_STORAGE_KEY) !== "0");
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("nav-collapsed", isCollapsed);
-    window.localStorage.setItem(COLLAPSE_STORAGE_KEY, isCollapsed ? "1" : "0");
+  const toggleCollapsed = useCallback(() => {
+    const next = !isCollapsed;
+    document.documentElement.classList.toggle("nav-collapsed", next);
+    window.localStorage.setItem(COLLAPSE_STORAGE_KEY, next ? "1" : "0");
+    setIsCollapsed(next);
   }, [isCollapsed]);
-
-  const toggleCollapsed = useCallback(() => setIsCollapsed((prev) => !prev), []);
 
   return (
     <>

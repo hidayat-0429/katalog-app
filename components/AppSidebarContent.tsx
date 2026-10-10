@@ -25,15 +25,14 @@ export default function AppSidebarContent({ user, cartBadge }: AppSidebarContent
       {/* Nav Publik */}
       <nav aria-label={nav.sectionMenu} className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
         {/* Baris judul MENU + preferensi tampilan. Cluster kontrol sengaja lg-only:
-            di mobile header drawer sudah memuat keduanya. Saat rail di-ciutkan label
-            dan pemilih bahasa ikut hilang, ikon tema tetap ada dan dipusatkan oleh
-            .nav-center-row. */}
+            di mobile header drawer sudah memuat keduanya. Saat rail di-ciutkan label grup
+            hilang, tapi ikon tema dan pil bahasa tetap ada (ditumpuk oleh .nav-prefs). */}
         <div className="nav-center-row flex items-center justify-between px-3 pb-1.5">
           <p className="nav-hide-collapsed text-xs font-bold tracking-widest uppercase text-charcoal-muted">
             {nav.sectionMenu}
           </p>
-          <div className="hidden lg:flex items-center gap-1.5">
-            <div className="nav-hide-collapsed">
+          <div className="nav-prefs hidden lg:flex items-center gap-1.5">
+            <div>
               <LanguageSwitcher />
             </div>
             <ThemeToggle />

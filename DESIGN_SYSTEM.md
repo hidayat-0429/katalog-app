@@ -279,8 +279,22 @@ Sistemnya sama untuk dua sidebar: lebar penuh saat terbuka, rail ikon 72px saat 
 |---|---|---|
 | Shell | `components/AppSidebarClient.tsx` | `app/admin/AdminLayoutClient.tsx` |
 | Mode ciut | kelas `nav-collapsed` di `<html>` + `--nav-w` | state `isCollapsed`, kelas inline |
+| Nilai awal saat muat | **ciut** untuk kunjungan pertama; kalau pernah dibuka (`"0"`), tetap terbuka | terbuka |
 | Simpan preferensi | ya (`localStorage["etira-nav-collapsed"]`) | tidak (selalu terbuka saat reload) |
 | Lebar | `--nav-w`: `16rem` → `72px` | `260px` ↔ `72px` |
+
+Kelas dipasang oleh skrip blocking di awal `<body>` pada `app/layout.tsx`, yaitu sebelum
+halaman pertama kali dilukis, jadi rail tidak pernah bergeser/meledak dari 256px ke 72px saat
+muat. `components/AppSidebarClient.tsx` hanya membaca nilai tersimpan untuk menyamakan state
+ikon/`aria-expanded`, dan tidak menulis kelas saat mount — tulisannya terjadi di
+`toggleCollapsed` (respons klik pengguna). Konsekuensinya: `useState(true)` adalah bawaan SSR,
+sehingga glyph tombol ciut harus tetap dirender dari state itu, bukan dibaca langsung dari
+`localStorage` di initializer (itu memicu hydration mismatch).
+
+Karena rail bisa tampil ikon-saja sejak kunjungan pertama, setiap tautan nav
+(`components/NavLinkActive.tsx`) dan tombol keluar (`components/SignOutButton.tsx`) membawa
+`aria-label` **dan** `title` dengan teks yang sama, supaya nama bagian muncul sebagai tooltip
+saat kursor di atas ikon.
 
 Kelas yang dipakai (`app/globals.css`, dibungkus `@media (min-width: 1024px)` supaya drawer
 mobile tidak ikut ciut):
@@ -288,8 +302,9 @@ mobile tidak ikut ciut):
 | Kelas | Efek saat ciut |
 |---|---|
 | `nav-label` | disembunyikan (teks label nav, nama akun, kata "Masuk"/"Daftar") |
-| `nav-hide-collapsed` | blok dibuang: label grup, kartu akun, pemilih bahasa |
-| `nav-center-row` | baris judul grup "Menu" (label + tema/bahasa) dipusatkan |
+| `nav-hide-collapsed` | blok dibuang: label grup "Menu" dan kartu akun |
+| `nav-center-row` | baris judul grup "Menu" (label + tema/bahasa) dipusatkan, padding-x 0 |
+| `nav-prefs` | klaster tema + pil bahasa jadi kolom supaya muat di 72px |
 | `nav-link` | `justify-center`, padding-x 0, `gap-0` supaya badge keranjang menempel ke ikon |
 | `nav-wordmark` / `nav-wordmark-row` / `nav-collapse-toggle` | baris logo jadi kolom: logo di atas, tombol ciut di bawah |
 | `nav-auth` / `nav-auth-btn` | blok masuk/daftar jadi kolom dan tombolnya ikon-saja |
@@ -304,10 +319,12 @@ bahasa di bar atas mobile, dan di desktop dua-duanya mengendap di dasar. Sekaran
 `components/AppSidebarContent.tsx` menaruh keduanya di **kanan baris judul grup "Menu"**
 (`hidden lg:flex` pada klusternya, jadi drawer mobile tidak duplikasi). Bawah rail tinggal
 **kartu akun → aksi akun (Logout / Masuk·Daftar)**. ThemeToggle 36px visual dengan
-`after:-inset-1` sehingga area sentuh 44px; rail ciut menyembunyikan label grup + pemilih
-bahasa (`nav-hide-collapsed`) dan memusatkan ikon tema (`nav-center-row`) — ikon tema
-**jangan** ikut dibungkus `nav-hide-collapsed`, karena itulah satu-satunya kontrol yang
-tersisa saat rail 72px.
+`after:-inset-1` sehingga area sentuh 44px; rail ciut menyembunyikan label grup
+(`nav-hide-collapsed`) dan memusatkan kontrol preferensi (`nav-center-row` + `.nav-prefs`
+jadi kolom). **Ikon tema dan pil bahasa keduanya wajib tersisa di rail 72px**: yang pertama
+satu-satunya kontrol tampilan, yang kedua satu-satunya pemilih bahasa di desktop (bar atasnya
+`lg:hidden`). Pil `ID|EN` terukur 67px dan masih muat di kolom 72px karena `padding-x` nav
+dilepas saat ciut — jadi **jangan** membungkus salah satunya dengan `nav-hide-collapsed`.
 - Panel admin menaruh `ThemeToggle` di baris logo (`app/admin/AdminSidebar.tsx`), sejajar
   kata "ETIRA", dan tetap terlihat saat rail admin di-ciutkan.
 
@@ -494,9 +511,10 @@ Khususnya: konten teks di atas latar polos tidak boleh pakai gradien-clip
   224px, sementara logo + tulisan (112px) + tombol ciut + tema + pil bahasa (151px) = 263px —
   tidak muat satu baris. Baris wordmark tetap logo + tombol ciut (`lg:pb-2 lg:border-b-0`;
   garis pemisahnya hanya muncul di drawer mobile), tema + bahasa baru muncul di baris "Menu".
-- Saat rail di-ciutkan, label grup dan pemilih bahasa hilang tapi **ikon tema tetap ada** dan
-  dipusatkan (`nav-center-row`). Jadi satu-satunya jalan ganti tampilan di rail 72px tidak
-  pernah ikut tersembunyi.
+- Saat rail di-ciutkan, label grup dan kartu akun hilang tapi **ikon tema dan pil bahasa tetap
+  ada**, ditumpuk jadi kolom dan dipusatkan (`nav-center-row` + `.nav-prefs`). Jadi satu-satunya
+  jalan ganti tampilan maupun bahasa di rail 72px tidak pernah ikut tersembunyi — penting karena
+  rail kini mulai dalam mode ciut pada kunjungan pertama.
 - Pemilih bahasa satu komponen untuk kedua shell (`components/LanguageSwitcher.tsx`):
   pil ID/EN ±67px, `aria-label` dari `nav.language`. Versi lama pakai bendera emoji
   (`🇮🇩 ID / 🇬🇧 EN`, ±120px) — emoji sebagai ikon dilarang §9 dan lebarnya yang bikin rail

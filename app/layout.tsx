@@ -103,6 +103,14 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${bricolage.variable} ${figtree.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden font-sans bg-bg text-charcoal antialiased transition-colors duration-200">
+        {/* Rail desktop mulai dalam mode ciut pada kunjungan pertama. Skrip ini jalan sebelum
+            halaman dilukis, jadi tidak ada kedip lebar; tanpa nilai tersimpan hasilnya "ciut". */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('etira-nav-collapsed')!=='0')document.documentElement.classList.add('nav-collapsed')}catch(e){}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}

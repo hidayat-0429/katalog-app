@@ -97,6 +97,17 @@ body {
   html.nav-collapsed .nav-link {
     gap: 0;
   }
+  /* Pil bahasa adalah satu-satunya pemilih bahasa di desktop (bar atasnya lg:hidden), jadi
+     tidak boleh ikut hilang saat ciut: cluster tema+bahasa ditumpuk dan padding-x nav
+     dilepas supaya pil ±60px muat di kolom 72px. */
+  html.nav-collapsed nav {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  html.nav-collapsed .nav-prefs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
   /* Baris wordmark jadi kolom: logo di atas, tombol ciut di bawahnya */
   html.nav-collapsed .nav-wordmark-row {
     flex-direction: column;
