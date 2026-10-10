@@ -28,7 +28,7 @@ const mono = JetBrains_Mono({
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://etiramushrooms.com";
 
 function organizationSchema() {
-  const email = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com";
+  const email = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "Ga.etira12@gmail.com";
   const phone = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
 
   return {

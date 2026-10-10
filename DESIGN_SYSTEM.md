@@ -237,7 +237,7 @@ Skala dasar 4px dan sudah didefinisikan ulang di tema: `1`=4, `2`=8, `3`=12, `4`
   sekarang cuma "Dipanen segar", dan slot statistik hero yang ketiga diisi `65 km` yang
   terbukti). TrustBanner menampilkan enam **segmen** pelanggan (`trustBanner.segments.*`)
   dengan label "Komitmen Mutu". Fallback email dan nomor WhatsApp keduanya data resmi
-  (`marketing@etiramushrooms.com` dan `628113503650`), jadi localhost maupun deployment tanpa
+  (`Ga.etira12@gmail.com` dan `628113503650`), jadi localhost maupun deployment tanpa
   env tetap menunjuk kontak perusahaan. Nomor itu bisa ditimpa lewat `NEXT_PUBLIC_ADMIN_PHONE`
   kalau PT memasang nomor baru.
   Kartu pembayaran (`components/PaymentInfoCard.tsx`) juga tidak mencetak nomor rekening: PT belum

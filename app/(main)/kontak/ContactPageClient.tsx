@@ -9,7 +9,7 @@ import { RETAIL_CHANNELS } from "@/lib/channels";
 export default function ContactPageClient() {
   const t = useTranslations();
   const adminWa = process.env.NEXT_PUBLIC_ADMIN_PHONE || "628113503650";
-  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "marketing@etiramushrooms.com";
+  const companyEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL || "Ga.etira12@gmail.com";
   const waLink = `https://wa.me/${adminWa}`;
 
   return (
